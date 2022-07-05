@@ -42,7 +42,7 @@ infinite) dimensional feature spaces.
 #         Malte Londschien
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.linear_model import Ridge

@@ -4,7 +4,7 @@
 #
 # License: BSD 3 clause
 import scipy.sparse as sp
-import numpy as np
+import jax.numpy as np
 
 from .sparsefuncs_fast import (
     csr_mean_variance_axis0 as _csr_mean_var_axis0,

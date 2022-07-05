@@ -1,6 +1,6 @@
 import re
 
-import numpy as np
+import jax.numpy as np
 from scipy.sparse import csr_matrix
 import pytest
 

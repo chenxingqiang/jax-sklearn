@@ -7,7 +7,7 @@
 import warnings
 import sys
 import re
-import numpy as np
+import jax.numpy as np
 
 from scipy.optimize import approx_fprime
 

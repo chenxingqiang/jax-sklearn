@@ -2,7 +2,7 @@
 Common utilities for testing model selection.
 """
 
-import numpy as np
+import jax.numpy as np
 
 from sklearn.model_selection import KFold
 

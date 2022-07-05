@@ -11,7 +11,7 @@ import array
 import warnings
 from collections.abc import Iterable
 
-import numpy as np
+import jax.numpy as np
 from scipy import linalg
 import scipy.sparse as sp
 

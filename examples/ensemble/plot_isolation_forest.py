@@ -23,7 +23,7 @@ for particular samples, they are highly likely to be anomalies.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from sklearn.ensemble import IsolationForest
 

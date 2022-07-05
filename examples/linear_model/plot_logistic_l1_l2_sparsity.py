@@ -20,7 +20,7 @@ The visualization shows coefficients of the models for varying C.
 #          Andreas Mueller <amueller@ais.uni-bonn.de>
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.linear_model import LogisticRegression

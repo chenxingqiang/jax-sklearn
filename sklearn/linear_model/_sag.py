@@ -6,7 +6,7 @@
 
 import warnings
 
-import numpy as np
+import jax.numpy as np
 
 from ._base import make_dataset
 from ._sag_fast import sag32, sag64
@@ -208,7 +208,7 @@ def sag_solver(
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn import linear_model
     >>> n_samples, n_features = 10, 5
     >>> rng = np.random.RandomState(0)

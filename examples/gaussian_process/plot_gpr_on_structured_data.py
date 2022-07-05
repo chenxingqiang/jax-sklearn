@@ -38,7 +38,7 @@ four correct classifications and fails on one.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from sklearn.gaussian_process.kernels import Kernel, Hyperparameter
 from sklearn.gaussian_process.kernels import GenericKernelMixin

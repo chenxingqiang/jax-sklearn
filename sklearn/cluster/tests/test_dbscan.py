@@ -4,7 +4,7 @@ Tests for DBSCAN clustering algorithm
 
 import pickle
 
-import numpy as np
+import jax.numpy as np
 
 import warnings
 

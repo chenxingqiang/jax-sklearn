@@ -5,7 +5,7 @@
 
 
 import numbers
-import numpy as np
+import jax.numpy as np
 import warnings
 
 from . import OneHotEncoder

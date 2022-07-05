@@ -7,7 +7,7 @@
 
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse
 from scipy.linalg import eigh
 from scipy.sparse.linalg import eigsh

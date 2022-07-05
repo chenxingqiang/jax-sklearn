@@ -25,7 +25,7 @@ implementation_specific_values = [
 ]
 
 }}
-cimport numpy as cnp
+cimport jax.numpy as cnp
 from libc.math cimport sqrt, exp
 
 from ..utils._typedefs cimport DTYPE_t, ITYPE_t, SPARSE_INDEX_TYPE_t

@@ -26,7 +26,7 @@ Dataset abstractions for sequential data access.
 WARNING: Do not edit .pxd file directly, it is generated from .pxd.tp
 """
 
-cimport numpy as cnp
+cimport jax.numpy as cnp
 
 # SequentialDataset and its two concrete subclasses are (optionally randomized)
 # iterators over the rows of a matrix X and corresponding target values y.

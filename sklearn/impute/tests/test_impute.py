@@ -1,7 +1,7 @@
 import pytest
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse
 from scipy.stats import kstest
 

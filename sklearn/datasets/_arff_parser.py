@@ -5,7 +5,7 @@ from collections import OrderedDict
 from collections.abc import Generator
 from typing import List
 
-import numpy as np
+import jax.numpy as np
 import scipy as sp
 
 

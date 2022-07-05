@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 import pytest
 
 from sklearn.ensemble._hist_gradient_boosting.grower import TreeGrower

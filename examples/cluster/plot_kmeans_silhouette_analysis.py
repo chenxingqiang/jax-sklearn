@@ -37,7 +37,7 @@ from sklearn.metrics import silhouette_samples, silhouette_score
 
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-import numpy as np
+import jax.numpy as np
 
 # Generating the sample data from make_blobs
 # This particular setting has one distinct cluster and 3 clusters placed close

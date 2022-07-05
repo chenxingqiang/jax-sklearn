@@ -5,7 +5,7 @@ specifically to work with sparse matrices.
 
 import warnings
 
-import numpy as np
+import jax.numpy as np
 import pytest
 from scipy.sparse import coo_matrix, csr_matrix
 import scipy.stats

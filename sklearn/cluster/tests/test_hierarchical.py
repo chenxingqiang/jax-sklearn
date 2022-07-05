@@ -11,7 +11,7 @@ import shutil
 import pytest
 from functools import partial
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse
 from scipy.cluster import hierarchy
 from scipy.sparse.csgraph import connected_components

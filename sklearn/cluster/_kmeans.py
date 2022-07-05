@@ -15,7 +15,7 @@ from abc import ABC, abstractmethod
 from numbers import Integral, Real
 import warnings
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 
 from ..base import (
@@ -118,7 +118,7 @@ def kmeans_plusplus(
     --------
 
     >>> from sklearn.cluster import kmeans_plusplus
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> X = np.array([[1, 2], [1, 4], [1, 0],
     ...               [10, 2], [10, 4], [10, 0]])
     >>> centers, indices = kmeans_plusplus(X, n_clusters=2, random_state=0)
@@ -1323,7 +1323,7 @@ class KMeans(_BaseKMeans):
     --------
 
     >>> from sklearn.cluster import KMeans
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> X = np.array([[1, 2], [1, 4], [1, 0],
     ...               [10, 2], [10, 4], [10, 0]])
     >>> kmeans = KMeans(n_clusters=2, random_state=0, n_init="auto").fit(X)
@@ -1805,7 +1805,7 @@ class MiniBatchKMeans(_BaseKMeans):
     Examples
     --------
     >>> from sklearn.cluster import MiniBatchKMeans
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> X = np.array([[1, 2], [1, 4], [1, 0],
     ...               [4, 2], [4, 0], [4, 4],
     ...               [4, 5], [0, 1], [2, 2],

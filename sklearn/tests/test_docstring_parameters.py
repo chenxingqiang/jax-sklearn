@@ -9,7 +9,7 @@ import importlib
 from pkgutil import walk_packages
 from inspect import signature
 
-import numpy as np
+import jax.numpy as np
 
 import sklearn
 from sklearn.utils import IS_PYPY

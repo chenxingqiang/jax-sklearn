@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 
 from ..base import BaseEstimator, ClassifierMixin
 from .validation import _check_sample_weight, _num_samples, check_array

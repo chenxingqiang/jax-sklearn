@@ -14,7 +14,7 @@ from os import remove, makedirs
 from os.path import exists, join
 from gzip import GzipFile
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 import joblib
 

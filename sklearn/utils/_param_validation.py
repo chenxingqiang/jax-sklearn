@@ -7,7 +7,7 @@ from numbers import Real
 import operator
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy.sparse import issparse
 from scipy.sparse import csr_matrix
 

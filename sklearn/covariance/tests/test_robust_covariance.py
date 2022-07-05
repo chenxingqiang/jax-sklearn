@@ -6,7 +6,7 @@
 
 import itertools
 
-import numpy as np
+import jax.numpy as np
 import pytest
 
 from sklearn.utils._testing import assert_array_almost_equal

@@ -10,7 +10,7 @@ import sys
 import warnings
 import re
 
-import numpy as np
+import jax.numpy as np
 import joblib
 
 from numpy.testing import (

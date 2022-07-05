@@ -14,7 +14,7 @@ shrunk_cov = (1-shrinkage)*cov + shrinkage*structured_estimate.
 
 # avoid division truncation
 import warnings
-import numpy as np
+import jax.numpy as np
 
 from . import empirical_covariance, EmpiricalCovariance
 from .._config import config_context
@@ -128,7 +128,7 @@ class ShrunkCovariance(EmpiricalCovariance):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.covariance import ShrunkCovariance
     >>> from sklearn.datasets import make_gaussian_quantiles
     >>> real_cov = np.array([[.8, .3],
@@ -429,7 +429,7 @@ class LedoitWolf(EmpiricalCovariance):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.covariance import LedoitWolf
     >>> real_cov = np.array([[.4, .2],
     ...                      [.2, .8]])
@@ -633,7 +633,7 @@ class OAS(EmpiricalCovariance):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.covariance import OAS
     >>> from sklearn.datasets import make_gaussian_quantiles
     >>> real_cov = np.array([[.8, .3],

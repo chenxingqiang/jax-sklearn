@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 from scipy import optimize
 from numpy.testing import assert_allclose
 from scipy.special import factorial, xlogy

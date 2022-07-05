@@ -11,7 +11,7 @@ import warnings
 import numbers
 from itertools import combinations
 
-import numpy as np
+import jax.numpy as np
 from scipy import linalg
 from scipy.special import binom
 from scipy.linalg.lapack import get_lapack_funcs

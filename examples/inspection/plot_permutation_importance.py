@@ -25,7 +25,7 @@ can mitigate those limitations.
 
 """
 # %%
-import numpy as np
+import jax.numpy as np
 
 # %%
 # Data Loading and Feature Engineering

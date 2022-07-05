@@ -1,7 +1,7 @@
 # Authors: Manoj Kumar mks542@nyu.edu
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 from scipy import optimize, sparse
 
 from sklearn.utils._testing import assert_almost_equal

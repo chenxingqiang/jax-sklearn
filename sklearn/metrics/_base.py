@@ -14,7 +14,7 @@ Common code for all metrics.
 
 from itertools import combinations
 
-import numpy as np
+import jax.numpy as np
 
 from ..utils import check_array, check_consistent_length
 from ..utils.multiclass import type_of_target

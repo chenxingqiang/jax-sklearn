@@ -11,7 +11,7 @@ import sys
 
 import matplotlib.pyplot as plt
 import scipy.sparse as sp
-import numpy as np
+import jax.numpy as np
 
 from sklearn.datasets import make_multilabel_classification
 from sklearn.metrics import (

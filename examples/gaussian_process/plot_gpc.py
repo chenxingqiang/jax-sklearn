@@ -26,7 +26,7 @@ hyperparameters used in the first figure by black dots.
 #
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 
 from matplotlib import pyplot as plt
 

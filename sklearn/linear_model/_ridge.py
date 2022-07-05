@@ -14,7 +14,7 @@ from functools import partial
 from numbers import Integral, Real
 import warnings
 
-import numpy as np
+import jax.numpy as np
 import numbers
 from scipy import linalg
 from scipy import sparse
@@ -1077,7 +1077,7 @@ class Ridge(MultiOutputMixin, RegressorMixin, _BaseRidge):
     Examples
     --------
     >>> from sklearn.linear_model import Ridge
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> n_samples, n_features = 10, 5
     >>> rng = np.random.RandomState(0)
     >>> y = rng.randn(n_samples)

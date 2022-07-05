@@ -20,7 +20,7 @@ point. This makes feature selection by the Lasso more stable.
 # Generate data
 # -------------
 
-import numpy as np
+import jax.numpy as np
 
 rng = np.random.RandomState(42)
 

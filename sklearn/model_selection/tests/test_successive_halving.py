@@ -2,7 +2,7 @@ from math import ceil
 
 import pytest
 from scipy.stats import norm, randint
-import numpy as np
+import jax.numpy as np
 
 from sklearn.datasets import make_classification
 from sklearn.dummy import DummyClassifier

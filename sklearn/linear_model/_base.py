@@ -18,7 +18,7 @@ from abc import ABCMeta, abstractmethod
 import numbers
 import warnings
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 from scipy import linalg
 from scipy import optimize
@@ -622,7 +622,7 @@ class LinearRegression(MultiOutputMixin, RegressorMixin, LinearModel):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.linear_model import LinearRegression
     >>> X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
     >>> # y = 1 * x_0 + 2 * x_1 + 3

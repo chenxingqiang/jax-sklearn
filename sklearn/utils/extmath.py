@@ -13,7 +13,7 @@ Extended math utilities.
 
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy import linalg, sparse
 
 from . import check_random_state

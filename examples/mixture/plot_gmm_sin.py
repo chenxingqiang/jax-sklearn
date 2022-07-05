@@ -41,7 +41,7 @@ number of Gaussian components instead of a continuous noisy sine curve.
 
 import itertools
 
-import numpy as np
+import jax.numpy as np
 from scipy import linalg
 import matplotlib.pyplot as plt
 import matplotlib as mpl

@@ -10,7 +10,7 @@ This exercise is used in the :ref:`cv_generators_tut` part of the
 
 """
 
-import numpy as np
+import jax.numpy as np
 from sklearn.model_selection import cross_val_score
 from sklearn import datasets, svm
 

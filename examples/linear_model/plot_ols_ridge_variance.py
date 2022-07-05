@@ -25,7 +25,7 @@ of the standard linear regression
 # License: BSD 3 clause
 
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn import linear_model

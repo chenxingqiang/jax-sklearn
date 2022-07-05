@@ -1,6 +1,6 @@
 import warnings
 
-import numpy as np
+import jax.numpy as np
 
 from ..base import MetaEstimatorMixin, clone, BaseEstimator
 from ..utils.validation import check_is_fitted
@@ -126,7 +126,7 @@ class SelfTrainingClassifier(MetaEstimatorMixin, BaseEstimator):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn import datasets
     >>> from sklearn.semi_supervised import SelfTrainingClassifier
     >>> from sklearn.svm import SVC

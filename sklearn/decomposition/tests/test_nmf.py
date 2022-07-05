@@ -2,7 +2,7 @@ import re
 import sys
 from io import StringIO
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 
 from scipy import linalg

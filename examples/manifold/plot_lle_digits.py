@@ -43,7 +43,7 @@ _ = fig.suptitle("A selection from the 64-dimensional digits dataset", fontsize=
 # the projection of the original data onto each embedding. It will allow us to
 # check whether or digits are grouped together in the embedding space, or
 # scattered across it.
-import numpy as np
+import jax.numpy as np
 from matplotlib import offsetbox
 from sklearn.preprocessing import MinMaxScaler
 

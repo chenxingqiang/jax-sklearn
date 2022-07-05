@@ -23,7 +23,7 @@ model with their true labels.
 # Authors: Clay Woolam <clay@woolam.org>
 # License: BSD
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 

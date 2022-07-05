@@ -3,7 +3,7 @@ import inspect
 import os
 
 import pytest
-import numpy as np
+import jax.numpy as np
 
 import sklearn.datasets
 

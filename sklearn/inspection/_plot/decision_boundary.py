@@ -1,6 +1,6 @@
 from functools import reduce
 
-import numpy as np
+import jax.numpy as np
 
 from ...preprocessing import LabelEncoder
 from ...utils import check_matplotlib_support

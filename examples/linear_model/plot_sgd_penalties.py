@@ -11,7 +11,7 @@ and :class:`~sklearn.linear_model.SGDRegressor`.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 l1_color = "navy"

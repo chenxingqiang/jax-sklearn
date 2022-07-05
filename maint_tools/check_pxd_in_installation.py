@@ -43,7 +43,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
             from distutils.core import setup
             from distutils.extension import Extension
             from Cython.Build import cythonize
-            import numpy
+            import jax.numpy
 
             extensions = [Extension("tst",
                                     sources=["tst.pyx"],

@@ -19,7 +19,7 @@ better.
 import warnings
 from math import log
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse as sp
 
 from ._expected_mutual_info_fast import expected_mutual_information

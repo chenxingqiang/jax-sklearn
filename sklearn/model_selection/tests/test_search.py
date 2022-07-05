@@ -9,7 +9,7 @@ import sys
 from types import GeneratorType
 import re
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 import pytest
 

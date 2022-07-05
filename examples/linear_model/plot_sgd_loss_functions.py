@@ -8,7 +8,7 @@ A plot that compares the various convex loss functions supported by
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 

@@ -46,7 +46,7 @@ helper functions for loading the data and visualizing results.
 
 from functools import partial
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 

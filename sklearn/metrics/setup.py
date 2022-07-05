@@ -1,5 +1,5 @@
 import os
-import numpy as np
+import jax.numpy as np
 
 from numpy.distutils.misc_util import Configuration
 

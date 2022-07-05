@@ -1,7 +1,7 @@
 from collections import defaultdict
 from time import time
 
-import numpy as np
+import jax.numpy as np
 from numpy import random as nr
 
 from sklearn.cluster import KMeans, MiniBatchKMeans

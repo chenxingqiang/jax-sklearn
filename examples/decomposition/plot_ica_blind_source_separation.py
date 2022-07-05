@@ -18,7 +18,7 @@ non-Gaussian processes.
 # Generate sample data
 # --------------------
 
-import numpy as np
+import jax.numpy as np
 from scipy import signal
 
 np.random.seed(0)

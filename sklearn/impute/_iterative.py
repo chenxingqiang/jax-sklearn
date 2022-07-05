@@ -3,7 +3,7 @@ from collections import namedtuple
 import warnings
 
 from scipy import stats
-import numpy as np
+import jax.numpy as np
 
 from ..base import clone
 from ..exceptions import ConvergenceWarning
@@ -208,7 +208,7 @@ class IterativeImputer(_BaseImputer):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.experimental import enable_iterative_imputer
     >>> from sklearn.impute import IterativeImputer
     >>> imp_mean = IterativeImputer(random_state=0)

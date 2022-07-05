@@ -9,7 +9,7 @@ using AgglomerativeClustering and the dendrogram method available in scipy.
 
 """
 
-import numpy as np
+import jax.numpy as np
 
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram

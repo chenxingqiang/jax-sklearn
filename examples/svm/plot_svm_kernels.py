@@ -14,7 +14,7 @@ data-points are not linearly separable.
 # Code source: Gaël Varoquaux
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from sklearn import svm
 

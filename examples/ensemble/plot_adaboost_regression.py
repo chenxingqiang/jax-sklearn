@@ -23,7 +23,7 @@ detail.
 #
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 
 rng = np.random.RandomState(1)
 X = np.linspace(0, 6, 100)[:, np.newaxis]

@@ -25,7 +25,7 @@ At the end, the top 10 most uncertain predictions will be shown.
 #
 # We use the digits dataset. We only use a subset of randomly selected samples.
 from sklearn import datasets
-import numpy as np
+import jax.numpy as np
 
 digits = datasets.load_digits()
 rng = np.random.RandomState(2)

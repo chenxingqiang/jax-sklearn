@@ -8,7 +8,7 @@
 #
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 from scipy import linalg
 
 from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutMixin

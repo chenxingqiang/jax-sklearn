@@ -1,6 +1,6 @@
 import sys
 
-import numpy as np
+import jax.numpy as np
 from scipy.linalg import block_diag
 from scipy.sparse import csr_matrix
 from scipy.special import psi

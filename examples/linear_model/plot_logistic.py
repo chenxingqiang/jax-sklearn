@@ -13,7 +13,7 @@ i.e. class one or two, using the logistic curve.
 # Code source: Gael Varoquaux
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.linear_model import LogisticRegression, LinearRegression

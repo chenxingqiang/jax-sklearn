@@ -35,7 +35,7 @@ faces = datasets.fetch_olivetti_faces()
 
 import time
 
-import numpy as np
+import jax.numpy as np
 
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.feature_extraction.image import extract_patches_2d

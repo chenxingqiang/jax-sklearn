@@ -4,7 +4,7 @@
 # License: BSD 3 clause
 
 import warnings
-import numpy as np
+import jax.numpy as np
 from numbers import Integral, Real
 from scipy import sparse
 from math import sqrt

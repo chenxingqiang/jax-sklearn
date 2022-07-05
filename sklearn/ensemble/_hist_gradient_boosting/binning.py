@@ -7,7 +7,7 @@ approximately the same number of samples.
 """
 # Author: Nicolas Hug
 
-import numpy as np
+import jax.numpy as np
 
 from ...utils import check_random_state, check_array
 from ...base import BaseEstimator, TransformerMixin

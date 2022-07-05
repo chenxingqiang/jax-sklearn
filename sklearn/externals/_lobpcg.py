@@ -21,7 +21,7 @@ References
 """
 
 import warnings
-import numpy as np
+import jax.numpy as np
 from scipy.linalg import (inv, eigh, cho_factor, cho_solve,
                           cholesky, LinAlgError)
 from scipy.sparse.linalg import aslinearoperator
@@ -242,7 +242,7 @@ def lobpcg(
     --------
     Solve ``A x = lambda x`` with constraints and preconditioning.
 
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from scipy.sparse import spdiags, issparse
     >>> from scipy.sparse.linalg import lobpcg, LinearOperator
     >>> n = 100

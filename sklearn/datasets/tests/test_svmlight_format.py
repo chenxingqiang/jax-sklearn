@@ -1,7 +1,7 @@
 from bz2 import BZ2File
 import gzip
 from io import BytesIO
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 import os
 import shutil

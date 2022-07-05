@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sparse
 from sklearn.preprocessing import PolynomialFeatures
 from time import time

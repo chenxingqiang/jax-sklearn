@@ -32,7 +32,7 @@ import shutil
 import re
 import codecs
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 import joblib
 

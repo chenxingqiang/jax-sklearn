@@ -4,7 +4,7 @@
 #         Sylvain Marie <sylvain.marie@schneider-electric.com>
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 import numbers
 from scipy import linalg
 from scipy.sparse.linalg import eigsh

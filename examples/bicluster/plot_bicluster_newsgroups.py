@@ -27,7 +27,7 @@ from collections import defaultdict
 import operator
 from time import time
 
-import numpy as np
+import jax.numpy as np
 
 from sklearn.cluster import SpectralCoclustering
 from sklearn.cluster import MiniBatchKMeans

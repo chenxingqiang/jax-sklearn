@@ -34,7 +34,7 @@ case.
 # License: BSD 3 clause
 
 import array
-import numpy as np
+import jax.numpy as np
 import warnings
 import scipy.sparse as sp
 import itertools
@@ -273,7 +273,7 @@ class OneVsRestClassifier(
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.multiclass import OneVsRestClassifier
     >>> from sklearn.svm import SVC
     >>> X = np.array([

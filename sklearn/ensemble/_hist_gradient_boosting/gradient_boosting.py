@@ -6,7 +6,7 @@ from functools import partial
 from numbers import Real, Integral
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from timeit import default_timer as time
 from ..._loss.loss import (
     _LOSSES,

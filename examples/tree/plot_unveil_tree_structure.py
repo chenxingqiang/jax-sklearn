@@ -16,7 +16,7 @@ show how to retrieve:
 
 """
 
-import numpy as np
+import jax.numpy as np
 from matplotlib import pyplot as plt
 
 from sklearn.model_selection import train_test_split

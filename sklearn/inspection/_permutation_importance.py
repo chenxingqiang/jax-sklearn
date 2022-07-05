@@ -1,6 +1,6 @@
 """Permutation importance for estimators."""
 import numbers
-import numpy as np
+import jax.numpy as np
 from joblib import Parallel
 
 from ..ensemble._bagging import _generate_indices

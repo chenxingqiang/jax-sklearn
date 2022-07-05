@@ -33,7 +33,7 @@ silhouette   silhouette coefficient
 # handwritten digits from 0 to 9. In the context of clustering, one would like
 # to group images such that the handwritten digits on the image are the same.
 
-import numpy as np
+import jax.numpy as np
 from sklearn.datasets import load_digits
 
 data, labels = load_digits(return_X_y=True)

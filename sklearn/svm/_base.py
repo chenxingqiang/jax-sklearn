@@ -2,7 +2,7 @@ import warnings
 import numbers
 from abc import ABCMeta, abstractmethod
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 
 # mypy error: error: Module 'sklearn.svm' has no attribute '_libsvm'

@@ -132,7 +132,7 @@ else:
 def setup_module(module):
     """Fixture for the tests to assure globally controllable seeding of RNGs"""
 
-    import numpy as np
+    import jax.numpy as np
 
     # Check if a random seed exists in the environment, if not create one.
     _random_seed = os.environ.get("SKLEARN_SEED", None)

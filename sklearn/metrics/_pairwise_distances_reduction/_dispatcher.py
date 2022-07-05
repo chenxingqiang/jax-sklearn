@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-import numpy as np
+import jax.numpy as np
 
 from typing import List
 from scipy.sparse import issparse

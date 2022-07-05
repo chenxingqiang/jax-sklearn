@@ -45,7 +45,7 @@ For document analysis via a supervised learning approach, see the example script
 # the `remove` parameter from :func:`~sklearn.datasets.fetch_20newsgroups` to
 # strip those features and have a more sensible clustering problem.
 
-import numpy as np
+import jax.numpy as np
 from sklearn.datasets import fetch_20newsgroups
 
 categories = [

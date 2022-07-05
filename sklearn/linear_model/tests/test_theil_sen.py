@@ -8,7 +8,7 @@ import os
 import re
 import sys
 from contextlib import contextmanager
-import numpy as np
+import jax.numpy as np
 import pytest
 from numpy.testing import assert_array_equal, assert_array_less
 from numpy.testing import assert_array_almost_equal

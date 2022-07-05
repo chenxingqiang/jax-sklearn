@@ -11,7 +11,7 @@ import itertools
 from functools import partial
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy.spatial import distance
 from scipy.sparse import csr_matrix
 from scipy.sparse import issparse
@@ -921,7 +921,7 @@ def manhattan_distances(X, Y=None, *, sum_over_features=True):
          [[1, 2], [0, 3]])
     array([[0., 2.],
            [4., 4.]])
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> X = np.ones((1, 2))
     >>> y = np.full((2, 2), 2.)
     >>> manhattan_distances(X, y, sum_over_features=False)
@@ -1736,7 +1736,7 @@ def pairwise_distances_chunked(
     --------
     Without reduce_func:
 
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.metrics import pairwise_distances_chunked
     >>> X = np.random.RandomState(0).rand(5, 3)
     >>> D_chunk = next(pairwise_distances_chunked(X))

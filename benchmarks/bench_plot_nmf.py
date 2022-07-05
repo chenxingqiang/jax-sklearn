@@ -11,7 +11,7 @@ import sys
 import warnings
 import numbers
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from joblib import Memory
 import pandas

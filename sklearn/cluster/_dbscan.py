@@ -11,7 +11,7 @@ DBSCAN: Density-Based Spatial Clustering of Applications with Noise
 import warnings
 from numbers import Integral, Real
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse
 
 from ..metrics.pairwise import _VALID_METRICS
@@ -289,7 +289,7 @@ class DBSCAN(ClusterMixin, BaseEstimator):
     Examples
     --------
     >>> from sklearn.cluster import DBSCAN
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> X = np.array([[1, 2], [2, 2], [2, 3],
     ...               [8, 7], [8, 8], [25, 80]])
     >>> clustering = DBSCAN(eps=3, min_samples=2).fit(X)

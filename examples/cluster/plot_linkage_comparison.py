@@ -26,7 +26,7 @@ dimensional data.
 import time
 import warnings
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn import cluster, datasets

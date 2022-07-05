@@ -49,7 +49,7 @@ or with conda::
 #   :target: ../model_selection/plot_successive_halving_iterations.html
 #   :align: center
 
-import numpy as np
+import jax.numpy as np
 from scipy.stats import randint
 from sklearn.experimental import enable_halving_search_cv  # noqa
 from sklearn.model_selection import HalvingRandomSearchCV
@@ -117,7 +117,7 @@ rsh.best_params_
 # semi-supervised classifier, allowing it to learn from unlabeled data.
 # Read more in the :ref:`User guide <self_training>`.
 
-import numpy as np
+import jax.numpy as np
 from sklearn import datasets
 from sklearn.semi_supervised import SelfTrainingClassifier
 from sklearn.svm import SVC
@@ -228,7 +228,7 @@ display.figure_.subplots_adjust(hspace=0.3)
 
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
-import numpy as np
+import jax.numpy as np
 
 n_samples, n_features = 1000, 20
 rng = np.random.RandomState(0)

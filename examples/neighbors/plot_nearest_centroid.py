@@ -8,7 +8,7 @@ It will plot the decision boundaries for each class.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn import datasets

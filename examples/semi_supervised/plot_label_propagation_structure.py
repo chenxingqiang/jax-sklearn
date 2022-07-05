@@ -21,7 +21,7 @@ propagate correctly around the circle.
 # the outer circle), 1 (belonging to the inner circle), and -1 (unknown).
 # Here, all labels but two are tagged as unknown.
 
-import numpy as np
+import jax.numpy as np
 from sklearn.datasets import make_circles
 
 n_samples = 200

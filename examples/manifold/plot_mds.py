@@ -13,7 +13,7 @@ shifted to avoid overlapping.
 # Author: Nelle Varoquaux <nelle.varoquaux@gmail.com>
 # License: BSD
 
-import numpy as np
+import jax.numpy as np
 
 from matplotlib import pyplot as plt
 from matplotlib.collections import LineCollection

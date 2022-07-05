@@ -2,7 +2,7 @@
 # License: BSD 3 clause
 
 from numbers import Integral, Real
-import numpy as np
+import jax.numpy as np
 
 from scipy import optimize
 
@@ -222,7 +222,7 @@ class HuberRegressor(LinearModel, RegressorMixin, BaseEstimator):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.linear_model import HuberRegressor, LinearRegression
     >>> from sklearn.datasets import make_regression
     >>> rng = np.random.RandomState(0)

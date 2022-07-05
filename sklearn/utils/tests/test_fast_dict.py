@@ -1,6 +1,6 @@
 """ Test fast_dict.
 """
-import numpy as np
+import jax.numpy as np
 
 from sklearn.utils._fast_dict import IntFloatDict, argmin
 

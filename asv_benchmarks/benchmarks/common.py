@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from multiprocessing import cpu_count
 
-import numpy as np
+import jax.numpy as np
 
 
 def get_from_config():

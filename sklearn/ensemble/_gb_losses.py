@@ -5,7 +5,7 @@ decision trees.
 from abc import ABCMeta
 from abc import abstractmethod
 
-import numpy as np
+import jax.numpy as np
 from scipy.special import expit, logsumexp
 
 from ..tree._tree import TREE_LEAF

@@ -47,7 +47,7 @@ from sklearn.model_selection import train_test_split
 
 # Some common libraries
 import matplotlib.pyplot as plt
-import numpy as np
+import jax.numpy as np
 
 # Will use this for timing results
 from time import time

@@ -4,7 +4,7 @@ import warnings
 
 import pytest
 import re
-import numpy as np
+import jax.numpy as np
 from scipy.sparse import (
     bsr_matrix,
     coo_matrix,

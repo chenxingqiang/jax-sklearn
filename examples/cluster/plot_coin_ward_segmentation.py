@@ -26,7 +26,7 @@ orig_coins = coins()
 # Applying a Gaussian filter for smoothing prior to down-scaling
 # reduces aliasing artifacts.
 
-import numpy as np
+import jax.numpy as np
 from scipy.ndimage import gaussian_filter
 from skimage.transform import rescale
 

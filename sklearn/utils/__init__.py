@@ -18,7 +18,7 @@ from pathlib import Path
 from contextlib import suppress
 
 import warnings
-import numpy as np
+import jax.numpy as np
 from scipy.sparse import issparse
 
 from .murmurhash import murmurhash3_32
@@ -87,7 +87,7 @@ def _in_unstable_openblas_configuration():
     """Return True if in an unstable configuration for OpenBLAS"""
 
     # Import libraries which might load OpenBLAS.
-    import numpy  # noqa
+    import jax.numpy  # noqa
     import scipy  # noqa
 
     modules_info = threadpool_info()
@@ -477,7 +477,7 @@ def resample(*arrays, replace=True, n_samples=None, random_state=None, stratify=
     --------
     It is possible to mix sparse and dense arrays in the same run::
 
-      >>> import numpy as np
+      >>> import jax.numpy as np
       >>> X = np.array([[1., 0.], [2., 1.], [0., 0.]])
       >>> y = np.array([0, 1, 2])
 
@@ -615,7 +615,7 @@ def shuffle(*arrays, random_state=None, n_samples=None):
     --------
     It is possible to mix sparse and dense arrays in the same run::
 
-      >>> import numpy as np
+      >>> import jax.numpy as np
       >>> X = np.array([[1., 0.], [2., 1.], [0., 0.]])
       >>> y = np.array([0, 1, 2])
 
@@ -839,7 +839,7 @@ def _to_object_array(sequence):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.utils import _to_object_array
     >>> _to_object_array([np.array([0]), np.array([1])])
     array([array([0]), array([1])], dtype=object)
@@ -1018,7 +1018,7 @@ def is_scalar_nan(x):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.utils import is_scalar_nan
     >>> is_scalar_nan(np.nan)
     True
@@ -1061,7 +1061,7 @@ def _approximate_mode(class_counts, n_draws, rng):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.utils import _approximate_mode
     >>> _approximate_mode(class_counts=np.array([4, 2]), n_draws=3, rng=0)
     array([2, 1])

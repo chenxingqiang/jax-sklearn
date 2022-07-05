@@ -20,7 +20,7 @@ import operator
 import time
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from numpy.ma import MaskedArray
 from scipy.stats import rankdata
 
@@ -241,7 +241,7 @@ class ParameterSampler:
     --------
     >>> from sklearn.model_selection import ParameterSampler
     >>> from scipy.stats.distributions import expon
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> rng = np.random.RandomState(0)
     >>> param_grid = {'a':[1, 2], 'b': expon()}
     >>> param_list = list(ParameterSampler(param_grid, n_iter=4,

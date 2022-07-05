@@ -29,7 +29,7 @@ the lower the better.
 import numbers
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy.special import xlogy
 
 from ..exceptions import UndefinedMetricWarning

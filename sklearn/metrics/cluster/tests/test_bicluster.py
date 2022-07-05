@@ -1,6 +1,6 @@
 """Testing for bicluster metrics module"""
 
-import numpy as np
+import jax.numpy as np
 
 from sklearn.utils._testing import assert_almost_equal
 

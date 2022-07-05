@@ -2,7 +2,7 @@
 #
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 from sklearn.utils.murmurhash import murmurhash3_32
 from numpy.testing import assert_array_almost_equal
 from numpy.testing import assert_array_equal

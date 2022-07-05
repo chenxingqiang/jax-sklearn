@@ -5,7 +5,7 @@ import string
 import timeit
 
 import pytest
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 
 from sklearn.utils._testing import (

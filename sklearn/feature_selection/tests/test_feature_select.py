@@ -3,7 +3,7 @@ Todo: cross-check the F-value with stats model
 """
 import itertools
 import warnings
-import numpy as np
+import jax.numpy as np
 from numpy.testing import assert_allclose
 from scipy import stats, sparse
 

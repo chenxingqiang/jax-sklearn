@@ -8,7 +8,7 @@ Testing for Neighborhood Component Analysis module (sklearn.neighbors.nca)
 
 import pytest
 import re
-import numpy as np
+import jax.numpy as np
 from numpy.testing import assert_array_equal, assert_array_almost_equal
 from scipy.optimize import check_grad
 from sklearn import clone

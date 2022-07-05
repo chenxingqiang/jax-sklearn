@@ -12,7 +12,7 @@ from abc import ABC, abstractmethod
 from functools import partial
 from numbers import Integral, Real
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse
 from joblib import Parallel, effective_n_jobs
 
@@ -326,7 +326,7 @@ def lasso_path(
 
     Comparing lasso_path and lars_path with interpolation:
 
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.linear_model import lasso_path
     >>> X = np.array([[1, 2, 3.1], [2.3, 5.4, 4.3]]).T
     >>> y = np.array([1, 2, 3.1])

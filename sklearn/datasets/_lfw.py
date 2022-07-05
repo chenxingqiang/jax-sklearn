@@ -13,7 +13,7 @@ from os.path import join, exists, isdir
 
 import logging
 
-import numpy as np
+import jax.numpy as np
 from joblib import Memory
 
 from ._base import (

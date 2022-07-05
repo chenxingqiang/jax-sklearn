@@ -26,7 +26,7 @@ import timeit
 import warnings
 
 import matplotlib.pyplot as plt
-import numpy as np
+import jax.numpy as np
 
 from sklearn.datasets import fetch_20newsgroups_vectorized
 from sklearn.linear_model import LogisticRegression

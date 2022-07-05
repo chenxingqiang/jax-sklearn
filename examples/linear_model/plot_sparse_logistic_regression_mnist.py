@@ -22,7 +22,7 @@ multi-layer perceptron model on this dataset.
 
 import time
 import matplotlib.pyplot as plt
-import numpy as np
+import jax.numpy as np
 
 from sklearn.datasets import fetch_openml
 from sklearn.linear_model import LogisticRegression

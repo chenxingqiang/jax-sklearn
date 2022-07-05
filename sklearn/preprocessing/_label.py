@@ -12,7 +12,7 @@ import itertools
 import array
 import warnings
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 
 from ..base import BaseEstimator, TransformerMixin
@@ -244,7 +244,7 @@ class LabelBinarizer(TransformerMixin, BaseEstimator):
 
     Passing a 2D matrix for multilabel classification
 
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> lb.fit(np.array([[0, 1, 1], [1, 0, 0]]))
     LabelBinarizer()
     >>> lb.classes_

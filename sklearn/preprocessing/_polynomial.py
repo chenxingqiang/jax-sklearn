@@ -6,7 +6,7 @@ import numbers
 from itertools import chain, combinations
 from itertools import combinations_with_replacement as combinations_w_r
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse
 from scipy.interpolate import BSpline
 from scipy.special import comb
@@ -110,7 +110,7 @@ class PolynomialFeatures(TransformerMixin, BaseEstimator):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.preprocessing import PolynomialFeatures
     >>> X = np.arange(6).reshape(3, 2)
     >>> X
@@ -614,7 +614,7 @@ class SplineTransformer(TransformerMixin, BaseEstimator):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.preprocessing import SplineTransformer
     >>> X = np.arange(6).reshape(6, 1)
     >>> spline = SplineTransformer(degree=2, n_knots=3)

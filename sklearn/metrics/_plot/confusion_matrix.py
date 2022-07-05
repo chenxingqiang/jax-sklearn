@@ -1,6 +1,6 @@
 from itertools import product
 
-import numpy as np
+import jax.numpy as np
 
 from .. import confusion_matrix
 from ...utils import check_matplotlib_support

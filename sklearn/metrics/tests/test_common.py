@@ -4,7 +4,7 @@ from itertools import product
 from itertools import chain
 from itertools import permutations
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 
 import pytest

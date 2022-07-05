@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 
 from sklearn.utils.optimize import _newton_cg
 from scipy.optimize import fmin_ncg

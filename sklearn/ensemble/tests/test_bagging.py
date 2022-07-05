@@ -6,7 +6,7 @@ Testing for the bagging ensemble module (sklearn.ensemble.bagging).
 # License: BSD 3 clause
 from itertools import product
 
-import numpy as np
+import jax.numpy as np
 import joblib
 import pytest
 

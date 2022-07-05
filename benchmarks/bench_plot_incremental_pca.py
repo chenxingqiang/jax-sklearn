@@ -7,7 +7,7 @@ Benchmarks for IncrementalPCA
 
 """
 
-import numpy as np
+import jax.numpy as np
 import gc
 from time import time
 from collections import defaultdict

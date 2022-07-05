@@ -33,7 +33,7 @@ separating the objects one from the other, and not from the background.
 # %%
 # Generate the data
 # -----------------
-import numpy as np
+import jax.numpy as np
 
 l = 100
 x, y = np.indices((l, l))

@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 import pytest
 from pytest import approx
 from numpy.testing import assert_array_equal

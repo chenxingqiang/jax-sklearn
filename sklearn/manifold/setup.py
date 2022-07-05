@@ -1,6 +1,6 @@
 import os
 
-import numpy
+import jax.numpy
 
 
 def configuration(parent_package="", top_path=None):

@@ -39,7 +39,7 @@ of components (this takes more time).
 
 import time
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from numpy.testing import assert_array_almost_equal

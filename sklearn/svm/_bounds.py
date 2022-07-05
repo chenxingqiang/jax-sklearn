@@ -2,7 +2,7 @@
 # Author: Paolo Losi
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 
 from ..preprocessing import LabelBinarizer
 from ..utils.validation import check_consistent_length, check_array

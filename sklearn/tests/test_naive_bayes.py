@@ -1,6 +1,6 @@
 import re
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse
 import pytest
 import warnings

@@ -8,7 +8,7 @@ is proportional to its weight.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from sklearn import linear_model
 

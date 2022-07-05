@@ -5,7 +5,7 @@ Note that correctness of losses (which compose LinearModelLoss) is already well
 covered in the _loss module.
 """
 import pytest
-import numpy as np
+import jax.numpy as np
 from numpy.testing import assert_allclose
 from scipy import linalg, optimize, sparse
 

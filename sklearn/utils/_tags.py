@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 
 _DEFAULT_TAGS = {
     "non_deterministic": False,

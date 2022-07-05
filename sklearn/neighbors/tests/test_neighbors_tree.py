@@ -3,7 +3,7 @@
 import pickle
 import itertools
 
-import numpy as np
+import jax.numpy as np
 import pytest
 
 from sklearn.metrics import DistanceMetric

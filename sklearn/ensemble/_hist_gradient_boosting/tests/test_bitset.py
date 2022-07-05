@@ -1,5 +1,5 @@
 import pytest
-import numpy as np
+import jax.numpy as np
 from numpy.testing import assert_allclose
 
 from sklearn.ensemble._hist_gradient_boosting._bitset import (

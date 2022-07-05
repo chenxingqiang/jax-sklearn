@@ -22,7 +22,7 @@ Algorithm 21.1
 import warnings
 from math import sqrt, log
 from numbers import Integral, Real
-import numpy as np
+import jax.numpy as np
 from scipy import linalg
 
 

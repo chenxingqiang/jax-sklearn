@@ -20,7 +20,7 @@ from os.path import exists, join
 import os
 from tempfile import TemporaryDirectory
 
-import numpy as np
+import jax.numpy as np
 import joblib
 
 from . import get_data_home

@@ -14,7 +14,7 @@ deformation of the decision boundary very visible.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from sklearn import svm
 

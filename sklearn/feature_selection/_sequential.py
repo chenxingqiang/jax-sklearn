@@ -3,7 +3,7 @@ Sequential feature selection
 """
 import numbers
 
-import numpy as np
+import jax.numpy as np
 
 import warnings
 

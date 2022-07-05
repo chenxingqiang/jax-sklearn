@@ -1,7 +1,7 @@
 # Author: Nikolay Mayorov <n59_ru@hotmail.com>
 # License: 3-clause BSD
 
-import numpy as np
+import jax.numpy as np
 from scipy.sparse import issparse
 from scipy.special import digamma
 

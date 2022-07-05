@@ -32,7 +32,7 @@ random resampling of the dataset.
 
 from time import time
 
-import numpy as np
+import jax.numpy as np
 from matplotlib import pyplot as plt
 
 from sklearn import manifold, datasets

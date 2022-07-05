@@ -4,7 +4,7 @@
 # License: BSD 3 clause (C) 2011
 import warnings
 
-import numpy as np
+import jax.numpy as np
 
 from scipy.sparse import issparse
 from scipy.sparse.csgraph import shortest_path

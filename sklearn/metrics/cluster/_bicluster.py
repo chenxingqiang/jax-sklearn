@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 from scipy.optimize import linear_sum_assignment
 
 from ...utils.validation import check_consistent_length, check_array

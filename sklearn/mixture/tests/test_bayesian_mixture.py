@@ -4,7 +4,7 @@
 import copy
 import re
 
-import numpy as np
+import jax.numpy as np
 from scipy.special import gammaln
 import pytest
 

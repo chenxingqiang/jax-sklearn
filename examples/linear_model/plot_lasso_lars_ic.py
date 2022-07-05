@@ -66,7 +66,7 @@ def zou_et_al_criterion_rescaling(criterion, n_samples, noise_variance):
 
 
 # %%
-import numpy as np
+import jax.numpy as np
 
 aic_criterion = zou_et_al_criterion_rescaling(
     lasso_lars_ic[-1].criterion_,

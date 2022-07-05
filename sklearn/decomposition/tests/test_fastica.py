@@ -5,7 +5,7 @@ import itertools
 import pytest
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy import stats
 
 from sklearn.utils._testing import assert_array_equal

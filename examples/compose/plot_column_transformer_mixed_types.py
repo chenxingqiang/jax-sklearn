@@ -29,7 +29,7 @@ model.
 # License: BSD 3 clause
 
 # %%
-import numpy as np
+import jax.numpy as np
 
 from sklearn.compose import ColumnTransformer
 from sklearn.datasets import fetch_openml

@@ -22,7 +22,7 @@ feature extraction.
 # artificially generate more labeled data by perturbing the training data with
 # linear shifts of 1 pixel in each direction.
 
-import numpy as np
+import jax.numpy as np
 
 from scipy.ndimage import convolve
 

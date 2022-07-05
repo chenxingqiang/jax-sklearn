@@ -215,7 +215,7 @@ WARNING: Do not edit `sklearn/_loss/_loss.pyx` file directly, as it is generated
 #       appropriate (arguments marked by "# IN").
 
 from cython.parallel import parallel, prange
-import numpy as np
+import jax.numpy as np
 
 from libc.math cimport exp, fabs, log, log1p, pow
 from libc.stdlib cimport malloc, free

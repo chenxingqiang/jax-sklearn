@@ -2,7 +2,7 @@ import pickle
 
 import joblib
 import pytest
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 from unittest.mock import Mock
 

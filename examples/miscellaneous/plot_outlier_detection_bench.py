@@ -31,7 +31,7 @@ print(__doc__)
 # will have two classes, 0 representing inliers and 1 representing outliers.
 # The `preprocess_dataset` function returns data and target.
 
-import numpy as np
+import jax.numpy as np
 from sklearn.datasets import fetch_kddcup99, fetch_covtype, fetch_openml
 from sklearn.preprocessing import LabelBinarizer
 import pandas as pd

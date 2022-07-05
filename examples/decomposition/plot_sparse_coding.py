@@ -16,7 +16,7 @@ is performed in order to stay on the same order of magnitude.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.decomposition import SparseCoder

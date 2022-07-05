@@ -5,7 +5,7 @@
 # License: BSD 3 clause
 from numbers import Integral, Real
 
-import numpy as np
+import jax.numpy as np
 
 from .base import BaseEstimator, RegressorMixin, MultiOutputMixin
 from .utils._param_validation import Interval, StrOptions
@@ -121,7 +121,7 @@ class KernelRidge(MultiOutputMixin, RegressorMixin, BaseEstimator):
     Examples
     --------
     >>> from sklearn.kernel_ridge import KernelRidge
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> n_samples, n_features = 10, 5
     >>> rng = np.random.RandomState(0)
     >>> y = rng.randn(n_samples)

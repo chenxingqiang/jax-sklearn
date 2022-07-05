@@ -32,7 +32,7 @@ around 0.7.
 # Authors: Oliver Rausch <rauscho@ethz.ch>
 # License: BSD
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.svm import SVC

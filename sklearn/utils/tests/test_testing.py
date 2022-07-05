@@ -4,7 +4,7 @@ import sys
 import os
 import atexit
 
-import numpy as np
+import jax.numpy as np
 
 from scipy import sparse
 

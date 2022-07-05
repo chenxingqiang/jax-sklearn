@@ -39,7 +39,7 @@ from datetime import datetime
 from pprint import pprint
 from time import time
 
-import numpy as np
+import jax.numpy as np
 
 from scipy import sparse
 

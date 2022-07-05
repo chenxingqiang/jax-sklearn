@@ -4,7 +4,7 @@ import platform
 import sys
 
 import pytest
-import numpy as np
+import jax.numpy as np
 from threadpoolctl import threadpool_limits
 from _pytest.doctest import DoctestItem
 

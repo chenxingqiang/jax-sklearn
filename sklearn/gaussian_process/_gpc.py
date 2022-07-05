@@ -7,7 +7,7 @@
 from numbers import Integral
 from operator import itemgetter
 
-import numpy as np
+import jax.numpy as np
 from scipy.linalg import cholesky, cho_solve, solve
 import scipy.optimize
 from scipy.special import erf, expit

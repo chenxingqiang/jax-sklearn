@@ -10,7 +10,7 @@ from functools import wraps
 from abc import ABCMeta, abstractmethod
 from operator import attrgetter
 from functools import update_wrapper
-import numpy as np
+import jax.numpy as np
 from contextlib import suppress
 
 from ..utils import _safe_indexing

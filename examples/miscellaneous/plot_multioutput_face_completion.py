@@ -12,7 +12,7 @@ regression and ridge regression complete the lower half of those faces.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.datasets import fetch_olivetti_faces

@@ -1,9 +1,8 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import argparse
 import os.path as op
 
-import argparse
-
+import jax.numpy as np
+import matplotlib.pyplot as plt
 
 LOG_DIR = "mnist_tsne_output"
 

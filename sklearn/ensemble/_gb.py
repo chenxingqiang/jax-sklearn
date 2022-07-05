@@ -36,7 +36,7 @@ from ._gradient_boosting import predict_stage
 from ._gradient_boosting import _random_sample_mask
 
 import numbers
-import numpy as np
+import jax.numpy as np
 
 from scipy.sparse import csc_matrix
 from scipy.sparse import csr_matrix

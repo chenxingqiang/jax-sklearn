@@ -107,7 +107,7 @@ class NearestNeighbors(KNeighborsMixin, RadiusNeighborsMixin, NeighborsBase):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.neighbors import NearestNeighbors
     >>> samples = [[0, 0, 2], [1, 0, 0], [0, 0, 1]]
 

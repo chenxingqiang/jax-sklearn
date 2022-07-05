@@ -82,7 +82,7 @@ is not scaled.
 #         Jaques Grobler <jaques.grobler@inria.fr>
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.svm import LinearSVC

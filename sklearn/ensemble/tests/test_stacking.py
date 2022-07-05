@@ -4,7 +4,7 @@
 # License: BSD 3 clause
 
 import pytest
-import numpy as np
+import jax.numpy as np
 from numpy.testing import assert_array_equal
 import scipy.sparse as sparse
 

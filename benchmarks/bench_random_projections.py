@@ -12,7 +12,7 @@ import optparse
 from datetime import datetime
 import collections
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 
 from sklearn import clone

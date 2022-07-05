@@ -6,7 +6,7 @@ Kernel Density Estimation
 import itertools
 from numbers import Integral, Real
 
-import numpy as np
+import jax.numpy as np
 from scipy.special import gammainc
 
 from ..base import BaseEstimator
@@ -113,7 +113,7 @@ class KernelDensity(BaseEstimator):
     Compute a gaussian kernel density estimate with a fixed bandwidth.
 
     >>> from sklearn.neighbors import KernelDensity
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> rng = np.random.RandomState(42)
     >>> X = rng.random_sample((100, 3))
     >>> kde = KernelDensity(kernel='gaussian', bandwidth=0.5).fit(X)

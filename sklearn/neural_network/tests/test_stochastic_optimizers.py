@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 
 from sklearn.neural_network._stochastic_optimizers import (
     BaseOptimizer,

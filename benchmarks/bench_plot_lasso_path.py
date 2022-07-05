@@ -7,7 +7,7 @@ import gc
 import sys
 from time import time
 
-import numpy as np
+import jax.numpy as np
 
 from sklearn.linear_model import lars_path, lars_path_gram
 from sklearn.linear_model import lasso_path

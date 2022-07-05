@@ -38,7 +38,7 @@ thus the clustering puts them in the same cluster.
 # License: BSD 3-Clause or CC-0
 
 import matplotlib.pyplot as plt
-import numpy as np
+import jax.numpy as np
 
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics import pairwise_distances

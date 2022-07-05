@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 
 from .extmath import stable_cumsum
 

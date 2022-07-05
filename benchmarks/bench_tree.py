@@ -13,7 +13,7 @@ In the second benchmark, we increase the number of dimensions of the
 training set, classify a sample and plot the time taken as a function
 of the number of dimensions.
 """
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 import gc
 from datetime import datetime

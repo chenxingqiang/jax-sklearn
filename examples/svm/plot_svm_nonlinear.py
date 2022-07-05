@@ -11,7 +11,7 @@ The color map illustrates the decision function learned by the SVC.
 
 """
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from sklearn import svm
 

@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 import pytest
 from scipy import sparse
 from scipy.sparse import random as sparse_random

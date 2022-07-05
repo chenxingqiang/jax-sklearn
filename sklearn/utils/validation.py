@@ -14,7 +14,7 @@ import warnings
 import numbers
 import operator
 
-import numpy as np
+import jax.numpy as np
 import scipy.sparse as sp
 from inspect import signature, isclass, Parameter
 

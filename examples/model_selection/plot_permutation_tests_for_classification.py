@@ -30,7 +30,7 @@ y = iris.target
 # We will also generate some random feature data (i.e., 20 features),
 # uncorrelated with the class labels in the iris dataset.
 
-import numpy as np
+import jax.numpy as np
 
 n_uncorrelated_features = 20
 rng = np.random.RandomState(seed=0)

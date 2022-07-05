@@ -9,7 +9,7 @@ import copy
 import warnings
 import pytest
 
-import numpy as np
+import jax.numpy as np
 from scipy import stats, linalg
 
 from sklearn.cluster import KMeans

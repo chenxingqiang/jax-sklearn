@@ -22,7 +22,7 @@ from abc import abstractmethod
 from math import ceil
 from numbers import Integral, Real
 
-import numpy as np
+import jax.numpy as np
 from scipy.sparse import issparse
 
 from ..base import BaseEstimator

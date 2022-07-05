@@ -8,7 +8,7 @@ import re
 import itertools
 
 import pytest
-import numpy as np
+import jax.numpy as np
 from scipy import sparse
 import joblib
 

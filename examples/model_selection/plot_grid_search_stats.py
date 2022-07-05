@@ -161,7 +161,7 @@ print(f"Correlation of models:\n {model_scores.transpose().corr()}")
 # second model. Our null hypothesis is that the second model performs at least
 # as good as the first model.
 
-import numpy as np
+import jax.numpy as np
 from scipy.stats import t
 
 

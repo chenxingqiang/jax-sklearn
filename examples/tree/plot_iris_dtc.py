@@ -23,7 +23,7 @@ iris = load_iris()
 
 # %%
 # Display the decision functions of trees trained on all pairs of features.
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.datasets import load_iris

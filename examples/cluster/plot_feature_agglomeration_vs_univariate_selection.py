@@ -21,7 +21,7 @@ a BayesianRidge as supervised estimator.
 import shutil
 import tempfile
 
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 from scipy import linalg, ndimage
 from joblib import Memory

@@ -42,7 +42,7 @@ Hamming Loss).
 # License: BSD 3 clause
 
 import time
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn import datasets

@@ -1,4 +1,4 @@
-import numpy as np
+import jax.numpy as np
 import pytest
 
 from sklearn.compose import make_column_transformer

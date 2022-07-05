@@ -12,7 +12,7 @@ from math import log
 import sys
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy import linalg, interpolate
 from scipy.linalg.lapack import get_lapack_funcs
 from joblib import Parallel

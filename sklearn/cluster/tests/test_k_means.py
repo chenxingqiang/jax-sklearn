@@ -3,7 +3,7 @@ import re
 import sys
 import warnings
 
-import numpy as np
+import jax.numpy as np
 from scipy import sparse as sp
 
 import pytest

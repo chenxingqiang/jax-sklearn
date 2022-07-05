@@ -14,7 +14,7 @@ from scipy.sparse import issparse
 from scipy.sparse import dok_matrix
 from scipy.sparse import lil_matrix
 
-import numpy as np
+import jax.numpy as np
 
 from .validation import check_array, _assert_all_finite
 
@@ -130,7 +130,7 @@ def is_multilabel(y):
 
     Examples
     --------
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> from sklearn.utils.multiclass import is_multilabel
     >>> is_multilabel([0, 1, 0, 1])
     False
@@ -246,7 +246,7 @@ def type_of_target(y, input_name=""):
     Examples
     --------
     >>> from sklearn.utils.multiclass import type_of_target
-    >>> import numpy as np
+    >>> import jax.numpy as np
     >>> type_of_target([0.1, 0.6])
     'continuous'
     >>> type_of_target([1, -1, -1, 1])

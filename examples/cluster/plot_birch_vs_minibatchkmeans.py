@@ -28,7 +28,7 @@ step before the final (global) clustering step that further reduces these
 from joblib import cpu_count
 from itertools import cycle
 from time import time
-import numpy as np
+import jax.numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 

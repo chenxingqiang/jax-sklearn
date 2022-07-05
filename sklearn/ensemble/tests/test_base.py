@@ -5,7 +5,7 @@ Testing for the base module (sklearn.ensemble.base).
 # Authors: Gilles Louppe
 # License: BSD 3 clause
 
-import numpy as np
+import jax.numpy as np
 import pytest
 
 from sklearn.datasets import load_iris

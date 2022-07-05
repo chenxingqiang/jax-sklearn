@@ -24,7 +24,7 @@ datapoint.
 # %%
 # Generate sample data
 # --------------------
-import numpy as np
+import jax.numpy as np
 
 rng = np.random.RandomState(42)
 
