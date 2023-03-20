@@ -7,7 +7,7 @@ import gc
 import sys
 from time import time
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.linear_model import lars_path, lars_path_gram, orthogonal_mp
 from sklearn.datasets import make_sparse_coded_signal

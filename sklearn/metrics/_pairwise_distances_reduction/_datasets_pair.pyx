@@ -1,5 +1,5 @@
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 
 from cython cimport final
 from scipy.sparse import issparse

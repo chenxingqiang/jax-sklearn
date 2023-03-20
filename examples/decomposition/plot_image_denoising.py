@@ -35,7 +35,7 @@ necessarily related to visualisation.
 # %%
 # Generate distorted image
 # ------------------------
-import jax.numpy as np
+import numpy as np
 import scipy as sp
 
 

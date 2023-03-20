@@ -3,7 +3,7 @@
 cimport cython
 from cython.parallel import prange
 from libc.math cimport isnan
-import jax.numpy as np
+import numpy as np
 from numpy.math cimport INFINITY
 
 from .common cimport X_DTYPE_C

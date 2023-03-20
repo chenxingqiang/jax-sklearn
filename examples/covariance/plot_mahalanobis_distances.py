@@ -73,7 +73,7 @@ observation ranking and clustering.
 # a standard deviation equal to 1 and feature 2 has a standard deviation equal
 # to 7.
 
-import jax.numpy as np
+import numpy as np
 
 # for consistent results
 np.random.seed(7)

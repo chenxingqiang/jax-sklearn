@@ -8,7 +8,7 @@ import warnings
 from numbers import Integral, Real
 from operator import itemgetter
 
-import jax.numpy as np
+import numpy as np
 from scipy.linalg import cholesky, cho_solve, solve_triangular
 import scipy.optimize
 

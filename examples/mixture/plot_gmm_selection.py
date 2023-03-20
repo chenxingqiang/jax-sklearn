@@ -16,7 +16,7 @@ In that case, the model with 2 components and full covariance
 
 """
 
-import jax.numpy as np
+import numpy as np
 import itertools
 
 from scipy import linalg

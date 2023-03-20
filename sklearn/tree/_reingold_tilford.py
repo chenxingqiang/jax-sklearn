@@ -1,7 +1,7 @@
 # Authors: William Mill (bill@billmill.org)
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 
 class DrawTree:

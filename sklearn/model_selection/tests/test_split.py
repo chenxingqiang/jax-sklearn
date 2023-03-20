@@ -2,7 +2,7 @@
 import warnings
 import pytest
 import re
-import jax.numpy as np
+import numpy as np
 from scipy.sparse import coo_matrix, csc_matrix, csr_matrix
 from scipy import stats
 from scipy.special import comb

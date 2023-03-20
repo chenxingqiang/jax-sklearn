@@ -3,7 +3,7 @@ Testing for mean shift clustering methods
 
 """
 
-import jax.numpy as np
+import numpy as np
 import warnings
 import pytest
 

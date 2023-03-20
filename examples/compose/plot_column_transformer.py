@@ -22,7 +22,7 @@ helpful, but serves to illustrate the technique.
 #
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.datasets import fetch_20newsgroups

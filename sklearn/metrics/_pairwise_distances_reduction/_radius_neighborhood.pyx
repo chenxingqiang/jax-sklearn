@@ -1,5 +1,5 @@
-cimport jax.numpy as cnp
-import jax.numpy as np
+cimport numpy as cnp
+import numpy as np
 import warnings
 
 from libcpp.memory cimport shared_ptr, make_shared

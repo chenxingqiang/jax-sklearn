@@ -4,7 +4,7 @@
 # License: BSD 3 clause
 
 import warnings
-import jax.numpy as np
+import numpy as np
 
 from scipy.optimize import approx_fprime
 

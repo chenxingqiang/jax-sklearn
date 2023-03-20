@@ -3,7 +3,7 @@
 import sys
 import pytest
 
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 
 from numpy.testing import assert_allclose

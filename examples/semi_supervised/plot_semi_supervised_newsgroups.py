@@ -12,7 +12,7 @@ loader or setting them to `None` to get all 20 of them.
 """
 
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer

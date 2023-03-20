@@ -1,7 +1,7 @@
 """
 Testing for the nearest centroid module.
 """
-import jax.numpy as np
+import numpy as np
 import pytest
 from scipy import sparse as sp
 from numpy.testing import assert_array_equal

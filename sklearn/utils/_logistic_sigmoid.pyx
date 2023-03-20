@@ -1,6 +1,6 @@
 from libc.math cimport log, exp
 
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 cnp.import_array()
 ctypedef cnp.float64_t DTYPE_t

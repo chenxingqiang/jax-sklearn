@@ -1,4 +1,4 @@
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 from libc.stdlib cimport free, malloc
 from libc.float cimport DBL_MAX
@@ -21,7 +21,7 @@ from ...utils._heap cimport heap_push
 from ...utils._sorting cimport simultaneous_sort
 from ...utils._typedefs cimport ITYPE_t, DTYPE_t
 
-import jax.numpy as np
+import numpy as np
 import warnings
 
 from numbers import Integral

@@ -4,7 +4,7 @@
 
 import warnings
 
-import jax.numpy as np
+import numpy as np
 
 from ..base import BaseEstimator, RegressorMixin, clone
 from ..utils.validation import check_is_fitted
@@ -112,7 +112,7 @@ class TransformedTargetRegressor(RegressorMixin, BaseEstimator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.linear_model import LinearRegression
     >>> from sklearn.compose import TransformedTargetRegressor
     >>> tt = TransformedTargetRegressor(regressor=LinearRegression(),

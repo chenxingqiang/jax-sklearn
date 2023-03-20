@@ -1,4 +1,4 @@
-import jax.numpy as np
+import numpy as np
 import pytest
 from sklearn.tree._reingold_tilford import buchheim, Tree
 

@@ -9,7 +9,7 @@
 
 cimport cython
 from cython.parallel import prange
-import jax.numpy as np
+import numpy as np
 from libc.stdlib cimport malloc, free, qsort
 from libc.string cimport memcpy
 from numpy.math cimport INFINITY

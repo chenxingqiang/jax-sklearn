@@ -33,7 +33,7 @@ by Thomas P. Minka is also compared.
 # Create the data
 # ---------------
 
-import jax.numpy as np
+import numpy as np
 
 from scipy import linalg
 

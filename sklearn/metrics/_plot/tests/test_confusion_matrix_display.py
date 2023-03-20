@@ -2,7 +2,7 @@ from numpy.testing import (
     assert_allclose,
     assert_array_equal,
 )
-import jax.numpy as np
+import numpy as np
 import pytest
 
 from sklearn.datasets import make_classification

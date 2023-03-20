@@ -8,7 +8,7 @@ the RANSAC algorithm.
 
 """
 
-import jax.numpy as np
+import numpy as np
 from matplotlib import pyplot as plt
 
 from sklearn import linear_model, datasets

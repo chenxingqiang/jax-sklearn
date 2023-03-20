@@ -3,7 +3,7 @@
 set -e
 
 python --version
-python -c "import jax.numpy; print(f'numpy {numpy.__version__}')"
+python -c "import numpy; print(f'numpy {numpy.__version__}')"
 python -c "import scipy; print(f'scipy {scipy.__version__}')"
 python -c "\
 try:

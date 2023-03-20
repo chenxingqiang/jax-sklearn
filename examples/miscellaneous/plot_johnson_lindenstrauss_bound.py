@@ -15,7 +15,7 @@ space while controlling the distortion in the pairwise distances.
 
 import sys
 from time import time
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.random_projection import johnson_lindenstrauss_min_dim
 from sklearn.random_projection import SparseRandomProjection

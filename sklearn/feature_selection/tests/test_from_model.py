@@ -1,6 +1,6 @@
 import re
 import pytest
-import jax.numpy as np
+import numpy as np
 import warnings
 from unittest.mock import Mock
 

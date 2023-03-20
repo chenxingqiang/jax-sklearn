@@ -27,7 +27,7 @@ or with conda::
 # :class:`ensemble.HistGradientBoostingRegressor` can model quantiles with
 # `loss="quantile"` and the new parameter `quantile`.
 from sklearn.ensemble import HistGradientBoostingRegressor
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 # Simple regression function for X * cos(X)
@@ -108,7 +108,7 @@ plt.tight_layout()
 # categories are `min_frequency` and `max_categories`. See the
 # :ref:`User Guide <one_hot_encoder_infrequent_categories>` for more details.
 from sklearn.preprocessing import OneHotEncoder
-import jax.numpy as np
+import numpy as np
 
 X = np.array(
     [["dog"] * 5 + ["cat"] * 20 + ["rabbit"] * 10 + ["snake"] * 3], dtype=object
@@ -174,7 +174,7 @@ pd.DataFrame(encoded, columns=enc.get_feature_names_out())
 # large datasets. In particular, it implements `partial_fit`, which can be used for
 # online learning when the data is not readily available from the start, or when the
 # data does not fit into memory.
-import jax.numpy as np
+import numpy as np
 from sklearn.decomposition import MiniBatchNMF
 
 rng = np.random.RandomState(0)

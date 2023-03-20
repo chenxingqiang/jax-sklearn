@@ -1,4 +1,4 @@
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 from joblib import Memory
 from pathlib import Path

@@ -12,8 +12,8 @@ from libc.stdint cimport SIZE_MAX
 from ..tree._utils cimport safe_realloc, sizet_ptr_to_ndarray
 from ..utils import check_array
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cnp.import_array()
 
 cdef extern from "math.h":

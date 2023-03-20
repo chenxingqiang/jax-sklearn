@@ -4,7 +4,7 @@ Test the ColumnTransformer.
 import re
 import pickle
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 import pytest
 

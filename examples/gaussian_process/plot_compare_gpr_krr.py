@@ -36,7 +36,7 @@ tuning the kernel hyperparameters.
 # We create a synthetic dataset. The true generative process will take a 1-D
 # vector and compute its sine. Note that the period of this sine is thus
 # :math:`2 \pi`. We will reuse this information later in this example.
-import jax.numpy as np
+import numpy as np
 
 rng = np.random.RandomState(0)
 data = np.linspace(0, 30, num=1_000).reshape(-1, 1)

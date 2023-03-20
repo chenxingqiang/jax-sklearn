@@ -18,7 +18,7 @@ target using both barycenter and constant weights.
 # %%
 # Generate sample data
 # --------------------
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import neighbors
 

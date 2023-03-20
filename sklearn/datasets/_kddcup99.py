@@ -14,7 +14,7 @@ import logging
 import os
 from os.path import exists, join
 
-import jax.numpy as np
+import numpy as np
 import joblib
 
 from ._base import _fetch_remote

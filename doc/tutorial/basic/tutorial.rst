@@ -215,7 +215,7 @@ Type casting
 
 Unless otherwise specified, input will be cast to ``float64``::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> from sklearn import kernel_approximation
 
   >>> rng = np.random.RandomState(0)
@@ -262,7 +262,7 @@ Hyper-parameters of an estimator can be updated after it has been constructed
 via the :term:`set_params()<set_params>` method. Calling ``fit()`` more than
 once will overwrite what was learned by any previous ``fit()``::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> from sklearn.datasets import load_iris
   >>> from sklearn.svm import SVC
   >>> X, y = load_iris(return_X_y=True)

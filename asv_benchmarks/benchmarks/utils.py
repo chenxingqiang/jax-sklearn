@@ -1,4 +1,4 @@
-import jax.numpy as np
+import numpy as np
 
 from sklearn.metrics import balanced_accuracy_score, r2_score
 

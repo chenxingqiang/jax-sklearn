@@ -31,7 +31,7 @@ regularization on the assumed training points' covariance matrix.
 #
 # We will start by generating a synthetic dataset. The true generative process
 # is defined as :math:`f(x) = x \sin(x)`.
-import jax.numpy as np
+import numpy as np
 
 X = np.linspace(start=0, stop=10, num=1_000).reshape(-1, 1)
 y = np.squeeze(X * np.sin(X))

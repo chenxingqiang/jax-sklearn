@@ -1,4 +1,4 @@
-import jax.numpy as np
+import numpy as np
 import pytest
 from scipy import sparse as sp
 

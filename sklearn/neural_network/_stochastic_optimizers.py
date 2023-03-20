@@ -4,7 +4,7 @@
 # Authors: Jiyuan Qian <jq401@nyu.edu>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 
 class BaseOptimizer:

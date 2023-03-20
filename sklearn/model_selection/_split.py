@@ -20,7 +20,7 @@ import numbers
 from abc import ABCMeta, abstractmethod
 from inspect import signature
 
-import jax.numpy as np
+import numpy as np
 from scipy.special import comb
 
 from ..utils import indexable, check_random_state, _safe_indexing
@@ -131,7 +131,7 @@ class LeaveOneOut(BaseCrossValidator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import LeaveOneOut
     >>> X = np.array([[1, 2], [3, 4]])
     >>> y = np.array([1, 2])
@@ -215,7 +215,7 @@ class LeavePOut(BaseCrossValidator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import LeavePOut
     >>> X = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
     >>> y = np.array([1, 2, 3, 4])
@@ -394,7 +394,7 @@ class KFold(_BaseKFold):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import KFold
     >>> X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
     >>> y = np.array([1, 2, 3, 4])
@@ -475,7 +475,7 @@ class GroupKFold(_BaseKFold):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import GroupKFold
     >>> X = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
     >>> y = np.array([1, 2, 3, 4])
@@ -606,7 +606,7 @@ class StratifiedKFold(_BaseKFold):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import StratifiedKFold
     >>> X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
     >>> y = np.array([0, 0, 1, 1])
@@ -791,7 +791,7 @@ class StratifiedGroupKFold(_BaseKFold):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import StratifiedGroupKFold
     >>> X = np.ones((17, 2))
     >>> y = np.array([0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
@@ -990,7 +990,7 @@ class TimeSeriesSplit(_BaseKFold):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import TimeSeriesSplit
     >>> X = np.array([[1, 2], [3, 4], [1, 2], [3, 4], [1, 2], [3, 4]])
     >>> y = np.array([1, 2, 3, 4, 5, 6])
@@ -1122,7 +1122,7 @@ class LeaveOneGroupOut(BaseCrossValidator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import LeaveOneGroupOut
     >>> X = np.array([[1, 2], [3, 4], [5, 6], [7, 8]])
     >>> y = np.array([1, 2, 1, 2])
@@ -1243,7 +1243,7 @@ class LeavePGroupsOut(BaseCrossValidator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import LeavePGroupsOut
     >>> X = np.array([[1, 2], [3, 4], [5, 6]])
     >>> y = np.array([1, 2, 1])
@@ -1476,7 +1476,7 @@ class RepeatedKFold(_RepeatedSplits):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import RepeatedKFold
     >>> X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
     >>> y = np.array([0, 0, 1, 1])
@@ -1531,7 +1531,7 @@ class RepeatedStratifiedKFold(_RepeatedSplits):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import RepeatedStratifiedKFold
     >>> X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
     >>> y = np.array([0, 0, 1, 1])
@@ -1678,7 +1678,7 @@ class ShuffleSplit(BaseShuffleSplit):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import ShuffleSplit
     >>> X = np.array([[1, 2], [3, 4], [5, 6], [7, 8], [3, 4], [5, 6]])
     >>> y = np.array([1, 2, 1, 2, 1, 2])
@@ -1785,7 +1785,7 @@ class GroupShuffleSplit(ShuffleSplit):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import GroupShuffleSplit
     >>> X = np.ones(shape=(8, 2))
     >>> y = np.ones(shape=(8, 1))
@@ -1899,7 +1899,7 @@ class StratifiedShuffleSplit(BaseShuffleSplit):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import StratifiedShuffleSplit
     >>> X = np.array([[1, 2], [3, 4], [1, 2], [3, 4], [1, 2], [3, 4]])
     >>> y = np.array([0, 0, 0, 1, 1, 1])
@@ -2137,7 +2137,7 @@ class PredefinedSplit(BaseCrossValidator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import PredefinedSplit
     >>> X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])
     >>> y = np.array([0, 0, 1, 1])
@@ -2393,7 +2393,7 @@ def train_test_split(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.model_selection import train_test_split
     >>> X, y = np.arange(10).reshape((5, 2)), range(5)
     >>> X

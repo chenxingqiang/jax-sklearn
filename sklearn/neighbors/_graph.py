@@ -567,7 +567,7 @@ class RadiusNeighborsTransformer(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.datasets import load_wine
     >>> from sklearn.cluster import DBSCAN
     >>> from sklearn.neighbors import RadiusNeighborsTransformer

@@ -14,7 +14,7 @@ information on this dataset.
 # Code source: Gaël Varoquaux
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 

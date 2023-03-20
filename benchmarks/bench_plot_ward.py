@@ -4,7 +4,7 @@ Benchmark scikit-learn's Ward implement compared to SciPy's
 
 import time
 
-import jax.numpy as np
+import numpy as np
 from scipy.cluster import hierarchy
 import matplotlib.pyplot as plt
 

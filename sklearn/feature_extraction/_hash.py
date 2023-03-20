@@ -3,7 +3,7 @@
 
 import numbers
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 
 from ..base import BaseEstimator, TransformerMixin

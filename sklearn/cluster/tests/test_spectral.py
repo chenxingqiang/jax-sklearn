@@ -1,7 +1,7 @@
 """Testing for Spectral Clustering methods"""
 import re
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy.linalg import LinAlgError
 

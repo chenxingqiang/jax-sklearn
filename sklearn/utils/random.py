@@ -1,7 +1,7 @@
 # Author: Hamzeh Alsalhi <ha258@cornell.edu>
 #
 # License: BSD 3 clause
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 import array
 

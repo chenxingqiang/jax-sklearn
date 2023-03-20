@@ -6,7 +6,7 @@ from copy import deepcopy
 from functools import partial, wraps
 from inspect import signature
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy.stats import rankdata
 import joblib

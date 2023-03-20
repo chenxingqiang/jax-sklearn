@@ -6,7 +6,7 @@ from functools import partial
 import itertools
 import warnings
 
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_allclose
 import pytest
 from scipy import linalg

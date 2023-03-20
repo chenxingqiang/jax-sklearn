@@ -13,7 +13,7 @@ that our model achieves best performance when we select around 10% of features.
 # %%
 # Load some data to play with
 # ---------------------------
-import jax.numpy as np
+import numpy as np
 from sklearn.datasets import load_iris
 
 X, y = load_iris(return_X_y=True)

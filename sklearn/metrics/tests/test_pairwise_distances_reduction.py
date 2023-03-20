@@ -1,7 +1,7 @@
 import re
 from collections import defaultdict
 
-import jax.numpy as np
+import numpy as np
 import pytest
 import threadpoolctl
 from math import log10, floor

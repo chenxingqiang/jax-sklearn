@@ -224,7 +224,7 @@ function that looks up the actual data in this data structure. E.g., to use
 DBSCAN with Levenshtein distances::
 
     >>> from leven import levenshtein       # doctest: +SKIP
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.cluster import dbscan
     >>> data = ["ACCTCCTAGAAG", "ACCTACTAGAAGTT", "GAATATTAGGCCGA"]
     >>> def lev_metric(x, y):

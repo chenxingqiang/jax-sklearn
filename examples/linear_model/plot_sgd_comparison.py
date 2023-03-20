@@ -9,7 +9,7 @@ on the hand-written digits dataset.
 # Author: Rob Zinkov <rob at zinkov dot com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets
 

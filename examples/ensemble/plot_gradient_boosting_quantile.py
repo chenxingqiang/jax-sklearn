@@ -11,7 +11,7 @@ intervals.
 # %%
 # Generate some data for a synthetic regression problem by applying the
 # function f to uniformly sampled random inputs.
-import jax.numpy as np
+import numpy as np
 from sklearn.model_selection import train_test_split
 
 

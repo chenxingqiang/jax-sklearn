@@ -12,7 +12,7 @@ estimator, as a chain of transforms and estimators.
 from collections import defaultdict
 from itertools import islice
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from joblib import Parallel
 

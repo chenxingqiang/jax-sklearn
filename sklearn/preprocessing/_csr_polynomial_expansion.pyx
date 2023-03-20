@@ -1,7 +1,7 @@
 # Author: Andrew nystrom <awnystrom@gmail.com>
 
 from scipy.sparse import csr_matrix
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 cnp.import_array()
 ctypedef cnp.int32_t INDEX_T

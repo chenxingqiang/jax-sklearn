@@ -8,7 +8,7 @@
 import numbers
 import warnings
 
-import jax.numpy as np
+import numpy as np
 
 from ..exceptions import ConvergenceWarning
 from ..base import BaseEstimator, ClusterMixin
@@ -390,7 +390,7 @@ class AffinityPropagation(ClusterMixin, BaseEstimator):
     Examples
     --------
     >>> from sklearn.cluster import AffinityPropagation
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[1, 2], [1, 4], [1, 0],
     ...               [4, 2], [4, 4], [4, 0]])
     >>> clustering = AffinityPropagation(random_state=5).fit(X)

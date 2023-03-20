@@ -30,8 +30,8 @@ implementation_specific_values = [
 # written for the scikit-learn project
 # License: BSD
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 
 cnp.import_array()  # required in order to use C-API
 

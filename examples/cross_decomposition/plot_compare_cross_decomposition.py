@@ -25,7 +25,7 @@ weak: the point cloud is very spherical.
 # Dataset based latent variables model
 # ------------------------------------
 
-import jax.numpy as np
+import numpy as np
 
 n = 500
 # 2 latents vars:

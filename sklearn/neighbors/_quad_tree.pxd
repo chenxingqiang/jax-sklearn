@@ -3,7 +3,7 @@
 
 # See quad_tree.pyx for details.
 
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 ctypedef cnp.npy_float32 DTYPE_t          # Type of X
 ctypedef cnp.npy_intp SIZE_t              # Type for indices and counters

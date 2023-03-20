@@ -14,7 +14,7 @@ This exercise is used in the :ref:`cv_estimators_tut` part of the
 # Load dataset and apply GridSearchCV
 # -----------------------------------
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 
 from sklearn import datasets
 from sklearn.linear_model import Lasso

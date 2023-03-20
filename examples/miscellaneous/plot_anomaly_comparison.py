@@ -68,7 +68,7 @@ the problem is completely unsupervised so model selection can be a challenge.
 
 import time
 
-import jax.numpy as np
+import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 

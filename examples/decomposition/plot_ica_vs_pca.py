@@ -35,7 +35,7 @@ identify the directions of largest non-Gaussianity (lower right).
 # %%
 # Generate sample data
 # --------------------
-import jax.numpy as np
+import numpy as np
 
 from sklearn.decomposition import PCA, FastICA
 

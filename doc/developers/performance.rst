@@ -304,7 +304,7 @@ directory::
 Another useful magic that ``memory_profiler`` defines is ``%memit``, which is
 analogous to ``%timeit``. It can be used as follows::
 
-    In [1]: import jax.numpy as np
+    In [1]: import numpy as np
 
     In [2]: %memit np.zeros(1e7)
     maximum of 3: 76.402344 MB per loop

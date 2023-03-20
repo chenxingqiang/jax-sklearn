@@ -9,14 +9,14 @@ import io
 import copyreg
 
 import pytest
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_allclose
 from scipy.sparse import csc_matrix
 from scipy.sparse import csr_matrix
 from scipy.sparse import coo_matrix
 
 import joblib
-from joblib.numpy_pickle import jax.numpyPickler
+from joblib.numpy_pickle import numpyPickler
 
 from sklearn.random_projection import _sparse_random_matrix
 

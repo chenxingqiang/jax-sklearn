@@ -3,7 +3,7 @@ Common utilities for testing clustering.
 
 """
 
-import jax.numpy as np
+import numpy as np
 
 
 ###############################################################################

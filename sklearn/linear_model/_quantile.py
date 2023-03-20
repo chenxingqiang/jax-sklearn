@@ -3,7 +3,7 @@
 # License: BSD 3 clause
 import warnings
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy.optimize import linprog
 
@@ -92,7 +92,7 @@ class QuantileRegressor(LinearModel, RegressorMixin, BaseEstimator):
     Examples
     --------
     >>> from sklearn.linear_model import QuantileRegressor
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> n_samples, n_features = 10, 2
     >>> rng = np.random.RandomState(0)
     >>> y = rng.randn(n_samples)

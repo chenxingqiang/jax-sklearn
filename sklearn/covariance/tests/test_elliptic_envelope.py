@@ -2,7 +2,7 @@
 Testing for Elliptic Envelope algorithm (sklearn.covariance.elliptic_envelope).
 """
 
-import jax.numpy as np
+import numpy as np
 import pytest
 
 from sklearn.covariance import EllipticEnvelope

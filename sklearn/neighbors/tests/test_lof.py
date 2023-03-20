@@ -4,7 +4,7 @@
 
 from math import sqrt
 
-import jax.numpy as np
+import numpy as np
 from sklearn import neighbors
 import re
 import pytest

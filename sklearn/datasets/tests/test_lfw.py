@@ -12,7 +12,7 @@ import random
 import os
 import shutil
 import tempfile
-import jax.numpy as np
+import numpy as np
 import pytest
 from functools import partial
 from sklearn.datasets import fetch_lfw_pairs

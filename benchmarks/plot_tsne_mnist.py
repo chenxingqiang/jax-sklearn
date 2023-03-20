@@ -1,7 +1,7 @@
 import argparse
 import os.path as op
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 LOG_DIR = "mnist_tsne_output"

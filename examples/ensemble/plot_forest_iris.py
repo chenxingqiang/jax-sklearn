@@ -42,7 +42,7 @@ samples are built sequentially and so do not use multiple cores.
 
 """
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 

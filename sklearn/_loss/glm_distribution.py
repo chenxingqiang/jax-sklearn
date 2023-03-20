@@ -13,7 +13,7 @@ from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 import numbers
 
-import jax.numpy as np
+import numpy as np
 from scipy.special import xlogy
 
 

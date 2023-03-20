@@ -22,7 +22,7 @@ from sklearn.model_selection import (
     StratifiedShuffleSplit,
     StratifiedGroupKFold,
 )
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 

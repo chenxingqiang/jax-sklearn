@@ -10,7 +10,7 @@ import warnings
 
 from math import ceil
 
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 from joblib import Parallel, effective_n_jobs
 
@@ -1335,7 +1335,7 @@ class SparseCoder(_BaseSparseCoding, BaseEstimator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.decomposition import SparseCoder
     >>> X = np.array([[-1, -1, -1], [0, 0, 3]])
     >>> dictionary = np.array(
@@ -1603,7 +1603,7 @@ class DictionaryLearning(_BaseSparseCoding, BaseEstimator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.datasets import make_sparse_coded_signal
     >>> from sklearn.decomposition import DictionaryLearning
     >>> X, dictionary, code = make_sparse_coded_signal(
@@ -1939,7 +1939,7 @@ class MiniBatchDictionaryLearning(_BaseSparseCoding, BaseEstimator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.datasets import make_sparse_coded_signal
     >>> from sklearn.decomposition import MiniBatchDictionaryLearning
     >>> X, dictionary, code = make_sparse_coded_signal(

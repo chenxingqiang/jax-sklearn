@@ -2,7 +2,7 @@
 # License: BSD 3 clause
 
 import re
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 import pytest
 import warnings

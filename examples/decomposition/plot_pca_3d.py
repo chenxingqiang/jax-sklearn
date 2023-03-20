@@ -19,7 +19,7 @@ comes in to choose a direction that is not flat.
 # Create the data
 # ---------------
 
-import jax.numpy as np
+import numpy as np
 
 from scipy import stats
 

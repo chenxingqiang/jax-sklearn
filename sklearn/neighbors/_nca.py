@@ -7,7 +7,7 @@ Neighborhood Component Analysis
 # License: BSD 3 clause
 
 from warnings import warn
-import jax.numpy as np
+import numpy as np
 import sys
 import time
 import numbers

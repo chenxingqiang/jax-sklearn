@@ -2,7 +2,7 @@
 #          Christian Lorentzen <lorentzen.ch@gmail.com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import pytest
 from pytest import approx
 from scipy.optimize import minimize

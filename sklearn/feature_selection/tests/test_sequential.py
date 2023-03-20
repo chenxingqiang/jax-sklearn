@@ -1,6 +1,6 @@
 import pytest
 import scipy
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_array_equal
 
 from sklearn.preprocessing import StandardScaler

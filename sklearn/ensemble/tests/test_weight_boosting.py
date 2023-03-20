@@ -1,6 +1,6 @@
 """Testing for the boost module (sklearn.ensemble.boost)."""
 
-import jax.numpy as np
+import numpy as np
 import pytest
 import re
 

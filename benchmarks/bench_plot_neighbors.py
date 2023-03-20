@@ -3,7 +3,7 @@ Plot the scaling of the nearest neighbors algorithms with k, D, and N
 """
 from time import time
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import ticker
 

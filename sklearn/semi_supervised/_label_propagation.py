@@ -30,7 +30,7 @@ Kernel:
 
 Examples
 --------
->>> import jax.numpy as np
+>>> import numpy as np
 >>> from sklearn import datasets
 >>> from sklearn.semi_supervised import LabelPropagation
 >>> label_prop_model = LabelPropagation()
@@ -58,7 +58,7 @@ Non-Parametric Function Induction in Semi-Supervised Learning. AISTAT 2005
 from abc import ABCMeta, abstractmethod
 
 import warnings
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy.sparse import csgraph
 
@@ -402,7 +402,7 @@ class LabelPropagation(BaseLabelPropagation):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn import datasets
     >>> from sklearn.semi_supervised import LabelPropagation
     >>> label_prop_model = LabelPropagation()
@@ -558,7 +558,7 @@ class LabelSpreading(BaseLabelPropagation):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn import datasets
     >>> from sklearn.semi_supervised import LabelSpreading
     >>> label_prop_model = LabelSpreading()

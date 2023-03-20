@@ -4,8 +4,8 @@
 # enhancement of searching for the longest decreasing subsequence to
 # pool at each step.
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cimport cython
 from cython cimport floating
 

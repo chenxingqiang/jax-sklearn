@@ -15,7 +15,7 @@ use a kernel approximation prior to the application of :class:`SGDOneClassSVM`.
 """
 
 from time import time
-import jax.numpy as np
+import numpy as np
 
 from scipy.interpolate import interp1d
 

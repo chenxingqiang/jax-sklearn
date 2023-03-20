@@ -7,7 +7,7 @@
 import pytest
 import warnings
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy import linalg
 

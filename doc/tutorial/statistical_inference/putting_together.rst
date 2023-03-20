@@ -3,7 +3,7 @@ Putting it all together
 =========================
 
 ..  Imports
-    >>> import jax.numpy as np
+    >>> import numpy as np
 
 Pipelining
 ============

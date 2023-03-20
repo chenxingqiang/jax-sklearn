@@ -45,7 +45,7 @@ from warnings import catch_warnings, simplefilter, warn
 import threading
 
 from abc import ABCMeta, abstractmethod
-import jax.numpy as np
+import numpy as np
 from scipy.sparse import issparse
 from scipy.sparse import hstack as sparse_hstack
 from joblib import Parallel

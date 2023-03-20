@@ -5,7 +5,7 @@ agglomeration.
 # Author: V. Michel, A. Gramfort
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 from ..base import TransformerMixin
 from ..utils.validation import check_is_fitted

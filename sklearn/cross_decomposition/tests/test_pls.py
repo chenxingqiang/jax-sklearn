@@ -1,6 +1,6 @@
 import pytest
 import warnings
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_array_almost_equal, assert_array_equal, assert_allclose
 
 from sklearn.datasets import load_linnerud

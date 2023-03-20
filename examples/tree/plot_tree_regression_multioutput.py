@@ -15,7 +15,7 @@ We can see that if the maximum depth of the tree (controlled by the
 details of the training data and learn from the noise, i.e. they overfit.
 """
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeRegressor
 

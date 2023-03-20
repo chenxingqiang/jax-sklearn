@@ -5,7 +5,7 @@ Data comes from a random square matrix.
 
 """
 from datetime import datetime
-import jax.numpy as np
+import numpy as np
 from sklearn import linear_model
 
 

@@ -1,6 +1,6 @@
 cimport cython
-cimport jax.numpy as cnp
-import jax.numpy as np
+cimport numpy as cnp
+import numpy as np
 
 cnp.import_array()
 

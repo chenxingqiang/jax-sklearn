@@ -9,7 +9,7 @@ measurement encoded with a dictionary
 """
 
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 from sklearn.linear_model import OrthogonalMatchingPursuit
 from sklearn.linear_model import OrthogonalMatchingPursuitCV
 from sklearn.datasets import make_sparse_coded_signal

@@ -35,7 +35,7 @@ feature distinguishes a particular class.
 
 """
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.datasets import make_multilabel_classification as make_ml_clf

@@ -906,7 +906,7 @@ The matrix H is stored into the fitted model in the ``components_`` attribute;
 the method ``transform`` will decompose a new matrix X_new based on these
 stored components::
 
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[1, 1], [2, 1], [3, 1.2], [4, 1], [5, 0.8], [6, 1]])
     >>> from sklearn.decomposition import NMF
     >>> model = NMF(n_components=2, init='random', random_state=0)

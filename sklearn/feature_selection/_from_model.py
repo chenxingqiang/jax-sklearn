@@ -3,7 +3,7 @@
 
 from copy import deepcopy
 
-import jax.numpy as np
+import numpy as np
 import numbers
 
 from ._base import SelectorMixin

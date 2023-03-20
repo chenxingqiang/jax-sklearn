@@ -26,7 +26,7 @@ regularization properties of the inference algorithm.
 
 import itertools
 
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 import matplotlib.pyplot as plt
 import matplotlib as mpl

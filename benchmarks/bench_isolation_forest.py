@@ -17,7 +17,7 @@ case a warning is raised when computing the ROC curve.
 """
 
 from time import time
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.ensemble import IsolationForest

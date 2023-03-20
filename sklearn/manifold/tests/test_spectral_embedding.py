@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 import pytest
 
-import jax.numpy as np
+import numpy as np
 
 from scipy import sparse
 from scipy.sparse import csgraph

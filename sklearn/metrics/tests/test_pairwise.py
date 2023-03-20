@@ -1,7 +1,7 @@
 import warnings
 from types import GeneratorType
 
-import jax.numpy as np
+import numpy as np
 from numpy import linalg
 
 from scipy.sparse import dok_matrix, csr_matrix, issparse

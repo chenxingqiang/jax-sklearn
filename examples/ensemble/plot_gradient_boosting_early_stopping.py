@@ -38,7 +38,7 @@ memory usage and prediction latency.
 
 import time
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn import ensemble

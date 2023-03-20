@@ -2,7 +2,7 @@
 # License: BSD 3 clause
 import os
 
-import jax.numpy
+import numpy
 
 
 def configuration(parent_package="", top_path=None):

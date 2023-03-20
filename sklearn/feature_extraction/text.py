@@ -21,7 +21,7 @@ import re
 import unicodedata
 import warnings
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 
 from ..base import BaseEstimator, TransformerMixin, _OneToOneFeatureMixin

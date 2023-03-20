@@ -1,4 +1,4 @@
-import jax.numpy as np
+import numpy as np
 import scipy as sp
 from numpy.testing import assert_array_equal
 

@@ -1,6 +1,6 @@
 import warnings
 import  numpy as np
-cimport jax.numpy as cnp
+cimport numpy as cnp
 from scipy import sparse
 from ..exceptions import ConvergenceWarning
 from ..utils._cython_blas cimport _dot

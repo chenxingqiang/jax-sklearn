@@ -7,7 +7,7 @@ from urllib.request import Request, build_opener
 
 import lxml.html
 from lxml.etree import ElementTree
-import jax.numpy as np
+import numpy as np
 
 import codecs
 

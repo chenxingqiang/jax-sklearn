@@ -23,7 +23,7 @@ thresholds in DBSCAN.
 from sklearn.cluster import OPTICS, cluster_optics_dbscan
 import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 
 # Generate sample data
 

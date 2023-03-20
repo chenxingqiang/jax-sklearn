@@ -2,7 +2,7 @@
 #          Alexandre Gramfort <alexandre.gramfort@inria.fr>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import pytest
 import warnings
 from scipy import interpolate, sparse

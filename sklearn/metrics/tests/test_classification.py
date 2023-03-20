@@ -5,7 +5,7 @@ from itertools import permutations
 import warnings
 import re
 
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 import pytest
 

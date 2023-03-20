@@ -2,7 +2,7 @@ import sys
 import re
 import pytest
 
-import jax.numpy as np
+import numpy as np
 from scipy.sparse import csc_matrix, csr_matrix, lil_matrix
 from sklearn.utils._testing import (
     assert_almost_equal,

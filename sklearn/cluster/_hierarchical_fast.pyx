@@ -1,7 +1,7 @@
 # Author: Gael Varoquaux <gael.varoquaux@normalesup.org>
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cimport cython
 
 ctypedef cnp.float64_t DOUBLE

@@ -6,7 +6,7 @@ from sklearn._build_utils import cythonize_extensions
 
 def configuration(parent_package="", top_path=None):
     from numpy.distutils.misc_util import Configuration
-    import jax.numpy
+    import numpy
 
     libraries = []
     if os.name == "posix":

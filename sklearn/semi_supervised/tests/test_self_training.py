@@ -1,6 +1,6 @@
 from math import ceil
 
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_array_equal
 import pytest
 

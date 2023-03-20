@@ -3,7 +3,7 @@
 # License: BSD 3 clause
 #
 # TODO(1.3): remove file
-import jax.numpy as np
+import numpy as np
 from numpy.testing import (
     assert_allclose,
     assert_array_equal,

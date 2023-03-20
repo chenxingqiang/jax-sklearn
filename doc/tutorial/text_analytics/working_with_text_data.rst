@@ -344,7 +344,7 @@ Evaluation of the performance on the test set
 
 Evaluating the predictive accuracy of the model is equally easy::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> twenty_test = fetch_20newsgroups(subset='test',
   ...     categories=categories, shuffle=True, random_state=42)
   >>> docs_test = twenty_test.data

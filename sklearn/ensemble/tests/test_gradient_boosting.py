@@ -2,7 +2,7 @@
 Testing for the gradient boosting module (sklearn.ensemble.gradient_boosting).
 """
 import warnings
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_allclose
 
 from scipy.sparse import csr_matrix

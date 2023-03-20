@@ -8,7 +8,7 @@
 # fused types and when the array may be read-only (for instance when it's
 # provided by the user). This is fixed in cython > 0.3.
 
-import jax.numpy as np
+import numpy as np
 from cython cimport floating
 from cython.parallel cimport prange
 from libc.math cimport sqrt

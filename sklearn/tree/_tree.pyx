@@ -26,8 +26,8 @@ from libcpp cimport bool
 
 import struct
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cnp.import_array()
 
 from scipy.sparse import issparse

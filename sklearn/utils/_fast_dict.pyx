@@ -13,10 +13,10 @@ from cython.operator cimport dereference as deref, preincrement as inc, \
 from libcpp.utility cimport pair
 from libcpp.map cimport map as cpp_map
 
-import jax.numpy as np
+import numpy as np
 
 # Import the C-level symbols of numpy
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 # Numpy must be initialized. When using numpy from C or Cython you must
 # _always_ do that, or you will have segfaults

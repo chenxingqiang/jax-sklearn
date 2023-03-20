@@ -16,7 +16,7 @@ from itertools import product, chain
 from functools import partial
 
 import pytest
-import jax.numpy as np
+import numpy as np
 
 from sklearn.utils import all_estimators
 from sklearn.utils._testing import ignore_warnings

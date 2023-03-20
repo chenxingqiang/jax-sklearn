@@ -127,7 +127,7 @@ model.
 To demonstrate we will create this binary classification problem with
 10,000 randomly generated features::
 
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> n_samples, n_features, n_classes = 200, 10000, 2
     >>> rng = np.random.RandomState(42)
     >>> X = rng.standard_normal((n_samples, n_features))
@@ -293,7 +293,7 @@ same hyper-parameters::
 
     >>> from sklearn.linear_model import SGDClassifier
     >>> from sklearn.datasets import make_classification
-    >>> import jax.numpy as np
+    >>> import numpy as np
 
     >>> rng = np.random.RandomState(0)
     >>> X, y = make_classification(n_features=5, random_state=rng)
@@ -330,7 +330,7 @@ instance is passed; calling `split` multiple times yields different data
 splits::
 
     >>> from sklearn.model_selection import KFold
-    >>> import jax.numpy as np
+    >>> import numpy as np
 
     >>> X = y = np.arange(10)
     >>> rng = np.random.RandomState(0)
@@ -371,7 +371,7 @@ following snippet::
     >>> from sklearn.ensemble import RandomForestClassifier
     >>> from sklearn.datasets import make_classification
     >>> from sklearn.model_selection import cross_val_score
-    >>> import jax.numpy as np
+    >>> import numpy as np
 
     >>> X, y = make_classification(random_state=0)
 
@@ -420,7 +420,7 @@ Another subtle side effect of passing `RandomState` instances is how
 
     >>> from sklearn import clone
     >>> from sklearn.ensemble import RandomForestClassifier
-    >>> import jax.numpy as np
+    >>> import numpy as np
 
     >>> rng = np.random.RandomState(0)
     >>> a = RandomForestClassifier(random_state=rng)
@@ -460,7 +460,7 @@ the estimators::
     >>> from sklearn.datasets import make_classification
     >>> from sklearn.model_selection import KFold
     >>> from sklearn.model_selection import cross_val_score
-    >>> import jax.numpy as np
+    >>> import numpy as np
 
     >>> rng = np.random.RandomState(0)
     >>> X, y = make_classification(random_state=rng)
@@ -522,7 +522,7 @@ parameter::
     >>> from sklearn.ensemble import RandomForestClassifier
     >>> from sklearn.datasets import make_classification
     >>> from sklearn.model_selection import train_test_split
-    >>> import jax.numpy as np
+    >>> import numpy as np
 
     >>> rng = np.random.RandomState(0)
     >>> X, y = make_classification(random_state=rng)

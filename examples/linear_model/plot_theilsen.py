@@ -39,7 +39,7 @@ it then works on a random subset.
 # License: BSD 3 clause
 
 import time
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression, TheilSenRegressor
 from sklearn.linear_model import RANSACRegressor

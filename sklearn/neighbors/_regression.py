@@ -12,7 +12,7 @@
 
 import warnings
 
-import jax.numpy as np
+import numpy as np
 
 from ._base import _get_weights, _check_weights
 from ._base import NeighborsBase, KNeighborsMixin, RadiusNeighborsMixin

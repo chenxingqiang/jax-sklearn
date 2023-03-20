@@ -8,7 +8,7 @@ from functools import partial
 from time import sleep
 
 import pytest
-import jax.numpy as np
+import numpy as np
 from scipy.sparse import coo_matrix, csr_matrix
 from sklearn.exceptions import FitFailedWarning
 

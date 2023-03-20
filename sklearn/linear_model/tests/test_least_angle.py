@@ -1,6 +1,6 @@
 import warnings
 
-import jax.numpy as np
+import numpy as np
 import pytest
 from scipy import linalg
 from sklearn.base import clone

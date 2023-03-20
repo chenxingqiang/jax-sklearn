@@ -57,7 +57,7 @@ iteratively refined in the neighborhood of the maximum.
 # %%
 # Generate the data
 # -----------------
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 from sklearn.datasets import make_sparse_spd_matrix
 

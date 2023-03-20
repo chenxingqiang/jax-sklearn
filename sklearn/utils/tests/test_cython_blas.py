@@ -1,6 +1,6 @@
 import pytest
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.utils._testing import assert_allclose
 from sklearn.utils._cython_blas import _dot_memview

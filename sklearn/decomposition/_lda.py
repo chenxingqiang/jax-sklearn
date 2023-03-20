@@ -11,7 +11,7 @@ Link: https://github.com/blei-lab/onlineldavb
 # Author: Chyi-Kwei Yau
 # Author: Matthew D. Hoffman (original onlineldavb implementation)
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 from scipy.special import gammaln, logsumexp
 from joblib import Parallel, effective_n_jobs

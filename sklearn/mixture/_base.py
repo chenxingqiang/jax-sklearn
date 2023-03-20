@@ -9,7 +9,7 @@ import warnings
 from abc import ABCMeta, abstractmethod
 from time import time
 
-import jax.numpy as np
+import numpy as np
 from scipy.special import logsumexp
 
 from .. import cluster

@@ -10,7 +10,7 @@
 
 import warnings
 from time import time
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 from scipy.spatial.distance import pdist
 from scipy.spatial.distance import squareform
@@ -736,7 +736,7 @@ class TSNE(BaseEstimator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.manifold import TSNE
     >>> X = np.array([[0, 0, 0], [0, 1, 1], [1, 0, 1], [1, 1, 1]])
     >>> X_embedded = TSNE(n_components=2, learning_rate='auto',

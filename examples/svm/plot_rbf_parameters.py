@@ -79,7 +79,7 @@ map.
 # Utility class to move the midpoint of a colormap to be around
 # the values of interest.
 
-import jax.numpy as np
+import numpy as np
 from matplotlib.colors import Normalize
 
 

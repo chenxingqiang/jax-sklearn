@@ -1,4 +1,4 @@
-import jax.numpy
+import numpy
 import os
 import platform
 

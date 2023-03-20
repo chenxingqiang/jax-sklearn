@@ -5,7 +5,7 @@
 # License: BSD 3 clause
 
 
-import jax.numpy as np
+import numpy as np
 import warnings
 
 from scipy import special, stats

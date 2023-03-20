@@ -73,7 +73,7 @@ data, the unsupervised algorithms within :mod:`sklearn.neighbors` can be
 used:
 
     >>> from sklearn.neighbors import NearestNeighbors
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
     >>> nbrs = NearestNeighbors(n_neighbors=2, algorithm='ball_tree').fit(X)
     >>> distances, indices = nbrs.kneighbors(X)
@@ -122,7 +122,7 @@ the :class:`NearestNeighbors` class used above.  The Ball Tree and KD Tree
 have the same interface; we'll show an example of using the KD Tree here:
 
     >>> from sklearn.neighbors import KDTree
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
     >>> kdt = KDTree(X, leaf_size=30, metric='euclidean')
     >>> kdt.query(X, k=2, return_distance=False)
@@ -497,7 +497,7 @@ for more complex methods that do not make this assumption. Usage of the default
 :class:`NearestCentroid` is simple:
 
     >>> from sklearn.neighbors import NearestCentroid
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
     >>> y = np.array([1, 1, 1, 2, 2, 2])
     >>> clf = NearestCentroid()

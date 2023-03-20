@@ -25,7 +25,7 @@ from os.path import exists
 from os import makedirs, remove
 import tarfile
 
-import jax.numpy as np
+import numpy as np
 import logging
 
 import joblib

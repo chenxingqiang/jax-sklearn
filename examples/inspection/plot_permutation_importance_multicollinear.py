@@ -21,7 +21,7 @@ picking a threshold, and keeping a single feature from each cluster.
 from collections import defaultdict
 
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 from scipy.stats import spearmanr
 from scipy.cluster import hierarchy
 from scipy.spatial.distance import squareform

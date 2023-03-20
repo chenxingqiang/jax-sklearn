@@ -24,7 +24,7 @@ from collections import namedtuple
 import math
 from inspect import signature
 
-import jax.numpy as np
+import numpy as np
 from scipy.special import kv, gamma
 from scipy.spatial.distance import pdist, cdist, squareform
 

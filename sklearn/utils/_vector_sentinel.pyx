@@ -1,6 +1,6 @@
 from cython.operator cimport dereference as deref
 from cpython.ref cimport Py_INCREF
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 from ._typedefs cimport DTYPECODE, ITYPECODE, INT32TYPECODE, INT64TYPECODE
 

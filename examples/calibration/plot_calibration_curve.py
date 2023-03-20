@@ -194,7 +194,7 @@ score_df
 # * :class:`~sklearn.svm.LinearSVC` with isotonic and sigmoid
 #   calibration (see :ref:`User Guide <calibration>`)
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.svm import LinearSVC
 

@@ -18,7 +18,7 @@ import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Real, Integral
 
-import jax.numpy as np
+import numpy as np
 from scipy.special import logsumexp
 
 from .base import BaseEstimator, ClassifierMixin
@@ -196,7 +196,7 @@ class GaussianNB(_BaseNB):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
     >>> Y = np.array([1, 1, 1, 2, 2, 2])
     >>> from sklearn.naive_bayes import GaussianNB
@@ -850,7 +850,7 @@ class MultinomialNB(_BaseDiscreteNB):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> rng = np.random.RandomState(1)
     >>> X = rng.randint(5, size=(6, 100))
     >>> y = np.array([1, 2, 3, 4, 5, 6])
@@ -974,7 +974,7 @@ class ComplementNB(_BaseDiscreteNB):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> rng = np.random.RandomState(1)
     >>> X = rng.randint(5, size=(6, 100))
     >>> y = np.array([1, 2, 3, 4, 5, 6])
@@ -1113,7 +1113,7 @@ class BernoulliNB(_BaseDiscreteNB):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> rng = np.random.RandomState(1)
     >>> X = rng.randint(5, size=(6, 100))
     >>> Y = np.array([1, 2, 3, 4, 4, 5])
@@ -1270,7 +1270,7 @@ class CategoricalNB(_BaseDiscreteNB):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> rng = np.random.RandomState(1)
     >>> X = rng.randint(5, size=(6, 100))
     >>> y = np.array([1, 2, 3, 4, 5, 6])

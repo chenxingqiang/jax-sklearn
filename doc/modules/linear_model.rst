@@ -180,7 +180,7 @@ Setting the regularization parameter: leave-one-out Cross-Validation
 cross-validation of the alpha parameter. The object works in the same way
 as GridSearchCV except that it defaults to Leave-One-Out Cross-Validation::
 
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn import linear_model
     >>> reg = linear_model.RidgeCV(alphas=np.logspace(-6, 6, 13))
     >>> reg.fit([[0, 0], [0, 0], [1, 1]], [0, .1, 1])
@@ -1682,7 +1682,7 @@ transforms an input data matrix into a new data matrix of a given degree.
 It can be used as follows::
 
     >>> from sklearn.preprocessing import PolynomialFeatures
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.arange(6).reshape(3, 2)
     >>> X
     array([[0, 1],
@@ -1705,7 +1705,7 @@ polynomial regression can be created and used as follows::
     >>> from sklearn.preprocessing import PolynomialFeatures
     >>> from sklearn.linear_model import LinearRegression
     >>> from sklearn.pipeline import Pipeline
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> model = Pipeline([('poly', PolynomialFeatures(degree=3)),
     ...                   ('linear', LinearRegression(fit_intercept=False))])
     >>> # fit to an order-3 polynomial data
@@ -1731,7 +1731,7 @@ This way, we can solve the XOR problem with a linear classifier::
 
     >>> from sklearn.linear_model import Perceptron
     >>> from sklearn.preprocessing import PolynomialFeatures
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
     >>> y = X[:, 0] ^ X[:, 1]
     >>> y

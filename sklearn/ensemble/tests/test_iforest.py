@@ -9,7 +9,7 @@ Testing for Isolation Forest algorithm (sklearn.ensemble.iforest).
 import pytest
 import warnings
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.utils._testing import assert_array_equal
 from sklearn.utils._testing import assert_array_almost_equal

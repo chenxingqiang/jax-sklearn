@@ -8,8 +8,8 @@ import warnings
 import itertools
 
 import re
-import jax.numpy as np
-import jax.numpy.linalg as la
+import numpy as np
+import numpy.linalg as la
 from scipy import sparse, stats
 
 import pytest

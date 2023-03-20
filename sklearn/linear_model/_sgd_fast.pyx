@@ -6,12 +6,12 @@
 # License: BSD 3 clause
 
 
-import jax.numpy as np
+import numpy as np
 import sys
 from time import time
 
 from libc.math cimport exp, log, sqrt, pow, fabs
-cimport jax.numpy as cnp
+cimport numpy as cnp
 from numpy.math cimport INFINITY
 cdef extern from "_sgd_fast_helpers.h":
     bint skl_isfinite(double) nogil

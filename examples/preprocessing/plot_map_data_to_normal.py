@@ -38,7 +38,7 @@ is prone to overfitting. The use of the power transform is then recommended.
 #         Nicolas Hug <contact@nicolas-hug.com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import PowerTransformer

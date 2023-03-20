@@ -19,7 +19,7 @@ representation of the checkerboard structure.
 # Author: Kemal Eren <kemal@kemaleren.com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 from matplotlib import pyplot as plt
 
 from sklearn.datasets import make_checkerboard

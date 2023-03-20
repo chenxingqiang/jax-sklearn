@@ -40,7 +40,7 @@ This is not easily possible for the case of the kernelized SVM.
 
 # Standard scientific Python imports
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 from time import time
 
 # Import datasets, classifiers and performance metrics

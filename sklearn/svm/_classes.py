@@ -1,7 +1,7 @@
 from numbers import Integral, Real
 import warnings
 
-import jax.numpy as np
+import numpy as np
 
 from ._base import _fit_liblinear, BaseSVC, BaseLibSVM
 from ..base import BaseEstimator, RegressorMixin, OutlierMixin
@@ -759,7 +759,7 @@ class SVC(BaseSVC):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.pipeline import make_pipeline
     >>> from sklearn.preprocessing import StandardScaler
     >>> X = np.array([[-1, -1], [-2, -1], [1, 1], [2, 1]])
@@ -1022,7 +1022,7 @@ class NuSVC(BaseSVC):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[-1, -1], [-2, -1], [1, 1], [2, 1]])
     >>> y = np.array([1, 1, 2, 2])
     >>> from sklearn.pipeline import make_pipeline
@@ -1234,7 +1234,7 @@ class SVR(RegressorMixin, BaseLibSVM):
     >>> from sklearn.svm import SVR
     >>> from sklearn.pipeline import make_pipeline
     >>> from sklearn.preprocessing import StandardScaler
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> n_samples, n_features = 10, 5
     >>> rng = np.random.RandomState(0)
     >>> y = rng.randn(n_samples)
@@ -1438,7 +1438,7 @@ class NuSVR(RegressorMixin, BaseLibSVM):
     >>> from sklearn.svm import NuSVR
     >>> from sklearn.pipeline import make_pipeline
     >>> from sklearn.preprocessing import StandardScaler
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> n_samples, n_features = 10, 5
     >>> np.random.seed(0)
     >>> y = np.random.randn(n_samples)

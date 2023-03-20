@@ -5,7 +5,7 @@
 
 from math import log
 
-import jax.numpy as np
+import numpy as np
 import pytest
 
 

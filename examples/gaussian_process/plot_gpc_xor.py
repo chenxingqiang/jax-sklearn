@@ -15,7 +15,7 @@ stationary kernels often obtain better results.
 #
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.gaussian_process import GaussianProcessClassifier

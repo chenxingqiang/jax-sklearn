@@ -2,7 +2,7 @@
 
 import pytest
 import re
-import jax.numpy as np
+import numpy as np
 
 from sklearn.utils._testing import assert_almost_equal, assert_array_equal
 from sklearn.utils._testing import assert_array_almost_equal

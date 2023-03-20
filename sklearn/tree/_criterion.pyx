@@ -16,8 +16,8 @@ from libc.string cimport memcpy
 from libc.string cimport memset
 from libc.math cimport fabs
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cnp.import_array()
 
 from numpy.math cimport INFINITY

@@ -1,6 +1,6 @@
 from time import time
 import argparse
-import jax.numpy as np
+import numpy as np
 
 from sklearn.dummy import DummyClassifier
 

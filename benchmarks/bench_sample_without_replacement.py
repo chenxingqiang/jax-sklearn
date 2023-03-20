@@ -9,7 +9,7 @@ from datetime import datetime
 import operator
 
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 import random
 
 from sklearn.utils.random import sample_without_replacement

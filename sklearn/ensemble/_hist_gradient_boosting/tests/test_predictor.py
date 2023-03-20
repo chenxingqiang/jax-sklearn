@@ -1,4 +1,4 @@
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_allclose
 from sklearn.datasets import make_regression
 from sklearn.model_selection import train_test_split

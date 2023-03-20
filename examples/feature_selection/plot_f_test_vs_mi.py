@@ -23,7 +23,7 @@ perception for this example. Both methods correctly marks x_3 as irrelevant.
 
 """
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.feature_selection import f_regression, mutual_info_regression
 

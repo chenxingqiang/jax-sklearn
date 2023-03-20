@@ -8,7 +8,7 @@
 #
 # License: BSD 3 clause (C) INRIA, University of Amsterdam
 
-import jax.numpy as np
+import numpy as np
 from scipy import stats
 from ..utils.extmath import weighted_mode
 from ..utils.validation import _is_arraylike, _num_samples

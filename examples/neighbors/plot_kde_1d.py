@@ -30,7 +30,7 @@ as well.
 
 # Author: Jake Vanderplas <jakevdp@cs.washington.edu>
 #
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 from sklearn.neighbors import KernelDensity

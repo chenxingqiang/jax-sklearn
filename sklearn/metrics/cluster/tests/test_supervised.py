@@ -1,6 +1,6 @@
 import warnings
 
-import jax.numpy as np
+import numpy as np
 import pytest
 
 from sklearn.metrics.cluster import adjusted_mutual_info_score

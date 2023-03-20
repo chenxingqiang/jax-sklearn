@@ -2,7 +2,7 @@
 #          Gael Varoquaux <gael.varoquaux@normalesup.org>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import scipy as sp
 from scipy import ndimage
 from scipy.sparse.csgraph import connected_components

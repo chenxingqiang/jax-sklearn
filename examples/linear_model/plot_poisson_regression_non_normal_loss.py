@@ -41,7 +41,7 @@ policyholders.
 #          Olivier Grisel <olivier.grisel@ensta.org>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 

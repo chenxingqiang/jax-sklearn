@@ -42,7 +42,7 @@ missing values imputed using different techniques.
 # up the calculations but feel free to use the whole dataset.
 #
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.datasets import fetch_california_housing
 from sklearn.datasets import load_diabetes

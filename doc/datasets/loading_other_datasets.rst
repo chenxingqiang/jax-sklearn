@@ -81,7 +81,7 @@ features::
 ..
     For doctests:
 
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> import os
 
 .. _openml:

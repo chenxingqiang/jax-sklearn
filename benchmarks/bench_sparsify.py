@@ -44,7 +44,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 """
 
 from scipy.sparse import csr_matrix
-import jax.numpy as np
+import numpy as np
 from sklearn.linear_model import SGDRegressor
 from sklearn.metrics import r2_score
 

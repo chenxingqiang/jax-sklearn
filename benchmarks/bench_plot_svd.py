@@ -4,7 +4,7 @@ The data is mostly low rank but is a fat infinite tail.
 """
 import gc
 from time import time
-import jax.numpy as np
+import numpy as np
 from collections import defaultdict
 
 from scipy.linalg import svd

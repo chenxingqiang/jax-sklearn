@@ -31,7 +31,7 @@ What we can see that:
 """
 
 from matplotlib import pyplot as plt
-import jax.numpy as np
+import numpy as np
 
 from sklearn.linear_model import (
     LinearRegression,

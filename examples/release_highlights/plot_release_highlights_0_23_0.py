@@ -34,7 +34,7 @@ or with conda::
 # :class:`~sklearn.ensemble.HistGradientBoostingRegressor` supports a new
 # 'poisson' loss as well.
 
-import jax.numpy as np
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import PoissonRegressor
 from sklearn.ensemble import HistGradientBoostingRegressor
@@ -95,7 +95,7 @@ clf
 # effect anymore. For more details on how to control the number of threads,
 # please refer to our :ref:`parallelism` notes.
 import scipy
-import jax.numpy as np
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
 from sklearn.datasets import make_blobs
@@ -123,7 +123,7 @@ print(completeness_score(kmeans.predict(X_test), y_test))
 # generally positively correlated with the first feature, with some noise.
 # Applying monotoinc constraints allows the prediction to capture the global
 # effect of the first feature, instead of fitting the noise.
-import jax.numpy as np
+import numpy as np
 from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.inspection import plot_partial_dependence
@@ -169,7 +169,7 @@ plt.show()
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_regression
 from sklearn.linear_model import Lasso
-import jax.numpy as np
+import numpy as np
 
 n_samples, n_features = 1000, 20
 rng = np.random.RandomState(0)

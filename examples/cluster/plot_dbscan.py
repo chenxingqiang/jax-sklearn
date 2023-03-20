@@ -8,7 +8,7 @@ Finds core samples of high density and expands clusters from them.
 
 """
 
-import jax.numpy as np
+import numpy as np
 
 from sklearn.cluster import DBSCAN
 from sklearn import metrics

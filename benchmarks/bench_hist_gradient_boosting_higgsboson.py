@@ -4,7 +4,7 @@ from gzip import GzipFile
 from time import time
 import argparse
 
-import jax.numpy as np
+import numpy as np
 import pandas as pd
 from joblib import Memory
 from sklearn.model_selection import train_test_split

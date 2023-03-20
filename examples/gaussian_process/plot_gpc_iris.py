@@ -10,7 +10,7 @@ assigning different length-scales to the two feature dimensions.
 
 """
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.gaussian_process import GaussianProcessClassifier

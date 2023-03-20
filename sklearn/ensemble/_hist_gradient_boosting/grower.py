@@ -7,7 +7,7 @@ the gradients and hessians of the training data.
 # Author: Nicolas Hug
 
 from heapq import heappush, heappop
-import jax.numpy as np
+import numpy as np
 from timeit import default_timer as time
 import numbers
 

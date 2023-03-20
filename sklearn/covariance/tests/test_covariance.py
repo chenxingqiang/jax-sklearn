@@ -4,7 +4,7 @@
 #
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import pytest
 
 from sklearn.utils._testing import assert_almost_equal

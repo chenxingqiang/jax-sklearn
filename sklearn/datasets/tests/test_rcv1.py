@@ -3,7 +3,7 @@ or if specifically requested via environment variable
 (e.g. for travis cron job)."""
 
 import scipy.sparse as sp
-import jax.numpy as np
+import numpy as np
 from functools import partial
 from sklearn.datasets.tests.test_common import check_return_X_y
 from sklearn.utils._testing import assert_almost_equal

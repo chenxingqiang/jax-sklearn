@@ -6,7 +6,7 @@
 #          Jiyuan Qian
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 from abc import ABCMeta, abstractmethod
 import warnings

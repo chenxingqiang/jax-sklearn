@@ -19,7 +19,7 @@ from contextlib import closing
 import io
 import os.path
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 
 from .. import __version__

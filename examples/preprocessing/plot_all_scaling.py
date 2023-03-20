@@ -46,7 +46,7 @@ of the results_.
 #          Thomas Unterthiner
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 import matplotlib as mpl
 from matplotlib import pyplot as plt

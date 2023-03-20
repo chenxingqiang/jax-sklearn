@@ -65,7 +65,7 @@ References
 
 # Author: Giorgio Patrini
 
-import jax.numpy as np
+import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
 

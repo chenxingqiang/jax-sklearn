@@ -22,7 +22,7 @@ from collections.abc import Iterable
 from functools import partial
 from collections import Counter
 
-import jax.numpy as np
+import numpy as np
 import copy
 import warnings
 

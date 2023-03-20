@@ -1,5 +1,5 @@
 #!python
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 # Floating point/data type
 ctypedef cnp.float64_t DTYPE_t  # WARNING: should match DTYPE in typedefs.pyx

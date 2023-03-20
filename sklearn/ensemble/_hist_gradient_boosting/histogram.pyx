@@ -5,7 +5,7 @@
 cimport cython
 from cython.parallel import prange
 
-import jax.numpy as np
+import numpy as np
 
 from .common import HISTOGRAM_DTYPE
 from .common cimport hist_struct

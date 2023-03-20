@@ -14,7 +14,7 @@ is good but the validation score is poor.
 """
 
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 
 from sklearn.datasets import load_digits
 from sklearn.svm import SVC

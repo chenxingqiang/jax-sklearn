@@ -10,7 +10,7 @@ from cpython cimport array
 cimport cython
 from libc.string cimport strchr
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 
 

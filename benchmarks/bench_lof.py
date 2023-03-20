@@ -18,7 +18,7 @@ is only caused by the random selection of anomalies in the SA dataset.
 """
 
 from time import time
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.neighbors import LocalOutlierFactor
 from sklearn.metrics import roc_curve, auc

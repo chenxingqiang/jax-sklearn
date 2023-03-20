@@ -19,7 +19,7 @@ from traceback import format_exc
 from contextlib import suppress
 from collections import Counter
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 from joblib import Parallel, logger
 

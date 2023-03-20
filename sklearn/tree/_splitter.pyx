@@ -18,7 +18,7 @@ from libc.stdlib cimport qsort
 from libc.string cimport memcpy
 from libc.string cimport memset
 
-import jax.numpy as np
+import numpy as np
 
 from scipy.sparse import csc_matrix
 

@@ -2,7 +2,7 @@
 Testing for the gradient boosting loss functions and initial estimators.
 """
 from itertools import product
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_allclose
 import pytest
 from pytest import approx

@@ -3,7 +3,7 @@
 # License: 3-clause BSD
 
 from libcpp.vector cimport vector
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 cnp.import_array()
 

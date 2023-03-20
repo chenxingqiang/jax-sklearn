@@ -5,7 +5,7 @@ from sklearn._build_utils import gen_from_templates
 
 
 def configuration(parent_package="", top_path=None):
-    import jax.numpy
+    import numpy
     from numpy.distutils.misc_util import Configuration
 
     config = Configuration("utils", parent_package, top_path)

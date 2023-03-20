@@ -1,6 +1,6 @@
 from libc cimport math
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 from libc.stdio cimport printf
 
 cnp.import_array()

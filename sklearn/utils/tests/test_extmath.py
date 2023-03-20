@@ -3,7 +3,7 @@
 #          Denis Engemann <denis-alexander.engemann@inria.fr>
 #
 # License: BSD 3 clause
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy import linalg
 from scipy import stats

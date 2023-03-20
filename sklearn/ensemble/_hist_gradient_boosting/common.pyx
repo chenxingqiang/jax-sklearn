@@ -1,4 +1,4 @@
-import jax.numpy as np
+import numpy as np
 
 # Y_DYTPE is the dtype to which the targets y are converted to. This is also
 # dtype for leaf values, gains, and sums of gradients / hessians. The gradients

@@ -4,7 +4,7 @@
 # License: BSD 3 clause
 
 import pytest
-import jax.numpy as np
+import numpy as np
 from inspect import signature
 
 from sklearn.gaussian_process.kernels import _approx_fprime

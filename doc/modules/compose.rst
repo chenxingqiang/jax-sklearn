@@ -272,7 +272,7 @@ back to the original space via an inverse transform. It takes as an argument
 the regressor that will be used for prediction, and the transformer that will
 be applied to the target variable::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> from sklearn.datasets import fetch_california_housing
   >>> from sklearn.compose import TransformedTargetRegressor
   >>> from sklearn.preprocessing import QuantileTransformer

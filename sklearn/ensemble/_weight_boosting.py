@@ -26,7 +26,7 @@ The module structure is the following:
 from abc import ABCMeta, abstractmethod
 
 from numbers import Integral, Real
-import jax.numpy as np
+import numpy as np
 
 import warnings
 

@@ -2,7 +2,7 @@
 # License: BSD 3 clause
 
 import pytest
-import jax.numpy as np
+import numpy as np
 
 from sklearn.mixture import GaussianMixture
 from sklearn.mixture import BayesianGaussianMixture

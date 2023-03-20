@@ -2,7 +2,7 @@
 
 cimport cython
 from cython.parallel import prange
-import jax.numpy as np
+import numpy as np
 
 from .common import Y_DTYPE
 from .common cimport Y_DTYPE_C

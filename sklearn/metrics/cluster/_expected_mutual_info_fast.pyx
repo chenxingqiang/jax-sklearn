@@ -4,8 +4,8 @@
 
 from libc.math cimport exp, lgamma
 from scipy.special import gammaln
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cimport cython
 
 cnp.import_array()

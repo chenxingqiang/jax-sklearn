@@ -20,7 +20,7 @@ The plot shows the regions where the discretized encoding is constant.
 # Author: Tom Dupré la Tour
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import KBinsDiscretizer

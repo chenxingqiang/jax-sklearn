@@ -1,4 +1,4 @@
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 from libcpp.memory cimport shared_ptr
 from libcpp.vector cimport vector

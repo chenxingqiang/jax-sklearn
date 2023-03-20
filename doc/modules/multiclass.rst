@@ -150,7 +150,7 @@ Valid :term:`multiclass` representations for
   - 1d or column vector containing more than two discrete values. An
     example of a vector ``y`` for 4 samples:
 
-      >>> import jax.numpy as np
+      >>> import numpy as np
       >>> y = np.array(['apple', 'pear', 'apple', 'orange'])
       >>> print(y)
       ['apple' 'pear' 'apple' 'orange']
@@ -160,7 +160,7 @@ Valid :term:`multiclass` representations for
     example of both a dense and sparse :term:`binary` matrix ``y`` for 4
     samples, where the columns, in order, are apple, orange, and pear:
 
-      >>> import jax.numpy as np
+      >>> import numpy as np
       >>> from sklearn.preprocessing import LabelBinarizer
       >>> y = np.array(['apple', 'pear', 'apple', 'orange'])
       >>> y_dense = LabelBinarizer().fit_transform(y)
@@ -472,7 +472,7 @@ Below is an example of multiclass-multioutput classification:
     >>> from sklearn.multioutput import MultiOutputClassifier
     >>> from sklearn.ensemble import RandomForestClassifier
     >>> from sklearn.utils import shuffle
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X, y1 = make_classification(n_samples=10, n_features=100,
     ...                             n_informative=30, n_classes=3,
     ...                             random_state=1)

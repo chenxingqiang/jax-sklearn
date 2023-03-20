@@ -13,7 +13,7 @@ original data matrix with some desired properties.
 For instance, given a matrix of shape ``(10, 10)``, one possible bicluster
 with three rows and two columns induces a submatrix of shape ``(3, 2)``::
 
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> data = np.arange(100).reshape(10, 10)
     >>> rows = np.array([0, 2, 3])[:, np.newaxis]
     >>> columns = np.array([1, 2])

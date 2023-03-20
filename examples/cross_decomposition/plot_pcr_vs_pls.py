@@ -41,7 +41,7 @@ example, it does not suffer from the issue we just mentioned.
 # into PCR and PLS, we fit a PCA estimator to display the two principal
 # components of this dataset, i.e. the two directions that explain the most
 # variance in the data.
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 

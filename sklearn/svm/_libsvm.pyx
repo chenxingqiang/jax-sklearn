@@ -29,7 +29,7 @@ Authors
 
 import warnings
 import  numpy as np
-cimport jax.numpy as cnp
+cimport numpy as cnp
 from libc.stdlib cimport free
 from ..utils._cython_blas cimport _dot
 

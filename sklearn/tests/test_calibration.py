@@ -2,7 +2,7 @@
 # License: BSD 3 clause
 
 import pytest
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_allclose
 from scipy import sparse
 

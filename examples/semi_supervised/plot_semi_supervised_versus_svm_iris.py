@@ -18,7 +18,7 @@ identical to training the SVC on 100% of the data.
 #          Oliver Rausch <rauscho@ethz.ch>
 # License: BSD
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.svm import SVC

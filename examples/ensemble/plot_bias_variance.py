@@ -66,7 +66,7 @@ References
 # Author: Gilles Louppe <g.louppe@gmail.com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.ensemble import BaggingRegressor

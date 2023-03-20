@@ -19,7 +19,7 @@ correspond to the scorer (key) that is set to the ``refit`` attribute.
 # Author: Raghav RV <rvraghav93@gmail.com>
 # License: BSD
 
-import jax.numpy as np
+import numpy as np
 from matplotlib import pyplot as plt
 
 from sklearn.datasets import make_hastie_10_2

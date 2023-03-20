@@ -16,7 +16,7 @@ This module contains:
 from abc import abstractmethod
 
 import numbers
-import jax.numpy as np
+import numpy as np
 
 from joblib import Parallel
 
@@ -240,7 +240,7 @@ class VotingClassifier(ClassifierMixin, _BaseVoting):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.linear_model import LogisticRegression
     >>> from sklearn.naive_bayes import GaussianNB
     >>> from sklearn.ensemble import RandomForestClassifier, VotingClassifier
@@ -546,7 +546,7 @@ class VotingRegressor(RegressorMixin, _BaseVoting):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.linear_model import LinearRegression
     >>> from sklearn.ensemble import RandomForestRegressor
     >>> from sklearn.ensemble import VotingRegressor

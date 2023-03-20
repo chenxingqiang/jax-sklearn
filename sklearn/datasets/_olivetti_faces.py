@@ -16,7 +16,7 @@ web page of Sam Roweis:
 from os.path import exists
 from os import makedirs, remove
 
-import jax.numpy as np
+import numpy as np
 from scipy.io import loadmat
 import joblib
 

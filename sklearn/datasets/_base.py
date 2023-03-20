@@ -23,7 +23,7 @@ from ..utils import check_random_state
 from ..utils import check_pandas_support
 from ..utils.deprecation import deprecated
 
-import jax.numpy as np
+import numpy as np
 
 from urllib.request import urlretrieve
 
@@ -1184,7 +1184,7 @@ def load_linnerud(*, return_X_y=False, as_frame=False):
     source::
 
         import pandas as pd
-        import jax.numpy as np
+        import numpy as np
 
         data_url = "http://lib.stat.cmu.edu/datasets/boston"
         raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)
@@ -1234,7 +1234,7 @@ def load_boston(*, return_X_y=False):
         source::
 
             import pandas as pd  # doctest: +SKIP
-            import jax.numpy as np
+            import numpy as np
 
             data_url = "http://lib.stat.cmu.edu/datasets/boston"
             raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)

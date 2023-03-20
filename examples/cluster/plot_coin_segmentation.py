@@ -27,7 +27,7 @@ There are three options to assign labels:
 
 import time
 
-import jax.numpy as np
+import numpy as np
 from scipy.ndimage import gaussian_filter
 import matplotlib.pyplot as plt
 from skimage.data import coins

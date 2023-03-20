@@ -2,7 +2,7 @@
 Testing for the partial dependence module.
 """
 
-import jax.numpy as np
+import numpy as np
 import pytest
 
 import sklearn

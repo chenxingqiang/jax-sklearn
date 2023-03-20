@@ -1,5 +1,5 @@
 import pytest
-import jax.numpy as np
+import numpy as np
 from scipy.sparse.csgraph import connected_components
 
 from sklearn.neighbors import kneighbors_graph

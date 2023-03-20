@@ -7,8 +7,8 @@ cimport cython
 from libc.stdlib cimport free
 from libc.string cimport memset
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cnp.import_array()
 
 from scipy.sparse import issparse

@@ -1,8 +1,8 @@
 import os
-
+import numpy
 
 def configuration(parent_package="", top_path=None):
-    import jax.numpy
+    import numpy
     from numpy.distutils.misc_util import Configuration
 
     config = Configuration("preprocessing", parent_package, top_path)

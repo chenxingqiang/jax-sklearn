@@ -2,7 +2,7 @@
 # License: 3-clause BSD
 from numbers import Real
 
-import jax.numpy as np
+import numpy as np
 from ..base import BaseEstimator
 from ._base import SelectorMixin
 from ..utils.sparsefuncs import mean_variance_axis, min_max_axis

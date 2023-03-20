@@ -2,7 +2,7 @@ from functools import partial
 from itertools import chain
 
 import pytest
-import jax.numpy as np
+import numpy as np
 
 from sklearn.metrics.cluster import adjusted_mutual_info_score
 from sklearn.metrics.cluster import adjusted_rand_score

@@ -42,7 +42,7 @@ from os import makedirs, remove
 from os.path import exists
 
 import logging
-import jax.numpy as np
+import numpy as np
 
 import joblib
 

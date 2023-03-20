@@ -7,7 +7,7 @@ Various bayesian regression
 
 from math import log
 import numbers
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 
 from ._base import LinearModel, _preprocess_data, _rescale_data

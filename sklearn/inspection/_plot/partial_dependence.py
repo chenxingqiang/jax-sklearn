@@ -3,7 +3,7 @@ import warnings
 from itertools import chain
 from math import ceil
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy.stats.mstats import mquantiles
 from joblib import Parallel

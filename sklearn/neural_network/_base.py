@@ -4,7 +4,7 @@
 # Author: Issam H. Laradji <issam.laradji@gmail.com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 from scipy.special import expit as logistic_sigmoid
 from scipy.special import xlogy

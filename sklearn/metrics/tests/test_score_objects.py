@@ -7,7 +7,7 @@ import numbers
 from unittest.mock import Mock
 from functools import partial
 
-import jax.numpy as np
+import numpy as np
 import pytest
 import joblib
 

@@ -14,7 +14,7 @@ returns intuitive clusters despite unevenly sized blobs.
 # Author: Phil Roth <mr.phil.roth@gmail.com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.cluster import KMeans

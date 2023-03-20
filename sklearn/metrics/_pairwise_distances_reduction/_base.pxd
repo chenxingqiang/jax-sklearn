@@ -1,4 +1,4 @@
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 from cython cimport final
 

@@ -10,7 +10,7 @@ approximate kernel feature maps based on Fourier transforms and Count Sketches.
 
 import warnings
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 from scipy.linalg import svd
 

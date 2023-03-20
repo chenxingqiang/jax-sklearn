@@ -4,7 +4,7 @@
 #
 # License: BSD 3 clause
 
-cimport jax.numpy as cnp
+cimport numpy as cnp
 from cython cimport floating
 from cython.parallel cimport prange
 from libc.math cimport fabs

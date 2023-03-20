@@ -7,7 +7,7 @@ Toy example of 1D regression using linear, polynomial and RBF kernels.
 
 """
 
-import jax.numpy as np
+import numpy as np
 from sklearn.svm import SVR
 import matplotlib.pyplot as plt
 

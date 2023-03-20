@@ -6,8 +6,8 @@ import numbers
 import warnings
 from collections import Counter
 
-import jax.numpy as np
-import jax.numpy.ma as ma
+import numpy as np
+import numpy.ma as ma
 from scipy import sparse as sp
 from scipy import stats
 
@@ -227,7 +227,7 @@ class SimpleImputer(_BaseImputer):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.impute import SimpleImputer
     >>> imp_mean = SimpleImputer(missing_values=np.nan, strategy='mean')
     >>> imp_mean.fit([[7, 2, 3], [4, np.nan, 6], [10, 5, 9]])
@@ -733,7 +733,7 @@ class MissingIndicator(TransformerMixin, BaseEstimator):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.impute import MissingIndicator
     >>> X1 = np.array([[np.nan, 1, 3],
     ...                [4, 0, np.nan],

@@ -16,7 +16,7 @@ classification.
 # - Replace link module of GLMs.
 
 import numbers
-import jax.numpy as np
+import numpy as np
 from scipy.special import xlogy
 from ._loss import (
     CyHalfSquaredError,

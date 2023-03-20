@@ -2,7 +2,7 @@ import functools
 from typing import List, Any
 import warnings
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse as sp
 import pytest
 

@@ -11,7 +11,7 @@ import warnings
 from heapq import heapify, heappop, heappush, heappushpop
 from numbers import Integral, Real
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy.sparse.csgraph import connected_components
 
@@ -867,7 +867,7 @@ class AgglomerativeClustering(ClusterMixin, BaseEstimator):
     Examples
     --------
     >>> from sklearn.cluster import AgglomerativeClustering
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[1, 2], [1, 4], [1, 0],
     ...               [4, 2], [4, 4], [4, 0]])
     >>> clustering = AgglomerativeClustering().fit(X)
@@ -1192,7 +1192,7 @@ class FeatureAgglomeration(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn import datasets, cluster
     >>> digits = datasets.load_digits()
     >>> images = digits.images

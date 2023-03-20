@@ -16,7 +16,7 @@ the number of dimensions.
 
 In both cases, only 10% of the features are informative.
 """
-import jax.numpy as np
+import numpy as np
 import gc
 from time import time
 from sklearn.datasets import make_regression

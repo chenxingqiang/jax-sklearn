@@ -7,7 +7,7 @@
 
 from collections.abc import Iterable
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy.stats.mstats import mquantiles
 

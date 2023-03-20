@@ -29,7 +29,7 @@ which is well known to have this percolation instability.
 
 import time
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.neighbors import kneighbors_graph

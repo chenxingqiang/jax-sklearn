@@ -12,7 +12,7 @@ Independent Component Analysis, by  Hyvarinen et al.
 import warnings
 from numbers import Integral, Real
 
-import jax.numpy as np
+import numpy as np
 from scipy import linalg
 
 from ..base import BaseEstimator, TransformerMixin, _ClassNamePrefixFeaturesOutMixin

@@ -1,6 +1,6 @@
 import re
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 import pytest
 

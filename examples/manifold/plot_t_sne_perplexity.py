@@ -27,7 +27,7 @@ those effects.
 # Author: Narine Kokhlikyan <narine@slice.com>
 # License: BSD
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from matplotlib.ticker import NullFormatter

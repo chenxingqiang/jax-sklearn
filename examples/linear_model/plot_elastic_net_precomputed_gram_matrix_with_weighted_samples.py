@@ -19,7 +19,7 @@ is computed.
 
 # %%
 # Let's start by loading the dataset and creating some sample weights.
-import jax.numpy as np
+import numpy as np
 from sklearn.datasets import make_regression
 
 rng = np.random.RandomState(0)

@@ -1,6 +1,6 @@
 import sys
 from io import StringIO
-import jax.numpy as np
+import numpy as np
 from numpy.testing import assert_allclose
 import scipy.sparse as sp
 import pytest

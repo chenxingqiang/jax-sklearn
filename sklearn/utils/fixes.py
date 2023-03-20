@@ -14,7 +14,7 @@ from functools import update_wrapper
 import functools
 
 import sklearn
-import jax.numpy as np
+import numpy as np
 import scipy
 import scipy.stats
 import threadpoolctl

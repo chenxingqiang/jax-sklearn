@@ -10,7 +10,7 @@ import platform
 import inspect
 import re
 
-import jax.numpy as np
+import numpy as np
 
 from . import __version__
 from ._config import get_config

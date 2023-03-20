@@ -12,7 +12,7 @@ from libc.stdlib cimport malloc
 from libc.stdlib cimport realloc
 from libc.math cimport log as ln
 
-cimport jax.numpy as cnp
+cimport numpy as cnp
 cnp.import_array()
 
 from ..utils._random cimport our_rand_r

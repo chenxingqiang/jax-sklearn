@@ -1,7 +1,7 @@
 # Authors: Shane Grigsby <refuge@rocktalus.com>
 #          Adrin Jalali <adrin.jalali@gmail.com>
 # License: BSD 3 clause
-import jax.numpy as np
+import numpy as np
 import pytest
 from scipy import sparse
 import warnings

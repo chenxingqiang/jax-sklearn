@@ -68,7 +68,7 @@ values.
 
 The function :func:`validation_curve` can help in this case::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> from sklearn.model_selection import validation_curve
   >>> from sklearn.datasets import load_iris
   >>> from sklearn.linear_model import Ridge

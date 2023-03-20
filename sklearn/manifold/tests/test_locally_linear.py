@@ -1,6 +1,6 @@
 from itertools import product
 
-import jax.numpy as np
+import numpy as np
 from sklearn.utils._testing import (
     assert_allclose,
     assert_array_equal,

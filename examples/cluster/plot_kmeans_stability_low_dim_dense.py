@@ -26,7 +26,7 @@ clusters widely spaced.
 # Author: Olivier Grisel <olivier.grisel@ensta.org>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 

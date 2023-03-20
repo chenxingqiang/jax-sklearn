@@ -16,7 +16,7 @@ function approaches that of the ridge.
 # Authors: Manoj Kumar mks542@nyu.edu
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn.datasets import make_regression

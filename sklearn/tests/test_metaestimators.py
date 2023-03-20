@@ -2,7 +2,7 @@
 import functools
 from inspect import signature
 
-import jax.numpy as np
+import numpy as np
 import pytest
 
 from sklearn.base import BaseEstimator

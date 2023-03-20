@@ -9,7 +9,7 @@ vectors in LinearSVC.
 
 """
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
 from sklearn.svm import LinearSVC

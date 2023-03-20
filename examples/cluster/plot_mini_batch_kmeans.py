@@ -20,7 +20,7 @@ algorithms.
 #
 # We start by generating the blobs of data to be clustered.
 
-import jax.numpy as np
+import numpy as np
 from sklearn.datasets import make_blobs
 
 np.random.seed(0)

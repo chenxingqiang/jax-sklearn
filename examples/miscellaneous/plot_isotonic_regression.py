@@ -23,7 +23,7 @@ target values are computed by the isotonic non-parametric fit.
 #         Alexandre Gramfort <alexandre.gramfort@inria.fr>
 # License: BSD
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 

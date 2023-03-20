@@ -10,7 +10,7 @@ This exercise is used in the :ref:`using_kernels_tut` part of the
 
 """
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets, svm
 

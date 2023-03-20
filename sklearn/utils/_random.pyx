@@ -12,8 +12,8 @@ The module contains:
 """
 cimport cython
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 cnp.import_array()
 
 from . import check_random_state

@@ -6,7 +6,7 @@
 Descent (SGD).
 """
 
-import jax.numpy as np
+import numpy as np
 import warnings
 
 from abc import ABCMeta, abstractmethod
@@ -1161,7 +1161,7 @@ class SGDClassifier(BaseSGDClassifier):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.linear_model import SGDClassifier
     >>> from sklearn.preprocessing import StandardScaler
     >>> from sklearn.pipeline import make_pipeline
@@ -1937,7 +1937,7 @@ class SGDRegressor(BaseSGDRegressor):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.linear_model import SGDRegressor
     >>> from sklearn.pipeline import make_pipeline
     >>> from sklearn.preprocessing import StandardScaler
@@ -2151,7 +2151,7 @@ class SGDOneClassSVM(BaseSGD, OutlierMixin):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn import linear_model
     >>> X = np.array([[-1, -1], [-2, -1], [1, 1], [2, 1]])
     >>> clf = linear_model.SGDOneClassSVM(random_state=42)

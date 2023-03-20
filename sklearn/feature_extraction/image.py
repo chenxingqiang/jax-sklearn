@@ -11,7 +11,7 @@ extract features from images.
 
 from itertools import product
 import numbers
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from numpy.lib.stride_tricks import as_strided
 

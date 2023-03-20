@@ -8,7 +8,7 @@
 
 import functools
 
-import jax.numpy as np
+import numpy as np
 
 from ...utils import check_random_state
 from ...utils import check_X_y

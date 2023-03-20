@@ -14,7 +14,7 @@ import numbers
 from numbers import Integral, Real
 import warnings
 
-import jax.numpy as np
+import numpy as np
 from scipy import optimize
 from joblib import Parallel, effective_n_jobs
 from collections.abc import Iterable

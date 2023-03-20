@@ -3,7 +3,7 @@ Small collection of auxiliary functions that operate on arrays
 
 """
 
-cimport jax.numpy as cnp
+cimport numpy as cnp
 import  numpy as np
 cimport cython
 from cython cimport floating

@@ -6,7 +6,7 @@ import pytest
 
 import sys
 import warnings
-import jax.numpy as np
+import numpy as np
 
 from sklearn.base import is_classifier
 from sklearn.linear_model import LinearRegression

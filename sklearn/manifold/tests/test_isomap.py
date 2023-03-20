@@ -1,5 +1,5 @@
 from itertools import product
-import jax.numpy as np
+import numpy as np
 import math
 from numpy.testing import (
     assert_almost_equal,

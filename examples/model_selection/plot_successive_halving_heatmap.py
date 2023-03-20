@@ -11,7 +11,7 @@ This example compares the parameter search performed by
 from time import time
 
 import matplotlib.pyplot as plt
-import jax.numpy as np
+import numpy as np
 import pandas as pd
 
 from sklearn.svm import SVC

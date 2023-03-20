@@ -22,7 +22,7 @@ This example was inspired by the `XGBoost documentation
 
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.inspection import PartialDependenceDisplay
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 

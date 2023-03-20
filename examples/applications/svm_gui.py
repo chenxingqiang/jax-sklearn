@@ -34,7 +34,7 @@ from matplotlib.figure import Figure
 from matplotlib.contour import ContourSet
 
 import sys
-import jax.numpy as np
+import numpy as np
 import tkinter as Tk
 
 from sklearn import svm

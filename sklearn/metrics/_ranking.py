@@ -22,7 +22,7 @@ the lower the better.
 import warnings
 from functools import partial
 
-import jax.numpy as np
+import numpy as np
 from scipy.sparse import csr_matrix
 from scipy.stats import rankdata
 
@@ -74,7 +74,7 @@ def auc(x, y):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn import metrics
     >>> y = np.array([1, 1, 2, 2])
     >>> pred = np.array([0.1, 0.4, 0.35, 0.8])
@@ -193,7 +193,7 @@ def average_precision_score(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.metrics import average_precision_score
     >>> y_true = np.array([0, 0, 1, 1])
     >>> y_scores = np.array([0.1, 0.4, 0.35, 0.8])
@@ -293,7 +293,7 @@ def det_curve(y_true, y_score, pos_label=None, sample_weight=None):
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.metrics import det_curve
     >>> y_true = np.array([0, 0, 1, 1])
     >>> y_scores = np.array([0.1, 0.4, 0.35, 0.8])
@@ -527,7 +527,7 @@ def roc_auc_score(
 
     Multilabel case:
 
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.datasets import make_multilabel_classification
     >>> from sklearn.multioutput import MultiOutputClassifier
     >>> X, y = make_multilabel_classification(random_state=0)
@@ -853,7 +853,7 @@ def precision_recall_curve(y_true, probas_pred, *, pos_label=None, sample_weight
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.metrics import precision_recall_curve
     >>> y_true = np.array([0, 0, 1, 1])
     >>> y_scores = np.array([0.1, 0.4, 0.35, 0.8])
@@ -965,7 +965,7 @@ def roc_curve(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn import metrics
     >>> y = np.array([1, 1, 2, 2])
     >>> scores = np.array([0.1, 0.4, 0.35, 0.8])
@@ -1063,7 +1063,7 @@ def label_ranking_average_precision_score(y_true, y_score, *, sample_weight=None
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.metrics import label_ranking_average_precision_score
     >>> y_true = np.array([[1, 0, 0], [0, 0, 1]])
     >>> y_score = np.array([[0.75, 0.5, 1], [1, 0.2, 0.1]])
@@ -1452,7 +1452,7 @@ def dcg_score(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.metrics import dcg_score
     >>> # we have groud-truth relevance of some answers to a query:
     >>> true_relevance = np.asarray([[10, 0, 0, 1, 5]])
@@ -1606,7 +1606,7 @@ def ndcg_score(y_true, y_score, *, k=None, sample_weight=None, ignore_ties=False
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.metrics import ndcg_score
     >>> # we have groud-truth relevance of some answers to a query:
     >>> true_relevance = np.asarray([[10, 0, 0, 1, 5]])
@@ -1717,7 +1717,7 @@ def top_k_accuracy_score(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.metrics import top_k_accuracy_score
     >>> y_true = np.array([0, 1, 2, 2])
     >>> y_score = np.array([[0.5, 0.2, 0.2],  # 0 is in top 2

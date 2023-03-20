@@ -1,6 +1,6 @@
 import os
 
-import jax.numpy
+import numpy
 from numpy.distutils.misc_util import Configuration
 
 

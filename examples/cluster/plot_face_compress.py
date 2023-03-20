@@ -14,7 +14,7 @@ used for vector quantization.
 # Modified for documentation by Jaques Grobler
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
 

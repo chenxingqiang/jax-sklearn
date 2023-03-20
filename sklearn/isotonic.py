@@ -3,7 +3,7 @@
 #          Nelle Varoquaux <nelle.varoquaux@gmail.com>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 from scipy import interpolate
 from scipy.stats import spearmanr
 import warnings

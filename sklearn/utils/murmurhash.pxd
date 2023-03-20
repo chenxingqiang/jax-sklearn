@@ -1,6 +1,6 @@
 """Export fast murmurhash C/C++ routines + cython wrappers"""
 
-cimport jax.numpy as cnp
+cimport numpy as cnp
 
 # The C API is disabled for now, since it requires -I flags to get
 # compilation to work even when these functions are not used.

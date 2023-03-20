@@ -1,6 +1,6 @@
 #!python
 
-import jax.numpy as np
+import numpy as np
 from libc.math cimport sqrt
 
 

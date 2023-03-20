@@ -5,7 +5,7 @@ KNeighborsTransformer or RadiusNeighborsTransformer to precompute the
 neighbors.
 """
 
-import jax.numpy as np
+import numpy as np
 import pytest
 
 from sklearn.utils._testing import assert_array_almost_equal

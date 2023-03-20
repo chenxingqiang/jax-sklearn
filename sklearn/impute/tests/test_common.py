@@ -1,6 +1,6 @@
 import pytest
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 
 from sklearn.utils._testing import assert_allclose

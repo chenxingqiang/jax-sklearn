@@ -3,7 +3,7 @@
 # License: BSD 3 clause
 
 import numbers
-import jax.numpy as np
+import numpy as np
 from scipy.sparse import issparse
 from warnings import warn
 from numbers import Integral, Real

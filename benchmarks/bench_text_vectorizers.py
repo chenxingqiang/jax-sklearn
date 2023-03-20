@@ -11,7 +11,7 @@ To run this benchmark, you will need,
 import timeit
 import itertools
 
-import jax.numpy as np
+import numpy as np
 import pandas as pd
 from memory_profiler import memory_usage
 

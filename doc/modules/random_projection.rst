@@ -98,7 +98,7 @@ matrix where components are drawn from the following distribution
 Here a small excerpt which illustrates how to use the Gaussian random
 projection transformer::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> from sklearn import random_projection
   >>> X = np.random.rand(100, 10000)
   >>> transformer = random_projection.GaussianRandomProjection()
@@ -139,7 +139,7 @@ recommended by Ping Li et al.: :math:`1 / \sqrt{n_{\text{features}}}`.
 Here a small excerpt which illustrates how to use the sparse random
 projection transformer::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> from sklearn import random_projection
   >>> X = np.random.rand(100, 10000)
   >>> transformer = random_projection.SparseRandomProjection()
@@ -183,7 +183,7 @@ dense, even if ``X`` is sparse.
 Here a small code example which illustrates how to use the inverse transform
 feature::
 
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> from sklearn.random_projection import SparseRandomProjection
   >>> X = np.random.rand(100, 10000)
   >>> transformer = SparseRandomProjection(

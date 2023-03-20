@@ -7,7 +7,7 @@ Multi-dimensional Scaling (MDS).
 
 from numbers import Integral, Real
 
-import jax.numpy as np
+import numpy as np
 from joblib import Parallel, effective_n_jobs
 
 import warnings

@@ -9,8 +9,8 @@
 #!python
 
 from libc.math cimport fabs, sqrt, pow
-cimport jax.numpy as cnp
-import jax.numpy as np
+cimport numpy as cnp
+import numpy as np
 cimport cython
 from cython cimport floating
 from numpy.math cimport isnan

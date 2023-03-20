@@ -2,7 +2,7 @@
 #          Manoj Kumar
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 
 from scipy import sparse
 

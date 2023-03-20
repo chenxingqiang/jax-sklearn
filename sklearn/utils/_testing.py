@@ -44,7 +44,7 @@ from numpy.testing import assert_approx_equal
 from numpy.testing import assert_array_equal
 from numpy.testing import assert_array_almost_equal
 from numpy.testing import assert_array_less
-import jax.numpy as np
+import numpy as np
 import joblib
 
 import sklearn
@@ -432,7 +432,7 @@ def assert_allclose(
 
     Examples
     --------
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> from sklearn.utils._testing import assert_allclose
     >>> x = [1e-5, 1e-3, 1e-1]
     >>> y = np.arccos(np.cos(x))

@@ -48,7 +48,7 @@ The same task has been used in a number of papers including:
 import os
 from time import time
 import argparse
-import jax.numpy as np
+import numpy as np
 from joblib import Memory
 
 from sklearn.datasets import fetch_covtype, get_data_home

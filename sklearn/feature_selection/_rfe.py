@@ -6,7 +6,7 @@
 
 """Recursive feature elimination for feature ranking"""
 
-import jax.numpy as np
+import numpy as np
 import numbers
 from joblib import Parallel, effective_n_jobs
 

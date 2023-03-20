@@ -1,5 +1,5 @@
-cimport jax.numpy as cnp
-import jax.numpy as np
+cimport numpy as cnp
+import numpy as np
 
 from sklearn import get_config
 from cython cimport final

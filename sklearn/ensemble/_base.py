@@ -7,7 +7,7 @@ from abc import ABCMeta, abstractmethod
 import numbers
 from typing import List
 
-import jax.numpy as np
+import numpy as np
 
 from joblib import effective_n_jobs
 

@@ -14,7 +14,7 @@ of the regularization parameter.
 #         Alexandre Gramfort <alexandre.gramfort@inria.fr>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn import linear_model

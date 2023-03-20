@@ -10,8 +10,8 @@
 
 # See _tree.pyx for details.
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 
 ctypedef cnp.npy_float32 DTYPE_t          # Type of X
 ctypedef cnp.npy_float64 DOUBLE_t         # Type of y, sample_weight

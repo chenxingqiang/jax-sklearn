@@ -292,7 +292,7 @@ The :class:`ensemble.IsolationForest` supports ``warm_start=True`` which
 allows you to add more trees to an already fitted model::
 
   >>> from sklearn.ensemble import IsolationForest
-  >>> import jax.numpy as np
+  >>> import numpy as np
   >>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [0, 0], [-20, 50], [3, 5]])
   >>> clf = IsolationForest(n_estimators=10, warm_start=True)
   >>> clf.fit(X)  # fit 10 trees  # doctest: +SKIP

@@ -7,9 +7,9 @@
 # License: BSD 3 clause
 
 from libc.math cimport fabs
-cimport jax.numpy as cnp
-import jax.numpy as np
-import jax.numpy.linalg as linalg
+cimport numpy as cnp
+import numpy as np
+import numpy.linalg as linalg
 
 from cpython cimport bool
 from cython cimport floating

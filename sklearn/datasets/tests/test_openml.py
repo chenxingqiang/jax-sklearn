@@ -8,7 +8,7 @@ from importlib import resources
 from io import BytesIO
 from urllib.error import HTTPError
 
-import jax.numpy as np
+import numpy as np
 import scipy.sparse
 import pytest
 

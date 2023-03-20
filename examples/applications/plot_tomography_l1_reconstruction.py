@@ -39,7 +39,7 @@ contributed to fewer projections than the central disk.
 # Author: Emmanuelle Gouillart <emmanuelle.gouillart@nsup.org>
 # License: BSD 3 clause
 
-import jax.numpy as np
+import numpy as np
 from scipy import sparse
 from scipy import ndimage
 from sklearn.linear_model import Lasso

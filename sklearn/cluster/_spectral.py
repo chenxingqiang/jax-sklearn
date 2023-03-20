@@ -9,7 +9,7 @@
 import numbers
 import warnings
 
-import jax.numpy as np
+import numpy as np
 
 from scipy.linalg import LinAlgError, qr, svd
 from scipy.sparse import csc_matrix
@@ -602,7 +602,7 @@ class SpectralClustering(ClusterMixin, BaseEstimator):
     Examples
     --------
     >>> from sklearn.cluster import SpectralClustering
-    >>> import jax.numpy as np
+    >>> import numpy as np
     >>> X = np.array([[1, 1], [2, 1], [1, 0],
     ...               [4, 7], [3, 5], [3, 6]])
     >>> clustering = SpectralClustering(n_clusters=2,

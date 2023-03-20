@@ -5,8 +5,8 @@
 # implementations and papers describing the technique
 
 
-import jax.numpy as np
-cimport jax.numpy as cnp
+import numpy as np
+cimport numpy as cnp
 from libc.stdio cimport printf
 from libc.math cimport sqrt, log
 from libc.stdlib cimport malloc, free

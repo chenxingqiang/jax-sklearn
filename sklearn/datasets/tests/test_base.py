@@ -8,7 +8,7 @@ from functools import partial
 from importlib import resources
 
 import pytest
-import jax.numpy as np
+import numpy as np
 from sklearn.datasets import get_data_home
 from sklearn.datasets import clear_data_home
 from sklearn.datasets import load_files
