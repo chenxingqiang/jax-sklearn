@@ -4,9 +4,9 @@
 Feature extraction
 ==================
 
-.. currentmodule:: sklearn.feature_extraction
+.. currentmodule:: xlearn.feature_extraction
 
-The :mod:`sklearn.feature_extraction` module can be used to extract
+The :mod:`xlearn.feature_extraction` module can be used to extract
 features in a format supported by machine learning algorithms from datasets
 consisting of formats such as text and image.
 
@@ -24,7 +24,7 @@ Loading features from dicts
 
 The class :class:`DictVectorizer` can be used to convert feature
 arrays represented as lists of standard Python ``dict`` objects to the
-NumPy/SciPy representation used by scikit-learn estimators.
+NumPy/SciPy representation used by jax-ml estimators.
 
 While not particularly fast to process, Python's ``dict`` has the
 advantages of being convenient to use, being sparse (absent features
@@ -33,7 +33,7 @@ need not be stored) and storing feature names in addition to values.
 :class:`DictVectorizer` implements what is called one-of-K or "one-hot"
 coding for categorical (aka nominal, discrete) features. Categorical
 features are "attribute-value" pairs where the value is restricted
-to a list of discrete of possibilities without ordering (e.g. topic
+to a list of discrete possibilities without ordering (e.g. topic
 identifiers, types of objects, tags, names...).
 
 In the following, "city" is a categorical attribute while "temperature"
@@ -45,7 +45,7 @@ is a traditional numerical feature::
   ...     {'city': 'San Francisco', 'temperature': 18.},
   ... ]
 
-  >>> from sklearn.feature_extraction import DictVectorizer
+  >>> from xlearn.feature_extraction import DictVectorizer
   >>> vec = DictVectorizer()
 
   >>> vec.fit_transform(measurements).toarray()
@@ -127,7 +127,7 @@ default instead of a ``numpy.ndarray``.
 Feature hashing
 ===============
 
-.. currentmodule:: sklearn.feature_extraction
+.. currentmodule:: xlearn.feature_extraction
 
 The class :class:`FeatureHasher` is a high-speed, low-memory vectorizer that
 uses a technique known as
@@ -150,8 +150,8 @@ and the expected mean of any output feature's value is zero. This mechanism
 is enabled by default with ``alternate_sign=True`` and is particularly useful
 for small hash table sizes (``n_features < 10000``). For large hash table
 sizes, it can be disabled, to allow the output to be passed to estimators like
-:class:`~sklearn.naive_bayes.MultinomialNB` or
-:class:`~sklearn.feature_selection.chi2`
+:class:`~xlearn.naive_bayes.MultinomialNB` or
+:class:`~xlearn.feature_selection.chi2`
 feature selectors that expect non-negative inputs.
 
 :class:`FeatureHasher` accepts either mappings
@@ -206,39 +206,39 @@ Note the use of a generator comprehension,
 which introduces laziness into the feature extraction:
 tokens are only processed on demand from the hasher.
 
-Implementation details
-----------------------
+.. dropdown:: Implementation details
 
-:class:`FeatureHasher` uses the signed 32-bit variant of MurmurHash3.
-As a result (and because of limitations in ``scipy.sparse``),
-the maximum number of features supported is currently :math:`2^{31} - 1`.
+  :class:`FeatureHasher` uses the signed 32-bit variant of MurmurHash3.
+  As a result (and because of limitations in ``scipy.sparse``),
+  the maximum number of features supported is currently :math:`2^{31} - 1`.
 
-The original formulation of the hashing trick by Weinberger et al.
-used two separate hash functions :math:`h` and :math:`\xi`
-to determine the column index and sign of a feature, respectively.
-The present implementation works under the assumption
-that the sign bit of MurmurHash3 is independent of its other bits.
+  The original formulation of the hashing trick by Weinberger et al.
+  used two separate hash functions :math:`h` and :math:`\xi`
+  to determine the column index and sign of a feature, respectively.
+  The present implementation works under the assumption
+  that the sign bit of MurmurHash3 is independent of its other bits.
 
-Since a simple modulo is used to transform the hash function to a column index,
-it is advisable to use a power of two as the ``n_features`` parameter;
-otherwise the features will not be mapped evenly to the columns.
+  Since a simple modulo is used to transform the hash function to a column index,
+  it is advisable to use a power of two as the ``n_features`` parameter;
+  otherwise the features will not be mapped evenly to the columns.
+
+  .. rubric:: References
+
+  * `MurmurHash3 <https://github.com/aappleby/smhasher>`_.
 
 
-.. topic:: References:
+.. rubric:: References
 
- * Kilian Weinberger, Anirban Dasgupta, John Langford, Alex Smola and
-   Josh Attenberg (2009). `Feature hashing for large scale multitask learning
-   <https://alex.smola.org/papers/2009/Weinbergeretal09.pdf>`_. Proc. ICML.
-
- * `MurmurHash3 <https://github.com/aappleby/smhasher>`_.
-
+* Kilian Weinberger, Anirban Dasgupta, John Langford, Alex Smola and
+  Josh Attenberg (2009). `Feature hashing for large scale multitask learning
+  <https://alex.smola.org/papers/2009/Weinbergeretal09.pdf>`_. Proc. ICML.
 
 .. _text_feature_extraction:
 
 Text feature extraction
 =======================
 
-.. currentmodule:: sklearn.feature_extraction.text
+.. currentmodule:: xlearn.feature_extraction.text
 
 
 The Bag of Words representation
@@ -250,7 +250,7 @@ directly to the algorithms themselves as most of them expect numerical
 feature vectors with a fixed size rather than the raw text documents
 with variable length.
 
-In order to address this, scikit-learn provides utilities for the most
+In order to address this, jax-ml provides utilities for the most
 common ways to extract numerical features from text content, namely:
 
 - **tokenizing** strings and giving an integer id for each possible token,
@@ -303,11 +303,11 @@ Common Vectorizer usage
 :class:`CountVectorizer` implements both tokenization and occurrence
 counting in a single class::
 
-  >>> from sklearn.feature_extraction.text import CountVectorizer
+  >>> from xlearn.feature_extraction.text import CountVectorizer
 
 This model has many parameters, however the default values are quite
 reasonable (please see  the :ref:`reference documentation
-<text_feature_extraction_ref>` for the details)::
+<feature_extraction_ref-from-text>` for the details)::
 
   >>> vectorizer = CountVectorizer()
   >>> vectorizer
@@ -396,7 +396,7 @@ last document::
 .. _stop_words:
 
 Using stop words
-................
+----------------
 
 Stop words are words like "and", "the", "him", which are presumed to be
 uninformative in representing the content of a text, and which may be
@@ -419,12 +419,13 @@ tokenizer, so if *we've* is in ``stop_words``, but *ve* is not, *ve* will
 be retained from *we've* in transformed text.  Our vectorizers will try to
 identify and warn about some kinds of inconsistencies.
 
-.. topic:: References
+.. rubric:: References
 
-    .. [NQY18] J. Nothman, H. Qin and R. Yurchak (2018).
-               `"Stop Word Lists in Free Open-source Software Packages"
-               <https://aclweb.org/anthology/W18-2502>`__.
-               In *Proc. Workshop for NLP Open Source Software*.
+.. [NQY18] J. Nothman, H. Qin and R. Yurchak (2018).
+   `"Stop Word Lists in Free Open-source Software Packages"
+   <https://aclweb.org/anthology/W18-2502>`__.
+   In *Proc. Workshop for NLP Open Source Software*.
+
 
 .. _tfidf:
 
@@ -466,7 +467,7 @@ use in document classification and clustering.
 
 The following sections contain further explanations and examples that
 illustrate how the tf-idfs are computed exactly and how the tf-idfs
-computed in scikit-learn's :class:`TfidfTransformer`
+computed in jax-ml's :class:`TfidfTransformer`
 and :class:`TfidfVectorizer` differ slightly from the standard textbook
 notation that defines the idf as
 
@@ -482,132 +483,131 @@ with ``smooth_idf=False``, the
 This normalization is implemented by the :class:`TfidfTransformer`
 class::
 
-  >>> from sklearn.feature_extraction.text import TfidfTransformer
+  >>> from xlearn.feature_extraction.text import TfidfTransformer
   >>> transformer = TfidfTransformer(smooth_idf=False)
   >>> transformer
   TfidfTransformer(smooth_idf=False)
 
 Again please see the :ref:`reference documentation
-<text_feature_extraction_ref>` for the details on all the parameters.
+<feature_extraction_ref-from-text>` for the details on all the parameters.
 
-Let's take an example with the following counts. The first term is present
-100% of the time hence not very interesting. The two other features only
-in less than 50% of the time hence probably more representative of the
-content of the documents::
+.. dropdown:: Numeric example of a tf-idf matrix
 
-  >>> counts = [[3, 0, 1],
-  ...           [2, 0, 0],
-  ...           [3, 0, 0],
-  ...           [4, 0, 0],
-  ...           [3, 2, 0],
-  ...           [3, 0, 2]]
-  ...
-  >>> tfidf = transformer.fit_transform(counts)
-  >>> tfidf
-  <6x3 sparse matrix of type '<... 'numpy.float64'>'
-      with 9 stored elements in Compressed Sparse ... format>
+  Let's take an example with the following counts. The first term is present
+  100% of the time hence not very interesting. The two other features only
+  in less than 50% of the time hence probably more representative of the
+  content of the documents::
 
-  >>> tfidf.toarray()
-  array([[0.81940995, 0.        , 0.57320793],
-         [1.        , 0.        , 0.        ],
-         [1.        , 0.        , 0.        ],
-         [1.        , 0.        , 0.        ],
-         [0.47330339, 0.88089948, 0.        ],
-         [0.58149261, 0.        , 0.81355169]])
+    >>> counts = [[3, 0, 1],
+    ...           [2, 0, 0],
+    ...           [3, 0, 0],
+    ...           [4, 0, 0],
+    ...           [3, 2, 0],
+    ...           [3, 0, 2]]
+    ...
+    >>> tfidf = transformer.fit_transform(counts)
+    >>> tfidf
+    <6x3 sparse matrix of type '<... 'numpy.float64'>'
+        with 9 stored elements in Compressed Sparse ... format>
 
-Each row is normalized to have unit Euclidean norm:
+    >>> tfidf.toarray()
+    array([[0.81940995, 0.        , 0.57320793],
+          [1.        , 0.        , 0.        ],
+          [1.        , 0.        , 0.        ],
+          [1.        , 0.        , 0.        ],
+          [0.47330339, 0.88089948, 0.        ],
+          [0.58149261, 0.        , 0.81355169]])
 
-:math:`v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
-v{_2}^2 + \dots + v{_n}^2}}`
+  Each row is normalized to have unit Euclidean norm:
 
-For example, we can compute the tf-idf of the first term in the first
-document in the `counts` array as follows:
+  :math:`v_{norm} = \frac{v}{||v||_2} = \frac{v}{\sqrt{v{_1}^2 +
+  v{_2}^2 + \dots + v{_n}^2}}`
 
-:math:`n = 6`
+  For example, we can compute the tf-idf of the first term in the first
+  document in the `counts` array as follows:
 
-:math:`\text{df}(t)_{\text{term1}} = 6`
+  :math:`n = 6`
 
-:math:`\text{idf}(t)_{\text{term1}} =
-\log \frac{n}{\text{df}(t)} + 1 = \log(1)+1 = 1`
+  :math:`\text{df}(t)_{\text{term1}} = 6`
 
-:math:`\text{tf-idf}_{\text{term1}} = \text{tf} \times \text{idf} = 3 \times 1 = 3`
+  :math:`\text{idf}(t)_{\text{term1}} =
+  \log \frac{n}{\text{df}(t)} + 1 = \log(1)+1 = 1`
 
-Now, if we repeat this computation for the remaining 2 terms in the document,
-we get
+  :math:`\text{tf-idf}_{\text{term1}} = \text{tf} \times \text{idf} = 3 \times 1 = 3`
 
-:math:`\text{tf-idf}_{\text{term2}} = 0 \times (\log(6/1)+1) = 0`
+  Now, if we repeat this computation for the remaining 2 terms in the document,
+  we get
 
-:math:`\text{tf-idf}_{\text{term3}} = 1 \times (\log(6/2)+1) \approx 2.0986`
+  :math:`\text{tf-idf}_{\text{term2}} = 0 \times (\log(6/1)+1) = 0`
 
-and the vector of raw tf-idfs:
+  :math:`\text{tf-idf}_{\text{term3}} = 1 \times (\log(6/2)+1) \approx 2.0986`
 
-:math:`\text{tf-idf}_{\text{raw}} = [3, 0, 2.0986].`
+  and the vector of raw tf-idfs:
 
-
-Then, applying the Euclidean (L2) norm, we obtain the following tf-idfs
-for document 1:
-
-:math:`\frac{[3, 0, 2.0986]}{\sqrt{\big(3^2 + 0^2 + 2.0986^2\big)}}
-= [ 0.819,  0,  0.573].`
-
-Furthermore, the default parameter ``smooth_idf=True`` adds "1" to the numerator
-and  denominator as if an extra document was seen containing every term in the
-collection exactly once, which prevents zero divisions:
-
-:math:`\text{idf}(t) = \log{\frac{1 + n}{1+\text{df}(t)}} + 1`
-
-Using this modification, the tf-idf of the third term in document 1 changes to
-1.8473:
-
-:math:`\text{tf-idf}_{\text{term3}} = 1 \times \log(7/3)+1 \approx 1.8473`
-
-And the L2-normalized tf-idf changes to
-
-:math:`\frac{[3, 0, 1.8473]}{\sqrt{\big(3^2 + 0^2 + 1.8473^2\big)}}
-= [0.8515, 0, 0.5243]`::
-
-  >>> transformer = TfidfTransformer()
-  >>> transformer.fit_transform(counts).toarray()
-  array([[0.85151335, 0.        , 0.52433293],
-         [1.        , 0.        , 0.        ],
-         [1.        , 0.        , 0.        ],
-         [1.        , 0.        , 0.        ],
-         [0.55422893, 0.83236428, 0.        ],
-         [0.63035731, 0.        , 0.77630514]])
-
-The weights of each
-feature computed by the ``fit`` method call are stored in a model
-attribute::
-
-  >>> transformer.idf_
-  array([1. ..., 2.25..., 1.84...])
+  :math:`\text{tf-idf}_{\text{raw}} = [3, 0, 2.0986].`
 
 
+  Then, applying the Euclidean (L2) norm, we obtain the following tf-idfs
+  for document 1:
 
+  :math:`\frac{[3, 0, 2.0986]}{\sqrt{\big(3^2 + 0^2 + 2.0986^2\big)}}
+  = [ 0.819,  0,  0.573].`
 
-As tf–idf is very often used for text features, there is also another
-class called :class:`TfidfVectorizer` that combines all the options of
-:class:`CountVectorizer` and :class:`TfidfTransformer` in a single model::
+  Furthermore, the default parameter ``smooth_idf=True`` adds "1" to the numerator
+  and  denominator as if an extra document was seen containing every term in the
+  collection exactly once, which prevents zero divisions:
 
-  >>> from sklearn.feature_extraction.text import TfidfVectorizer
-  >>> vectorizer = TfidfVectorizer()
-  >>> vectorizer.fit_transform(corpus)
-  <4x9 sparse matrix of type '<... 'numpy.float64'>'
-      with 19 stored elements in Compressed Sparse ... format>
+  :math:`\text{idf}(t) = \log{\frac{1 + n}{1+\text{df}(t)}} + 1`
 
-While the tf–idf normalization is often very useful, there might
-be cases where the binary occurrence markers might offer better
-features. This can be achieved by using the ``binary`` parameter
-of :class:`CountVectorizer`. In particular, some estimators such as
-:ref:`bernoulli_naive_bayes` explicitly model discrete boolean random
-variables. Also, very short texts are likely to have noisy tf–idf values
-while the binary occurrence info is more stable.
+  Using this modification, the tf-idf of the third term in document 1 changes to
+  1.8473:
 
-As usual the best way to adjust the feature extraction parameters
-is to use a cross-validated grid search, for instance by pipelining the
-feature extractor with a classifier:
+  :math:`\text{tf-idf}_{\text{term3}} = 1 \times \log(7/3)+1 \approx 1.8473`
 
- * :ref:`sphx_glr_auto_examples_model_selection_grid_search_text_feature_extraction.py`
+  And the L2-normalized tf-idf changes to
+
+  :math:`\frac{[3, 0, 1.8473]}{\sqrt{\big(3^2 + 0^2 + 1.8473^2\big)}}
+  = [0.8515, 0, 0.5243]`::
+
+    >>> transformer = TfidfTransformer()
+    >>> transformer.fit_transform(counts).toarray()
+    array([[0.85151335, 0.        , 0.52433293],
+          [1.        , 0.        , 0.        ],
+          [1.        , 0.        , 0.        ],
+          [1.        , 0.        , 0.        ],
+          [0.55422893, 0.83236428, 0.        ],
+          [0.63035731, 0.        , 0.77630514]])
+
+  The weights of each
+  feature computed by the ``fit`` method call are stored in a model
+  attribute::
+
+    >>> transformer.idf_
+    array([1. ..., 2.25..., 1.84...])
+
+  As tf-idf is very often used for text features, there is also another
+  class called :class:`TfidfVectorizer` that combines all the options of
+  :class:`CountVectorizer` and :class:`TfidfTransformer` in a single model::
+
+    >>> from xlearn.feature_extraction.text import TfidfVectorizer
+    >>> vectorizer = TfidfVectorizer()
+    >>> vectorizer.fit_transform(corpus)
+    <4x9 sparse matrix of type '<... 'numpy.float64'>'
+        with 19 stored elements in Compressed Sparse ... format>
+
+  While the tf-idf normalization is often very useful, there might
+  be cases where the binary occurrence markers might offer better
+  features. This can be achieved by using the ``binary`` parameter
+  of :class:`CountVectorizer`. In particular, some estimators such as
+  :ref:`bernoulli_naive_bayes` explicitly model discrete boolean random
+  variables. Also, very short texts are likely to have noisy tf-idf values
+  while the binary occurrence info is more stable.
+
+  As usual the best way to adjust the feature extraction parameters
+  is to use a cross-validated grid search, for instance by pipelining the
+  feature extractor with a classifier:
+
+  * :ref:`sphx_glr_auto_examples_model_selection_plot_grid_search_text_feature_extraction.py`
 
 
 Decoding text files
@@ -623,7 +623,7 @@ and the universal encodings UTF-8 and UTF-16. Many others exist.
     but this term is less accurate: several encodings can exist
     for a single character set.
 
-The text feature extractors in scikit-learn know how to decode text files,
+The text feature extractors in jax-ml know how to decode text files,
 but only if you tell them what encoding the files are in.
 The :class:`CountVectorizer` takes an ``encoding`` parameter for this purpose.
 For modern text files, the correct encoding is probably UTF-8,
@@ -637,58 +637,59 @@ or ``"replace"``. See the documentation for the Python function
 ``bytes.decode`` for more details
 (type ``help(bytes.decode)`` at the Python prompt).
 
-If you are having trouble decoding text, here are some things to try:
+.. dropdown:: Troubleshooting decoding text
 
-- Find out what the actual encoding of the text is. The file might come
-  with a header or README that tells you the encoding, or there might be some
-  standard encoding you can assume based on where the text comes from.
+  If you are having trouble decoding text, here are some things to try:
 
-- You may be able to find out what kind of encoding it is in general
-  using the UNIX command ``file``. The Python ``chardet`` module comes with
-  a script called ``chardetect.py`` that will guess the specific encoding,
-  though you cannot rely on its guess being correct.
+  - Find out what the actual encoding of the text is. The file might come
+    with a header or README that tells you the encoding, or there might be some
+    standard encoding you can assume based on where the text comes from.
 
-- You could try UTF-8 and disregard the errors. You can decode byte
-  strings with ``bytes.decode(errors='replace')`` to replace all
-  decoding errors with a meaningless character, or set
-  ``decode_error='replace'`` in the vectorizer. This may damage the
-  usefulness of your features.
+  - You may be able to find out what kind of encoding it is in general
+    using the UNIX command ``file``. The Python ``chardet`` module comes with
+    a script called ``chardetect.py`` that will guess the specific encoding,
+    though you cannot rely on its guess being correct.
 
-- Real text may come from a variety of sources that may have used different
-  encodings, or even be sloppily decoded in a different encoding than the
-  one it was encoded with. This is common in text retrieved from the Web.
-  The Python package `ftfy`_ can automatically sort out some classes of
-  decoding errors, so you could try decoding the unknown text as ``latin-1``
-  and then using ``ftfy`` to fix errors.
+  - You could try UTF-8 and disregard the errors. You can decode byte
+    strings with ``bytes.decode(errors='replace')`` to replace all
+    decoding errors with a meaningless character, or set
+    ``decode_error='replace'`` in the vectorizer. This may damage the
+    usefulness of your features.
 
-- If the text is in a mish-mash of encodings that is simply too hard to sort
-  out (which is the case for the 20 Newsgroups dataset), you can fall back on
-  a simple single-byte encoding such as ``latin-1``. Some text may display
-  incorrectly, but at least the same sequence of bytes will always represent
-  the same feature.
+  - Real text may come from a variety of sources that may have used different
+    encodings, or even be sloppily decoded in a different encoding than the
+    one it was encoded with. This is common in text retrieved from the Web.
+    The Python package `ftfy <https://github.com/LuminosoInsight/python-ftfy>`__
+    can automatically sort out some classes of
+    decoding errors, so you could try decoding the unknown text as ``latin-1``
+    and then using ``ftfy`` to fix errors.
 
-For example, the following snippet uses ``chardet``
-(not shipped with scikit-learn, must be installed separately)
-to figure out the encoding of three texts.
-It then vectorizes the texts and prints the learned vocabulary.
-The output is not shown here.
+  - If the text is in a mish-mash of encodings that is simply too hard to sort
+    out (which is the case for the 20 Newsgroups dataset), you can fall back on
+    a simple single-byte encoding such as ``latin-1``. Some text may display
+    incorrectly, but at least the same sequence of bytes will always represent
+    the same feature.
 
-  >>> import chardet    # doctest: +SKIP
-  >>> text1 = b"Sei mir gegr\xc3\xbc\xc3\x9ft mein Sauerkraut"
-  >>> text2 = b"holdselig sind deine Ger\xfcche"
-  >>> text3 = b"\xff\xfeA\x00u\x00f\x00 \x00F\x00l\x00\xfc\x00g\x00e\x00l\x00n\x00 \x00d\x00e\x00s\x00 \x00G\x00e\x00s\x00a\x00n\x00g\x00e\x00s\x00,\x00 \x00H\x00e\x00r\x00z\x00l\x00i\x00e\x00b\x00c\x00h\x00e\x00n\x00,\x00 \x00t\x00r\x00a\x00g\x00 \x00i\x00c\x00h\x00 \x00d\x00i\x00c\x00h\x00 \x00f\x00o\x00r\x00t\x00"
-  >>> decoded = [x.decode(chardet.detect(x)['encoding'])
-  ...            for x in (text1, text2, text3)]        # doctest: +SKIP
-  >>> v = CountVectorizer().fit(decoded).vocabulary_    # doctest: +SKIP
-  >>> for term in v: print(v)                           # doctest: +SKIP
+  For example, the following snippet uses ``chardet``
+  (not shipped with jax-ml, must be installed separately)
+  to figure out the encoding of three texts.
+  It then vectorizes the texts and prints the learned vocabulary.
+  The output is not shown here.
 
-(Depending on the version of ``chardet``, it might get the first one wrong.)
+    >>> import chardet    # doctest: +SKIP
+    >>> text1 = b"Sei mir gegr\xc3\xbc\xc3\x9ft mein Sauerkraut"
+    >>> text2 = b"holdselig sind deine Ger\xfcche"
+    >>> text3 = b"\xff\xfeA\x00u\x00f\x00 \x00F\x00l\x00\xfc\x00g\x00e\x00l\x00n\x00 \x00d\x00e\x00s\x00 \x00G\x00e\x00s\x00a\x00n\x00g\x00e\x00s\x00,\x00 \x00H\x00e\x00r\x00z\x00l\x00i\x00e\x00b\x00c\x00h\x00e\x00n\x00,\x00 \x00t\x00r\x00a\x00g\x00 \x00i\x00c\x00h\x00 \x00d\x00i\x00c\x00h\x00 \x00f\x00o\x00r\x00t\x00"
+    >>> decoded = [x.decode(chardet.detect(x)['encoding'])
+    ...            for x in (text1, text2, text3)]        # doctest: +SKIP
+    >>> v = CountVectorizer().fit(decoded).vocabulary_    # doctest: +SKIP
+    >>> for term in v: print(v)                           # doctest: +SKIP
 
-For an introduction to Unicode and character encodings in general,
-see Joel Spolsky's `Absolute Minimum Every Software Developer Must Know
-About Unicode <https://www.joelonsoftware.com/articles/Unicode.html>`_.
+  (Depending on the version of ``chardet``, it might get the first one wrong.)
 
-.. _`ftfy`: https://github.com/LuminosoInsight/python-ftfy
+  For an introduction to Unicode and character encodings in general,
+  see Joel Spolsky's `Absolute Minimum Every Software Developer Must Know
+  About Unicode <https://www.joelonsoftware.com/articles/Unicode.html>`_.
 
 
 Applications and examples
@@ -701,18 +702,18 @@ In particular in a **supervised setting** it can be successfully combined
 with fast and scalable linear models to train **document classifiers**,
 for instance:
 
- * :ref:`sphx_glr_auto_examples_text_plot_document_classification_20newsgroups.py`
+* :ref:`sphx_glr_auto_examples_text_plot_document_classification_20newsgroups.py`
 
 In an **unsupervised setting** it can be used to group similar documents
 together by applying clustering algorithms such as :ref:`k_means`:
 
-  * :ref:`sphx_glr_auto_examples_text_plot_document_clustering.py`
+* :ref:`sphx_glr_auto_examples_text_plot_document_clustering.py`
 
 Finally it is possible to discover the main topics of a corpus by
 relaxing the hard assignment constraint of clustering, for instance by
 using :ref:`NMF`:
 
-  * :ref:`sphx_glr_auto_examples_applications_plot_topics_extraction_with_nmf_lda.py`
+* :ref:`sphx_glr_auto_examples_applications_plot_topics_extraction_with_nmf_lda.py`
 
 
 Limitations of the Bag of Words representation
@@ -782,7 +783,7 @@ the meaning carried by that internal structure.
 In order to address the wider task of Natural Language Understanding,
 the local structure of sentences and paragraphs should thus be taken
 into account. Many such models will thus be casted as "Structured output"
-problems which are currently outside of the scope of scikit-learn.
+problems which are currently outside of the scope of jax-ml.
 
 
 .. _hashing_vectorizer:
@@ -817,7 +818,7 @@ datasets**:
 
 It is possible to overcome those limitations by combining the "hashing trick"
 (:ref:`Feature_hashing`) implemented by the
-:class:`~sklearn.feature_extraction.FeatureHasher` class and the text
+:class:`~xlearn.feature_extraction.FeatureHasher` class and the text
 preprocessing and tokenization features of the :class:`CountVectorizer`.
 
 This combination is implementing in :class:`HashingVectorizer`,
@@ -825,7 +826,7 @@ a transformer class that is mostly API compatible with :class:`CountVectorizer`.
 :class:`HashingVectorizer` is stateless,
 meaning that you don't have to call ``fit`` on it::
 
-  >>> from sklearn.feature_extraction.text import HashingVectorizer
+  >>> from xlearn.feature_extraction.text import HashingVectorizer
   >>> hv = HashingVectorizer(n_features=10)
   >>> hv.transform(corpus)
   <4x10 sparse matrix of type '<... 'numpy.float64'>'
@@ -846,7 +847,7 @@ Note that the dimensionality does not affect the CPU training time of
 algorithms which operate on CSR matrices (``LinearSVC(dual=True)``,
 ``Perceptron``, ``SGDClassifier``, ``PassiveAggressive``) but it does for
 algorithms that work with CSC matrices (``LinearSVC(dual=False)``, ``Lasso()``,
-etc).
+etc.).
 
 Let's try again with the default setting::
 
@@ -870,25 +871,25 @@ The :class:`HashingVectorizer` also comes with the following limitations:
   model. A :class:`TfidfTransformer` can be appended to it in a pipeline if
   required.
 
-Performing out-of-core scaling with HashingVectorizer
-------------------------------------------------------
+.. dropdown:: Performing out-of-core scaling with HashingVectorizer
 
-An interesting development of using a :class:`HashingVectorizer` is the ability
-to perform `out-of-core`_ scaling. This means that we can learn from data that
-does not fit into the computer's main memory.
+  An interesting development of using a :class:`HashingVectorizer` is the ability
+  to perform `out-of-core`_ scaling. This means that we can learn from data that
+  does not fit into the computer's main memory.
 
-.. _out-of-core: https://en.wikipedia.org/wiki/Out-of-core_algorithm
+  .. _out-of-core: https://en.wikipedia.org/wiki/Out-of-core_algorithm
 
-A strategy to implement out-of-core scaling is to stream data to the estimator
-in mini-batches. Each mini-batch is vectorized using :class:`HashingVectorizer`
-so as to guarantee that the input space of the estimator has always the same
-dimensionality. The amount of memory used at any time is thus bounded by the
-size of a mini-batch. Although there is no limit to the amount of data that can
-be ingested using such an approach, from a practical point of view the learning
-time is often limited by the CPU time one wants to spend on the task.
+  A strategy to implement out-of-core scaling is to stream data to the estimator
+  in mini-batches. Each mini-batch is vectorized using :class:`HashingVectorizer`
+  so as to guarantee that the input space of the estimator has always the same
+  dimensionality. The amount of memory used at any time is thus bounded by the
+  size of a mini-batch. Although there is no limit to the amount of data that can
+  be ingested using such an approach, from a practical point of view the learning
+  time is often limited by the CPU time one wants to spend on the task.
 
-For a full-fledged example of out-of-core scaling in a text classification
-task see :ref:`sphx_glr_auto_examples_applications_plot_out_of_core_classification.py`.
+  For a full-fledged example of out-of-core scaling in a text classification
+  task see :ref:`sphx_glr_auto_examples_applications_plot_out_of_core_classification.py`.
+
 
 Customizing the vectorizer classes
 ----------------------------------
@@ -906,21 +907,21 @@ to the vectorizer constructor::
 
 In particular we name:
 
-  * ``preprocessor``: a callable that takes an entire document as input (as a
-    single string), and returns a possibly transformed version of the document,
-    still as an entire string. This can be used to remove HTML tags, lowercase
-    the entire document, etc.
+* ``preprocessor``: a callable that takes an entire document as input (as a
+  single string), and returns a possibly transformed version of the document,
+  still as an entire string. This can be used to remove HTML tags, lowercase
+  the entire document, etc.
 
-  * ``tokenizer``: a callable that takes the output from the preprocessor
-    and splits it into tokens, then returns a list of these.
+* ``tokenizer``: a callable that takes the output from the preprocessor
+  and splits it into tokens, then returns a list of these.
 
-  * ``analyzer``: a callable that replaces the preprocessor and tokenizer.
-    The default analyzers all call the preprocessor and tokenizer, but custom
-    analyzers will skip this. N-gram extraction and stop word filtering take
-    place at the analyzer level, so a custom analyzer may have to reproduce
-    these steps.
+* ``analyzer``: a callable that replaces the preprocessor and tokenizer.
+  The default analyzers all call the preprocessor and tokenizer, but custom
+  analyzers will skip this. N-gram extraction and stop word filtering take
+  place at the analyzer level, so a custom analyzer may have to reproduce
+  these steps.
 
-(Lucene users might recognize these names, but be aware that scikit-learn
+(Lucene users might recognize these names, but be aware that jax-ml
 concepts may not map one-to-one onto Lucene concepts.)
 
 To make the preprocessor, tokenizer and analyzers aware of the model
@@ -928,14 +929,15 @@ parameters it is possible to derive from the class and override the
 ``build_preprocessor``, ``build_tokenizer`` and ``build_analyzer``
 factory methods instead of passing custom functions.
 
-Some tips and tricks:
+.. dropdown:: Tips and tricks
+  :color: success
 
   * If documents are pre-tokenized by an external package, then store them in
     files (or strings) with the tokens separated by whitespace and pass
     ``analyzer=str.split``
   * Fancy token-level analysis such as stemming, lemmatizing, compound
     splitting, filtering based on part-of-speech, etc. are not included in the
-    scikit-learn codebase, but can be added by customizing either the
+    jax-ml codebase, but can be added by customizing either the
     tokenizer or the analyzer.
     Here's a ``CountVectorizer`` with a tokenizer and lemmatizer using
     `NLTK <https://www.nltk.org/>`_::
@@ -951,7 +953,6 @@ Some tips and tricks:
         >>> vect = CountVectorizer(tokenizer=LemmaTokenizer())  # doctest: +SKIP
 
     (Note that this will not filter out punctuation.)
-
 
     The following example will, for instance, transform some British spelling
     to American spelling::
@@ -976,18 +977,17 @@ Some tips and tricks:
     for other styles of preprocessing; examples include stemming, lemmatization,
     or normalizing numerical tokens, with the latter illustrated in:
 
-     * :ref:`sphx_glr_auto_examples_bicluster_plot_bicluster_newsgroups.py`
+    * :ref:`sphx_glr_auto_examples_bicluster_plot_bicluster_newsgroups.py`
 
-
-Customizing the vectorizer can also be useful when handling Asian languages
-that do not use an explicit word separator such as whitespace.
+  Customizing the vectorizer can also be useful when handling Asian languages
+  that do not use an explicit word separator such as whitespace.
 
 .. _image_feature_extraction:
 
 Image feature extraction
 ========================
 
-.. currentmodule:: sklearn.feature_extraction.image
+.. currentmodule:: xlearn.feature_extraction.image
 
 Patch extraction
 ----------------
@@ -995,11 +995,11 @@ Patch extraction
 The :func:`extract_patches_2d` function extracts patches from an image stored
 as a two-dimensional array, or three-dimensional with color information along
 the third axis. For rebuilding an image from all its patches, use
-:func:`reconstruct_from_patches_2d`. For example let use generate a 4x4 pixel
+:func:`reconstruct_from_patches_2d`. For example let us generate a 4x4 pixel
 picture with 3 color channels (e.g. in RGB format)::
 
     >>> import numpy as np
-    >>> from sklearn.feature_extraction import image
+    >>> from xlearn.feature_extraction import image
 
     >>> one_image = np.arange(4 * 4 * 3).reshape((4, 4, 3))
     >>> one_image[:, :, 0]  # R channel of a fake RGB picture
@@ -1033,7 +1033,7 @@ on overlapping areas::
 
 The :class:`PatchExtractor` class works in the same way as
 :func:`extract_patches_2d`, only it supports multiple images as input. It is
-implemented as an estimator, so it can be used in pipelines. See::
+implemented as a jax-ml transformer, so it can be used in pipelines. See::
 
     >>> five_images = np.arange(5 * 4 * 4 * 3).reshape(5, 4, 4, 3)
     >>> patches = image.PatchExtractor(patch_size=(2, 2)).transform(five_images)
@@ -1043,7 +1043,7 @@ implemented as an estimator, so it can be used in pipelines. See::
 Connectivity graph of an image
 -------------------------------
 
-Several estimators in the scikit-learn can use connectivity information between
+Several estimators in the jax-ml can use connectivity information between
 features or samples. For instance Ward clustering
 (:ref:`hierarchical_clustering`) can cluster together only neighboring pixels
 of an image, thus forming contiguous patches:

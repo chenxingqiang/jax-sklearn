@@ -31,13 +31,13 @@ verified from the labelled scatter plot on the right.
 
 """
 
-from sklearn.datasets import make_blobs
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_samples, silhouette_score
-
-import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import matplotlib.pyplot as plt
 import numpy as np
+
+from xlearn.cluster import KMeans
+from xlearn.datasets import make_blobs
+from xlearn.metrics import silhouette_samples, silhouette_score
 
 # Generating the sample data from make_blobs
 # This particular setting has one distinct cluster and 3 clusters placed close

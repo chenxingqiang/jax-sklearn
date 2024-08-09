@@ -7,11 +7,14 @@ This example demonstrates Gradient Boosting to produce a predictive
 model from an ensemble of weak predictive models. Gradient boosting can be used
 for regression and classification problems. Here, we will train a model to
 tackle a diabetes regression task. We will obtain the results from
-:class:`~sklearn.ensemble.GradientBoostingRegressor` with least squares loss
+:class:`~xlearn.ensemble.GradientBoostingRegressor` with least squares loss
 and 500 regression trees of depth 4.
 
 Note: For larger datasets (n_samples >= 10000), please refer to
-:class:`~sklearn.ensemble.HistGradientBoostingRegressor`.
+:class:`~xlearn.ensemble.HistGradientBoostingRegressor`. See
+:ref:`sphx_glr_auto_examples_ensemble_plot_hgbt_regression.py` for an example
+showcasing some other advantages of
+:class:`~ensemble.HistGradientBoostingRegressor`.
 
 """
 
@@ -23,10 +26,11 @@ Note: For larger datasets (n_samples >= 10000), please refer to
 
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import datasets, ensemble
-from sklearn.inspection import permutation_importance
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
+
+from xlearn import datasets, ensemble
+from xlearn.inspection import permutation_importance
+from xlearn.metrics import mean_squared_error
+from xlearn.model_selection import train_test_split
 
 # %%
 # Load the data
@@ -58,7 +62,7 @@ X, y = diabetes.data, diabetes.target
 #
 # `loss` : loss function to optimize. The least squares function is  used in
 # this case however, there are many other options (see
-# :class:`~sklearn.ensemble.GradientBoostingRegressor` ).
+# :class:`~xlearn.ensemble.GradientBoostingRegressor` ).
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.1, random_state=13
@@ -94,7 +98,7 @@ print("The mean squared error (MSE) on test set: {:.4f}".format(mse))
 
 test_score = np.zeros((params["n_estimators"],), dtype=np.float64)
 for i, y_pred in enumerate(reg.staged_predict(X_test)):
-    test_score[i] = reg.loss_(y_test, y_pred)
+    test_score[i] = mean_squared_error(y_test, y_pred)
 
 fig = plt.figure(figsize=(6, 6))
 plt.subplot(1, 1, 1)

@@ -9,8 +9,12 @@ sinusoidal dataset with a small amount of Gaussian noise.
 regressor. As the number of boosts is increased the regressor can fit more
 detail.
 
+See :ref:`sphx_glr_auto_examples_ensemble_plot_hgbt_regression.py` for an
+example showcasing the benefits of using more efficient regression models such
+as :class:`~ensemble.HistGradientBoostingRegressor`.
+
 .. [1] `H. Drucker, "Improving Regressors using Boosting Techniques", 1997.
-        <http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.31.314>`_
+        <https://citeseerx.ist.psu.edu/doc_view/pid/8d49e2dedb817f2c3330e74b63c5fc86d2399ce3>`_
 
 """
 
@@ -39,8 +43,8 @@ y = np.sin(X).ravel() + np.sin(6 * X).ravel() + rng.normal(0, 0.1, X.shape[0])
 # of `max_depth=4` as base learner and will be built with `n_estimators=300`
 # of those base learners.
 
-from sklearn.ensemble import AdaBoostRegressor
-from sklearn.tree import DecisionTreeRegressor
+from xlearn.ensemble import AdaBoostRegressor
+from xlearn.tree import DecisionTreeRegressor
 
 regr_1 = DecisionTreeRegressor(max_depth=4)
 

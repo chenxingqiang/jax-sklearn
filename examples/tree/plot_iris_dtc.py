@@ -14,22 +14,22 @@ the training samples.
 
 We also show the tree structure of a model built on all of the features.
 """
+
 # %%
-# First load the copy of the Iris dataset shipped with scikit-learn:
-from sklearn.datasets import load_iris
+# First load the copy of the Iris dataset shipped with jax-ml:
+from xlearn.datasets import load_iris
 
 iris = load_iris()
 
 
 # %%
 # Display the decision functions of trees trained on all pairs of features.
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn.datasets import load_iris
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.inspection import DecisionBoundaryDisplay
-
+from xlearn.datasets import load_iris
+from xlearn.inspection import DecisionBoundaryDisplay
+from xlearn.tree import DecisionTreeClassifier
 
 # Parameters
 n_classes = 3
@@ -66,7 +66,6 @@ for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]])
             X[idx, 1],
             c=color,
             label=iris.target_names[i],
-            cmap=plt.cm.RdYlBu,
             edgecolor="black",
             s=15,
         )
@@ -78,7 +77,7 @@ _ = plt.axis("tight")
 # %%
 # Display the structure of a single decision tree trained on all the features
 # together.
-from sklearn.tree import plot_tree
+from xlearn.tree import plot_tree
 
 plt.figure()
 clf = DecisionTreeClassifier().fit(iris.data, iris.target)

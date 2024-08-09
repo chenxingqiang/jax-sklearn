@@ -1,7 +1,7 @@
 .. _minimal_reproducer:
 
 ==============================================
-Crafting a minimal reproducer for scikit-learn
+Crafting a minimal reproducer for jax-ml
 ==============================================
 
 
@@ -18,9 +18,9 @@ Our goal is not to be repetitive with those references but rather to provide a
 step-by-step guide on how to narrow down a bug until you have reached the
 shortest possible code to reproduce it.
 
-The first step before submitting a bug report to scikit-learn is to read the
+The first step before submitting a bug report to jax-ml is to read the
 `Issue template
-<https://github.com/scikit-learn/scikit-learn/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_.
+<https://github.com/jax-learn/jax-ml/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_.
 It is already quite informative about the information you will be asked to
 provide.
 
@@ -32,7 +32,7 @@ Good practices
 
 In this section we will focus on the **Steps/Code to Reproduce** section of the
 `Issue template
-<https://github.com/scikit-learn/scikit-learn/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_.
+<https://github.com/jax-learn/jax-ml/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_.
 We will start with a snippet of code that already provides a failing example but
 that has room for readability improvement. We then craft a MCVE from it.
 
@@ -82,15 +82,15 @@ Better make sure that all the necessary details to reproduce the problem are
 illustrated in the Python code snippet to avoid any ambiguity. Besides, by this
 point you already provided a concise description in the **Describe the bug**
 section of the `Issue template
-<https://github.com/scikit-learn/scikit-learn/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_.
+<https://github.com/jax-learn/jax-ml/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_.
 
 The following code, while **still not minimal**, is already **much better**
 because it can be copy-pasted in a Python terminal to reproduce the problem in
 one step. In particular:
 
-    - it contains **all necessary imports statements**;
-    - it can fetch the public dataset without having to manually download a
-      file and put it in the expected location on the disk.
+- it contains **all necessary imports statements**;
+- it can fetch the public dataset without having to manually download a
+  file and put it in the expected location on the disk.
 
 **Improved example**
 
@@ -102,19 +102,19 @@ one step. In particular:
     X = df[["feature_name"]]
     y = df["target"]
 
-    from sklearn.model_selection import train_test_split
+    from xlearn.model_selection import train_test_split
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42
     )
 
-    from sklearn.preprocessing import StandardScaler
+    from xlearn.preprocessing import StandardScaler
 
     scaler = StandardScaler(with_mean=False)
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    from sklearn.ensemble import GradientBoostingRegressor
+    from xlearn.ensemble import GradientBoostingRegressor
 
     gbdt = GradientBoostingRegressor(random_state=0)
     gbdt.fit(X_train, y_train)  # no warning
@@ -154,7 +154,7 @@ In particular, for this specific example:
     X = df[["feature_name"]]
     y = df["target"]
 
-    from sklearn.ensemble import GradientBoostingRegressor
+    from xlearn.ensemble import GradientBoostingRegressor
 
     gbdt = GradientBoostingRegressor()
     gbdt.fit(X, y)  # no warning
@@ -168,7 +168,7 @@ In particular, for this specific example:
 
 The idea is to make the code as self-contained as possible. For doing so, you
 can use a :ref:`synth_data`. It can be generated using numpy, pandas or the
-:mod:`sklearn.datasets` module. Most of the times the bug is not related to a
+:mod:`xlearn.datasets` module. Most of the times the bug is not related to a
 particular structure of your data. Even if it is, try to find an available
 dataset that has similar characteristics to yours and that reproduces the
 problem. In this particular case, we are interested in data that has labeled
@@ -179,7 +179,7 @@ feature names.
 .. code-block:: python
 
     import pandas as pd
-    from sklearn.ensemble import GradientBoostingRegressor
+    from xlearn.ensemble import GradientBoostingRegressor
 
     df = pd.DataFrame(
         {
@@ -199,21 +199,21 @@ As already mentioned, the key to communication is the readability of the code
 and good formatting can really be a plus. Notice that in the previous snippet
 we:
 
-    - try to limit all lines to a maximum of 79 characters to avoid horizontal
-      scrollbars in the code snippets blocks rendered on the GitHub issue;
-    - use blank lines to separate groups of related functions;
-    - place all the imports in their own group at the beginning.
+- try to limit all lines to a maximum of 79 characters to avoid horizontal
+  scrollbars in the code snippets blocks rendered on the GitHub issue;
+- use blank lines to separate groups of related functions;
+- place all the imports in their own group at the beginning.
 
 The simplification steps presented in this guide can be implemented in a
 different order than the progression we have shown here. The important points
 are:
 
-    - a minimal reproducer should be runnable by a simple copy-and-paste in a
-      python terminal;
-    - it should be simplified as much as possible by removing any code steps
-      that are not strictly needed to reproducing the original problem;
-    - it should ideally only rely on a minimal dataset generated on-the-fly by
-      running the code instead of relying on external data, if possible.
+- a minimal reproducer should be runnable by a simple copy-and-paste in a
+  python terminal;
+- it should be simplified as much as possible by removing any code steps
+  that are not strictly needed to reproducing the original problem;
+- it should ideally only rely on a minimal dataset generated on-the-fly by
+  running the code instead of relying on external data, if possible.
 
 
 Use markdown formatting
@@ -226,7 +226,7 @@ supports an optional language identifier to enable syntax highlighting in your
 fenced code block. For example::
 
     ```python
-    from sklearn.datasets import make_blobs
+    from xlearn.datasets import make_blobs
 
     n_samples = 100
     n_components = 3
@@ -237,7 +237,7 @@ will render a python formatted snippet as follows
 
 .. code-block:: python
 
-    from sklearn.datasets import make_blobs
+    from xlearn.datasets import make_blobs
 
     n_samples = 100
     n_components = 3
@@ -248,7 +248,7 @@ report. Remember other reviewers are going to copy-paste your code and having a
 single cell will make their task easier.
 
 In the section named **Actual results** of the `Issue template
-<https://github.com/scikit-learn/scikit-learn/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_
+<https://github.com/jax-learn/jax-ml/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml>`_
 you are asked to provide the error message including the full traceback of the
 exception. In this case, use the `python-traceback` qualifier. For example::
 
@@ -305,55 +305,55 @@ can be used to create dummy numeric data.
 
 - regression
 
-    Regressions take continuous numeric data as features and target.
+  Regressions take continuous numeric data as features and target.
 
-    .. code-block:: python
+  .. code-block:: python
 
-        import numpy as np
+      import numpy as np
 
-        rng = np.random.RandomState(0)
-        n_samples, n_features = 5, 5
-        X = rng.randn(n_samples, n_features)
-        y = rng.randn(n_samples)
+      rng = np.random.RandomState(0)
+      n_samples, n_features = 5, 5
+      X = rng.randn(n_samples, n_features)
+      y = rng.randn(n_samples)
 
 A similar snippet can be used as synthetic data when testing scaling tools such
-as :class:`sklearn.preprocessing.StandardScaler`.
+as :class:`xlearn.preprocessing.StandardScaler`.
 
 - classification
 
-    If the bug is not raised during when encoding a categorical variable, you can
-    feed numeric data to a classifier. Just remember to ensure that the target
-    is indeed an integer.
+  If the bug is not raised during when encoding a categorical variable, you can
+  feed numeric data to a classifier. Just remember to ensure that the target
+  is indeed an integer.
 
-    .. code-block:: python
+  .. code-block:: python
 
-        import numpy as np
+      import numpy as np
 
-        rng = np.random.RandomState(0)
-        n_samples, n_features = 5, 5
-        X = rng.randn(n_samples, n_features)
-        y = rng.randint(0, 2, n_samples)  # binary target with values in {0, 1}
+      rng = np.random.RandomState(0)
+      n_samples, n_features = 5, 5
+      X = rng.randn(n_samples, n_features)
+      y = rng.randint(0, 2, n_samples)  # binary target with values in {0, 1}
 
 
-    If the bug only happens with non-numeric class labels, you might want to
-    generate a random target with `numpy.random.choice
-    <https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html>`_.
+  If the bug only happens with non-numeric class labels, you might want to
+  generate a random target with `numpy.random.choice
+  <https://numpy.org/doc/stable/reference/random/generated/numpy.random.choice.html>`_.
 
-    .. code-block:: python
+  .. code-block:: python
 
-        import numpy as np
+      import numpy as np
 
-        rng = np.random.RandomState(0)
-        n_samples, n_features = 50, 5
-        X = rng.randn(n_samples, n_features)
-        y = np.random.choice(
-            ["male", "female", "other"], size=n_samples, p=[0.49, 0.49, 0.02]
-        )
+      rng = np.random.RandomState(0)
+      n_samples, n_features = 50, 5
+      X = rng.randn(n_samples, n_features)
+      y = np.random.choice(
+          ["male", "female", "other"], size=n_samples, p=[0.49, 0.49, 0.02]
+      )
 
 Pandas
 ------
 
-Some scikit-learn objects expect pandas dataframes as input. In this case you can
+Some jax-ml objects expect pandas dataframes as input. In this case you can
 transform numpy arrays into pandas objects using `pandas.DataFrame
 <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_, or
 `pandas.Series
@@ -375,32 +375,32 @@ transform numpy arrays into pandas objects using `pandas.DataFrame
     )
     y = pd.Series(rng.randn(n_samples))
 
-In addition, scikit-learn includes various :ref:`sample_generators` that can be
+In addition, jax-ml includes various :ref:`sample_generators` that can be
 used to build artificial datasets of controlled size and complexity.
 
 `make_regression`
 -----------------
 
-As hinted by the name, :class:`sklearn.datasets.make_regression` produces
+As hinted by the name, :class:`xlearn.datasets.make_regression` produces
 regression targets with noise as an optionally-sparse random linear combination
 of random features.
 
 .. code-block:: python
 
-    from sklearn.datasets import make_regression
+    from xlearn.datasets import make_regression
 
     X, y = make_regression(n_samples=1000, n_features=20)
 
 `make_classification`
 ---------------------
 
-:class:`sklearn.datasets.make_classification` creates multiclass datasets with multiple Gaussian
+:class:`xlearn.datasets.make_classification` creates multiclass datasets with multiple Gaussian
 clusters per class. Noise can be introduced by means of correlated, redundant or
 uninformative features.
 
 .. code-block:: python
 
-    from sklearn.datasets import make_classification
+    from xlearn.datasets import make_classification
 
     X, y = make_classification(
         n_features=2, n_redundant=0, n_informative=2, n_clusters_per_class=1
@@ -409,14 +409,14 @@ uninformative features.
 `make_blobs`
 ------------
 
-Similarly to `make_classification`, :class:`sklearn.datasets.make_blobs` creates
+Similarly to `make_classification`, :class:`xlearn.datasets.make_blobs` creates
 multiclass datasets using normally-distributed clusters of points. It provides
 greater control regarding the centers and standard deviations of each cluster,
 and therefore it is useful to demonstrate clustering.
 
 .. code-block:: python
 
-    from sklearn.datasets import make_blobs
+    from xlearn.datasets import make_blobs
 
     X, y = make_blobs(n_samples=10, centers=3, n_features=2)
 
@@ -429,6 +429,6 @@ of the data, e.g. dealing with missing values or image recognition.
 
 .. code-block:: python
 
-    from sklearn.datasets import load_breast_cancer
+    from xlearn.datasets import load_breast_cancer
 
     X, y = load_breast_cancer(return_X_y=True)

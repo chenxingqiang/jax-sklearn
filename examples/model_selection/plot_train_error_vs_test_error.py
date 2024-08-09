@@ -19,9 +19,10 @@ measured using the explained variance a.k.a. R^2.
 # Generate sample data
 # --------------------
 import numpy as np
-from sklearn import linear_model
-from sklearn.datasets import make_regression
-from sklearn.model_selection import train_test_split
+
+from xlearn import linear_model
+from xlearn.datasets import make_regression
+from xlearn.model_selection import train_test_split
 
 n_samples_train, n_samples_test, n_features = 75, 150, 500
 X, y, coef = make_regression(
@@ -73,7 +74,7 @@ plt.vlines(
     linewidth=3,
     label="Optimum on test",
 )
-plt.legend(loc="lower left")
+plt.legend(loc="lower right")
 plt.ylim([0, 1.2])
 plt.xlabel("Regularization parameter")
 plt.ylabel("Performance")

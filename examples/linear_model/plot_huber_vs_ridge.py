@@ -16,11 +16,11 @@ function approaches that of the ridge.
 # Authors: Manoj Kumar mks542@nyu.edu
 # License: BSD 3 clause
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn.datasets import make_regression
-from sklearn.linear_model import HuberRegressor, Ridge
+from xlearn.datasets import make_regression
+from xlearn.linear_model import HuberRegressor, Ridge
 
 # Generate toy data.
 rng = np.random.RandomState(0)

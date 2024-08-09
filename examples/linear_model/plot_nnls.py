@@ -9,9 +9,10 @@ linear regression.
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import r2_score
+import numpy as np
+
+from xlearn.metrics import r2_score
 
 # %%
 # Generate some random data
@@ -29,13 +30,13 @@ y += 5 * np.random.normal(size=(n_samples,))
 
 # %%
 # Split the data in train set and test set
-from sklearn.model_selection import train_test_split
+from xlearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5)
 
 # %%
 # Fit the Non-Negative least squares.
-from sklearn.linear_model import LinearRegression
+from xlearn.linear_model import LinearRegression
 
 reg_nnls = LinearRegression(positive=True)
 y_pred_nnls = reg_nnls.fit(X_train, y_train).predict(X_test)

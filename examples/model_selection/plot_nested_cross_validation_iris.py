@@ -18,11 +18,11 @@ the size of the dataset and the stability of the model. See Cawley and Talbot
 
 To avoid this problem, nested CV effectively uses a series of
 train/validation/test set splits. In the inner loop (here executed by
-:class:`GridSearchCV <sklearn.model_selection.GridSearchCV>`), the score is
+:class:`GridSearchCV <xlearn.model_selection.GridSearchCV>`), the score is
 approximately maximized by fitting a model to each training set, and then
 directly maximized in selecting (hyper)parameters over the validation set. In
 the outer loop (here in :func:`cross_val_score
-<sklearn.model_selection.cross_val_score>`), generalization error is estimated
+<xlearn.model_selection.cross_val_score>`), generalization error is estimated
 by averaging test set scores over several dataset splits.
 
 The example below uses a support vector classifier with a non-linear kernel to
@@ -30,25 +30,26 @@ build a model with optimized hyperparameters by grid search. We compare the
 performance of non-nested and nested CV strategies by taking the difference
 between their scores.
 
-.. topic:: See Also:
+.. seealso::
 
     - :ref:`cross_validation`
     - :ref:`grid_search`
 
-.. topic:: References:
+.. rubric:: References
 
-    .. [1] `Cawley, G.C.; Talbot, N.L.C. On over-fitting in model selection and
-     subsequent selection bias in performance evaluation.
-     J. Mach. Learn. Res 2010,11, 2079-2107.
-     <http://jmlr.csail.mit.edu/papers/volume11/cawley10a/cawley10a.pdf>`_
+.. [1] `Cawley, G.C.; Talbot, N.L.C. On over-fitting in model selection and
+    subsequent selection bias in performance evaluation.
+    J. Mach. Learn. Res 2010,11, 2079-2107.
+    <http://jmlr.csail.mit.edu/papers/volume11/cawley10a/cawley10a.pdf>`_
 
 """
 
-from sklearn.datasets import load_iris
-from matplotlib import pyplot as plt
-from sklearn.svm import SVC
-from sklearn.model_selection import GridSearchCV, cross_val_score, KFold
 import numpy as np
+from matplotlib import pyplot as plt
+
+from xlearn.datasets import load_iris
+from xlearn.model_selection import GridSearchCV, KFold, cross_val_score
+from xlearn.svm import SVC
 
 # Number of random trials
 NUM_TRIALS = 30
@@ -70,7 +71,6 @@ nested_scores = np.zeros(NUM_TRIALS)
 
 # Loop for each trial
 for i in range(NUM_TRIALS):
-
     # Choose cross-validation techniques for the inner and outer loops,
     # independently of the dataset.
     # E.g "GroupKFold", "LeaveOneOut", "LeaveOneGroupOut", etc.

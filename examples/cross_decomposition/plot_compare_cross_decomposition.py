@@ -53,7 +53,7 @@ print(np.round(np.corrcoef(Y.T), 2))
 # Transform data
 # ~~~~~~~~~~~~~~
 
-from sklearn.cross_decomposition import PLSCanonical
+from xlearn.cross_decomposition import PLSCanonical
 
 plsca = PLSCanonical(n_components=2)
 plsca.fit(X_train, Y_train)
@@ -126,7 +126,7 @@ plt.show()
 # PLS regression, with multivariate response, a.k.a. PLS2
 # -------------------------------------------------------
 
-from sklearn.cross_decomposition import PLSRegression
+from xlearn.cross_decomposition import PLSRegression
 
 n = 1000
 q = 3
@@ -163,7 +163,7 @@ print(np.round(pls1.coef_, 1))
 # CCA (PLS mode B with symmetric deflation)
 # -----------------------------------------
 
-from sklearn.cross_decomposition import CCA
+from xlearn.cross_decomposition import CCA
 
 cca = CCA(n_components=2)
 cca.fit(X_train, Y_train)

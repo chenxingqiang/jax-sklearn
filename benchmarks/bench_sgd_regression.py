@@ -1,16 +1,15 @@
 # Author: Peter Prettenhofer <peter.prettenhofer@gmail.com>
 # License: BSD 3 clause
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 import gc
-
 from time import time
 
-from sklearn.linear_model import Ridge, SGDRegressor, ElasticNet
-from sklearn.metrics import mean_squared_error
-from sklearn.datasets import make_regression
+import matplotlib.pyplot as plt
+import numpy as np
+
+from xlearn.datasets import make_regression
+from xlearn.linear_model import ElasticNet, Ridge, SGDRegressor
+from xlearn.metrics import mean_squared_error
 
 """
 Benchmark for SGD regression
@@ -123,7 +122,7 @@ if __name__ == "__main__":
     # Plot results
     i = 0
     m = len(list_n_features)
-    plt.figure("scikit-learn SGD regression benchmark results", figsize=(5 * 2, 4 * m))
+    plt.figure("jax-ml SGD regression benchmark results", figsize=(5 * 2, 4 * m))
     for j in range(m):
         plt.subplot(m, 2, i + 1)
         plt.plot(list_n_samples, np.sqrt(elnet_results[:, j, 0]), label="ElasticNet")

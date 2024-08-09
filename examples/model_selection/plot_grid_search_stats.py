@@ -4,7 +4,7 @@ Statistical comparison of models using grid search
 ==================================================
 
 This example illustrates how to statistically compare the performance of models
-trained and evaluated using :class:`~sklearn.model_selection.GridSearchCV`.
+trained and evaluated using :class:`~xlearn.model_selection.GridSearchCV`.
 
 """
 
@@ -16,7 +16,8 @@ trained and evaluated using :class:`~sklearn.model_selection.GridSearchCV`.
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.datasets import make_moons
+
+from xlearn.datasets import make_moons
 
 X, y = make_moons(noise=0.352, random_state=1, n_samples=100)
 
@@ -26,17 +27,17 @@ sns.scatterplot(
 plt.show()
 
 # %%
-# We will compare the performance of :class:`~sklearn.svm.SVC` estimators that
+# We will compare the performance of :class:`~xlearn.svm.SVC` estimators that
 # vary on their `kernel` parameter, to decide which choice of this
 # hyper-parameter predicts our simulated data best.
 # We will evaluate the performance of the models using
-# :class:`~sklearn.model_selection.RepeatedStratifiedKFold`, repeating 10 times
+# :class:`~xlearn.model_selection.RepeatedStratifiedKFold`, repeating 10 times
 # a 10-fold stratified cross validation using a different randomization of the
 # data in each repetition. The performance will be evaluated using
-# :class:`~sklearn.metrics.roc_auc_score`.
+# :class:`~xlearn.metrics.roc_auc_score`.
 
-from sklearn.model_selection import GridSearchCV, RepeatedStratifiedKFold
-from sklearn.svm import SVC
+from xlearn.model_selection import GridSearchCV, RepeatedStratifiedKFold
+from xlearn.svm import SVC
 
 param_grid = [
     {"kernel": ["linear"]},
@@ -71,7 +72,7 @@ results_df[["params", "rank_test_score", "mean_test_score", "std_test_score"]]
 # lower performance than all other models.
 #
 # Usually, the analysis just ends here, but half the story is missing. The
-# output of :class:`~sklearn.model_selection.GridSearchCV` does not provide
+# output of :class:`~xlearn.model_selection.GridSearchCV` does not provide
 # information on the certainty of the differences between the models.
 # We don't know if these are **statistically** significant.
 # To evaluate this, we need to conduct a statistical test.
@@ -425,7 +426,7 @@ cred_int_df
 # -------------------------------------------------------
 #
 # We could also be interested in comparing the performance of all our models
-# evaluated with :class:`~sklearn.model_selection.GridSearchCV`. In this case
+# evaluated with :class:`~xlearn.model_selection.GridSearchCV`. In this case
 # we would be running our statistical test multiple times, which leads us to
 # the `multiple comparisons problem
 # <https://en.wikipedia.org/wiki/Multiple_comparisons_problem>`_.
@@ -467,7 +468,7 @@ pairwise_comp_df
 # We observe that after correcting for multiple comparisons, the only model
 # that significantly differs from the others is `'2_poly'`.
 # `'rbf'`, the model ranked first by
-# :class:`~sklearn.model_selection.GridSearchCV`, does not significantly
+# :class:`~xlearn.model_selection.GridSearchCV`, does not significantly
 # differ from `'linear'` or `'3_poly'`.
 
 # %%
@@ -507,7 +508,7 @@ pairwise_comp_df
 # performs better, worse or practically equivalent to another.
 #
 # Results show that the model ranked first by
-# :class:`~sklearn.model_selection.GridSearchCV` `'rbf'`, has approximately a
+# :class:`~xlearn.model_selection.GridSearchCV` `'rbf'`, has approximately a
 # 6.8% chance of being worse than `'linear'`, and a 1.8% chance of being worse
 # than `'3_poly'`.
 # `'rbf'` and `'linear'` have a 43% probability of being practically
@@ -539,27 +540,27 @@ pairwise_comp_df
 #   correction is needed when using the frequentist approach.
 
 # %%
-# .. topic:: References
+# .. rubric:: References
 #
-#    .. [1] Dietterich, T. G. (1998). `Approximate statistical tests for
-#           comparing supervised classification learning algorithms
-#           <http://web.cs.iastate.edu/~jtian/cs573/Papers/Dietterich-98.pdf>`_.
-#           Neural computation, 10(7).
-#    .. [2] Nadeau, C., & Bengio, Y. (2000). `Inference for the generalization
-#           error
-#           <https://papers.nips.cc/paper/1661-inference-for-the-generalization-error.pdf>`_.
-#           In Advances in neural information processing systems.
-#    .. [3] Bouckaert, R. R., & Frank, E. (2004). `Evaluating the replicability
-#           of significance tests for comparing learning algorithms
-#           <https://www.cms.waikato.ac.nz/~ml/publications/2004/bouckaert-frank.pdf>`_.
-#           In Pacific-Asia Conference on Knowledge Discovery and Data Mining.
-#    .. [4] Benavoli, A., Corani, G., Demšar, J., & Zaffalon, M. (2017). `Time
-#           for a change: a tutorial for comparing multiple classifiers through
-#           Bayesian analysis
-#           <http://www.jmlr.org/papers/volume18/16-305/16-305.pdf>`_.
-#           The Journal of Machine Learning Research, 18(1). See the Python
-#           library that accompanies this paper `here
-#           <https://github.com/janezd/baycomp>`_.
-#    .. [5] Diebold, F.X. & Mariano R.S. (1995). `Comparing predictive accuracy
-#           <http://www.est.uc3m.es/esp/nueva_docencia/comp_col_get/lade/tecnicas_prediccion/Practicas0708/Comparing%20Predictive%20Accuracy%20(Dielbold).pdf>`_
-#           Journal of Business & economic statistics, 20(1), 134-144.
+# .. [1] Dietterich, T. G. (1998). `Approximate statistical tests for
+#        comparing supervised classification learning algorithms
+#        <http://web.cs.iastate.edu/~jtian/cs573/Papers/Dietterich-98.pdf>`_.
+#        Neural computation, 10(7).
+# .. [2] Nadeau, C., & Bengio, Y. (2000). `Inference for the generalization
+#        error
+#        <https://papers.nips.cc/paper/1661-inference-for-the-generalization-error.pdf>`_.
+#        In Advances in neural information processing systems.
+# .. [3] Bouckaert, R. R., & Frank, E. (2004). `Evaluating the replicability
+#        of significance tests for comparing learning algorithms
+#        <https://www.cms.waikato.ac.nz/~ml/publications/2004/bouckaert-frank.pdf>`_.
+#        In Pacific-Asia Conference on Knowledge Discovery and Data Mining.
+# .. [4] Benavoli, A., Corani, G., Demšar, J., & Zaffalon, M. (2017). `Time
+#        for a change: a tutorial for comparing multiple classifiers through
+#        Bayesian analysis
+#        <http://www.jmlr.org/papers/volume18/16-305/16-305.pdf>`_.
+#        The Journal of Machine Learning Research, 18(1). See the Python
+#        library that accompanies this paper `here
+#        <https://github.com/janezd/baycomp>`_.
+# .. [5] Diebold, F.X. & Mariano R.S. (1995). `Comparing predictive accuracy
+#        <http://www.est.uc3m.es/esp/nueva_docencia/comp_col_get/lade/tecnicas_prediccion/Practicas0708/Comparing%20Predictive%20Accuracy%20(Dielbold).pdf>`_
+#        Journal of Business & economic statistics, 20(1), 134-144.

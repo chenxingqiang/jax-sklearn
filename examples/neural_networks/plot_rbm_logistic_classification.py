@@ -6,7 +6,7 @@ Restricted Boltzmann Machine features for digit classification
 For greyscale image data where pixel values can be interpreted as degrees of
 blackness on a white background, like handwritten digit recognition, the
 Bernoulli Restricted Boltzmann machine model (:class:`BernoulliRBM
-<sklearn.neural_network.BernoulliRBM>`) can perform effective non-linear
+<xlearn.neural_network.BernoulliRBM>`) can perform effective non-linear
 feature extraction.
 
 """
@@ -23,13 +23,11 @@ feature extraction.
 # linear shifts of 1 pixel in each direction.
 
 import numpy as np
-
 from scipy.ndimage import convolve
 
-from sklearn import datasets
-from sklearn.preprocessing import minmax_scale
-
-from sklearn.model_selection import train_test_split
+from xlearn import datasets
+from xlearn.model_selection import train_test_split
+from xlearn.preprocessing import minmax_scale
 
 
 def nudge_dataset(X, Y):
@@ -66,12 +64,12 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 # -----------------
 #
 # We build a classification pipeline with a BernoulliRBM feature extractor and
-# a :class:`LogisticRegression <sklearn.linear_model.LogisticRegression>`
+# a :class:`LogisticRegression <xlearn.linear_model.LogisticRegression>`
 # classifier.
 
-from sklearn import linear_model
-from sklearn.neural_network import BernoulliRBM
-from sklearn.pipeline import Pipeline
+from xlearn import linear_model
+from xlearn.neural_network import BernoulliRBM
+from xlearn.pipeline import Pipeline
 
 logistic = linear_model.LogisticRegression(solver="newton-cg", tol=1)
 rbm = BernoulliRBM(random_state=0, verbose=True)
@@ -86,7 +84,7 @@ rbm_features_classifier = Pipeline(steps=[("rbm", rbm), ("logistic", logistic)])
 # regularization) were optimized by grid search, but the search is not
 # reproduced here because of runtime constraints.
 
-from sklearn.base import clone
+from xlearn.base import clone
 
 # Hyper-parameters. These were set by cross-validation,
 # using a GridSearchCV. Here we are not performing cross-validation to
@@ -111,7 +109,7 @@ raw_pixel_classifier.fit(X_train, Y_train)
 # Evaluation
 # ----------
 
-from sklearn import metrics
+from xlearn import metrics
 
 Y_pred = rbm_features_classifier.predict(X_test)
 print(

@@ -3,7 +3,7 @@
 Plot randomly generated multilabel dataset
 ==============================================
 
-This illustrates the :func:`~sklearn.datasets.make_multilabel_classification`
+This illustrates the :func:`~xlearn.datasets.make_multilabel_classification`
 dataset generator. Each sample consists of counts of two features (up to 50 in
 total), which are differently distributed in each of two classes.
 
@@ -35,10 +35,10 @@ feature distinguishes a particular class.
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn.datasets import make_multilabel_classification as make_ml_clf
+from xlearn.datasets import make_multilabel_classification as make_ml_clf
 
 COLORS = np.array(
     [

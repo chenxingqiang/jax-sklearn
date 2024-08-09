@@ -4,24 +4,24 @@ Lasso model selection via information criteria
 ==============================================
 
 This example reproduces the example of Fig. 2 of [ZHT2007]_. A
-:class:`~sklearn.linear_model.LassoLarsIC` estimator is fit on a
+:class:`~xlearn.linear_model.LassoLarsIC` estimator is fit on a
 diabetes dataset and the AIC and the BIC criteria are used to select
 the best model.
 
 .. note::
     It is important to note that the optimization to find `alpha` with
-    :class:`~sklearn.linear_model.LassoLarsIC` relies on the AIC or BIC
+    :class:`~xlearn.linear_model.LassoLarsIC` relies on the AIC or BIC
     criteria that are computed in-sample, thus on the training set directly.
     This approach differs from the cross-validation procedure. For a comparison
     of the two approaches, you can refer to the following example:
     :ref:`sphx_glr_auto_examples_linear_model_plot_lasso_model_selection.py`.
 
-.. topic:: References
+.. rubric:: References
 
-    .. [ZHT2007] :arxiv:`Zou, Hui, Trevor Hastie, and Robert Tibshirani.
-       "On the degrees of freedom of the lasso."
-       The Annals of Statistics 35.5 (2007): 2173-2192.
-       <0712.0881>`
+.. [ZHT2007] :arxiv:`Zou, Hui, Trevor Hastie, and Robert Tibshirani.
+    "On the degrees of freedom of the lasso."
+    The Annals of Statistics 35.5 (2007): 2173-2192.
+    <0712.0881>`
 """
 
 # Author: Alexandre Gramfort
@@ -30,7 +30,7 @@ the best model.
 
 # %%
 # We will use the diabetes dataset.
-from sklearn.datasets import load_diabetes
+from xlearn.datasets import load_diabetes
 
 X, y = load_diabetes(return_X_y=True, as_frame=True)
 n_samples = X.shape[0]
@@ -38,20 +38,18 @@ X.head()
 
 # %%
 # Scikit-learn provides an estimator called
-# :class:`~sklearn.linear_model.LinearLarsIC` that uses either Akaike's
+# :class:`~xlearn.linear_model.LassoLarsIC` that uses either Akaike's
 # information criterion (AIC) or the Bayesian information criterion (BIC) to
 # select the best model. Before fitting
 # this model, we will scale the dataset.
 #
 # In the following, we are going to fit two models to compare the values
 # reported by AIC and BIC.
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LassoLarsIC
-from sklearn.pipeline import make_pipeline
+from xlearn.linear_model import LassoLarsIC
+from xlearn.pipeline import make_pipeline
+from xlearn.preprocessing import StandardScaler
 
-lasso_lars_ic = make_pipeline(
-    StandardScaler(), LassoLarsIC(criterion="aic", normalize=False)
-).fit(X, y)
+lasso_lars_ic = make_pipeline(StandardScaler(), LassoLarsIC(criterion="aic")).fit(X, y)
 
 
 # %%

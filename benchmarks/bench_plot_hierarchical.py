@@ -4,11 +4,10 @@ from time import time
 import numpy as np
 from numpy import random as nr
 
-from sklearn.cluster import AgglomerativeClustering
+from xlearn.cluster import AgglomerativeClustering
 
 
 def compute_bench(samples_range, features_range):
-
     it = 0
     results = defaultdict(lambda: [])
 

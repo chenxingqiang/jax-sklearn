@@ -48,7 +48,7 @@ x_test = np.linspace(0.0, 1.0, 100)
 # %%
 # Fit by cubic polynomial
 # -----------------------
-from sklearn.linear_model import BayesianRidge
+from xlearn.linear_model import BayesianRidge
 
 n_order = 3
 X_train = np.vander(x_train, n_order + 1, increasing=True)

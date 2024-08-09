@@ -23,7 +23,7 @@ power iteration method:
     https://en.wikipedia.org/wiki/Power_iteration
 
 Here the computation is achieved thanks to Martinsson's Randomized SVD
-algorithm implemented in scikit-learn.
+algorithm implemented in jax-ml.
 
 The graph data is fetched from the DBpedia dumps. DBpedia is an extraction
 of the latent structured data of the Wikipedia content.
@@ -33,19 +33,17 @@ of the latent structured data of the Wikipedia content.
 # Author: Olivier Grisel <olivier.grisel@ensta.org>
 # License: BSD 3 clause
 
-from bz2 import BZ2File
 import os
+from bz2 import BZ2File
 from datetime import datetime
 from pprint import pprint
 from time import time
-
-import numpy as np
-
-from scipy import sparse
-
-from sklearn.decomposition import randomized_svd
 from urllib.request import urlopen
 
+import numpy as np
+from scipy import sparse
+
+from xlearn.decomposition import randomized_svd
 
 # %%
 # Download data, if not already on disk

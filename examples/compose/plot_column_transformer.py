@@ -12,7 +12,7 @@ extraction and processing pipelines. This scenario might occur when:
    require different processing pipelines.
 
 This example demonstrates how to use
-:class:`~sklearn.compose.ColumnTransformer` on a dataset containing
+:class:`~xlearn.compose.ColumnTransformer` on a dataset containing
 different types of features. The choice of features is not particularly
 helpful, but serves to illustrate the technique.
 
@@ -24,15 +24,15 @@ helpful, but serves to illustrate the technique.
 
 import numpy as np
 
-from sklearn.preprocessing import FunctionTransformer
-from sklearn.datasets import fetch_20newsgroups
-from sklearn.decomposition import TruncatedSVD
-from sklearn.feature_extraction import DictVectorizer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import classification_report
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
-from sklearn.svm import LinearSVC
+from xlearn.compose import ColumnTransformer
+from xlearn.datasets import fetch_20newsgroups
+from xlearn.decomposition import PCA
+from xlearn.feature_extraction import DictVectorizer
+from xlearn.feature_extraction.text import TfidfVectorizer
+from xlearn.metrics import classification_report
+from xlearn.pipeline import Pipeline
+from xlearn.preprocessing import FunctionTransformer
+from xlearn.svm import LinearSVC
 
 ##############################################################################
 # 20 newsgroups dataset
@@ -74,7 +74,7 @@ print(X_train[0])
 # body of each post. Since this is a stateless transformation (does not
 # require state information from training data), we can define a function that
 # performs the data transformation then use
-# :class:`~sklearn.preprocessing.FunctionTransformer` to create a scikit-learn
+# :class:`~xlearn.preprocessing.FunctionTransformer` to create a jax-ml
 # transformer.
 
 
@@ -141,7 +141,7 @@ pipeline = Pipeline(
                         Pipeline(
                             [
                                 ("tfidf", TfidfVectorizer()),
-                                ("best", TruncatedSVD(n_components=50)),
+                                ("best", PCA(n_components=50, svd_solver="arpack")),
                             ]
                         ),
                         1,

@@ -65,28 +65,29 @@ References
 
 # Author: Giorgio Patrini
 
+import gc
+import os.path
+import pickle
+from collections import defaultdict
+from time import time
+
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy as sp
-import matplotlib.pyplot as plt
 
-import gc
-import pickle
-from time import time
-from collections import defaultdict
-import os.path
-
-from sklearn.utils._arpack import _init_arpack_v0
-from sklearn.utils import gen_batches
-from sklearn.utils.validation import check_random_state
-from sklearn.utils.extmath import randomized_svd
-from sklearn.datasets import make_low_rank_matrix, make_sparse_uncorrelated
-from sklearn.datasets import (
-    fetch_lfw_people,
-    fetch_openml,
+from xlearn.datasets import (
     fetch_20newsgroups_vectorized,
+    fetch_lfw_people,
     fetch_olivetti_faces,
+    fetch_openml,
     fetch_rcv1,
+    make_low_rank_matrix,
+    make_sparse_uncorrelated,
 )
+from xlearn.utils import gen_batches
+from xlearn.utils._arpack import _init_arpack_v0
+from xlearn.utils.extmath import randomized_svd
+from xlearn.utils.validation import check_random_state
 
 try:
     import fbpca
@@ -191,7 +192,7 @@ def get_data(dataset_name):
         del row
         del col
     else:
-        X = fetch_openml(dataset_name, parser="auto").data
+        X = fetch_openml(dataset_name).data
     return X
 
 
@@ -342,7 +343,6 @@ def scalable_frobenius_norm_discrepancy(X, U, s, V):
 
 
 def bench_a(X, dataset_name, power_iter, n_oversamples, n_comps):
-
     all_time = defaultdict(list)
     if enable_spectral_norm:
         all_spectral = defaultdict(list)
@@ -352,7 +352,7 @@ def bench_a(X, dataset_name, power_iter, n_oversamples, n_comps):
 
     for pi in power_iter:
         for pm in ["none", "LU", "QR"]:
-            print("n_iter = %d on sklearn - %s" % (pi, pm))
+            print("n_iter = %d on xlearn - %s" % (pi, pm))
             U, s, V, time = svd_timing(
                 X,
                 n_comps,
@@ -360,7 +360,7 @@ def bench_a(X, dataset_name, power_iter, n_oversamples, n_comps):
                 power_iteration_normalizer=pm,
                 n_oversamples=n_oversamples,
             )
-            label = "sklearn - %s" % pm
+            label = "xlearn - %s" % pm
             all_time[label].append(time)
             if enable_spectral_norm:
                 A = U.dot(np.diag(s).dot(V))
@@ -398,7 +398,6 @@ def bench_a(X, dataset_name, power_iter, n_oversamples, n_comps):
 
 
 def bench_b(power_list):
-
     n_samples, n_features = 1000, 10000
     data_params = {
         "n_samples": n_samples,
@@ -460,7 +459,7 @@ def bench_c(datasets, n_comps):
         X_fro_norm = norm_diff(X, norm="fro", msg=False)
         n_comps = np.minimum(n_comps, np.min(X.shape))
 
-        label = "sklearn"
+        label = "xlearn"
         print("%s %d x %d - %s" % (dataset_name, X.shape[0], X.shape[1], label))
         U, s, V, time = svd_timing(X, n_comps, n_iter=2, n_oversamples=10, method=label)
 
@@ -509,7 +508,7 @@ if __name__ == "__main__":
         if X is None:
             continue
         print(
-            " >>>>>> Benching sklearn and fbpca on %s %d x %d"
+            " >>>>>> Benching xlearn and fbpca on %s %d x %d"
             % (dataset_name, X.shape[0], X.shape[1])
         )
         bench_a(
@@ -523,7 +522,7 @@ if __name__ == "__main__":
     print(" >>>>>> Benching on simulated low rank matrix with variable rank")
     bench_b(power_iter)
 
-    print(" >>>>>> Benching sklearn and fbpca default configurations")
+    print(" >>>>>> Benching xlearn and fbpca default configurations")
     bench_c(datasets + big_sparse_datasets, n_comps)
 
     plt.show()

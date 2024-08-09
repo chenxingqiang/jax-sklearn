@@ -32,14 +32,15 @@ around 0.7.
 # Authors: Oliver Rausch <rauscho@ethz.ch>
 # License: BSD
 
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import datasets
-from sklearn.svm import SVC
-from sklearn.model_selection import StratifiedKFold
-from sklearn.semi_supervised import SelfTrainingClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.utils import shuffle
+import numpy as np
+
+from xlearn import datasets
+from xlearn.metrics import accuracy_score
+from xlearn.model_selection import StratifiedKFold
+from xlearn.semi_supervised import SelfTrainingClassifier
+from xlearn.svm import SVC
+from xlearn.utils import shuffle
 
 n_splits = 3
 

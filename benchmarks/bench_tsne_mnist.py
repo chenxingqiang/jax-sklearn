@@ -7,21 +7,22 @@ MNIST dataset T-SNE benchmark
 
 # License: BSD 3 clause
 
+import argparse
+import json
 import os
 import os.path as op
 from time import time
+
 import numpy as np
-import json
-import argparse
 from joblib import Memory
 
-from sklearn.datasets import fetch_openml
-from sklearn.manifold import TSNE
-from sklearn.neighbors import NearestNeighbors
-from sklearn.decomposition import PCA
-from sklearn.utils import check_array
-from sklearn.utils import shuffle as _shuffle
-from sklearn.utils._openmp_helpers import _openmp_effective_n_threads
+from xlearn.datasets import fetch_openml
+from xlearn.decomposition import PCA
+from xlearn.manifold import TSNE
+from xlearn.neighbors import NearestNeighbors
+from xlearn.utils import check_array
+from xlearn.utils import shuffle as _shuffle
+from xlearn.utils._openmp_helpers import _openmp_effective_n_threads
 
 LOG_DIR = "mnist_tsne_output"
 if not os.path.exists(LOG_DIR):
@@ -35,7 +36,7 @@ memory = Memory(os.path.join(LOG_DIR, "mnist_tsne_benchmark_data"), mmap_mode="r
 def load_data(dtype=np.float32, order="C", shuffle=True, seed=0):
     """Load the data, then cache and memmap the train/test split"""
     print("Loading dataset...")
-    data = fetch_openml("mnist_784", as_frame=True, parser="pandas")
+    data = fetch_openml("mnist_784", as_frame=True)
 
     X = check_array(data["data"], dtype=dtype, order=order)
     y = data["target"]
@@ -123,7 +124,7 @@ if __name__ == "__main__":
         verbose=args.verbose,
         n_iter=1000,
     )
-    methods.append(("sklearn TSNE", lambda data: tsne_fit_transform(tsne, data)))
+    methods.append(("xlearn TSNE", lambda data: tsne_fit_transform(tsne, data)))
 
     if args.bhtsne:
         try:
@@ -160,7 +161,6 @@ $ cd ..
         methods.append(("lvdmaaten/bhtsne", bhtsne))
 
     if args.profile:
-
         try:
             from memory_profiler import profile
         except ImportError as e:

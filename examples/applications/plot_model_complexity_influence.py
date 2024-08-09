@@ -15,16 +15,16 @@ We will be using two datasets:
       the post is written about.
 
 We will model the complexity influence on three different estimators:
-    - :class:`~sklearn.linear_model.SGDClassifier` (for classification data)
+    - :class:`~xlearn.linear_model.SGDClassifier` (for classification data)
       which implements stochastic gradient descent learning;
 
-    - :class:`~sklearn.svm.NuSVR` (for regression data) which implements
+    - :class:`~xlearn.svm.NuSVR` (for regression data) which implements
       Nu support vector regression;
 
-    - :class:`~sklearn.ensemble.GradientBoostingRegressor` builds an additive
+    - :class:`~xlearn.ensemble.GradientBoostingRegressor` builds an additive
       model in a forward stage-wise fashion. Notice that
-      :class:`~sklearn.ensemble.HistGradientBoostingRegressor` is much faster
-      than :class:`~sklearn.ensemble.GradientBoostingRegressor` starting with
+      :class:`~xlearn.ensemble.HistGradientBoostingRegressor` is much faster
+      than :class:`~xlearn.ensemble.GradientBoostingRegressor` starting with
       intermediate datasets (`n_samples >= 10_000`), which is not the case for
       this example.
 
@@ -42,16 +42,16 @@ Hamming Loss).
 # License: BSD 3 clause
 
 import time
-import numpy as np
-import matplotlib.pyplot as plt
 
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-from sklearn.svm import NuSVR
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.linear_model import SGDClassifier
-from sklearn.metrics import hamming_loss
+import matplotlib.pyplot as plt
+import numpy as np
+
+from xlearn import datasets
+from xlearn.ensemble import GradientBoostingRegressor
+from xlearn.linear_model import SGDClassifier
+from xlearn.metrics import hamming_loss, mean_squared_error
+from xlearn.model_selection import train_test_split
+from xlearn.svm import NuSVR
 
 # Initialize random generator
 np.random.seed(0)
@@ -63,7 +63,7 @@ np.random.seed(0)
 # First we load both datasets.
 #
 # .. note:: We are using
-#    :func:`~sklearn.datasets.fetch_20newsgroups_vectorized` to download 20
+#    :func:`~xlearn.datasets.fetch_20newsgroups_vectorized` to download 20
 #    newsgroups dataset. It returns ready-to-use features.
 #
 # .. note:: ``X`` of the 20 newsgroups dataset is a sparse matrix while ``X``
@@ -266,7 +266,7 @@ def plot_influence(conf, mse_values, prediction_times, complexities):
     ax2.tick_params(axis="y", colors=line2.get_color())
 
     plt.legend(
-        (line1, line2), ("prediction error", "prediction latency"), loc="upper right"
+        (line1, line2), ("prediction error", "prediction latency"), loc="upper center"
     )
 
     plt.title(

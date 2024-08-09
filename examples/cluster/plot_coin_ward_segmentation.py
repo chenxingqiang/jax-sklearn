@@ -46,7 +46,7 @@ X = np.reshape(rescaled_coins, (-1, 1))
 #
 # Pixels are connected to their neighbors.
 
-from sklearn.feature_extraction.image import grid_to_graph
+from xlearn.feature_extraction.image import grid_to_graph
 
 connectivity = grid_to_graph(*rescaled_coins.shape)
 
@@ -56,7 +56,7 @@ connectivity = grid_to_graph(*rescaled_coins.shape)
 
 import time as time
 
-from sklearn.cluster import AgglomerativeClustering
+from xlearn.cluster import AgglomerativeClustering
 
 print("Compute structured hierarchical clustering...")
 st = time.time()

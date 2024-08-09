@@ -3,8 +3,8 @@ Comparison between grid search and successive halving
 =====================================================
 
 This example compares the parameter search performed by
-:class:`~sklearn.model_selection.HalvingGridSearchCV` and
-:class:`~sklearn.model_selection.GridSearchCV`.
+:class:`~xlearn.model_selection.HalvingGridSearchCV` and
+:class:`~xlearn.model_selection.GridSearchCV`.
 
 """
 
@@ -14,18 +14,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from sklearn.svm import SVC
-from sklearn import datasets
-from sklearn.model_selection import GridSearchCV
-from sklearn.experimental import enable_halving_search_cv  # noqa
-from sklearn.model_selection import HalvingGridSearchCV
-
+from xlearn import datasets
+from xlearn.experimental import enable_halving_search_cv  # noqa
+from xlearn.model_selection import GridSearchCV, HalvingGridSearchCV
+from xlearn.svm import SVC
 
 # %%
-# We first define the parameter space for an :class:`~sklearn.svm.SVC`
+# We first define the parameter space for an :class:`~xlearn.svm.SVC`
 # estimator, and compute the time required to train a
-# :class:`~sklearn.model_selection.HalvingGridSearchCV` instance, as well as a
-# :class:`~sklearn.model_selection.GridSearchCV` instance.
+# :class:`~xlearn.model_selection.HalvingGridSearchCV` instance, as well as a
+# :class:`~xlearn.model_selection.GridSearchCV` instance.
 
 rng = np.random.RandomState(0)
 X, y = datasets.make_classification(n_samples=1000, random_state=rng)
@@ -54,8 +52,10 @@ gs_time = time() - tic
 
 def make_heatmap(ax, gs, is_sh=False, make_cbar=False):
     """Helper to make a heatmap."""
-    results = pd.DataFrame.from_dict(gs.cv_results_)
-    results["params_str"] = results.params.apply(str)
+    results = pd.DataFrame(gs.cv_results_)
+    results[["param_C", "param_gamma"]] = results[["param_C", "param_gamma"]].astype(
+        np.float64
+    )
     if is_sh:
         # SH dataframe: get mean_test_score values for the highest iter
         scores_matrix = results.sort_values("iter").pivot_table(
@@ -118,12 +118,12 @@ plt.show()
 
 # %%
 # The heatmaps show the mean test score of the parameter combinations for an
-# :class:`~sklearn.svm.SVC` instance. The
-# :class:`~sklearn.model_selection.HalvingGridSearchCV` also shows the
+# :class:`~xlearn.svm.SVC` instance. The
+# :class:`~xlearn.model_selection.HalvingGridSearchCV` also shows the
 # iteration at which the combinations where last used. The combinations marked
 # as ``0`` were only evaluated at the first iteration, while the ones with
 # ``5`` are the parameter combinations that are considered the best ones.
 #
-# We can see that the :class:`~sklearn.model_selection.HalvingGridSearchCV`
+# We can see that the :class:`~xlearn.model_selection.HalvingGridSearchCV`
 # class is able to find parameter combinations that are just as accurate as
-# :class:`~sklearn.model_selection.GridSearchCV`, in much less time.
+# :class:`~xlearn.model_selection.GridSearchCV`, in much less time.

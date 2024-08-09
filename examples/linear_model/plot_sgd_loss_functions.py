@@ -4,12 +4,12 @@ SGD: convex loss functions
 ==========================
 
 A plot that compares the various convex loss functions supported by
-:class:`~sklearn.linear_model.SGDClassifier` .
+:class:`~xlearn.linear_model.SGDClassifier` .
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def modified_huber_loss(y_true, y_pred):

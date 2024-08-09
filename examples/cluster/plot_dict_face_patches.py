@@ -6,11 +6,11 @@ This example uses a large dataset of faces to learn a set of 20 x 20
 images patches that constitute faces.
 
 From the programming standpoint, it is interesting because it shows how
-to use the online API of the scikit-learn to process a very large
+to use the online API of the jax-ml to process a very large
 dataset by chunks. The way we proceed is that we load an image at a time
 and extract randomly 50 patches from this image. Once we have accumulated
 500 of these patches (using 10 images), we run the
-:func:`~sklearn.cluster.MiniBatchKMeans.partial_fit` method
+:func:`~xlearn.cluster.MiniBatchKMeans.partial_fit` method
 of the online KMeans object, MiniBatchKMeans.
 
 The verbose setting on the MiniBatchKMeans enables us to see that some
@@ -25,7 +25,7 @@ cluster.
 # Load the data
 # -------------
 
-from sklearn import datasets
+from xlearn import datasets
 
 faces = datasets.fetch_olivetti_faces()
 
@@ -37,12 +37,12 @@ import time
 
 import numpy as np
 
-from sklearn.cluster import MiniBatchKMeans
-from sklearn.feature_extraction.image import extract_patches_2d
+from xlearn.cluster import MiniBatchKMeans
+from xlearn.feature_extraction.image import extract_patches_2d
 
 print("Learning the dictionary... ")
 rng = np.random.RandomState(0)
-kmeans = MiniBatchKMeans(n_clusters=81, random_state=rng, verbose=True)
+kmeans = MiniBatchKMeans(n_clusters=81, random_state=rng, verbose=True, n_init=3)
 patch_size = (20, 20)
 
 buffer = []

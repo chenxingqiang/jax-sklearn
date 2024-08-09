@@ -12,12 +12,13 @@ space. Please refer to the :ref:`User Guide <nca>` for more information.
 
 # License: BSD 3 clause
 
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.datasets import make_classification
-from sklearn.neighbors import NeighborhoodComponentsAnalysis
+import numpy as np
 from matplotlib import cm
 from scipy.special import logsumexp
+
+from xlearn.datasets import make_classification
+from xlearn.neighbors import NeighborhoodComponentsAnalysis
 
 # %%
 # Original points
@@ -77,7 +78,7 @@ plt.show()
 # %%
 # Learning an embedding
 # ---------------------
-# We use :class:`~sklearn.neighbors.NeighborhoodComponentsAnalysis` to learn an
+# We use :class:`~xlearn.neighbors.NeighborhoodComponentsAnalysis` to learn an
 # embedding and plot the points after the transformation. We then take the
 # embedding and find the nearest neighbors.
 

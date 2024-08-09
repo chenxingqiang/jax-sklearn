@@ -4,7 +4,7 @@ Fitting an Elastic Net with a precomputed Gram Matrix and Weighted Samples
 ==========================================================================
 
 The following example shows how to precompute the gram matrix
-while using weighted samples with an ElasticNet.
+while using weighted samples with an :class:`~xlearn.linear_model.ElasticNet`.
 
 If weighted samples are used, the design matrix must be centered and then
 rescaled by the square root of the weight vector before the gram matrix
@@ -13,14 +13,15 @@ is computed.
 .. note::
   `sample_weight` vector is also rescaled to sum to `n_samples`, see the
    documentation for the `sample_weight` parameter to
-   :func:`linear_model.ElasticNet.fit`.
+   :meth:`~xlearn.linear_model.ElasticNet.fit`.
 
 """
 
 # %%
 # Let's start by loading the dataset and creating some sample weights.
 import numpy as np
-from sklearn.datasets import make_regression
+
+from xlearn.datasets import make_regression
 
 rng = np.random.RandomState(0)
 
@@ -45,7 +46,7 @@ gram = np.dot(X_scaled.T, X_scaled)
 # `fit` otherwise the elastic net estimator will detect that it is uncentered
 # and discard the gram matrix we passed. However, if we pass the scaled design
 # matrix, the preprocessing code will incorrectly rescale it a second time.
-from sklearn.linear_model import ElasticNet
+from xlearn.linear_model import ElasticNet
 
 lm = ElasticNet(alpha=0.01, precompute=gram)
 lm.fit(X_centered, y, sample_weight=normalized_weights)

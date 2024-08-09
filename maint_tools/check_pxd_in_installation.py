@@ -2,19 +2,18 @@
 
 Usage:
 ------
-python check_pxd_in_installation.py path/to/install_dir/of/scikit-learn
+python check_pxd_in_installation.py path/to/install_dir/of/jax-ml
 """
 
 import os
-import sys
 import pathlib
+import subprocess
+import sys
 import tempfile
 import textwrap
-import subprocess
 
-
-sklearn_dir = pathlib.Path(sys.argv[1])
-pxd_files = list(sklearn_dir.glob("**/*.pxd"))
+xlearn_dir = pathlib.Path(sys.argv[1])
+pxd_files = list(xlearn_dir.glob("**/*.pxd"))
 
 print("> Found pxd files:")
 for pxd_file in pxd_files:
@@ -25,13 +24,13 @@ with tempfile.TemporaryDirectory() as tmpdir:
     tmpdir = pathlib.Path(tmpdir)
     # A cython test file which cimports all modules corresponding to found
     # pxd files.
-    # e.g. sklearn/tree/_utils.pxd becomes `cimport sklearn.tree._utils`
+    # e.g. xlearn/tree/_utils.pxd becomes `cimport xlearn.tree._utils`
     with open(tmpdir / "tst.pyx", "w") as f:
         for pxd_file in pxd_files:
-            to_import = str(pxd_file.relative_to(sklearn_dir))
+            to_import = str(pxd_file.relative_to(xlearn_dir))
             to_import = to_import.replace(os.path.sep, ".")
             to_import = to_import.replace(".pxd", "")
-            f.write("cimport sklearn." + to_import + "\n")
+            f.write("cimport xlearn." + to_import + "\n")
 
     # A basic setup file to build the test file.
     # We set the language to c++ and we use numpy.get_include() because
@@ -40,8 +39,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
         f.write(
             textwrap.dedent(
                 """
-            from distutils.core import setup
-            from distutils.extension import Extension
+            from setuptools import setup, Extension
             from Cython.Build import cythonize
             import numpy
 

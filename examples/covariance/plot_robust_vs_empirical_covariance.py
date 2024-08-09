@@ -53,11 +53,11 @@ References
 
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.font_manager
+import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn.covariance import EmpiricalCovariance, MinCovDet
+from xlearn.covariance import EmpiricalCovariance, MinCovDet
 
 # example settings
 n_samples = 80
@@ -82,7 +82,6 @@ err_cov_emp_pure = np.zeros((range_n_outliers.size, repeat))
 # computation
 for i, n_outliers in enumerate(range_n_outliers):
     for j in range(repeat):
-
         rng = np.random.RandomState(i * j)
 
         # generate data

@@ -8,9 +8,9 @@ Density Estimation
 Density estimation walks the line between unsupervised learning, feature
 engineering, and data modeling.  Some of the most popular and useful
 density estimation techniques are mixture models such as
-Gaussian Mixtures (:class:`~sklearn.mixture.GaussianMixture`), and
+Gaussian Mixtures (:class:`~xlearn.mixture.GaussianMixture`), and
 neighbor-based approaches such as the kernel density estimate
-(:class:`~sklearn.neighbors.KernelDensity`).
+(:class:`~xlearn.neighbors.KernelDensity`).
 Gaussian Mixtures are discussed more fully in the context of
 :ref:`clustering <clustering>`, because the technique is also useful as
 an unsupervised clustering scheme.
@@ -57,8 +57,8 @@ distribution of points.
 
 Kernel Density Estimation
 =========================
-Kernel density estimation in scikit-learn is implemented in the
-:class:`~sklearn.neighbors.KernelDensity` estimator, which uses the
+Kernel density estimation in jax-ml is implemented in the
+:class:`~xlearn.neighbors.KernelDensity` estimator, which uses the
 Ball Tree or KD Tree for efficient queries (see :ref:`neighbors` for
 a discussion of these).  Though the above example
 uses a 1D data set for simplicity, kernel density estimation can be
@@ -75,10 +75,10 @@ and the kernel density estimates are shown for three choices of kernels:
 .. centered:: |kde_1d_distribution|
 
 It's clear how the kernel shape affects the smoothness of the resulting
-distribution.  The scikit-learn kernel density estimator can be used as
+distribution.  The jax-ml kernel density estimator can be used as
 follows:
 
-   >>> from sklearn.neighbors import KernelDensity
+   >>> from xlearn.neighbors import KernelDensity
    >>> import numpy as np
    >>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
    >>> kde = KernelDensity(kernel='gaussian', bandwidth=0.2).fit(X)
@@ -104,7 +104,7 @@ The parameter `bandwidth` controls this smoothing. One can either set
 manually this parameter or use Scott's and Silvermann's estimation
 methods.
 
-:class:`~sklearn.neighbors.KernelDensity` implements several common kernel
+:class:`~xlearn.neighbors.KernelDensity` implements several common kernel
 forms, which are shown in the following figure:
 
 .. |kde_kernels| image:: ../auto_examples/neighbors/images/sphx_glr_plot_kde_1d_002.png
@@ -113,34 +113,37 @@ forms, which are shown in the following figure:
 
 .. centered:: |kde_kernels|
 
-The form of these kernels is as follows:
+.. dropdown:: Kernels' mathematical expressions
 
-* Gaussian kernel (``kernel = 'gaussian'``)
+  The form of these kernels is as follows:
 
-  :math:`K(x; h) \propto \exp(- \frac{x^2}{2h^2} )`
+  * Gaussian kernel (``kernel = 'gaussian'``)
 
-* Tophat kernel (``kernel = 'tophat'``)
+    :math:`K(x; h) \propto \exp(- \frac{x^2}{2h^2} )`
 
-  :math:`K(x; h) \propto 1` if :math:`x < h`
+  * Tophat kernel (``kernel = 'tophat'``)
 
-* Epanechnikov kernel (``kernel = 'epanechnikov'``)
+    :math:`K(x; h) \propto 1` if :math:`x < h`
 
-  :math:`K(x; h) \propto 1 - \frac{x^2}{h^2}`
+  * Epanechnikov kernel (``kernel = 'epanechnikov'``)
 
-* Exponential kernel (``kernel = 'exponential'``)
+    :math:`K(x; h) \propto 1 - \frac{x^2}{h^2}`
 
-  :math:`K(x; h) \propto \exp(-x/h)`
+  * Exponential kernel (``kernel = 'exponential'``)
 
-* Linear kernel (``kernel = 'linear'``)
+    :math:`K(x; h) \propto \exp(-x/h)`
 
-  :math:`K(x; h) \propto 1 - x/h` if :math:`x < h`
+  * Linear kernel (``kernel = 'linear'``)
 
-* Cosine kernel (``kernel = 'cosine'``)
+    :math:`K(x; h) \propto 1 - x/h` if :math:`x < h`
 
-  :math:`K(x; h) \propto \cos(\frac{\pi x}{2h})` if :math:`x < h`
+  * Cosine kernel (``kernel = 'cosine'``)
+
+    :math:`K(x; h) \propto \cos(\frac{\pi x}{2h})` if :math:`x < h`
+
 
 The kernel density estimator can be used with any of the valid distance
-metrics (see :class:`~sklearn.metrics.DistanceMetric` for a list of
+metrics (see :class:`~xlearn.metrics.DistanceMetric` for a list of
 available metrics), though the results are properly normalized only
 for the Euclidean metric.  One particularly useful metric is the
 `Haversine distance <https://en.wikipedia.org/wiki/Haversine_formula>`_
@@ -171,14 +174,14 @@ on a PCA projection of the data:
 The "new" data consists of linear combinations of the input data, with weights
 probabilistically drawn given the KDE model.
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-  * :ref:`sphx_glr_auto_examples_neighbors_plot_kde_1d.py`: computation of simple kernel
-    density estimates in one dimension.
+* :ref:`sphx_glr_auto_examples_neighbors_plot_kde_1d.py`: computation of simple kernel
+  density estimates in one dimension.
 
-  * :ref:`sphx_glr_auto_examples_neighbors_plot_digits_kde_sampling.py`: an example of using
-    Kernel Density estimation to learn a generative model of the hand-written
-    digits data, and drawing new samples from this model.
+* :ref:`sphx_glr_auto_examples_neighbors_plot_digits_kde_sampling.py`: an example of using
+  Kernel Density estimation to learn a generative model of the hand-written
+  digits data, and drawing new samples from this model.
 
-  * :ref:`sphx_glr_auto_examples_neighbors_plot_species_kde.py`: an example of Kernel Density
-    estimation using the Haversine distance metric to visualize geospatial data
+* :ref:`sphx_glr_auto_examples_neighbors_plot_species_kde.py`: an example of Kernel Density
+  estimation using the Haversine distance metric to visualize geospatial data

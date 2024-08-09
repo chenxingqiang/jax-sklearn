@@ -35,7 +35,7 @@ from time import time
 import numpy as np
 from matplotlib import pyplot as plt
 
-from sklearn import manifold, datasets
+from xlearn import datasets, manifold
 
 digits = datasets.load_digits()
 X, y = digits.data, digits.target
@@ -74,7 +74,7 @@ print("Computing embedding")
 X_red = manifold.SpectralEmbedding(n_components=2).fit_transform(X)
 print("Done.")
 
-from sklearn.cluster import AgglomerativeClustering
+from xlearn.cluster import AgglomerativeClustering
 
 for linkage in ("ward", "average", "complete", "single"):
     clustering = AgglomerativeClustering(linkage=linkage, n_clusters=10)

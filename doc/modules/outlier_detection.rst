@@ -4,7 +4,7 @@
 Novelty and Outlier Detection
 ===================================================
 
-.. currentmodule:: sklearn
+.. currentmodule:: xlearn
 
 Many applications require being able to decide whether a new observation
 belongs to the same distribution as existing observations (it is an
@@ -34,7 +34,7 @@ detection, novelties/anomalies can form a dense cluster as long as they are in
 a low density region of the training data, considered as normal in this
 context.
 
-The scikit-learn project provides a set of machine learning tools that
+The jax-ml project provides a set of machine learning tools that
 can be used both for novelty or outlier detection. This strategy is
 implemented with objects learning in an unsupervised way from the data::
 
@@ -95,7 +95,7 @@ Method                       Outlier detection                Novelty detection
 Overview of outlier detection methods
 =====================================
 
-A comparison of the outlier detection algorithms in scikit-learn. Local
+A comparison of the outlier detection algorithms in jax-ml. Local
 Outlier Factor (LOF) does not show a decision boundary in black as it
 has no predict method to be applied on new data when it is used for outlier
 detection.
@@ -123,19 +123,19 @@ refer to the example
 :ref:`sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py` and the
 sections hereunder.
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-  * See :ref:`sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py`
-    for a comparison of the :class:`svm.OneClassSVM`, the
-    :class:`ensemble.IsolationForest`, the
-    :class:`neighbors.LocalOutlierFactor` and
-    :class:`covariance.EllipticEnvelope`.
+* See :ref:`sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py`
+  for a comparison of the :class:`svm.OneClassSVM`, the
+  :class:`ensemble.IsolationForest`, the
+  :class:`neighbors.LocalOutlierFactor` and
+  :class:`covariance.EllipticEnvelope`.
 
-  * See :ref:`sphx_glr_auto_examples_miscellaneous_plot_outlier_detection_bench.py`
-    for an example showing how to evaluate outlier detection estimators,
-    the :class:`neighbors.LocalOutlierFactor` and the
-    :class:`ensemble.IsolationForest`, using ROC curves from
-    :class:`metrics.RocCurveDisplay`.
+* See :ref:`sphx_glr_auto_examples_miscellaneous_plot_outlier_detection_bench.py`
+  for an example showing how to evaluate outlier detection estimators,
+  the :class:`neighbors.LocalOutlierFactor` and the
+  :class:`ensemble.IsolationForest`, using ROC curves from
+  :class:`metrics.RocCurveDisplay`.
 
 Novelty Detection
 =================
@@ -162,23 +162,23 @@ and implemented in the :ref:`svm` module in the
 :class:`svm.OneClassSVM` object. It requires the choice of a
 kernel and a scalar parameter to define a frontier.  The RBF kernel is
 usually chosen although there exists no exact formula or algorithm to
-set its bandwidth parameter. This is the default in the scikit-learn
+set its bandwidth parameter. This is the default in the jax-ml
 implementation. The `nu` parameter, also known as the margin of
 the One-Class SVM, corresponds to the probability of finding a new,
 but regular, observation outside the frontier.
 
-.. topic:: References:
+.. rubric:: References
 
-    * `Estimating the support of a high-dimensional distribution
-      <https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-99-87.pdf>`_
-      Schölkopf, Bernhard, et al. Neural computation 13.7 (2001): 1443-1471.
+* `Estimating the support of a high-dimensional distribution
+  <https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-99-87.pdf>`_
+  Schölkopf, Bernhard, et al. Neural computation 13.7 (2001): 1443-1471.
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-   * See :ref:`sphx_glr_auto_examples_svm_plot_oneclass.py` for visualizing the
-     frontier learned around some data by a
-     :class:`svm.OneClassSVM` object.
-   * :ref:`sphx_glr_auto_examples_applications_plot_species_distribution_modeling.py`
+* See :ref:`sphx_glr_auto_examples_svm_plot_oneclass.py` for visualizing the
+  frontier learned around some data by a :class:`svm.OneClassSVM` object.
+
+* :ref:`sphx_glr_auto_examples_applications_plot_species_distribution_modeling.py`
 
 .. figure:: ../auto_examples/svm/images/sphx_glr_plot_oneclass_001.png
    :target: ../auto_examples/svm/plot_oneclass.html
@@ -196,11 +196,11 @@ approximate the solution of a kernelized :class:`svm.OneClassSVM` whose
 complexity is at best quadratic in the number of samples. See section
 :ref:`sgd_online_one_class_svm` for more details.
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-  * See :ref:`sphx_glr_auto_examples_linear_model_plot_sgdocsvm_vs_ocsvm.py`
-    for an illustration of the approximation of a kernelized One-Class SVM
-    with the `linear_model.SGDOneClassSVM` combined with kernel approximation.
+* See :ref:`sphx_glr_auto_examples_linear_model_plot_sgdocsvm_vs_ocsvm.py`
+  for an illustration of the approximation of a kernelized One-Class SVM
+  with the `linear_model.SGDOneClassSVM` combined with kernel approximation.
 
 
 Outlier Detection
@@ -222,7 +222,7 @@ distributed). From this assumption, we generally try to define the
 "shape" of the data, and can define outlying observations as
 observations which stand far enough from the fit shape.
 
-The scikit-learn provides an object
+The jax-ml provides an object
 :class:`covariance.EllipticEnvelope` that fits a robust covariance
 estimate to the data, and thus fits an ellipse to the central data
 points, ignoring points outside the central mode.
@@ -238,18 +238,18 @@ This strategy is illustrated below.
    :align: center
    :scale: 75%
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-   * See :ref:`sphx_glr_auto_examples_covariance_plot_mahalanobis_distances.py` for
-     an illustration of the difference between using a standard
-     (:class:`covariance.EmpiricalCovariance`) or a robust estimate
-     (:class:`covariance.MinCovDet`) of location and covariance to
-     assess the degree of outlyingness of an observation.
+* See :ref:`sphx_glr_auto_examples_covariance_plot_mahalanobis_distances.py` for
+  an illustration of the difference between using a standard
+  (:class:`covariance.EmpiricalCovariance`) or a robust estimate
+  (:class:`covariance.MinCovDet`) of location and covariance to
+  assess the degree of outlyingness of an observation.
 
-.. topic:: References:
+.. rubric:: References
 
-    * Rousseeuw, P.J., Van Driessen, K. "A fast algorithm for the minimum
-      covariance determinant estimator" Technometrics 41(3), 212 (1999)
+* Rousseeuw, P.J., Van Driessen, K. "A fast algorithm for the minimum
+  covariance determinant estimator" Technometrics 41(3), 212 (1999)
 
 .. _isolation_forest:
 
@@ -281,7 +281,7 @@ the maximum depth of each tree is set to :math:`\lceil \log_2(n) \rceil` where
 
 This algorithm is illustrated below.
 
-.. figure:: ../auto_examples/ensemble/images/sphx_glr_plot_isolation_forest_001.png
+.. figure:: ../auto_examples/ensemble/images/sphx_glr_plot_isolation_forest_003.png
    :target: ../auto_examples/ensemble/plot_isolation_forest.html
    :align: center
    :scale: 75%
@@ -291,7 +291,7 @@ This algorithm is illustrated below.
 The :class:`ensemble.IsolationForest` supports ``warm_start=True`` which
 allows you to add more trees to an already fitted model::
 
-  >>> from sklearn.ensemble import IsolationForest
+  >>> from xlearn.ensemble import IsolationForest
   >>> import numpy as np
   >>> X = np.array([[-1, -1], [-2, -1], [-3, -2], [0, 0], [-20, 50], [3, 5]])
   >>> clf = IsolationForest(n_estimators=10, warm_start=True)
@@ -299,22 +299,22 @@ allows you to add more trees to an already fitted model::
   >>> clf.set_params(n_estimators=20)  # add 10 more trees  # doctest: +SKIP
   >>> clf.fit(X)  # fit the added trees  # doctest: +SKIP
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-   * See :ref:`sphx_glr_auto_examples_ensemble_plot_isolation_forest.py` for
-     an illustration of the use of IsolationForest.
+* See :ref:`sphx_glr_auto_examples_ensemble_plot_isolation_forest.py` for
+  an illustration of the use of IsolationForest.
 
-   * See :ref:`sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py`
-     for a comparison of :class:`ensemble.IsolationForest` with
-     :class:`neighbors.LocalOutlierFactor`,
-     :class:`svm.OneClassSVM` (tuned to perform like an outlier detection
-     method), :class:`linear_model.SGDOneClassSVM`, and a covariance-based
-     outlier detection with :class:`covariance.EllipticEnvelope`.
+* See :ref:`sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py`
+  for a comparison of :class:`ensemble.IsolationForest` with
+  :class:`neighbors.LocalOutlierFactor`,
+  :class:`svm.OneClassSVM` (tuned to perform like an outlier detection
+  method), :class:`linear_model.SGDOneClassSVM`, and a covariance-based
+  outlier detection with :class:`covariance.EllipticEnvelope`.
 
-.. topic:: References:
+.. rubric:: References
 
-    * Liu, Fei Tony, Ting, Kai Ming and Zhou, Zhi-Hua. "Isolation forest."
-      Data Mining, 2008. ICDM'08. Eighth IEEE International Conference on.
+* Liu, Fei Tony, Ting, Kai Ming and Zhou, Zhi-Hua. "Isolation forest."
+  Data Mining, 2008. ICDM'08. Eighth IEEE International Conference on.
 
 .. _local_outlier_factor:
 
@@ -370,20 +370,20 @@ This strategy is illustrated below.
    :align: center
    :scale: 75%
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-   * See :ref:`sphx_glr_auto_examples_neighbors_plot_lof_outlier_detection.py`
-     for an illustration of the use of :class:`neighbors.LocalOutlierFactor`.
+* See :ref:`sphx_glr_auto_examples_neighbors_plot_lof_outlier_detection.py`
+  for an illustration of the use of :class:`neighbors.LocalOutlierFactor`.
 
-   * See :ref:`sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py`
-     for a comparison with other anomaly detection methods.
+* See :ref:`sphx_glr_auto_examples_miscellaneous_plot_anomaly_comparison.py`
+  for a comparison with other anomaly detection methods.
 
-.. topic:: References:
+.. rubric:: References
 
-   *  Breunig, Kriegel, Ng, and Sander (2000)
-      `LOF: identifying density-based local outliers.
-      <http://www.dbs.ifi.lmu.de/Publikationen/Papers/LOF.pdf>`_
-      Proc. ACM SIGMOD
+* Breunig, Kriegel, Ng, and Sander (2000)
+  `LOF: identifying density-based local outliers.
+  <https://www.dbs.ifi.lmu.de/Publikationen/Papers/LOF.pdf>`_
+  Proc. ACM SIGMOD
 
 .. _novelty_with_lof:
 
@@ -411,7 +411,7 @@ Note that ``fit_predict`` is not available in this case to avoid inconsistencies
 
 Novelty detection with Local Outlier Factor is illustrated below.
 
-  .. figure:: ../auto_examples/neighbors/images/sphx_glr_plot_lof_novelty_detection_001.png
-     :target: ../auto_examples/neighbors/plot_lof_novelty_detection.html
-     :align: center
-     :scale: 75%
+.. figure:: ../auto_examples/neighbors/images/sphx_glr_plot_lof_novelty_detection_001.png
+    :target: ../auto_examples/neighbors/plot_lof_novelty_detection.html
+    :align: center
+    :scale: 75%

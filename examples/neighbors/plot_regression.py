@@ -18,9 +18,10 @@ target using both barycenter and constant weights.
 # %%
 # Generate sample data
 # --------------------
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import neighbors
+import numpy as np
+
+from xlearn import neighbors
 
 np.random.seed(0)
 X = np.sort(5 * np.random.rand(40, 1), axis=0)

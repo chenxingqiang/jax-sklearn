@@ -1,7 +1,7 @@
 """
 To run this, you'll need to have installed.
 
-  * scikit-learn
+  * jax-ml
 
 Does two benchmarks
 
@@ -13,10 +13,12 @@ In the second benchmark, we increase the number of dimensions of the
 training set, classify a sample and plot the time taken as a function
 of the number of dimensions.
 """
-import numpy as np
-import matplotlib.pyplot as plt
+
 import gc
 from datetime import datetime
+
+import matplotlib.pyplot as plt
+import numpy as np
 
 # to store the results
 scikit_classifier_results = []
@@ -26,9 +28,9 @@ mu_second = 0.0 + 10**6  # number of microseconds in a second
 
 
 def bench_scikit_tree_classifier(X, Y):
-    """Benchmark with scikit-learn decision tree classifier"""
+    """Benchmark with jax-ml decision tree classifier"""
 
-    from sklearn.tree import DecisionTreeClassifier
+    from xlearn.tree import DecisionTreeClassifier
 
     gc.collect()
 
@@ -43,9 +45,9 @@ def bench_scikit_tree_classifier(X, Y):
 
 
 def bench_scikit_tree_regressor(X, Y):
-    """Benchmark with scikit-learn decision tree regressor"""
+    """Benchmark with jax-ml decision tree regressor"""
 
-    from sklearn.tree import DecisionTreeRegressor
+    from xlearn.tree import DecisionTreeRegressor
 
     gc.collect()
 
@@ -60,7 +62,6 @@ def bench_scikit_tree_regressor(X, Y):
 
 
 if __name__ == "__main__":
-
     print("============================================")
     print("Warning: this is going to take a looong time")
     print("============================================")
@@ -82,7 +83,7 @@ if __name__ == "__main__":
         bench_scikit_tree_regressor(X, Y)
 
     xx = range(0, n * step, step)
-    plt.figure("scikit-learn tree benchmark results")
+    plt.figure("jax-ml tree benchmark results")
     plt.subplot(211)
     plt.title("Learning with varying number of samples")
     plt.plot(xx, scikit_classifier_results, "g-", label="classification")

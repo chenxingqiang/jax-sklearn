@@ -20,14 +20,14 @@ NY, USA: Springer New York Inc..
 
 # Author: Wenhao Zhang <wenhaoz@ucla.edu>
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn.datasets import load_digits
-from sklearn.decomposition import PCA
-from sklearn.model_selection import GridSearchCV
-from sklearn.pipeline import Pipeline
-from sklearn.svm import LinearSVC
+from xlearn.datasets import load_digits
+from xlearn.decomposition import PCA
+from xlearn.model_selection import GridSearchCV
+from xlearn.pipeline import Pipeline
+from xlearn.svm import LinearSVC
 
 
 def lower_bound(cv_results):

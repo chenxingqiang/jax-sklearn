@@ -4,9 +4,9 @@ Model-based and sequential feature selection
 ============================================
 
 This example illustrates and compares two approaches for feature selection:
-:class:`~sklearn.feature_selection.SelectFromModel` which is based on feature
+:class:`~xlearn.feature_selection.SelectFromModel` which is based on feature
 importance, and
-:class:`~sklearn.feature_selection.SequentialFeatureSelection` which relies
+:class:`~xlearn.feature_selection.SequentialFeatureSelector` which relies
 on a greedy approach.
 
 We use the Diabetes dataset, which consists of 10 features collected from 442
@@ -24,8 +24,8 @@ License: BSD 3 clause
 # ----------------
 #
 # We first load the diabetes dataset which is available from within
-# scikit-learn, and print its description:
-from sklearn.datasets import load_diabetes
+# jax-ml, and print its description:
+from xlearn.datasets import load_diabetes
 
 diabetes = load_diabetes()
 X, y = diabetes.data, diabetes.target
@@ -36,17 +36,18 @@ print(diabetes.DESCR)
 # ------------------------------------
 #
 # To get an idea of the importance of the features, we are going to use the
-# :class:`~sklearn.linear_model.RidgeCV` estimator. The features with the
+# :class:`~xlearn.linear_model.RidgeCV` estimator. The features with the
 # highest absolute `coef_` value are considered the most important.
 # We can observe the coefficients directly without needing to scale them (or
 # scale the data) because from the description above, we know that the features
 # were already standardized.
 # For a more complete example on the interpretations of the coefficients of
 # linear models, you may refer to
-# :ref:`sphx_glr_auto_examples_inspection_plot_linear_model_coefficient_interpretation.py`.
+# :ref:`sphx_glr_auto_examples_inspection_plot_linear_model_coefficient_interpretation.py`.  # noqa: E501
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.linear_model import RidgeCV
+
+from xlearn.linear_model import RidgeCV
 
 ridge = RidgeCV(alphas=np.logspace(-6, 6, num=5)).fit(X, y)
 importance = np.abs(ridge.coef_)
@@ -60,15 +61,16 @@ plt.show()
 # --------------------------------------
 #
 # Now we want to select the two features which are the most important according
-# to the coefficients. The :class:`~sklearn.feature_selection.SelectFromModel`
-# is meant just for that. :class:`~sklearn.feature_selection.SelectFromModel`
+# to the coefficients. The :class:`~xlearn.feature_selection.SelectFromModel`
+# is meant just for that. :class:`~xlearn.feature_selection.SelectFromModel`
 # accepts a `threshold` parameter and will select the features whose importance
 # (defined by the coefficients) are above this threshold.
 #
 # Since we want to select only 2 features, we will set this threshold slightly
 # above the coefficient of third most important feature.
-from sklearn.feature_selection import SelectFromModel
 from time import time
+
+from xlearn.feature_selection import SelectFromModel
 
 threshold = np.sort(importance)[-3] + 0.01
 
@@ -83,7 +85,7 @@ print(f"Done in {toc - tic:.3f}s")
 # ----------------------------------------------------
 #
 # Another way of selecting features is to use
-# :class:`~sklearn.feature_selection.SequentialFeatureSelector`
+# :class:`~xlearn.feature_selection.SequentialFeatureSelector`
 # (SFS). SFS is a greedy procedure where, at each iteration, we choose the best
 # new feature to add to our selected features based a cross-validation score.
 # That is, we start with 0 features and choose the best single feature with the
@@ -94,7 +96,7 @@ print(f"Done in {toc - tic:.3f}s")
 # the features and greedily choose features to remove one by one. We illustrate
 # both approaches here.
 
-from sklearn.feature_selection import SequentialFeatureSelector
+from xlearn.feature_selection import SequentialFeatureSelector
 
 tic_fwd = time()
 sfs_forward = SequentialFeatureSelector(
@@ -120,9 +122,6 @@ print(
 print(f"Done in {toc_bwd - tic_bwd:.3f}s")
 
 # %%
-# Discussion
-# ----------
-#
 # Interestingly, forward and backward selection have selected the same set of
 # features. In general, this isn't the case and the two methods would lead to
 # different results.
@@ -134,12 +133,63 @@ print(f"Done in {toc_bwd - tic_bwd:.3f}s")
 # that SFS makes no use of the coefficients at all.
 #
 # To finish with, we should note that
-# :class:`~sklearn.feature_selection.SelectFromModel` is significantly faster
-# than SFS. Indeed, :class:`~sklearn.feature_selection.SelectFromModel` only
+# :class:`~xlearn.feature_selection.SelectFromModel` is significantly faster
+# than SFS. Indeed, :class:`~xlearn.feature_selection.SelectFromModel` only
 # needs to fit a model once, while SFS needs to cross-validate many different
 # models for each of the iterations. SFS however works with any model, while
-# :class:`~sklearn.feature_selection.SelectFromModel` requires the underlying
+# :class:`~xlearn.feature_selection.SelectFromModel` requires the underlying
 # estimator to expose a `coef_` attribute or a `feature_importances_`
 # attribute. The forward SFS is faster than the backward SFS because it only
 # needs to perform `n_features_to_select = 2` iterations, while the backward
 # SFS needs to perform `n_features - n_features_to_select = 8` iterations.
+#
+# Using negative tolerance values
+# -------------------------------
+#
+# :class:`~xlearn.feature_selection.SequentialFeatureSelector` can be used
+# to remove features present in the dataset and return a
+# smaller subset of the original features with `direction="backward"`
+# and a negative value of `tol`.
+#
+# We begin by loading the Breast Cancer dataset, consisting of 30 different
+# features and 569 samples.
+import numpy as np
+
+from xlearn.datasets import load_breast_cancer
+
+breast_cancer_data = load_breast_cancer()
+X, y = breast_cancer_data.data, breast_cancer_data.target
+feature_names = np.array(breast_cancer_data.feature_names)
+print(breast_cancer_data.DESCR)
+
+# %%
+# We will make use of the :class:`~xlearn.linear_model.LogisticRegression`
+# estimator with :class:`~xlearn.feature_selection.SequentialFeatureSelector`
+# to perform the feature selection.
+from xlearn.linear_model import LogisticRegression
+from xlearn.metrics import roc_auc_score
+from xlearn.pipeline import make_pipeline
+from xlearn.preprocessing import StandardScaler
+
+for tol in [-1e-2, -1e-3, -1e-4]:
+    start = time()
+    feature_selector = SequentialFeatureSelector(
+        LogisticRegression(),
+        n_features_to_select="auto",
+        direction="backward",
+        scoring="roc_auc",
+        tol=tol,
+        n_jobs=2,
+    )
+    model = make_pipeline(StandardScaler(), feature_selector, LogisticRegression())
+    model.fit(X, y)
+    end = time()
+    print(f"\ntol: {tol}")
+    print(f"Features selected: {feature_names[model[1].get_support()]}")
+    print(f"ROC AUC score: {roc_auc_score(y, model.predict_proba(X)[:, 1]):.3f}")
+    print(f"Done in {end - start:.3f}s")
+
+# %%
+# We can see that the number of features selected tend to increase as negative
+# values of `tol` approach to zero. The time taken for feature selection also
+# decreases as the values of `tol` come closer to zero.

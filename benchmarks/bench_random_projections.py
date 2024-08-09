@@ -6,19 +6,20 @@ Random projection benchmark
 Benchmarks for random projections.
 
 """
-import gc
-import sys
-import optparse
-from datetime import datetime
+
 import collections
+import gc
+import optparse
+import sys
+from datetime import datetime
 
 import numpy as np
 import scipy.sparse as sp
 
-from sklearn import clone
-from sklearn.random_projection import (
-    SparseRandomProjection,
+from xlearn import clone
+from xlearn.random_projection import (
     GaussianRandomProjection,
+    SparseRandomProjection,
     johnson_lindenstrauss_min_dim,
 )
 

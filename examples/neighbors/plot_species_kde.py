@@ -40,10 +40,11 @@ References
 #
 # License: BSD 3 clause
 
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.datasets import fetch_species_distributions
-from sklearn.neighbors import KernelDensity
+import numpy as np
+
+from xlearn.datasets import fetch_species_distributions
+from xlearn.neighbors import KernelDensity
 
 # if basemap is available, we'll use it.
 # otherwise, we'll improvise later...

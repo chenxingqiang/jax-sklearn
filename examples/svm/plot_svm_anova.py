@@ -14,7 +14,8 @@ that our model achieves best performance when we select around 10% of features.
 # Load some data to play with
 # ---------------------------
 import numpy as np
-from sklearn.datasets import load_iris
+
+from xlearn.datasets import load_iris
 
 X, y = load_iris(return_X_y=True)
 
@@ -25,17 +26,17 @@ X = np.hstack((X, 2 * rng.random((X.shape[0], 36))))
 # %%
 # Create the pipeline
 # -------------------
-from sklearn.pipeline import Pipeline
-from sklearn.feature_selection import SelectPercentile, chi2
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
+from xlearn.feature_selection import SelectPercentile, f_classif
+from xlearn.pipeline import Pipeline
+from xlearn.preprocessing import StandardScaler
+from xlearn.svm import SVC
 
 # Create a feature-selection transform, a scaler and an instance of SVM that we
 # combine together to have a full-blown estimator
 
 clf = Pipeline(
     [
-        ("anova", SelectPercentile(chi2)),
+        ("anova", SelectPercentile(f_classif)),
         ("scaler", StandardScaler()),
         ("svc", SVC(gamma="auto")),
     ]
@@ -45,7 +46,8 @@ clf = Pipeline(
 # Plot the cross-validation score as a function of percentile of features
 # -----------------------------------------------------------------------
 import matplotlib.pyplot as plt
-from sklearn.model_selection import cross_val_score
+
+from xlearn.model_selection import cross_val_score
 
 score_means = list()
 score_stds = list()

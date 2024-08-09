@@ -5,7 +5,7 @@ Sparse coding with a precomputed dictionary
 
 Transform a signal as a sparse combination of Ricker wavelets. This example
 visually compares different sparse coding methods using the
-:class:`~sklearn.decomposition.SparseCoder` estimator. The Ricker (also known
+:class:`~xlearn.decomposition.SparseCoder` estimator. The Ricker (also known
 as Mexican hat or the second derivative of a Gaussian) is not a particularly
 good kernel to represent piecewise constant signals like this one. It can
 therefore be seen how much adding different widths of atoms matters and it
@@ -16,10 +16,10 @@ is performed in order to stay on the same order of magnitude.
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn.decomposition import SparseCoder
+from xlearn.decomposition import SparseCoder
 
 
 def ricker_function(resolution, center, width):

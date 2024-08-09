@@ -1,13 +1,9 @@
-.. Places parent toc into the sidebar
-
-:parenttoc: True
-
 .. _loading_other_datasets:
 
 Loading other datasets
 ======================
 
-.. currentmodule:: sklearn.datasets
+.. currentmodule:: xlearn.datasets
 
 .. _sample_images:
 
@@ -37,16 +33,16 @@ and pipelines on 2D data.
   if you plan to use ``matplotlib.pyplpt.imshow``, don't forget to scale to the range
   0 - 1 as done in the following example.
 
-.. topic:: Examples:
+.. rubric:: Examples
 
-    * :ref:`sphx_glr_auto_examples_cluster_plot_color_quantization.py`
+* :ref:`sphx_glr_auto_examples_cluster_plot_color_quantization.py`
 
 .. _libsvm_loader:
 
 Datasets in svmlight / libsvm format
 ------------------------------------
 
-scikit-learn includes utility functions for loading
+jax-ml includes utility functions for loading
 datasets in the svmlight / libsvm format. In this format, each line
 takes the form ``<label> <feature-id>:<feature-value>
 <feature-id>:<feature-value> ...``. This format is especially suitable for sparse datasets.
@@ -54,7 +50,7 @@ In this module, scipy sparse CSR matrices are used for ``X`` and numpy arrays ar
 
 You may load a dataset like as follows::
 
-  >>> from sklearn.datasets import load_svmlight_file
+  >>> from xlearn.datasets import load_svmlight_file
   >>> X_train, y_train = load_svmlight_file("/path/to/train_dataset.txt")
   ...                                                         # doctest: +SKIP
 
@@ -72,11 +68,10 @@ features::
   ...     "/path/to/test_dataset.txt", n_features=X_train.shape[1])
   ...                                                         # doctest: +SKIP
 
-.. topic:: Related links:
+.. rubric:: Related links
 
- _`Public datasets in svmlight / libsvm format`: https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets
-
- _`Faster API-compatible implementation`: https://github.com/mblondel/svmlight-loader
+- `Public datasets in svmlight / libsvm format`: https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets
+- `Faster API-compatible implementation`: https://github.com/mblondel/svmlight-loader
 
 ..
     For doctests:
@@ -92,14 +87,14 @@ Downloading datasets from the openml.org repository
 `openml.org <https://openml.org>`_ is a public repository for machine learning
 data and experiments, that allows everybody to upload open datasets.
 
-The ``sklearn.datasets`` package is able to download datasets
+The ``xlearn.datasets`` package is able to download datasets
 from the repository using the function
-:func:`sklearn.datasets.fetch_openml`.
+:func:`xlearn.datasets.fetch_openml`.
 
 For example, to download a dataset of gene expressions in mice brains::
 
-  >>> from sklearn.datasets import fetch_openml
-  >>> mice = fetch_openml(name='miceprotein', version=4, parser="auto")
+  >>> from xlearn.datasets import fetch_openml
+  >>> mice = fetch_openml(name='miceprotein', version=4)
 
 To fully specify a dataset, you need to provide a name and a version, though
 the version is optional, see :ref:`openml_versions` below.
@@ -147,7 +142,7 @@ dataset on the openml website::
 
 The ``data_id`` also uniquely identifies a dataset from OpenML::
 
-  >>> mice = fetch_openml(data_id=40966, parser="auto")
+  >>> mice = fetch_openml(data_id=40966)
   >>> mice.details # doctest: +SKIP
   {'id': '4550', 'name': 'MiceProtein', 'version': '1', 'format': 'ARFF',
   'creator': ...,
@@ -171,7 +166,7 @@ which can contain entirely different datasets.
 If a particular version of a dataset has been found to contain significant
 issues, it might be deactivated. Using a name to specify a dataset will yield
 the earliest version of a dataset that is still active. That means that
-``fetch_openml(name="miceprotein", parser="auto")`` can yield different results
+``fetch_openml(name="miceprotein")`` can yield different results
 at different times if earlier versions become inactive.
 You can see that the dataset with ``data_id`` 40966 that we fetched above is
 the first version of the "miceprotein" dataset::
@@ -182,19 +177,19 @@ the first version of the "miceprotein" dataset::
 In fact, this dataset only has one version. The iris dataset on the other hand
 has multiple versions::
 
-  >>> iris = fetch_openml(name="iris", parser="auto")
+  >>> iris = fetch_openml(name="iris")
   >>> iris.details['version']  #doctest: +SKIP
   '1'
   >>> iris.details['id']  #doctest: +SKIP
   '61'
 
-  >>> iris_61 = fetch_openml(data_id=61, parser="auto")
+  >>> iris_61 = fetch_openml(data_id=61)
   >>> iris_61.details['version']
   '1'
   >>> iris_61.details['id']
   '61'
 
-  >>> iris_969 = fetch_openml(data_id=969, parser="auto")
+  >>> iris_969 = fetch_openml(data_id=969)
   >>> iris_969.details['version']
   '3'
   >>> iris_969.details['id']
@@ -212,25 +207,25 @@ binarized version of the data::
 You can also specify both the name and the version, which also uniquely
 identifies the dataset::
 
-  >>> iris_version_3 = fetch_openml(name="iris", version=3, parser="auto")
+  >>> iris_version_3 = fetch_openml(name="iris", version=3)
   >>> iris_version_3.details['version']
   '3'
   >>> iris_version_3.details['id']
   '969'
 
 
-.. topic:: References:
+.. rubric:: References
 
- * :arxiv:`Vanschoren, van Rijn, Bischl and Torgo. "OpenML: networked science in
-   machine learning" ACM SIGKDD Explorations Newsletter, 15(2), 49-60, 2014.
-   <1407.7722>`
+* :arxiv:`Vanschoren, van Rijn, Bischl and Torgo. "OpenML: networked science in
+  machine learning" ACM SIGKDD Explorations Newsletter, 15(2), 49-60, 2014.
+  <1407.7722>`
 
 .. _openml_parser:
 
 ARFF parser
 ~~~~~~~~~~~
 
-From version 1.2, scikit-learn provides a new keyword argument `parser` that
+From version 1.2, jax-ml provides a new keyword argument `parser` that
 provides several options to parse the ARFF files provided by OpenML. The legacy
 parser (i.e. `parser="liac-arff"`) is based on the project
 `LIAC-ARFF <https://github.com/renatopp/liac-arff>`_. This parser is however
@@ -273,26 +268,26 @@ preprocess the categorical columns explicitly. See for instance: :ref:`sphx_glr_
 Loading from external datasets
 ------------------------------
 
-scikit-learn works on any numeric data stored as numpy arrays or scipy sparse
+jax-ml works on any numeric data stored as numpy arrays or scipy sparse
 matrices. Other types that are convertible to numeric arrays such as pandas
 DataFrame are also acceptable.
 
 Here are some recommended ways to load standard columnar data into a
-format usable by scikit-learn:
+format usable by jax-ml:
 
 * `pandas.io <https://pandas.pydata.org/pandas-docs/stable/io.html>`_
   provides tools to read data from common formats including CSV, Excel, JSON
   and SQL. DataFrames may also be constructed from lists of tuples or dicts.
   Pandas handles heterogeneous data smoothly and provides tools for
-  manipulation and conversion into a numeric array suitable for scikit-learn.
+  manipulation and conversion into a numeric array suitable for jax-ml.
 * `scipy.io <https://docs.scipy.org/doc/scipy/reference/io.html>`_
   specializes in binary formats often used in scientific computing
   context such as .mat and .arff
 * `numpy/routines.io <https://docs.scipy.org/doc/numpy/reference/routines.io.html>`_
   for standard loading of columnar data into numpy arrays
-* scikit-learn's :func:`datasets.load_svmlight_file` for the svmlight or libSVM
+* jax-ml's :func:`load_svmlight_file` for the svmlight or libSVM
   sparse format
-* scikit-learn's :func:`datasets.load_files` for directories of text files where
+* jax-ml's :func:`load_files` for directories of text files where
   the name of each directory is the name of each category and each file inside
   of each directory corresponds to one sample from that category
 
@@ -303,12 +298,12 @@ refer to:
   `Imageio <https://imageio.readthedocs.io/en/stable/reference/core_v3.html>`_
   for loading images and videos into numpy arrays
 * `scipy.io.wavfile.read
-  <https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.io.wavfile.read.html>`_
+  <https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.wavfile.read.html>`_
   for reading WAV files into a numpy array
 
 Categorical (or nominal) features stored as strings (common in pandas DataFrames)
-will need converting to numerical features using :class:`~sklearn.preprocessing.OneHotEncoder`
-or :class:`~sklearn.preprocessing.OrdinalEncoder` or similar.
+will need converting to numerical features using :class:`~xlearn.preprocessing.OneHotEncoder`
+or :class:`~xlearn.preprocessing.OrdinalEncoder` or similar.
 See :ref:`preprocessing`.
 
 Note: if you manage your own numerical data it is recommended to use an

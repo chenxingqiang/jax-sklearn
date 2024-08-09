@@ -1,8 +1,8 @@
 import argparse
 import os.path as op
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 LOG_DIR = "mnist_tsne_output"
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--embedding",
         type=str,
-        default=op.join(LOG_DIR, "mnist_sklearn_TSNE_10000.npy"),
+        default=op.join(LOG_DIR, "mnist_xlearn_TSNE_10000.npy"),
         help="2D float numpy array for embedded data",
     )
     args = parser.parse_args()

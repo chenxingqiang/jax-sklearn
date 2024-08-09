@@ -36,28 +36,31 @@ necessarily related to visualisation.
 # Generate distorted image
 # ------------------------
 import numpy as np
-import scipy as sp
 
-
-try:  # SciPy >= 0.16 have face in misc
+try:  # Scipy >= 1.10
+    from scipy.datasets import face
+except ImportError:
     from scipy.misc import face
 
-    face = face(gray=True)
-except ImportError:
-    face = sp.face(gray=True)
+raccoon_face = face(gray=True)
 
 # Convert from uint8 representation with values between 0 and 255 to
 # a floating point representation with values between 0 and 1.
-face = face / 255.0
+raccoon_face = raccoon_face / 255.0
 
 # downsample for higher speed
-face = face[::4, ::4] + face[1::4, ::4] + face[::4, 1::4] + face[1::4, 1::4]
-face /= 4.0
-height, width = face.shape
+raccoon_face = (
+    raccoon_face[::4, ::4]
+    + raccoon_face[1::4, ::4]
+    + raccoon_face[::4, 1::4]
+    + raccoon_face[1::4, 1::4]
+)
+raccoon_face /= 4.0
+height, width = raccoon_face.shape
 
 # Distort the right half of the image
 print("Distorting image...")
-distorted = face.copy()
+distorted = raccoon_face.copy()
 distorted[:, width // 2 :] += 0.075 * np.random.randn(height, width // 2)
 
 
@@ -88,7 +91,7 @@ def show_with_diff(image, reference, title):
     plt.subplots_adjust(0.02, 0.02, 0.98, 0.79, 0.02, 0.2)
 
 
-show_with_diff(distorted, face, "Distorted image")
+show_with_diff(distorted, raccoon_face, "Distorted image")
 
 
 # %%
@@ -96,7 +99,7 @@ show_with_diff(distorted, face, "Distorted image")
 # ----------------------------
 from time import time
 
-from sklearn.feature_extraction.image import extract_patches_2d
+from xlearn.feature_extraction.image import extract_patches_2d
 
 # Extract all reference patches from the left half of the image
 print("Extracting reference patches...")
@@ -112,7 +115,7 @@ print(f"{data.shape[0]} patches extracted in %.2fs." % (time() - t0))
 # %%
 # Learn the dictionary from reference patches
 # -------------------------------------------
-from sklearn.decomposition import MiniBatchDictionaryLearning
+from xlearn.decomposition import MiniBatchDictionaryLearning
 
 print("Learning the dictionary...")
 t0 = time()
@@ -145,7 +148,7 @@ plt.subplots_adjust(0.08, 0.02, 0.92, 0.85, 0.08, 0.23)
 # %%
 # Extract noisy patches and reconstruct them using the dictionary
 # ---------------------------------------------------------------
-from sklearn.feature_extraction.image import reconstruct_from_patches_2d
+from xlearn.feature_extraction.image import reconstruct_from_patches_2d
 
 print("Extracting noisy patches... ")
 t0 = time()
@@ -165,7 +168,7 @@ transform_algorithms = [
 reconstructions = {}
 for title, transform_algorithm, kwargs in transform_algorithms:
     print(title + "...")
-    reconstructions[title] = face.copy()
+    reconstructions[title] = raccoon_face.copy()
     t0 = time()
     dico.set_params(transform_algorithm=transform_algorithm, **kwargs)
     code = dico.transform(data)
@@ -181,6 +184,6 @@ for title, transform_algorithm, kwargs in transform_algorithms:
     )
     dt = time() - t0
     print("done in %.2fs." % dt)
-    show_with_diff(reconstructions[title], face, title + " (time: %.1fs)" % dt)
+    show_with_diff(reconstructions[title], raccoon_face, title + " (time: %.1fs)" % dt)
 
 plt.show()

@@ -1,12 +1,12 @@
-# flake8: noqa
+# ruff: noqa
 """
 =======================================
-Release Highlights for scikit-learn 1.0
+Release Highlights for jax-ml 1.0
 =======================================
 
-.. currentmodule:: sklearn
+.. currentmodule:: xlearn
 
-We are very pleased to announce the release of scikit-learn 1.0! The library
+We are very pleased to announce the release of jax-ml 1.0! The library
 has been stable for quite some time, releasing version 1.0 is recognizing that
 and signalling it to our users. This release does not include any breaking
 changes apart from the usual two-release deprecation cycle. For the future, we
@@ -15,22 +15,22 @@ do our best to keep this pattern.
 This release includes some new key features as well as many improvements and
 bug fixes. We detail below a few of the major features of this release. **For
 an exhaustive list of all the changes**, please refer to the :ref:`release
-notes <changes_1_0>`.
+notes <release_notes_1_0>`.
 
 To install the latest version (with pip)::
 
-    pip install --upgrade scikit-learn
+    pip install --upgrade jax-ml
 
 or with conda::
 
-    conda install -c conda-forge scikit-learn
+    conda install -c conda-forge jax-ml
 
 """
 
 ##############################################################################
 # Keyword and positional arguments
 # ---------------------------------------------------------
-# The scikit-learn API exposes many functions and methods which have many input
+# The jax-ml API exposes many functions and methods which have many input
 # parameters. For example, before this release, one could instantiate a
 # :class:`~ensemble.HistGradientBoostingRegressor` as::
 #
@@ -40,7 +40,7 @@ or with conda::
 #
 # Understanding the above code requires the reader to go to the API
 # documentation and to check each and every parameter for its position and
-# its meaning. To improve the readability of code written based on scikit-learn,
+# its meaning. To improve the readability of code written based on jax-ml,
 # now users have to provide most parameters with their names, as keyword
 # arguments, instead of positional arguments. For example, the above code would
 # be::
@@ -89,7 +89,7 @@ or with conda::
 # refer to the :ref:`User Guide <spline_transformer>`.
 
 import numpy as np
-from sklearn.preprocessing import SplineTransformer
+from xlearn.preprocessing import SplineTransformer
 
 X = np.arange(5).reshape(5, 1)
 spline = SplineTransformer(degree=2, n_knots=3)
@@ -113,7 +113,7 @@ spline.fit_transform(X)
 #     \sum_i PB_q(y_i - X_i w) + \alpha ||w||_1}.
 #
 # This consists of the pinball loss (also known as linear loss),
-# see also :class:`~sklearn.metrics.mean_pinball_loss`,
+# see also :class:`~xlearn.metrics.mean_pinball_loss`,
 #
 # .. math::
 #     PB_q(t) = q \max(t, 0) + (1 - q) \max(-t, 0) =
@@ -145,7 +145,7 @@ spline.fit_transform(X)
 # is used to check that the column names of the dataframe passed in
 # non-:term:`fit`, such as :term:`predict`, are consistent with features in
 # :term:`fit`:
-from sklearn.preprocessing import StandardScaler
+from xlearn.preprocessing import StandardScaler
 import pandas as pd
 
 X = pd.DataFrame([[1, 2, 3], [4, 5, 6]], columns=["a", "b", "c"])
@@ -154,14 +154,14 @@ scalar.feature_names_in_
 
 # %%
 # The support of :term:`get_feature_names_out` is available for transformers
-# that already had :term:`get_feature_names` and transformers with a one-to-one
+# that already had `get_feature_names` and transformers with a one-to-one
 # correspondence between input and output such as
 # :class:`~preprocessing.StandardScaler`. :term:`get_feature_names_out` support
 # will be added to all other transformers in future releases. Additionally,
 # :meth:`compose.ColumnTransformer.get_feature_names_out` is available to
 # combine feature names of its transformers:
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder
+from xlearn.compose import ColumnTransformer
+from xlearn.preprocessing import OneHotEncoder
 import pandas as pd
 
 X = pd.DataFrame({"pet": ["dog", "cat", "fish"], "age": [3, 7, 1]})
@@ -179,8 +179,8 @@ preprocessor.get_feature_names_out()
 # When this ``preprocessor`` is used with a pipeline, the feature names used
 # by the classifier are obtained by slicing and calling
 # :term:`get_feature_names_out`:
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import make_pipeline
+from xlearn.linear_model import LogisticRegression
+from xlearn.pipeline import make_pipeline
 
 y = [1, 0, 1]
 pipe = make_pipeline(preprocessor, LogisticRegression())
@@ -227,11 +227,11 @@ pipe[:-1].get_feature_names_out()
 ##############################################################################
 # Histogram-based Gradient Boosting Models are now stable
 # --------------------------------------------------------------------------
-# :class:`~sklearn.ensemble.HistGradientBoostingRegressor` and
+# :class:`~xlearn.ensemble.HistGradientBoostingRegressor` and
 # :class:`~ensemble.HistGradientBoostingClassifier` are no longer experimental
 # and can simply be imported and used as::
 #
-#     from sklearn.ensemble import HistGradientBoostingClassifier
+#     from xlearn.ensemble import HistGradientBoostingClassifier
 
 ##############################################################################
 # New documentation improvements

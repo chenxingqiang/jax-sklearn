@@ -4,7 +4,9 @@ Prediction Intervals for Gradient Boosting Regression
 =====================================================
 
 This example shows how quantile regression can be used to create prediction
-intervals.
+intervals. See :ref:`sphx_glr_auto_examples_ensemble_plot_hgbt_regression.py`
+for an example showcasing some other features of
+:class:`~ensemble.HistGradientBoostingRegressor`.
 
 """
 
@@ -12,7 +14,8 @@ intervals.
 # Generate some data for a synthetic regression problem by applying the
 # function f to uniformly sampled random inputs.
 import numpy as np
-from sklearn.model_selection import train_test_split
+
+from xlearn.model_selection import train_test_split
 
 
 def f(x):
@@ -55,9 +58,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 # The model trained with alpha=0.5 produces a regression of the median: on
 # average, there should be the same number of target observations above and
 # below the predicted values.
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.metrics import mean_pinball_loss, mean_squared_error
-
+from xlearn.ensemble import GradientBoostingRegressor
+from xlearn.metrics import mean_pinball_loss, mean_squared_error
 
 all_models = {}
 common_params = dict(
@@ -72,8 +74,8 @@ for alpha in [0.05, 0.5, 0.95]:
     all_models["q %1.2f" % alpha] = gbr.fit(X_train, y_train)
 
 # %%
-# Notice that :class:`~sklearn.ensemble.HistGradientBoostingRegressor` is much
-# faster than :class:`~sklearn.ensemble.GradientBoostingRegressor` starting with
+# Notice that :class:`~xlearn.ensemble.HistGradientBoostingRegressor` is much
+# faster than :class:`~xlearn.ensemble.GradientBoostingRegressor` starting with
 # intermediate datasets (`n_samples >= 10_000`), which is not the case of the
 # present example.
 #
@@ -92,7 +94,6 @@ xx = np.atleast_2d(np.linspace(0, 10, 1000)).T
 # mean (loss equals squared error), the conditional median and the conditional
 # 90% interval (from 5th to 95th conditional percentiles).
 import matplotlib.pyplot as plt
-
 
 y_pred = all_models["mse"].predict(xx)
 y_lower = all_models["q 0.05"].predict(xx)
@@ -129,8 +130,8 @@ plt.show()
 # Analysis of the error metrics
 # -----------------------------
 #
-# Measure the models with :func:`mean_squared_error` and
-# :func:`mean_pinball_loss` metrics on the training dataset.
+# Measure the models with :func:`~xlearn.metrics.mean_squared_error` and
+# :func:`~xlearn.metrics.mean_pinball_loss` metrics on the training dataset.
 import pandas as pd
 
 
@@ -157,7 +158,7 @@ pd.DataFrame(results).set_index("model").style.apply(highlight_min)
 # training converged.
 #
 # Note that because the target distribution is asymmetric, the expected
-# conditional mean and conditional median are signficiantly different and
+# conditional mean and conditional median are significantly different and
 # therefore one could not use the squared error model get a good estimation of
 # the conditional median nor the converse.
 #
@@ -191,11 +192,13 @@ pd.DataFrame(results).set_index("model").style.apply(highlight_min)
 # (underestimation for this asymmetric noise) but is also naturally robust to
 # outliers and overfits less.
 #
+# .. _calibration-section:
+#
 # Calibration of the confidence interval
 # --------------------------------------
 #
 # We can also evaluate the ability of the two extreme quantile estimators at
-# producing a well-calibrated conditational 90%-confidence interval.
+# producing a well-calibrated conditional 90%-confidence interval.
 #
 # To do this we can compute the fraction of observations that fall between the
 # predictions:
@@ -237,9 +240,9 @@ coverage_fraction(
 # cross-validation on the pinball loss with alpha=0.05:
 
 # %%
-from sklearn.experimental import enable_halving_search_cv  # noqa
-from sklearn.model_selection import HalvingRandomSearchCV
-from sklearn.metrics import make_scorer
+from xlearn.experimental import enable_halving_search_cv  # noqa
+from xlearn.model_selection import HalvingRandomSearchCV
+from xlearn.metrics import make_scorer
 from pprint import pprint
 
 param_grid = dict(
@@ -276,7 +279,7 @@ pprint(search_05p.best_params_)
 # need to redefine the `scoring` metric used to select the best model, along
 # with adjusting the alpha parameter of the inner gradient boosting estimator
 # itself:
-from sklearn.base import clone
+from xlearn.base import clone
 
 alpha = 0.95
 neg_mean_pinball_loss_95p_scorer = make_scorer(

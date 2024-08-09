@@ -3,9 +3,9 @@
 ==================
 Random Projection
 ==================
-.. currentmodule:: sklearn.random_projection
+.. currentmodule:: xlearn.random_projection
 
-The :mod:`sklearn.random_projection` module implements a simple and
+The :mod:`xlearn.random_projection` module implements a simple and
 computationally efficient way to reduce the dimensionality of the data by
 trading a controlled amount of accuracy (as additional variance) for faster
 processing times and smaller model sizes. This module implements two types of
@@ -19,19 +19,19 @@ samples of the dataset. Thus random projection is a suitable approximation
 technique for distance based method.
 
 
-.. topic:: References:
+.. rubric:: References
 
- * Sanjoy Dasgupta. 2000.
-   `Experiments with random projection. <https://cseweb.ucsd.edu/~dasgupta/papers/randomf.pdf>`_
-   In Proceedings of the Sixteenth conference on Uncertainty in artificial
-   intelligence (UAI'00), Craig Boutilier and Moisés Goldszmidt (Eds.). Morgan
-   Kaufmann Publishers Inc., San Francisco, CA, USA, 143-151.
+* Sanjoy Dasgupta. 2000.
+  `Experiments with random projection. <https://cseweb.ucsd.edu/~dasgupta/papers/randomf.pdf>`_
+  In Proceedings of the Sixteenth conference on Uncertainty in artificial
+  intelligence (UAI'00), Craig Boutilier and Moisés Goldszmidt (Eds.). Morgan
+  Kaufmann Publishers Inc., San Francisco, CA, USA, 143-151.
 
- * Ella Bingham and Heikki Mannila. 2001.
-   `Random projection in dimensionality reduction: applications to image and text data. <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.24.5135&rep=rep1&type=pdf>`_
-   In Proceedings of the seventh ACM SIGKDD international conference on
-   Knowledge discovery and data mining (KDD '01). ACM, New York, NY, USA,
-   245-250.
+* Ella Bingham and Heikki Mannila. 2001.
+  `Random projection in dimensionality reduction: applications to image and text data. <https://citeseerx.ist.psu.edu/doc_view/pid/aed77346f737b0ed5890b61ad02e5eb4ab2f3dc6>`_
+  In Proceedings of the seventh ACM SIGKDD international conference on
+  Knowledge discovery and data mining (KDD '01). ACM, New York, NY, USA,
+  245-250.
 
 
 .. _johnson_lindenstrauss:
@@ -56,7 +56,7 @@ Knowing only the number of samples, the
 conservatively the minimal size of the random subspace to guarantee a
 bounded distortion introduced by the random projection::
 
-  >>> from sklearn.random_projection import johnson_lindenstrauss_min_dim
+  >>> from xlearn.random_projection import johnson_lindenstrauss_min_dim
   >>> johnson_lindenstrauss_min_dim(n_samples=1e6, eps=0.5)
   663
   >>> johnson_lindenstrauss_min_dim(n_samples=1e6, eps=[0.5, 0.1, 0.01])
@@ -74,17 +74,17 @@ bounded distortion introduced by the random projection::
    :scale: 75
    :align: center
 
-.. topic:: Example:
+.. rubric:: Examples
 
-  * See :ref:`sphx_glr_auto_examples_miscellaneous_plot_johnson_lindenstrauss_bound.py`
-    for a theoretical explication on the Johnson-Lindenstrauss lemma and an
-    empirical validation using sparse random matrices.
+* See :ref:`sphx_glr_auto_examples_miscellaneous_plot_johnson_lindenstrauss_bound.py`
+  for a theoretical explication on the Johnson-Lindenstrauss lemma and an
+  empirical validation using sparse random matrices.
 
-.. topic:: References:
+.. rubric:: References
 
-  * Sanjoy Dasgupta and Anupam Gupta, 1999.
-    `An elementary proof of the Johnson-Lindenstrauss Lemma.
-    <http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.39.3334&rep=rep1&type=pdf>`_
+* Sanjoy Dasgupta and Anupam Gupta, 1999.
+  `An elementary proof of the Johnson-Lindenstrauss Lemma.
+  <https://citeseerx.ist.psu.edu/doc_view/pid/95cd464d27c25c9c8690b378b894d337cdf021f9>`_
 
 .. _gaussian_random_matrix:
 
@@ -99,7 +99,7 @@ Here a small excerpt which illustrates how to use the Gaussian random
 projection transformer::
 
   >>> import numpy as np
-  >>> from sklearn import random_projection
+  >>> from xlearn import random_projection
   >>> X = np.random.rand(100, 10000)
   >>> transformer = random_projection.GaussianRandomProjection()
   >>> X_new = transformer.fit_transform(X)
@@ -140,7 +140,7 @@ Here a small excerpt which illustrates how to use the sparse random
 projection transformer::
 
   >>> import numpy as np
-  >>> from sklearn import random_projection
+  >>> from xlearn import random_projection
   >>> X = np.random.rand(100, 10000)
   >>> transformer = random_projection.SparseRandomProjection()
   >>> X_new = transformer.fit_transform(X)
@@ -148,18 +148,17 @@ projection transformer::
   (100, 3947)
 
 
-.. topic:: References:
+.. rubric:: References
 
- * D. Achlioptas. 2003.
-   `Database-friendly random projections: Johnson-Lindenstrauss  with binary
-   coins <https://www.sciencedirect.com/science/article/pii/S0022000003000254>`_.
-   Journal of Computer and System Sciences 66 (2003) 671–687
+* D. Achlioptas. 2003.
+  `Database-friendly random projections: Johnson-Lindenstrauss  with binary
+  coins <https://www.sciencedirect.com/science/article/pii/S0022000003000254>`_.
+  Journal of Computer and System Sciences 66 (2003) 671-687.
 
- * Ping Li, Trevor J. Hastie, and Kenneth W. Church. 2006.
-   `Very sparse random projections. <https://web.stanford.edu/~hastie/Papers/Ping/KDD06_rp.pdf>`_
-   In Proceedings of the 12th ACM SIGKDD international conference on
-   Knowledge discovery and data mining (KDD '06). ACM, New York, NY, USA,
-   287-296.
+* Ping Li, Trevor J. Hastie, and Kenneth W. Church. 2006.
+  `Very sparse random projections. <https://web.stanford.edu/~hastie/Papers/Ping/KDD06_rp.pdf>`_
+  In Proceedings of the 12th ACM SIGKDD international conference on
+  Knowledge discovery and data mining (KDD '06). ACM, New York, NY, USA, 287-296.
 
 
 .. _random_projection_inverse_transform:
@@ -184,7 +183,7 @@ Here a small code example which illustrates how to use the inverse transform
 feature::
 
   >>> import numpy as np
-  >>> from sklearn.random_projection import SparseRandomProjection
+  >>> from xlearn.random_projection import SparseRandomProjection
   >>> X = np.random.rand(100, 10000)
   >>> transformer = SparseRandomProjection(
   ...   compute_inverse_components=True

@@ -4,12 +4,12 @@ Species distribution modeling
 =============================
 
 Modeling species' geographic distributions is an important
-problem in conservation biology. In this example we
-model the geographic distribution of two south american
+problem in conservation biology. In this example, we
+model the geographic distribution of two South American
 mammals given past observations and 14 environmental
 variables. Since we have only positive examples (there are
 no unsuccessful observations), we cast this problem as a
-density estimation problem and use the :class:`~sklearn.svm.OneClassSVM`
+density estimation problem and use the :class:`~xlearn.svm.OneClassSVM`
 as our modeling tool. The dataset is provided by Phillips et. al. (2006).
 If available, the example uses
 `basemap <https://matplotlib.org/basemap/>`_
@@ -43,12 +43,12 @@ References
 
 from time import time
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn.utils import Bunch
-from sklearn.datasets import fetch_species_distributions
-from sklearn import svm, metrics
+from xlearn import metrics, svm
+from xlearn.datasets import fetch_species_distributions
+from xlearn.utils import Bunch
 
 # if basemap is available, we'll use it.
 # otherwise, we'll improvise later...

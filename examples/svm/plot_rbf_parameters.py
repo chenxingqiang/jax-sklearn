@@ -99,7 +99,7 @@ class MidpointNormalize(Normalize):
 #
 # dataset for grid search
 
-from sklearn.datasets import load_iris
+from xlearn.datasets import load_iris
 
 iris = load_iris()
 X = iris.data
@@ -121,7 +121,7 @@ y_2d -= 1
 # instead of fitting the transformation on the training set and
 # just applying it on the test set.
 
-from sklearn.preprocessing import StandardScaler
+from xlearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
@@ -135,9 +135,8 @@ X_2d = scaler.fit_transform(X_2d)
 # 10 is often helpful. Using a basis of 2, a finer
 # tuning can be achieved but at a much higher cost.
 
-from sklearn.svm import SVC
-from sklearn.model_selection import StratifiedShuffleSplit
-from sklearn.model_selection import GridSearchCV
+from xlearn.model_selection import GridSearchCV, StratifiedShuffleSplit
+from xlearn.svm import SVC
 
 C_range = np.logspace(-2, 10, 13)
 gamma_range = np.logspace(-9, 3, 13)

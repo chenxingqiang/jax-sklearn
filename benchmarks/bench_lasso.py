@@ -11,11 +11,13 @@ the number of dimensions.
 
 In both cases, only 10% of the features are informative.
 """
+
 import gc
 from time import time
+
 import numpy as np
 
-from sklearn.datasets import make_regression
+from xlearn.datasets import make_regression
 
 
 def compute_bench(alpha, n_samples, n_features, precompute):
@@ -50,9 +52,7 @@ def compute_bench(alpha, n_samples, n_features, precompute):
 
             gc.collect()
             print("- benchmarking LassoLars")
-            clf = LassoLars(
-                alpha=alpha, fit_intercept=False, normalize=False, precompute=precompute
-            )
+            clf = LassoLars(alpha=alpha, fit_intercept=False, precompute=precompute)
             tstart = time()
             clf.fit(X, Y)
             lars_lasso_results.append(time() - tstart)
@@ -61,8 +61,9 @@ def compute_bench(alpha, n_samples, n_features, precompute):
 
 
 if __name__ == "__main__":
-    from sklearn.linear_model import Lasso, LassoLars
     import matplotlib.pyplot as plt
+
+    from xlearn.linear_model import Lasso, LassoLars
 
     alpha = 0.01  # regularization parameter
 
@@ -72,7 +73,7 @@ if __name__ == "__main__":
         alpha, list_n_samples, [n_features], precompute=True
     )
 
-    plt.figure("scikit-learn LASSO benchmark results")
+    plt.figure("jax-ml LASSO benchmark results")
     plt.subplot(211)
     plt.plot(list_n_samples, lasso_results, "b-", label="Lasso")
     plt.plot(list_n_samples, lars_lasso_results, "r-", label="LassoLars")

@@ -3,7 +3,7 @@
 Combine predictors using stacking
 =================================
 
-.. currentmodule:: sklearn
+.. currentmodule:: xlearn
 
 Stacking refers to a method to blend estimators. In this strategy, some
 estimators are individually fitted on some training data while a final
@@ -22,9 +22,9 @@ stacking strategy. Stacking slightly improves the overall performance.
 
 # %%
 # Download the dataset
-##############################################################################
+######################
 #
-# We will use `Ames Housing`_ dataset which was first compiled by Dean De Cock
+# We will use the `Ames Housing`_ dataset which was first compiled by Dean De Cock
 # and became better known after it was used in Kaggle challenge. It is a set
 # of 1460 residential homes in Ames, Iowa, each described by 80 features. We
 # will use it to predict the final logarithmic price of the houses. In this
@@ -32,7 +32,7 @@ stacking strategy. Stacking slightly improves the overall performance.
 # GradientBoostingRegressor() and limit number of entries (here we won't go
 # into the details on how to select the most interesting features).
 #
-# The Ames housing dataset is not shipped with scikit-learn and therefore we
+# The Ames housing dataset is not shipped with jax-ml and therefore we
 # will fetch it from `OpenML`_.
 #
 # .. _`Ames Housing`: http://jse.amstat.org/v19n3/decock.pdf
@@ -40,12 +40,12 @@ stacking strategy. Stacking slightly improves the overall performance.
 
 import numpy as np
 
-from sklearn.datasets import fetch_openml
-from sklearn.utils import shuffle
+from xlearn.datasets import fetch_openml
+from xlearn.utils import shuffle
 
 
 def load_ames_housing():
-    df = fetch_openml(name="house_prices", as_frame=True, parser="pandas")
+    df = fetch_openml(name="house_prices", as_frame=True)
     X = df.data
     y = df.target
 
@@ -72,26 +72,25 @@ def load_ames_housing():
         "MoSold",
     ]
 
-    X = X[features]
+    X = X.loc[:, features]
     X, y = shuffle(X, y, random_state=0)
 
-    X = X[:600]
-    y = y[:600]
+    X = X.iloc[:600]
+    y = y.iloc[:600]
     return X, np.log(y)
 
 
 X, y = load_ames_housing()
 
-
 # %%
 # Make pipeline to preprocess the data
-##############################################################################
+######################################
 #
 # Before we can use Ames dataset we still need to do some preprocessing.
 # First, we will select the categorical and numerical columns of the dataset to
 # construct the first step of the pipeline.
 
-from sklearn.compose import make_column_selector
+from xlearn.compose import make_column_selector
 
 cat_selector = make_column_selector(dtype_include=object)
 num_selector = make_column_selector(dtype_include=np.number)
@@ -111,10 +110,10 @@ num_selector(X)
 #
 # We will first design the pipeline required for the tree-based models.
 
-from sklearn.compose import make_column_transformer
-from sklearn.impute import SimpleImputer
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import OrdinalEncoder
+from xlearn.compose import make_column_transformer
+from xlearn.impute import SimpleImputer
+from xlearn.pipeline import make_pipeline
+from xlearn.preprocessing import OrdinalEncoder
 
 cat_tree_processor = OrdinalEncoder(
     handle_unknown="use_encoded_value",
@@ -132,8 +131,7 @@ tree_preprocessor
 # Then, we will now define the preprocessor used when the ending regressor
 # is a linear model.
 
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import StandardScaler
+from xlearn.preprocessing import OneHotEncoder, StandardScaler
 
 cat_linear_processor = OneHotEncoder(handle_unknown="ignore")
 num_linear_processor = make_pipeline(
@@ -147,7 +145,7 @@ linear_preprocessor
 
 # %%
 # Stack of predictors on a single data set
-##############################################################################
+##########################################
 #
 # It is sometimes tedious to find the model which will best perform on a given
 # dataset. Stacking provide an alternative by combining the outputs of several
@@ -161,23 +159,23 @@ linear_preprocessor
 # .. note::
 #    Although we will make new pipelines with the processors which we wrote in
 #    the previous section for the 3 learners, the final estimator
-#    :class:`~sklearn.linear_model.RidgeCV()` does not need preprocessing of
+#    :class:`~xlearn.linear_model.RidgeCV()` does not need preprocessing of
 #    the data as it will be fed with the already preprocessed output from the 3
 #    learners.
 
-from sklearn.linear_model import LassoCV
+from xlearn.linear_model import LassoCV
 
 lasso_pipeline = make_pipeline(linear_preprocessor, LassoCV())
 lasso_pipeline
 
 # %%
-from sklearn.ensemble import RandomForestRegressor
+from xlearn.ensemble import RandomForestRegressor
 
 rf_pipeline = make_pipeline(tree_preprocessor, RandomForestRegressor(random_state=42))
 rf_pipeline
 
 # %%
-from sklearn.ensemble import HistGradientBoostingRegressor
+from xlearn.ensemble import HistGradientBoostingRegressor
 
 gbdt_pipeline = make_pipeline(
     tree_preprocessor, HistGradientBoostingRegressor(random_state=0)
@@ -185,8 +183,8 @@ gbdt_pipeline = make_pipeline(
 gbdt_pipeline
 
 # %%
-from sklearn.ensemble import StackingRegressor
-from sklearn.linear_model import RidgeCV
+from xlearn.ensemble import StackingRegressor
+from xlearn.linear_model import RidgeCV
 
 estimators = [
     ("Random Forest", rf_pipeline),
@@ -199,45 +197,19 @@ stacking_regressor
 
 # %%
 # Measure and plot the results
-##############################################################################
+##############################
 #
 # Now we can use Ames Housing dataset to make the predictions. We check the
 # performance of each individual predictor as well as of the stack of the
 # regressors.
-#
-# The function ``plot_regression_results`` is used to plot the predicted and
-# true targets.
 
 
 import time
+
 import matplotlib.pyplot as plt
-from sklearn.model_selection import cross_validate, cross_val_predict
 
-
-def plot_regression_results(ax, y_true, y_pred, title, scores, elapsed_time):
-    """Scatter plot of the predicted vs true targets."""
-    ax.plot(
-        [y_true.min(), y_true.max()], [y_true.min(), y_true.max()], "--r", linewidth=2
-    )
-    ax.scatter(y_true, y_pred, alpha=0.2)
-
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-    ax.get_xaxis().tick_bottom()
-    ax.get_yaxis().tick_left()
-    ax.spines["left"].set_position(("outward", 10))
-    ax.spines["bottom"].set_position(("outward", 10))
-    ax.set_xlim([y_true.min(), y_true.max()])
-    ax.set_ylim([y_true.min(), y_true.max()])
-    ax.set_xlabel("Measured")
-    ax.set_ylabel("Predicted")
-    extra = plt.Rectangle(
-        (0, 0), 0, 0, fc="w", fill=False, edgecolor="none", linewidth=0
-    )
-    ax.legend([extra], [scores], loc="upper left")
-    title = title + "\n Evaluation in {:.2f} seconds".format(elapsed_time)
-    ax.set_title(title)
-
+from xlearn.metrics import PredictionErrorDisplay
+from xlearn.model_selection import cross_val_predict, cross_validate
 
 fig, axs = plt.subplots(2, 2, figsize=(9, 7))
 axs = np.ravel(axs)
@@ -245,27 +217,36 @@ axs = np.ravel(axs)
 for ax, (name, est) in zip(
     axs, estimators + [("Stacking Regressor", stacking_regressor)]
 ):
+    scorers = {"R2": "r2", "MAE": "neg_mean_absolute_error"}
+
     start_time = time.time()
-    score = cross_validate(
-        est, X, y, scoring=["r2", "neg_mean_absolute_error"], n_jobs=2, verbose=0
+    scores = cross_validate(
+        est, X, y, scoring=list(scorers.values()), n_jobs=-1, verbose=0
     )
     elapsed_time = time.time() - start_time
 
-    y_pred = cross_val_predict(est, X, y, n_jobs=2, verbose=0)
+    y_pred = cross_val_predict(est, X, y, n_jobs=-1, verbose=0)
+    scores = {
+        key: (
+            f"{np.abs(np.mean(scores[f'test_{value}'])):.2f} +- "
+            f"{np.std(scores[f'test_{value}']):.2f}"
+        )
+        for key, value in scorers.items()
+    }
 
-    plot_regression_results(
-        ax,
-        y,
-        y_pred,
-        name,
-        (r"$R^2={:.2f} \pm {:.2f}$" + "\n" + r"$MAE={:.2f} \pm {:.2f}$").format(
-            np.mean(score["test_r2"]),
-            np.std(score["test_r2"]),
-            -np.mean(score["test_neg_mean_absolute_error"]),
-            np.std(score["test_neg_mean_absolute_error"]),
-        ),
-        elapsed_time,
+    display = PredictionErrorDisplay.from_predictions(
+        y_true=y,
+        y_pred=y_pred,
+        kind="actual_vs_predicted",
+        ax=ax,
+        scatter_kwargs={"alpha": 0.2, "color": "tab:blue"},
+        line_kwargs={"color": "tab:red"},
     )
+    ax.set_title(f"{name}\nEvaluation in {elapsed_time:.2f} seconds")
+
+    for name, score in scores.items():
+        ax.plot([], [], " ", label=f"{name}: {score}")
+    ax.legend(loc="upper left")
 
 plt.suptitle("Single predictors versus stacked predictors")
 plt.tight_layout()

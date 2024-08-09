@@ -3,25 +3,24 @@
 A comparison of multilabel target formats and metrics over them
 """
 
-from timeit import timeit
-from functools import partial
-import itertools
 import argparse
+import itertools
 import sys
+from functools import partial
+from timeit import timeit
 
 import matplotlib.pyplot as plt
-import scipy.sparse as sp
 import numpy as np
+import scipy.sparse as sp
 
-from sklearn.datasets import make_multilabel_classification
-from sklearn.metrics import (
-    f1_score,
+from xlearn.datasets import make_multilabel_classification
+from xlearn.metrics import (
     accuracy_score,
+    f1_score,
     hamming_loss,
     jaccard_similarity_score,
 )
-from sklearn.utils._testing import ignore_warnings
-
+from xlearn.utils._testing import ignore_warnings
 
 METRICS = {
     "f1": partial(f1_score, average="micro"),
@@ -131,7 +130,7 @@ def _plot(
     Plot the results by metric, format and some other variable given by
     x_label
     """
-    fig = plt.figure("scikit-learn multilabel metrics benchmarks")
+    fig = plt.figure("jax-ml multilabel metrics benchmarks")
     plt.title(title)
     ax = fig.add_subplot(111)
     for i, metric in enumerate(metrics):

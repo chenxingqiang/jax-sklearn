@@ -1,32 +1,30 @@
 """
 Benchmarks of Non-Negative Matrix Factorization
 """
+
 # Authors: Tom Dupre la Tour (benchmark)
 #          Chih-Jen Linn (original projected gradient NMF implementation)
 #          Anthony Di Franco (projected gradient, Python and NumPy port)
 # License: BSD 3 clause
 
-from time import time
+import numbers
 import sys
 import warnings
-import numbers
+from time import time
 
-import numpy as np
 import matplotlib.pyplot as plt
-from joblib import Memory
+import numpy as np
 import pandas
+from joblib import Memory
 
-from sklearn.utils._testing import ignore_warnings
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import NMF
-from sklearn.decomposition._nmf import _initialize_nmf
-from sklearn.decomposition._nmf import _beta_divergence
-from sklearn.decomposition._nmf import _check_init
-from sklearn.exceptions import ConvergenceWarning
-from sklearn.utils.extmath import safe_sparse_dot, squared_norm
-from sklearn.utils import check_array
-from sklearn.utils.validation import check_is_fitted, check_non_negative
-
+from xlearn.decomposition import NMF
+from xlearn.decomposition._nmf import _beta_divergence, _check_init, _initialize_nmf
+from xlearn.exceptions import ConvergenceWarning
+from xlearn.feature_extraction.text import TfidfVectorizer
+from xlearn.utils import check_array
+from xlearn.utils._testing import ignore_warnings
+from xlearn.utils.extmath import safe_sparse_dot, squared_norm
+from xlearn.utils.validation import check_is_fitted, check_non_negative
 
 mem = Memory(cachedir=".", verbose=0)
 
@@ -34,14 +32,14 @@ mem = Memory(cachedir=".", verbose=0)
 # Start of _PGNMF #
 ###################
 # This class implements a projected gradient solver for the NMF.
-# The projected gradient solver was removed from scikit-learn in version 0.19,
+# The projected gradient solver was removed from jax-ml in version 0.19,
 # and a simplified copy is used here for comparison purpose only.
 # It is not tested, and it may change or disappear without notice.
 
 
 def _norm(x):
     """Dot product-based Euclidean norm implementation
-    See: http://fseoane.net/blog/2011/computing-the-vector-norm/
+    See: https://fa.bianp.net/blog/2011/computing-the-vector-norm/
     """
     return np.sqrt(squared_norm(x))
 
@@ -219,7 +217,8 @@ class _PGNMF(NMF):
             tol=tol,
             max_iter=max_iter,
             random_state=random_state,
-            alpha=alpha,
+            alpha_W=alpha,
+            alpha_H=alpha,
             l1_ratio=l1_ratio,
         )
         self.nls_max_iter = nls_max_iter
@@ -260,8 +259,7 @@ class _PGNMF(NMF):
         if not isinstance(self.max_iter, numbers.Integral) or self.max_iter < 0:
             raise ValueError(
                 "Maximum number of iterations must be a positive "
-                "integer; got (max_iter=%r)"
-                % self.max_iter
+                "integer; got (max_iter=%r)" % self.max_iter
             )
         if not isinstance(self.tol, numbers.Number) or self.tol < 0:
             raise ValueError(
@@ -307,8 +305,7 @@ class _PGNMF(NMF):
         if n_iter == self.max_iter and self.tol > 0:
             warnings.warn(
                 "Maximum number of iteration %d reached. Increase it"
-                " to improve convergence."
-                % self.max_iter,
+                " to improve convergence." % self.max_iter,
                 ConvergenceWarning,
             )
 
@@ -414,7 +411,7 @@ def run_bench(X, clfs, plot_name, n_components, tol, alpha, l1_ratio):
 def load_20news():
     print("Loading 20 newsgroups dataset")
     print("-----------------------------")
-    from sklearn.datasets import fetch_20newsgroups
+    from xlearn.datasets import fetch_20newsgroups
 
     dataset = fetch_20newsgroups(
         shuffle=True, random_state=1, remove=("headers", "footers", "quotes")
@@ -427,7 +424,7 @@ def load_20news():
 def load_faces():
     print("Loading Olivetti face dataset")
     print("-----------------------------")
-    from sklearn.datasets import fetch_olivetti_faces
+    from xlearn.datasets import fetch_olivetti_faces
 
     faces = fetch_olivetti_faces(shuffle=True)
     return faces.data

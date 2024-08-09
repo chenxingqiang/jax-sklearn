@@ -1,6 +1,6 @@
 import numpy as np
 
-from sklearn.metrics import balanced_accuracy_score, r2_score
+from xlearn.metrics import balanced_accuracy_score, r2_score
 
 
 def neg_mean_inertia(X, labels, centers):

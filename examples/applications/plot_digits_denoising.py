@@ -3,21 +3,21 @@
 Image denoising using kernel PCA
 ================================
 
-This example shows how to use :class:`~sklearn.decomposition.KernelPCA` to
+This example shows how to use :class:`~xlearn.decomposition.KernelPCA` to
 denoise images. In short, we take advantage of the approximation function
 learned during `fit` to reconstruct the original image.
 
 We will compare the results with an exact reconstruction using
-:class:`~sklearn.decomposition.PCA`.
+:class:`~xlearn.decomposition.PCA`.
 
 We will use USPS digits dataset to reproduce presented in Sect. 4 of [1]_.
 
-.. topic:: References
+.. rubric:: References
 
-   .. [1] `Bakır, Gökhan H., Jason Weston, and Bernhard Schölkopf.
-      "Learning to find pre-images."
-      Advances in neural information processing systems 16 (2004): 449-456.
-      <https://papers.nips.cc/paper/2003/file/ac1ad983e08ad3304a97e147f522747e-Paper.pdf>`_
+.. [1] `Bakır, Gökhan H., Jason Weston, and Bernhard Schölkopf.
+    "Learning to find pre-images."
+    Advances in neural information processing systems 16 (2004): 449-456.
+    <https://papers.nips.cc/paper/2003/file/ac1ad983e08ad3304a97e147f522747e-Paper.pdf>`_
 
 """
 
@@ -29,14 +29,15 @@ We will use USPS digits dataset to reproduce presented in Sect. 4 of [1]_.
 # ---------------------------
 #
 # The USPS digits datasets is available in OpenML. We use
-# :func:`~sklearn.datasets.fetch_openml` to get this dataset. In addition, we
+# :func:`~xlearn.datasets.fetch_openml` to get this dataset. In addition, we
 # normalize the dataset such that all pixel values are in the range (0, 1).
 import numpy as np
-from sklearn.datasets import fetch_openml
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import train_test_split
 
-X, y = fetch_openml(data_id=41082, as_frame=False, return_X_y=True, parser="pandas")
+from xlearn.datasets import fetch_openml
+from xlearn.model_selection import train_test_split
+from xlearn.preprocessing import MinMaxScaler
+
+X, y = fetch_openml(data_id=41082, as_frame=False, return_X_y=True)
 X = MinMaxScaler().fit_transform(X)
 
 # %%
@@ -96,11 +97,16 @@ plot_digits(
 #
 # We can now learn our PCA basis using both a linear PCA and a kernel PCA that
 # uses a radial basis function (RBF) kernel.
-from sklearn.decomposition import PCA, KernelPCA
+from xlearn.decomposition import PCA, KernelPCA
 
-pca = PCA(n_components=32)
+pca = PCA(n_components=32, random_state=42)
 kernel_pca = KernelPCA(
-    n_components=400, kernel="rbf", gamma=1e-3, fit_inverse_transform=True, alpha=5e-3
+    n_components=400,
+    kernel="rbf",
+    gamma=1e-3,
+    fit_inverse_transform=True,
+    alpha=5e-3,
+    random_state=42,
 )
 
 pca.fit(X_train_noisy)
@@ -130,8 +136,10 @@ plot_digits(
 )
 plot_digits(
     X_reconstructed_kernel_pca,
-    "Kernel PCA reconstruction\n"
-    f"MSE: {np.mean((X_test - X_reconstructed_kernel_pca) ** 2):.2f}",
+    (
+        "Kernel PCA reconstruction\n"
+        f"MSE: {np.mean((X_test - X_reconstructed_kernel_pca) ** 2):.2f}"
+    ),
 )
 
 # %%

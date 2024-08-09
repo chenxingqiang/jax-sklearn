@@ -19,10 +19,12 @@ that are linked tend to fluctuate in relation to each other during a day.
 #
 # The data is from 2003 - 2008. This is reasonably calm: (not too long ago so
 # that we get high-tech firms, and before the 2008 crash). This kind of
-# historical data can be obtained from APIs like the quandl.com and
-# alphavantage.co .
+# historical data can be obtained from APIs like the
+# `data.nasdaq.com <https://data.nasdaq.com/>`_ and
+# `alphavantage.co <https://www.alphavantage.co/>`_.
 
 import sys
+
 import numpy as np
 import pandas as pd
 
@@ -93,7 +95,7 @@ quotes = []
 for symbol in symbols:
     print("Fetching quote history for %r" % symbol, file=sys.stderr)
     url = (
-        "https://raw.githubusercontent.com/scikit-learn/examples-data/"
+        "https://raw.githubusercontent.com/jax-ml/examples-data/"
         "master/financial-data/{}.csv"
     )
     quotes.append(pd.read_csv(url.format(symbol)))
@@ -112,11 +114,11 @@ variation = close_prices - open_prices
 #
 # We use sparse inverse covariance estimation to find which quotes are
 # correlated conditionally on the others. Specifically, sparse inverse
-# covariance gives us a graph, that is a list of connection. For each
-# symbol, the symbols that it is connected too are those useful to explain
+# covariance gives us a graph, that is a list of connections. For each
+# symbol, the symbols that it is connected to are those useful to explain
 # its fluctuations.
 
-from sklearn import covariance
+from xlearn import covariance
 
 alphas = np.logspace(-1.5, 1, num=10)
 edge_model = covariance.GraphicalLassoCV(alphas=alphas)
@@ -133,7 +135,7 @@ edge_model.fit(X)
 #
 # We use clustering to group together quotes that behave similarly. Here,
 # amongst the :ref:`various clustering techniques <clustering>` available
-# in the scikit-learn, we use :ref:`affinity_propagation` as it does
+# in the jax-ml, we use :ref:`affinity_propagation` as it does
 # not enforce equal-size clusters, and it can choose automatically the
 # number of clusters from the data.
 #
@@ -143,7 +145,7 @@ edge_model.fit(X)
 # be considered as having a similar impact at the level of the full stock
 # market.
 
-from sklearn import cluster
+from xlearn import cluster
 
 _, labels = cluster.affinity_propagation(edge_model.covariance_, random_state=0)
 n_labels = labels.max()
@@ -165,7 +167,7 @@ for i in range(n_labels + 1):
 # Finding a low-dimension embedding for visualization: find the best position of
 # the nodes (the stocks) on a 2D plane
 
-from sklearn import manifold
+from xlearn import manifold
 
 node_position_model = manifold.LocallyLinearEmbedding(
     n_components=2, eigen_solver="dense", n_neighbors=6
@@ -228,7 +230,6 @@ ax.add_collection(lc)
 # Add a label to each node. The challenge here is that we want to
 # position the labels to avoid overlap with other labels
 for index, (name, label, (x, y)) in enumerate(zip(names, labels, embedding.T)):
-
     dx = x - embedding[0]
     dx[index] = 1
     dy = y - embedding[1]
@@ -262,12 +263,12 @@ for index, (name, label, (x, y)) in enumerate(zip(names, labels, embedding.T)):
     )
 
 plt.xlim(
-    embedding[0].min() - 0.15 * embedding[0].ptp(),
-    embedding[0].max() + 0.10 * embedding[0].ptp(),
+    embedding[0].min() - 0.15 * np.ptp(embedding[0]),
+    embedding[0].max() + 0.10 * np.ptp(embedding[0]),
 )
 plt.ylim(
-    embedding[1].min() - 0.03 * embedding[1].ptp(),
-    embedding[1].max() + 0.03 * embedding[1].ptp(),
+    embedding[1].min() - 0.03 * np.ptp(embedding[1]),
+    embedding[1].max() + 0.03 * np.ptp(embedding[1]),
 )
 
 plt.show()

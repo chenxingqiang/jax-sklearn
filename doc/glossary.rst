@@ -1,4 +1,4 @@
-.. currentmodule:: sklearn
+.. currentmodule:: xlearn
 
 .. _glossary:
 
@@ -66,10 +66,11 @@ General Concepts
         It excludes:
 
         * a :term:`sparse matrix`
+        * a sparse array
         * an iterator
         * a generator
 
-        Note that *output* from scikit-learn estimators and functions (e.g.
+        Note that *output* from jax-ml estimators and functions (e.g.
         predictions) should generally be arrays or sparse matrices, or lists
         thereof (as in multi-output :class:`tree.DecisionTreeClassifier`'s
         ``predict_proba``). An estimator where ``predict()`` returns a list or
@@ -135,7 +136,7 @@ General Concepts
         Serialization
             We make no assurances that pickling an estimator in one version
             will allow it to be unpickled to an equivalent model in the
-            subsequent version.  (For estimators in the sklearn package, we
+            subsequent version.  (For estimators in the xlearn package, we
             issue a warning when this unpickling is attempted, even if it may
             happen to work.)  See :ref:`persistence_limitations`.
         :func:`utils.estimator_checks.check_estimator`
@@ -158,27 +159,27 @@ General Concepts
         A categorical or nominal :term:`feature` is one that has a
         finite set of discrete values across the population of data.
         These are commonly represented as columns of integers or
-        strings. Strings will be rejected by most scikit-learn
+        strings. Strings will be rejected by most jax-ml
         estimators, and integers will be treated as ordinal or
         count-valued. For the use with most estimators, categorical
         variables should be one-hot encoded. Notable exceptions include
         tree-based models such as random forests and gradient boosting
         models that often work better and faster with integer-coded
         categorical variables.
-        :class:`~sklearn.preprocessing.OrdinalEncoder` helps encoding
+        :class:`~xlearn.preprocessing.OrdinalEncoder` helps encoding
         string-valued categorical features as ordinal integers, and
-        :class:`~sklearn.preprocessing.OneHotEncoder` can be used to
+        :class:`~xlearn.preprocessing.OneHotEncoder` can be used to
         one-hot encode categorical features.
         See also :ref:`preprocessing_categorical_features` and the
         `categorical-encoding
-        <https://github.com/scikit-learn-contrib/category_encoders>`_
+        <https://github.com/jax-ml-contrib/category_encoders>`_
         package for tools related to encoding categorical features.
 
     clone
     cloned
         To copy an :term:`estimator instance` and create a new one with
         identical :term:`parameters`, but without any fitted
-        :term:`attributes`, using :func:`~sklearn.base.clone`.
+        :term:`attributes`, using :func:`~xlearn.base.clone`.
 
         When ``fit`` is called, a :term:`meta-estimator` usually clones
         a wrapped estimator instance before fitting the cloned instance.
@@ -198,12 +199,35 @@ General Concepts
         Scikit-learn to check they comply with basic API conventions.  They are
         available for external use through
         :func:`utils.estimator_checks.check_estimator`, with most of the
-        implementation in ``sklearn/utils/estimator_checks.py``.
+        implementation in ``xlearn/utils/estimator_checks.py``.
 
         Note: Some exceptions to the common testing regime are currently
         hard-coded into the library, but we hope to replace this by marking
         exceptional behaviours on the estimator using semantic :term:`estimator
         tags`.
+
+    cross-fitting
+    cross fitting
+        A resampling method that iteratively partitions data into mutually
+        exclusive subsets to fit two stages. During the first stage, the
+        mutually exclusive subsets enable predictions or transformations to be
+        computed on data not seen during training. The computed data is then
+        used in the second stage. The objective is to avoid having any
+        overfitting in the first stage introduce bias into the input data
+        distribution of the second stage.
+        For examples of its use, see: :class:`~preprocessing.TargetEncoder`,
+        :class:`~ensemble.StackingClassifier`,
+        :class:`~ensemble.StackingRegressor` and
+        :class:`~calibration.CalibratedClassifierCV`.
+
+    cross-validation
+    cross validation
+        A resampling method that iteratively partitions data into mutually
+        exclusive 'train' and 'test' subsets so model performance can be
+        evaluated on unseen data. This conserves data as avoids the need to hold
+        out a 'validation' dataset and accounts for variability as multiple
+        rounds of cross validation are generally performed.
+        See :ref:`User Guide <cross_validation>` for more details.
 
     deprecation
         We use deprecation to slowly violate our :term:`backwards
@@ -250,7 +274,7 @@ General Concepts
     data type
         NumPy arrays assume a homogeneous data type throughout, available in
         the ``.dtype`` attribute of an array (or sparse matrix). We generally
-        assume simple data types for scikit-learn data: float or integer.
+        assume simple data types for jax-ml data: float or integer.
         We may support object or string data types for arrays before encoding
         or vectorizing.  Our estimators do not work with struct arrays, for
         instance.
@@ -262,7 +286,26 @@ General Concepts
         Note that in this case, the precision can be platform dependent.
         The `numeric` dtype refers to accepting both `integer` and `floating`.
 
-        TODO: Mention efficiency and precision issues; casting policy.
+        When it comes to choosing between 64-bit dtype (i.e. `np.float64` and
+        `np.int64`) and 32-bit dtype (i.e. `np.float32` and `np.int32`), it
+        boils down to a trade-off between efficiency and precision. The 64-bit
+        types offer more accurate results due to their lower floating-point
+        error, but demand more computational resources, resulting in slower
+        operations and increased memory usage. In contrast, 32-bit types
+        promise enhanced operation speed and reduced memory consumption, but
+        introduce a larger floating-point error. The efficiency improvement are
+        dependent on lower level optimization such as like vectorization,
+        single instruction multiple dispatch (SIMD), or cache optimization but
+        crucially on the compatibility of the algorithm in use.
+
+        Specifically, the choice of precision should account for whether the
+        employed algorithm can effectively leverage `np.float32`. Some
+        algorithms, especially certain minimization methods, are exclusively
+        coded for `np.float64`, meaning that even if `np.float32` is passed, it
+        triggers an automatic conversion back to `np.float64`. This not only
+        negates the intended computational savings but also introduces
+        additional overhead, making operations with `np.float32` unexpectedly
+        slower and more memory-intensive due to this extra conversion step.
 
     duck typing
         We try to apply `duck typing
@@ -281,10 +324,10 @@ General Concepts
           can only determine if ``clf`` is probabilistic after fitting it on
           some data::
 
-              >>> from sklearn.model_selection import GridSearchCV
-              >>> from sklearn.linear_model import SGDClassifier
+              >>> from xlearn.model_selection import GridSearchCV
+              >>> from xlearn.linear_model import SGDClassifier
               >>> clf = GridSearchCV(SGDClassifier(),
-              ...                    param_grid={'loss': ['log', 'hinge']})
+              ...                    param_grid={'loss': ['log_loss', 'hinge']})
 
           This means that we can only check for duck-typed attributes after
           fitting, and that we must be careful to make :term:`meta-estimators`
@@ -324,7 +367,7 @@ General Concepts
         We try to give examples of basic usage for most functions and
         classes in the API:
 
-        * as doctests in their docstrings (i.e. within the ``sklearn/`` library
+        * as doctests in their docstrings (i.e. within the ``xlearn/`` library
           code itself).
         * as examples in the :ref:`example gallery <general_examples>`
           rendered (using `sphinx-gallery
@@ -344,8 +387,8 @@ General Concepts
     evaluation metric
     evaluation metrics
         Evaluation metrics give a measure of how well a model performs.  We may
-        use this term specifically to refer to the functions in :mod:`metrics`
-        (disregarding :mod:`metrics.pairwise`), as distinct from the
+        use this term specifically to refer to the functions in :mod:`~xlearn.metrics`
+        (disregarding :mod:`~xlearn.metrics.pairwise`), as distinct from the
         :term:`score` method and the :term:`scoring` API used in cross
         validation. See :ref:`model_evaluation`.
 
@@ -360,7 +403,7 @@ General Concepts
         the scoring API.
 
         Note that some estimators can calculate metrics that are not included
-        in :mod:`metrics` and are estimator-specific, notably model
+        in :mod:`~xlearn.metrics` and are estimator-specific, notably model
         likelihoods.
 
     estimator tags
@@ -398,7 +441,7 @@ General Concepts
         Elsewhere features are known as attributes, predictors, regressors, or
         independent variables.
 
-        Nearly all estimators in scikit-learn assume that features are numeric,
+        Nearly all estimators in jax-ml assume that features are numeric,
         finite and not missing, even when they have semantically distinct
         domains and distributions (categorical, ordinal, count-valued,
         real-valued, interval). See also :term:`categorical feature` and
@@ -494,8 +537,8 @@ General Concepts
         applying a :term:`transformer` to the entirety of a dataset rather
         than each training portion in a cross validation split.
 
-        We aim to provide interfaces (such as :mod:`pipeline` and
-        :mod:`model_selection`) that shield the user from data leakage.
+        We aim to provide interfaces (such as :mod:`~xlearn.pipeline` and
+        :mod:`~xlearn.model_selection`) that shield the user from data leakage.
 
     memmapping
     memory map
@@ -575,7 +618,7 @@ General Concepts
     params
         We mostly use *parameter* to refer to the aspects of an estimator that
         can be specified in its construction. For example, ``max_depth`` and
-        ``random_state`` are parameters of :class:`RandomForestClassifier`.
+        ``random_state`` are parameters of :class:`~ensemble.RandomForestClassifier`.
         Parameters to an estimator's constructor are stored unmodified as
         attributes on the estimator instance, and conventionally start with an
         alphabetic character and end with an alphanumeric character.  Each
@@ -595,10 +638,10 @@ General Concepts
         meta-estimator.  Ordinarily, these nested parameters are denoted by
         using a :term:`double underscore` (``__``) to separate between the
         estimator-as-parameter and its parameter.  Thus ``clf =
-        BaggingClassifier(base_estimator=DecisionTreeClassifier(max_depth=3))``
-        has a deep parameter ``base_estimator__max_depth`` with value ``3``,
-        which is accessible with ``clf.base_estimator.max_depth`` or
-        ``clf.get_params()['base_estimator__max_depth']``.
+        BaggingClassifier(estimator=DecisionTreeClassifier(max_depth=3))``
+        has a deep parameter ``estimator__max_depth`` with value ``3``,
+        which is accessible with ``clf.estimator.max_depth`` or
+        ``clf.get_params()['estimator__max_depth']``.
 
         The list of parameters and their current values can be retrieved from
         an :term:`estimator instance` using its :term:`get_params` method.
@@ -620,7 +663,7 @@ General Concepts
         implementations of distance metrics (as well as improper metrics like
         Cosine Distance) through :func:`metrics.pairwise_distances`, and of
         kernel functions (a constrained class of similarity functions) in
-        :func:`metrics.pairwise_kernels`.  These can compute pairwise distance
+        :func:`metrics.pairwise.pairwise_kernels`.  These can compute pairwise distance
         matrices that are symmetric and hence store data redundantly.
 
         See also :term:`precomputed` and :term:`metric`.
@@ -680,13 +723,13 @@ General Concepts
         sample properties and their routing in :term:`meta-estimators`, though
         a ``fit_params`` parameter is often used.
 
-    scikit-learn-contrib
+    jax-ml-contrib
         A venue for publishing Scikit-learn-compatible libraries that are
         broadly authorized by the core developers and the contrib community,
         but not maintained by the core developer team.
-        See https://scikit-learn-contrib.github.io.
+        See https://jax-ml-contrib.github.io.
 
-    scikit-learn enhancement proposals
+    jax-ml enhancement proposals
     SLEP
     SLEPs
         Changes to the API principles and changes to dependencies or supported
@@ -694,10 +737,10 @@ General Concepts
         decision-making process outlined in :ref:`governance`.
         For all votes, a proposal must have been made public and discussed before the
         vote. Such a proposal must be a consolidated document, in the form of a
-        ‘Scikit-Learn Enhancement Proposal’ (SLEP), rather than a long discussion on an
+        "Scikit-Learn Enhancement Proposal" (SLEP), rather than a long discussion on an
         issue. A SLEP must be submitted as a pull-request to
-        `enhancement proposals <https://scikit-learn-enhancement-proposals.readthedocs.io>`_ using the
-        `SLEP template <https://scikit-learn-enhancement-proposals.readthedocs.io/en/latest/slep_template.html>`_.
+        `enhancement proposals <https://jax-ml-enhancement-proposals.readthedocs.io>`_ using the
+        `SLEP template <https://jax-ml-enhancement-proposals.readthedocs.io/en/latest/slep_template.html>`_.
 
     semi-supervised
     semi-supervised learning
@@ -747,6 +790,15 @@ General Concepts
         sparse matrix, instead maintaining sparsity or raising an error if not
         possible (i.e. if an estimator does not / cannot support sparse
         matrices).
+
+    stateless
+        An estimator is stateless if it does not store any information that is
+        obtained during :term:`fit`. This information can be either parameters
+        learned during :term:`fit` or statistics computed from the
+        training data. An estimator is stateless if it has no :term:`attributes`
+        apart from ones set in `__init__`. Calling :term:`fit` for these
+        estimators will only validate the public :term:`attributes` passed
+        in `__init__`.
 
     supervised
     supervised learning
@@ -800,7 +852,7 @@ Class APIs and Estimator Types
 
         A classifier supports modeling some of :term:`binary`,
         :term:`multiclass`, :term:`multilabel`, or :term:`multiclass
-        multioutput` targets.  Within scikit-learn, all classifiers support
+        multioutput` targets.  Within jax-ml, all classifiers support
         multi-class classification, defaulting to using a one-vs-rest
         strategy over the binary classification problem.
 
@@ -835,7 +887,13 @@ Class APIs and Estimator Types
         * :term:`predict` if :term:`inductive`
 
     density estimator
-        TODO
+        An :term:`unsupervised` estimation of input probability density
+        function. Commonly used techniques are:
+
+        * :ref:`kernel_density` - uses a kernel function, controlled by the
+          bandwidth parameter to represent density;
+        * :ref:`Gaussian mixture <mixture>` - uses mixture of Gaussian models
+          to represent density.
 
     estimator
     estimators
@@ -875,7 +933,6 @@ Class APIs and Estimator Types
 
         * :term:`fit`
         * :term:`transform`
-        * :term:`get_feature_names`
         * :term:`get_feature_names_out`
 
     meta-estimator
@@ -1012,6 +1069,38 @@ Further examples:
 * :class:`gaussian_process.kernels.Kernel`
 * ``tree.Criterion``
 
+.. _glossary_metadata_routing:
+
+Metadata Routing
+================
+
+.. glossary::
+
+    consumer
+        An object which consumes :term:`metadata`. This object is usually an
+        :term:`estimator`, a :term:`scorer`, or a :term:`CV splitter`. Consuming
+        metadata means using it in calculations, e.g. using
+        :term:`sample_weight` to calculate a certain type of score. Being a
+        consumer doesn't mean that the object always receives a certain
+        metadata, rather it means it can use it if it is provided.
+
+    metadata
+        Data which is related to the given :term:`X` and :term:`y` data, but
+        is not directly a part of the data, e.g. :term:`sample_weight` or
+        :term:`groups`, and is passed along to different objects and methods,
+        e.g. to a :term:`scorer` or a :term:`CV splitter`.
+
+    router
+        An object which routes metadata to :term:`consumers <consumer>`. This
+        object is usually a :term:`meta-estimator`, e.g.
+        :class:`~pipeline.Pipeline` or :class:`~model_selection.GridSearchCV`.
+        Some routers can also be a consumer. This happens for example when a
+        meta-estimator uses the given :term:`groups`, and it also passes it
+        along to some of its sub-objects, such as a :term:`CV splitter`.
+
+Please refer to :ref:`Metadata Routing User Guide <metadata_routing>` for more
+information.
+
 .. _glossary_target_types:
 
 Target Types
@@ -1079,7 +1168,7 @@ Target Types
         For semi-supervised classification, :term:`unlabeled` samples should
         have the special label -1 in ``y``.
 
-        Within scikit-learn, all estimators supporting binary classification
+        Within jax-ml, all estimators supporting binary classification
         also support multiclass classification, using One-vs-Rest by default.
 
         A :class:`preprocessing.LabelEncoder` helps to canonicalize multiclass
@@ -1108,7 +1197,7 @@ Target Types
         XXX: For simplicity, we may not always support string class labels
         for multiclass multioutput, and integer class labels should be used.
 
-        :mod:`multioutput` provides estimators which estimate multi-output
+        :mod:`~xlearn.multioutput` provides estimators which estimate multi-output
         problems using multiple single-output estimators.  This may not fully
         account for dependencies among the different outputs, which methods
         natively handling the multioutput case (e.g. decision trees, nearest
@@ -1171,18 +1260,19 @@ Methods
             predicted class.  Columns are ordered according to
             :term:`classes_`.
         multilabel classification
-            Scikit-learn is inconsistent in its representation of multilabel
-            decision functions.  Some estimators represent it like multiclass
-            multioutput, i.e. a list of 2d arrays, each with two columns. Others
-            represent it with a single 2d array, whose columns correspond to
-            the individual binary classification decisions. The latter
-            representation is ambiguously identical to the multiclass
-            classification format, though its semantics differ: it should be
-            interpreted, like in the binary case, by thresholding at 0.
+            Scikit-learn is inconsistent in its representation of :term:`multilabel`
+            decision functions. It may be represented one of two ways:
 
-            TODO: `This gist
-            <https://gist.github.com/jnothman/4807b1b0266613c20ba4d1f88d0f8cf5>`_
-            highlights the use of the different formats for multilabel.
+            - List of 2d arrays, each array of shape: (`n_samples`, 2), like in
+              multiclass multioutput. List is of length `n_labels`.
+
+            - Single 2d array of shape (`n_samples`, `n_labels`), with each
+              'column' in the array corresponding to the individual binary
+              classification decisions. This is identical to the
+              multiclass classification format, though its semantics differ: it
+              should be interpreted, like in the binary case, by thresholding at
+              0.
+
         multioutput classification
             A list of 2d arrays, corresponding to each multiclass decision
             function.
@@ -1239,14 +1329,6 @@ Methods
         careful not to apply ``fit_transform`` to the entirety of a dataset
         (i.e. training and test data together) before further modelling, as
         this results in :term:`data leakage`.
-
-    ``get_feature_names``
-        Primarily for :term:`feature extractors`, but also used for other
-        transformers to provide string names for each column in the output of
-        the estimator's :term:`transform` method.  It outputs a list of
-        strings and may take a list of strings as input, corresponding
-        to the names of input columns from which output column names can
-        be generated.  By default input features are named x0, x1, ....
 
     ``get_feature_names_out``
         Primarily for :term:`feature extractors`, but also used for other
@@ -1467,7 +1549,7 @@ functions or non-estimator constructors.
         1: 1}, {0: 1, 1: 1}]`` instead of ``[{1:1}, {2:5}, {3:1}, {4:1}]``.
 
         The ``class_weight`` parameter is validated and interpreted with
-        :func:`utils.compute_class_weight`.
+        :func:`utils.class_weight.compute_class_weight`.
 
     ``cv``
         Determines a cross validation splitting strategy, as used in
@@ -1493,16 +1575,17 @@ functions or non-estimator constructors.
         With some exceptions (especially where not using cross validation at
         all is an option), the default is 5-fold.
 
-        ``cv`` values are validated and interpreted with :func:`utils.check_cv`.
+        ``cv`` values are validated and interpreted with
+        :func:`model_selection.check_cv`.
 
     ``kernel``
         Specifies the kernel function to be used by Kernel Method algorithms.
-        For example, the estimators :class:`SVC` and
-        :class:`GaussianProcessClassifier` both have a ``kernel`` parameter
-        that takes the name of the kernel to use as string or a callable
-        kernel function used to compute the kernel matrix. For more reference,
-        see the :ref:`kernel_approximation` and the :ref:`gaussian_process`
-        user guides.
+        For example, the estimators :class:`svm.SVC` and
+        :class:`gaussian_process.GaussianProcessClassifier` both have a
+        ``kernel`` parameter that takes the name of the kernel to use as string
+        or a callable kernel function used to compute the kernel matrix. For
+        more reference, see the :ref:`kernel_approximation` and the
+        :ref:`gaussian_process` user guides.
 
     ``max_iter``
         For estimators involving iterative optimization, this determines the
@@ -1569,7 +1652,7 @@ functions or non-estimator constructors.
         might be used in some configuration.
 
         For more details on the use of ``joblib`` and its interactions with
-        scikit-learn, please refer to our :ref:`parallelism notes
+        jax-ml, please refer to our :ref:`parallelism notes
         <parallelism>`.
 
     ``pos_label``
@@ -1587,7 +1670,7 @@ functions or non-estimator constructors.
 
         The passed value will have an effect on the reproducibility of the
         results returned by the function (:term:`fit`, :term:`split`, or any
-        other function like :func:`~sklearn.cluster.k_means`). `random_state`'s
+        other function like :func:`~xlearn.cluster.k_means`). `random_state`'s
         value may be:
 
         None (default)
@@ -1615,7 +1698,7 @@ functions or non-estimator constructors.
         input ``random_state`` and return a :class:`~numpy.random.RandomState`
         instance.
 
-        For more details on how to control the randomness of scikit-learn
+        For more details on how to control the randomness of jax-ml
         objects and avoid common pitfalls, you may refer to :ref:`randomness`.
 
     ``scoring``
@@ -1659,10 +1742,24 @@ functions or non-estimator constructors.
         in a subsequent call to :term:`fit`.
 
         Note that this is only applicable for some models and some
-        parameters, and even some orders of parameter values. For example,
-        ``warm_start`` may be used when building random forests to add more
-        trees to the forest (increasing ``n_estimators``) but not to reduce
-        their number.
+        parameters, and even some orders of parameter values. In general, there
+        is an interaction between ``warm_start`` and the parameter controlling
+        the number of iterations of the estimator.
+
+        For estimators imported from :mod:`~xlearn.ensemble`,
+        ``warm_start`` will interact with ``n_estimators`` or ``max_iter``.
+        For these models, the number of iterations, reported via
+        ``len(estimators_)`` or ``n_iter_``, corresponds the total number of
+        estimators/iterations learnt since the initialization of the model.
+        Thus, if a model was already initialized with `N` estimators, and `fit`
+        is called with ``n_estimators`` or ``max_iter`` set to `M`, the model
+        will train `M - N` new estimators.
+
+        Other models, usually using gradient-based solvers, have a different
+        behavior. They all expose a ``max_iter`` parameter. The reported
+        ``n_iter_`` corresponds to the number of iteration done during the last
+        call to ``fit`` and will be at most ``max_iter``. Thus, we do not
+        consider the state of the estimator since the initialization.
 
         :term:`partial_fit` also retains the model between calls, but differs:
         with ``warm_start`` the parameters change and the data is

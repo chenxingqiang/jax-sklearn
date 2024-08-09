@@ -6,13 +6,13 @@ SGD: Penalties
 Contours of where the penalty is equal to 1
 for the three penalties L1, L2 and elastic-net.
 
-All of the above are supported by :class:`~sklearn.linear_model.SGDClassifier`
-and :class:`~sklearn.linear_model.SGDRegressor`.
+All of the above are supported by :class:`~xlearn.linear_model.SGDClassifier`
+and :class:`~xlearn.linear_model.SGDRegressor`.
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 l1_color = "navy"
 l2_color = "c"

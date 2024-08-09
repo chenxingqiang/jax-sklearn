@@ -4,11 +4,10 @@ from time import time
 import numpy as np
 from numpy import random as nr
 
-from sklearn.cluster import KMeans, MiniBatchKMeans
+from xlearn.cluster import KMeans, MiniBatchKMeans
 
 
 def compute_bench(samples_range, features_range):
-
     it = 0
     results = defaultdict(lambda: [])
     chunk = 100
@@ -115,7 +114,7 @@ if __name__ == "__main__":
         [max(i) for i in [t for (label, t) in results.items() if "speed" not in label]]
     )
 
-    fig = plt.figure("scikit-learn K-Means benchmark results")
+    fig = plt.figure("jax-ml K-Means benchmark results")
     for c, (label, timings) in zip("brcy", sorted(results.items())):
         if "speed" in label:
             ax = fig.add_subplot(2, 2, 1, projection="3d")

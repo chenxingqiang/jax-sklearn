@@ -78,9 +78,9 @@ _ = plt.title(
 # ------------------------------------
 #
 # First, we would like to highlight the limitations of a linear model given
-# our dataset. We fit a :class:`~sklearn.linear_model.Ridge` and check the
+# our dataset. We fit a :class:`~xlearn.linear_model.Ridge` and check the
 # predictions of this model on our dataset.
-from sklearn.linear_model import Ridge
+from xlearn.linear_model import Ridge
 
 ridge = Ridge().fit(training_data, training_noisy_target)
 
@@ -113,9 +113,9 @@ _ = plt.title("Limitation of a linear model such as ridge")
 # kernel.
 #
 # In our case, we know that the true generative process is a periodic function.
-# We can use a :class:`~sklearn.gaussian_process.kernels.ExpSineSquared` kernel
+# We can use a :class:`~xlearn.gaussian_process.kernels.ExpSineSquared` kernel
 # which allows recovering the periodicity. The class
-# :class:`~sklearn.kernel_ridge.KernelRidge` will accept such a kernel.
+# :class:`~xlearn.kernel_ridge.KernelRidge` will accept such a kernel.
 #
 # Using this model together with a kernel is equivalent to embed the data
 # using the mapping function of the kernel and then apply a ridge regression.
@@ -123,10 +123,11 @@ _ = plt.title("Limitation of a linear model such as ridge")
 # between samples in the higher dimensional feature space is computed using the
 # "kernel trick".
 #
-# Thus, let's use such a :class:`~sklearn.kernel_ridge.KernelRidge`.
+# Thus, let's use such a :class:`~xlearn.kernel_ridge.KernelRidge`.
 import time
-from sklearn.gaussian_process.kernels import ExpSineSquared
-from sklearn.kernel_ridge import KernelRidge
+
+from xlearn.gaussian_process.kernels import ExpSineSquared
+from xlearn.kernel_ridge import KernelRidge
 
 kernel_ridge = KernelRidge(kernel=ExpSineSquared())
 
@@ -176,8 +177,9 @@ kernel_ridge.kernel
 # parameter and the kernel parameters.
 
 # %%
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.utils.fixes import loguniform
+from scipy.stats import loguniform
+
+from xlearn.model_selection import RandomizedSearchCV
 
 param_distributions = {
     "alpha": loguniform(1e0, 1e3),
@@ -239,15 +241,15 @@ _ = plt.title(
 # ...........................
 #
 # Now, we will use a
-# :class:`~sklearn.gaussian_process.GaussianProcessRegressor` to fit the same
+# :class:`~xlearn.gaussian_process.GaussianProcessRegressor` to fit the same
 # dataset. When training a Gaussian process, the hyperparameters of the kernel
 # are optimized during the fitting process. There is no need for an external
 # hyperparameter search. Here, we create a slightly more complex kernel than
 # for the kernel ridge regressor: we add a
-# :class:`~sklearn.gaussian_process.kernels.WhiteKernel` that is used to
+# :class:`~xlearn.gaussian_process.kernels.WhiteKernel` that is used to
 # estimate the noise in the dataset.
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import WhiteKernel
+from xlearn.gaussian_process import GaussianProcessRegressor
+from xlearn.gaussian_process.kernels import WhiteKernel
 
 kernel = 1.0 * ExpSineSquared(1.0, 5.0, periodicity_bounds=(1e-2, 1e1)) + WhiteKernel(
     1e-1
@@ -339,7 +341,7 @@ _ = plt.title("Comparison between kernel ridge and gaussian process regressor")
 # Gaussian process allows to combine kernels together. Thus, we could associate
 # the exponential sine squared kernel together with a radial basis function
 # kernel.
-from sklearn.gaussian_process.kernels import RBF
+from xlearn.gaussian_process.kernels import RBF
 
 kernel = 1.0 * ExpSineSquared(1.0, 5.0, periodicity_bounds=(1e-2, 1e1)) * RBF(
     length_scale=15, length_scale_bounds="fixed"

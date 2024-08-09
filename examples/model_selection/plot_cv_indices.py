@@ -1,5 +1,5 @@
 """
-Visualizing cross-validation behavior in scikit-learn
+Visualizing cross-validation behavior in jax-ml
 =====================================================
 
 Choosing the right cross-validation object is a crucial part of fitting a
@@ -7,24 +7,25 @@ model properly. There are many ways to split data into training and test
 sets in order to avoid model overfitting, to standardize the number of
 groups in test sets, etc.
 
-This example visualizes the behavior of several common scikit-learn objects
+This example visualizes the behavior of several common jax-ml objects
 for comparison.
 
 """
 
-from sklearn.model_selection import (
-    TimeSeriesSplit,
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.patches import Patch
+
+from xlearn.model_selection import (
+    GroupKFold,
+    GroupShuffleSplit,
     KFold,
     ShuffleSplit,
-    StratifiedKFold,
-    GroupShuffleSplit,
-    GroupKFold,
-    StratifiedShuffleSplit,
     StratifiedGroupKFold,
+    StratifiedKFold,
+    StratifiedShuffleSplit,
+    TimeSeriesSplit,
 )
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Patch
 
 rng = np.random.RandomState(1338)
 cmap_data = plt.cm.Paired
@@ -98,9 +99,10 @@ visualize_groups(y, groups, "no groups")
 
 def plot_cv_indices(cv, X, y, group, ax, n_splits, lw=10):
     """Create a sample plot for indices of a cross-validation object."""
-
+    use_groups = "Group" in type(cv).__name__
+    groups = group if use_groups else None
     # Generate the training/testing visualizations for each CV split
-    for ii, (tr, tt) in enumerate(cv.split(X=X, y=y, groups=group)):
+    for ii, (tr, tt) in enumerate(cv.split(X=X, y=y, groups=groups)):
         # Fill in indices with the training/test groups
         indices = np.array([np.nan] * len(X))
         indices[tt] = 1
@@ -142,7 +144,7 @@ def plot_cv_indices(cv, X, y, group, ax, n_splits, lw=10):
 
 
 # %%
-# Let's see how it looks for the :class:`~sklearn.model_selection.KFold`
+# Let's see how it looks for the :class:`~xlearn.model_selection.KFold`
 # cross-validation object:
 
 fig, ax = plt.subplots()
@@ -180,7 +182,7 @@ for cv in cvs:
 # ------------------------------------------------------
 #
 # Let's visually compare the cross validation behavior for many
-# scikit-learn cross-validation objects. Below we will loop through several
+# jax-ml cross-validation objects. Below we will loop through several
 # common cross-validation objects, visualizing the behavior of each.
 #
 # Note how some use the group/class information while others do not.

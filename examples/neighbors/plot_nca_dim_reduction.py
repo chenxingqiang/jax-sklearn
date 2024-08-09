@@ -30,15 +30,16 @@ meaningful despite the large reduction in dimension.
 
 # License: BSD 3 clause
 
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.decomposition import PCA
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.neighbors import KNeighborsClassifier, NeighborhoodComponentsAnalysis
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+from xlearn import datasets
+from xlearn.decomposition import PCA
+from xlearn.discriminant_analysis import LinearDiscriminantAnalysis
+from xlearn.model_selection import train_test_split
+from xlearn.neighbors import KNeighborsClassifier, NeighborhoodComponentsAnalysis
+from xlearn.pipeline import make_pipeline
+from xlearn.preprocessing import StandardScaler
 
 n_neighbors = 3
 random_state = 0

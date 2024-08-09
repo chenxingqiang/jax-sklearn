@@ -3,7 +3,7 @@
 Imputing missing values with variants of IterativeImputer
 =========================================================
 
-.. currentmodule:: sklearn
+.. currentmodule:: xlearn
 
 The :class:`~impute.IterativeImputer` class is very flexible - it can be
 used with a variety of estimators to do round-robin regression, treating every
@@ -13,8 +13,8 @@ In this example we compare some estimators for the purpose of missing feature
 imputation with :class:`~impute.IterativeImputer`:
 
 * :class:`~linear_model.BayesianRidge`: regularized linear regression
-* :class:`~tree.RandomForestRegressor`: Forests of randomized trees regression
-* :func:`~pipeline.make_pipeline`(:class:`~kernel_approximation.Nystroem`,
+* :class:`~ensemble.RandomForestRegressor`: Forests of randomized trees regression
+* :func:`~pipeline.make_pipeline` (:class:`~kernel_approximation.Nystroem`,
   :class:`~linear_model.Ridge`): a pipeline with the expansion of a degree 2
   polynomial kernel and regularized linear regression
 * :class:`~neighbors.KNeighborsRegressor`: comparable to other KNN
@@ -44,21 +44,21 @@ complex and costly missing values imputation strategies.
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
+from xlearn.datasets import fetch_california_housing
+from xlearn.ensemble import RandomForestRegressor
+
 # To use this experimental feature, we need to explicitly ask for it:
-from sklearn.experimental import enable_iterative_imputer  # noqa
-from sklearn.datasets import fetch_california_housing
-from sklearn.impute import SimpleImputer
-from sklearn.impute import IterativeImputer
-from sklearn.linear_model import BayesianRidge, Ridge
-from sklearn.kernel_approximation import Nystroem
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.pipeline import make_pipeline
-from sklearn.model_selection import cross_val_score
+from xlearn.experimental import enable_iterative_imputer  # noqa
+from xlearn.impute import IterativeImputer, SimpleImputer
+from xlearn.kernel_approximation import Nystroem
+from xlearn.linear_model import BayesianRidge, Ridge
+from xlearn.model_selection import cross_val_score
+from xlearn.neighbors import KNeighborsRegressor
+from xlearn.pipeline import make_pipeline
 
 N_SPLITS = 5
 

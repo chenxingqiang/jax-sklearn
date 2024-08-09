@@ -1,3 +1,5 @@
+# Authors: The jax-ml developers
+# SPDX-License-Identifier: BSD-3-Clause
 """
 ======================================
 Poisson regression and non-normal loss
@@ -32,19 +34,13 @@ policyholders.
 
 .. [1]  A. Noll, R. Salzmann and M.V. Wuthrich, Case Study: French Motor
     Third-Party Liability Claims (November 8, 2018). `doi:10.2139/ssrn.3164764
-    <http://dx.doi.org/10.2139/ssrn.3164764>`_
+    <https://doi.org/10.2139/ssrn.3164764>`_
 
 """
 
-# Authors: Christian Lorentzen <lorentzen.ch@gmail.com>
-#          Roman Yurchak <rth.yurchak@gmail.com>
-#          Olivier Grisel <olivier.grisel@ensta.org>
-# License: BSD 3 clause
-
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
-
 
 ##############################################################################
 # The French Motor Third-Party Liability Claims dataset
@@ -52,11 +48,9 @@ import pandas as pd
 #
 # Let's load the motor claim dataset from OpenML:
 # https://www.openml.org/d/41214
+from xlearn.datasets import fetch_openml
 
-from sklearn.datasets import fetch_openml
-
-
-df = fetch_openml(data_id=41214, as_frame=True, parser="pandas").frame
+df = fetch_openml(data_id=41214, as_frame=True).frame
 df
 
 # %%
@@ -97,11 +91,14 @@ _ = df["Frequency"].hist(bins=30, log=True, ax=ax2)
 # In order to fit linear models with those predictors it is therefore
 # necessary to perform standard feature transformations as follows:
 
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import FunctionTransformer, OneHotEncoder
-from sklearn.preprocessing import StandardScaler, KBinsDiscretizer
-from sklearn.compose import ColumnTransformer
-
+from xlearn.compose import ColumnTransformer
+from xlearn.pipeline import make_pipeline
+from xlearn.preprocessing import (
+    FunctionTransformer,
+    KBinsDiscretizer,
+    OneHotEncoder,
+    StandardScaler,
+)
 
 log_scale_transformer = make_pipeline(
     FunctionTransformer(np.log, validate=False), StandardScaler()
@@ -110,7 +107,11 @@ log_scale_transformer = make_pipeline(
 linear_model_preprocessor = ColumnTransformer(
     [
         ("passthrough_numeric", "passthrough", ["BonusMalus"]),
-        ("binned_numeric", KBinsDiscretizer(n_bins=10), ["VehAge", "DrivAge"]),
+        (
+            "binned_numeric",
+            KBinsDiscretizer(n_bins=10, random_state=0),
+            ["VehAge", "DrivAge"],
+        ),
         ("log_scaled_numeric", log_scale_transformer, ["Density"]),
         (
             "onehot_categorical",
@@ -134,9 +135,9 @@ linear_model_preprocessor = ColumnTransformer(
 # baseline a "dummy" estimator that constantly predicts the mean frequency of
 # the training sample.
 
-from sklearn.dummy import DummyRegressor
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
+from xlearn.dummy import DummyRegressor
+from xlearn.model_selection import train_test_split
+from xlearn.pipeline import Pipeline
 
 df_train, df_test = train_test_split(df, test_size=0.33, random_state=0)
 
@@ -152,9 +153,11 @@ dummy = Pipeline(
 # Let's compute the performance of this constant prediction baseline with 3
 # different regression metrics:
 
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_poisson_deviance
+from xlearn.metrics import (
+    mean_absolute_error,
+    mean_poisson_deviance,
+    mean_squared_error,
+)
 
 
 def score_estimator(estimator, df_test):
@@ -203,12 +206,11 @@ score_estimator(dummy, df_test)
 # ---------------------------
 #
 # We start by modeling the target variable with the (l2 penalized) least
-# squares linear regression model, more comonly known as Ridge regression. We
+# squares linear regression model, more commonly known as Ridge regression. We
 # use a low penalization `alpha`, as we expect such a linear model to under-fit
 # on such a large dataset.
 
-from sklearn.linear_model import Ridge
-
+from xlearn.linear_model import Ridge
 
 ridge_glm = Pipeline(
     [
@@ -220,9 +222,9 @@ ridge_glm = Pipeline(
 # %%
 # The Poisson deviance cannot be computed on non-positive values predicted by
 # the model. For models that do return a few non-positive predictions (e.g.
-# :class:`~sklearn.linear_model.Ridge`) we ignore the corresponding samples,
+# :class:`~xlearn.linear_model.Ridge`) we ignore the corresponding samples,
 # meaning that the obtained Poisson deviance is approximate. An alternative
-# approach could be to use :class:`~sklearn.compose.TransformedTargetRegressor`
+# approach could be to use :class:`~xlearn.compose.TransformedTargetRegressor`
 # meta-estimator to map ``y_pred`` to a strictly positive domain.
 
 print("Ridge evaluation:")
@@ -240,14 +242,14 @@ score_estimator(ridge_glm, df_test)
 # Poisson regressor is called a Generalized Linear Model (GLM) rather than a
 # vanilla linear model as is the case for Ridge regression.
 
-from sklearn.linear_model import PoissonRegressor
+from xlearn.linear_model import PoissonRegressor
 
 n_samples = df_train.shape[0]
 
 poisson_glm = Pipeline(
     [
         ("preprocessor", linear_model_preprocessor),
-        ("regressor", PoissonRegressor(alpha=1e-12, max_iter=300)),
+        ("regressor", PoissonRegressor(alpha=1e-12, solver="newton-cholesky")),
     ]
 )
 poisson_glm.fit(
@@ -264,13 +266,13 @@ score_estimator(poisson_glm, df_test)
 # Finally, we will consider a non-linear model, namely Gradient Boosting
 # Regression Trees. Tree-based models do not require the categorical data to be
 # one-hot encoded: instead, we can encode each category label with an arbitrary
-# integer using :class:`~sklearn.preprocessing.OrdinalEncoder`. With this
+# integer using :class:`~xlearn.preprocessing.OrdinalEncoder`. With this
 # encoding, the trees will treat the categorical features as ordered features,
 # which might not be always a desired behavior. However this effect is limited
 # for deep enough trees which are able to recover the categorical nature of the
 # features. The main advantage of the
-# :class:`~sklearn.preprocessing.OrdinalEncoder` over the
-# :class:`~sklearn.preprocessing.OneHotEncoder` is that it will make training
+# :class:`~xlearn.preprocessing.OrdinalEncoder` over the
+# :class:`~xlearn.preprocessing.OneHotEncoder` is that it will make training
 # faster.
 #
 # Gradient Boosting also gives the possibility to fit the trees with a Poisson
@@ -278,9 +280,8 @@ score_estimator(poisson_glm, df_test)
 # least-squares loss. Here we only fit trees with the Poisson loss to keep this
 # example concise.
 
-from sklearn.ensemble import HistGradientBoostingRegressor
-from sklearn.preprocessing import OrdinalEncoder
-
+from xlearn.ensemble import HistGradientBoostingRegressor
+from xlearn.preprocessing import OrdinalEncoder
 
 tree_preprocessor = ColumnTransformer(
     [
@@ -383,7 +384,7 @@ plt.tight_layout()
 # by each model. Then for each bin, we compare the mean predicted ``y_pred``,
 # with the mean observed target:
 
-from sklearn.utils import gen_even_slices
+from xlearn.utils import gen_even_slices
 
 
 def _mean_frequency_by_risk_group(y_true, y_pred, sample_weight=None, n_bins=100):
@@ -485,7 +486,7 @@ plt.tight_layout()
 #
 # This plot is called a Lorenz curve and can be summarized by the Gini index:
 
-from sklearn.metrics import auc
+from xlearn.metrics import auc
 
 
 def lorenz_curve(y_true, y_pred, exposure):
@@ -548,7 +549,7 @@ ax.legend(loc="upper left")
 #
 # The linear models assume no interactions between the input variables which
 # likely causes under-fitting. Inserting a polynomial feature extractor
-# (:func:`~sklearn.preprocessing.PolynomialFeatures`) indeed increases their
+# (:func:`~xlearn.preprocessing.PolynomialFeatures`) indeed increases their
 # discrimative power by 2 points of Gini index. In particular it improves the
 # ability of the models to identify the top 5% riskiest profiles.
 #

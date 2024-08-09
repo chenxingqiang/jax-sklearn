@@ -14,7 +14,7 @@ Decision boundaries between inliers and outliers are displayed in black
 except for Local Outlier Factor (LOF) as it has no predict method to be applied
 on new data when it is used for outlier detection.
 
-The :class:`~sklearn.svm.OneClassSVM` is known to be sensitive to outliers and
+The :class:`~xlearn.svm.OneClassSVM` is known to be sensitive to outliers and
 thus does not perform very well for outlier detection. This estimator is best
 suited for novelty detection when the training set is not contaminated by
 outliers. That said, outlier detection in high-dimension, or without any
@@ -22,24 +22,24 @@ assumptions on the distribution of the inlying data is very challenging, and a
 One-class SVM might give useful results in these situations depending on the
 value of its hyperparameters.
 
-The :class:`sklearn.linear_model.SGDOneClassSVM` is an implementation of the
+The :class:`xlearn.linear_model.SGDOneClassSVM` is an implementation of the
 One-Class SVM based on stochastic gradient descent (SGD). Combined with kernel
 approximation, this estimator can be used to approximate the solution
-of a kernelized :class:`sklearn.svm.OneClassSVM`. We note that, although not
+of a kernelized :class:`xlearn.svm.OneClassSVM`. We note that, although not
 identical, the decision boundaries of the
-:class:`sklearn.linear_model.SGDOneClassSVM` and the ones of
-:class:`sklearn.svm.OneClassSVM` are very similar. The main advantage of using
-:class:`sklearn.linear_model.SGDOneClassSVM` is that it scales linearly with
+:class:`xlearn.linear_model.SGDOneClassSVM` and the ones of
+:class:`xlearn.svm.OneClassSVM` are very similar. The main advantage of using
+:class:`xlearn.linear_model.SGDOneClassSVM` is that it scales linearly with
 the number of samples.
 
-:class:`sklearn.covariance.EllipticEnvelope` assumes the data is Gaussian and
+:class:`xlearn.covariance.EllipticEnvelope` assumes the data is Gaussian and
 learns an ellipse. It thus degrades when the data is not unimodal. Notice
 however that this estimator is robust to outliers.
 
-:class:`~sklearn.ensemble.IsolationForest` and
-:class:`~sklearn.neighbors.LocalOutlierFactor` seem to perform reasonably well
+:class:`~xlearn.ensemble.IsolationForest` and
+:class:`~xlearn.neighbors.LocalOutlierFactor` seem to perform reasonably well
 for multi-modal data sets. The advantage of
-:class:`~sklearn.neighbors.LocalOutlierFactor` over the other estimators is
+:class:`~xlearn.neighbors.LocalOutlierFactor` over the other estimators is
 shown for the third data set, where the two modes have different densities.
 This advantage is explained by the local aspect of LOF, meaning that it only
 compares the score of abnormality of one sample with the scores of its
@@ -47,7 +47,7 @@ neighbors.
 
 Finally, for the last data set, it is hard to say that one sample is more
 abnormal than another sample as they are uniformly distributed in a
-hypercube. Except for the :class:`~sklearn.svm.OneClassSVM` which overfits a
+hypercube. Except for the :class:`~xlearn.svm.OneClassSVM` which overfits a
 little, all estimators present decent solutions for this situation. In such a
 case, it would be wise to look more closely at the scores of abnormality of
 the samples as a good estimator should assign similar scores to all the
@@ -68,18 +68,18 @@ the problem is completely unsupervised so model selection can be a challenge.
 
 import time
 
-import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+import numpy as np
 
-from sklearn import svm
-from sklearn.datasets import make_moons, make_blobs
-from sklearn.covariance import EllipticEnvelope
-from sklearn.ensemble import IsolationForest
-from sklearn.neighbors import LocalOutlierFactor
-from sklearn.linear_model import SGDOneClassSVM
-from sklearn.kernel_approximation import Nystroem
-from sklearn.pipeline import make_pipeline
+from xlearn import svm
+from xlearn.covariance import EllipticEnvelope
+from xlearn.datasets import make_blobs, make_moons
+from xlearn.ensemble import IsolationForest
+from xlearn.kernel_approximation import Nystroem
+from xlearn.linear_model import SGDOneClassSVM
+from xlearn.neighbors import LocalOutlierFactor
+from xlearn.pipeline import make_pipeline
 
 matplotlib.rcParams["contour.negative_linestyle"] = "solid"
 
@@ -93,7 +93,10 @@ n_inliers = n_samples - n_outliers
 # the SGDOneClassSVM must be used in a pipeline with a kernel approximation
 # to give similar results to the OneClassSVM
 anomaly_algorithms = [
-    ("Robust covariance", EllipticEnvelope(contamination=outliers_fraction)),
+    (
+        "Robust covariance",
+        EllipticEnvelope(contamination=outliers_fraction, random_state=42),
+    ),
     ("One-Class SVM", svm.OneClassSVM(nu=outliers_fraction, kernel="rbf", gamma=0.1)),
     (
         "One-Class SVM (SGD)",

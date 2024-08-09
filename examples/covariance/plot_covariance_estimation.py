@@ -5,7 +5,7 @@ Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood
 
 When working with covariance estimation, the usual approach is to use
 a maximum likelihood estimator, such as the
-:class:`~sklearn.covariance.EmpiricalCovariance`. It is unbiased, i.e. it
+:class:`~xlearn.covariance.EmpiricalCovariance`. It is unbiased, i.e. it
 converges to the true (population) covariance when given many
 observations. However, it can also be beneficial to regularize it, in
 order to reduce its variance; this, in turn, introduces some bias. This
@@ -14,7 +14,6 @@ example illustrates the simple regularization used in
 set the amount of regularization, i.e. how to choose the bias-variance
 trade-off.
 """
-
 
 # %%
 # Generate sample data
@@ -37,8 +36,9 @@ X_test = np.dot(base_X_test, coloring_matrix)
 # Compute the likelihood on test data
 # -----------------------------------
 
-from sklearn.covariance import ShrunkCovariance, empirical_covariance, log_likelihood
 from scipy import linalg
+
+from xlearn.covariance import ShrunkCovariance, empirical_covariance, log_likelihood
 
 # spanning a range of possible shrinkage coefficient values
 shrinkages = np.logspace(-2, 0, 30)
@@ -64,17 +64,17 @@ loglik_real = -log_likelihood(emp_cov, linalg.inv(real_cov))
 #
 # * A close formula proposed by Ledoit and Wolf to compute
 #   the asymptotically optimal regularization parameter (minimizing a MSE
-#   criterion), yielding the :class:`~sklearn.covariance.LedoitWolf`
+#   criterion), yielding the :class:`~xlearn.covariance.LedoitWolf`
 #   covariance estimate.
 #
 # * An improvement of the Ledoit-Wolf shrinkage, the
-#   :class:`~sklearn.covariance.OAS`, proposed by Chen et al. Its
+#   :class:`~xlearn.covariance.OAS`, proposed by Chen et al. Its
 #   convergence is significantly better under the assumption that the data
 #   are Gaussian, in particular for small samples.
 
 
-from sklearn.model_selection import GridSearchCV
-from sklearn.covariance import LedoitWolf, OAS
+from xlearn.covariance import OAS, LedoitWolf
+from xlearn.model_selection import GridSearchCV
 
 # GridSearch for an optimal shrinkage coefficient
 tuned_parameters = [{"shrinkage": shrinkages}]

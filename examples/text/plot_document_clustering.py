@@ -3,18 +3,18 @@
 Clustering text documents using k-means
 =======================================
 
-This is an example showing how the scikit-learn API can be used to cluster
+This is an example showing how the jax-ml API can be used to cluster
 documents by topics using a `Bag of Words approach
 <https://en.wikipedia.org/wiki/Bag-of-words_model>`_.
 
-Two algorithms are demoed: :class:`~sklearn.cluster.KMeans` and its more
-scalable variant, :class:`~sklearn.cluster.MiniBatchKMeans`. Additionally,
+Two algorithms are demonstrated, namely :class:`~xlearn.cluster.KMeans` and its more
+scalable variant, :class:`~xlearn.cluster.MiniBatchKMeans`. Additionally,
 latent semantic analysis is used to reduce dimensionality and discover latent
 patterns in the data.
 
 This example uses two different text vectorizers: a
-:class:`~sklearn.feature_extraction.text.TfidfVectorizer` and a
-:class:`~sklearn.feature_extraction.text.HashingVectorizer`. See the example
+:class:`~xlearn.feature_extraction.text.TfidfVectorizer` and a
+:class:`~xlearn.feature_extraction.text.HashingVectorizer`. See the example
 notebook :ref:`sphx_glr_auto_examples_text_plot_hashing_vs_dict_vectorizer.py`
 for more information on vectorizers and a comparison of their processing times.
 
@@ -42,11 +42,12 @@ For document analysis via a supervised learning approach, see the example script
 #
 # Notice that, by default, the text samples contain some message metadata such
 # as `"headers"`, `"footers"` (signatures) and `"quotes"` to other posts. We use
-# the `remove` parameter from :func:`~sklearn.datasets.fetch_20newsgroups` to
+# the `remove` parameter from :func:`~xlearn.datasets.fetch_20newsgroups` to
 # strip those features and have a more sensible clustering problem.
 
 import numpy as np
-from sklearn.datasets import fetch_20newsgroups
+
+from xlearn.datasets import fetch_20newsgroups
 
 categories = [
     "alt.atheism",
@@ -98,14 +99,16 @@ print(f"{len(dataset.data)} documents - {true_k} categories")
 #   assignment have an ARI of 0.0 in expectation.
 #
 # If the ground truth labels are not known, evaluation can only be performed
-# using the model results itself. In that case, the Silhouette Coefficient comes
-# in handy.
+# using the model results itself. In that case, the Silhouette Coefficient comes in
+# handy. See :ref:`sphx_glr_auto_examples_cluster_plot_kmeans_silhouette_analysis.py`
+# for an example on how to do it.
 #
 # For more reference, see :ref:`clustering_evaluation`.
 
 from collections import defaultdict
-from sklearn import metrics
 from time import time
+
+from xlearn import metrics
 
 evaluations = []
 evaluations_std = []
@@ -156,13 +159,13 @@ def fit_and_evaluate(km, X, name=None, n_runs=5):
 #
 # Two feature extraction methods are used in this example:
 #
-# - :class:`~sklearn.feature_extraction.text.TfidfVectorizer` uses an in-memory
+# - :class:`~xlearn.feature_extraction.text.TfidfVectorizer` uses an in-memory
 #   vocabulary (a Python dict) to map the most frequent words to features
 #   indices and hence compute a word occurrence frequency (sparse) matrix. The
 #   word frequencies are then reweighted using the Inverse Document Frequency
 #   (IDF) vector collected feature-wise over the corpus.
 #
-# - :class:`~sklearn.feature_extraction.text.HashingVectorizer` hashes word
+# - :class:`~xlearn.feature_extraction.text.HashingVectorizer` hashes word
 #   occurrences to a fixed dimensional space, possibly with collisions. The word
 #   count vectors are then normalized to each have l2-norm equal to one
 #   (projected to the euclidean unit-sphere) which seems to be important for
@@ -177,9 +180,9 @@ def fit_and_evaluate(km, X, name=None, n_runs=5):
 #
 # We first benchmark the estimators using a dictionary vectorizer along with an
 # IDF normalization as provided by
-# :class:`~sklearn.feature_extraction.text.TfidfVectorizer`.
+# :class:`~xlearn.feature_extraction.text.TfidfVectorizer`.
 
-from sklearn.feature_extraction.text import TfidfVectorizer
+from xlearn.feature_extraction.text import TfidfVectorizer
 
 vectorizer = TfidfVectorizer(
     max_df=0.5,
@@ -197,7 +200,7 @@ print(f"n_samples: {X_tfidf.shape[0]}, n_features: {X_tfidf.shape[1]}")
 # `max_df=0.5`) and terms that are not present in at least 5 documents (set by
 # `min_df=5`), the resulting number of unique terms `n_features` is around
 # 8,000. We can additionally quantify the sparsity of the `X_tfidf` matrix as
-# the fraction of non-zero entries devided by the total number of elements.
+# the fraction of non-zero entries divided by the total number of elements.
 
 print(f"{X_tfidf.nnz / np.prod(X_tfidf.shape):.3f}")
 
@@ -209,8 +212,8 @@ print(f"{X_tfidf.nnz / np.prod(X_tfidf.shape):.3f}")
 # Clustering sparse data with k-means
 # -----------------------------------
 #
-# As both :class:`~sklearn.cluster.KMeans` and
-# :class:`~sklearn.cluster.MiniBatchKMeans` optimize a non-convex objective
+# As both :class:`~xlearn.cluster.KMeans` and
+# :class:`~xlearn.cluster.MiniBatchKMeans` optimize a non-convex objective
 # function, their clustering is not guaranteed to be optimal for a given random
 # init. Even further, on sparse high-dimensional data such as text vectorized
 # using the Bag of Words approach, k-means can initialize centroids on extremely
@@ -220,7 +223,7 @@ print(f"{X_tfidf.nnz / np.prod(X_tfidf.shape):.3f}")
 # The following code illustrates how the previous phenomenon can sometimes lead
 # to highly imbalanced clusters, depending on the random initialization:
 
-from sklearn.cluster import KMeans
+from xlearn.cluster import KMeans
 
 for seed in range(5):
     kmeans = KMeans(
@@ -230,7 +233,7 @@ for seed in range(5):
         random_state=seed,
     ).fit(X_tfidf)
     cluster_ids, cluster_sizes = np.unique(kmeans.labels_, return_counts=True)
-    print(f"Number of elements asigned to each cluster: {cluster_sizes}")
+    print(f"Number of elements assigned to each cluster: {cluster_sizes}")
 print()
 print(
     "True number of documents in each category according to the class labels: "
@@ -266,17 +269,16 @@ fit_and_evaluate(kmeans, X_tfidf, name="KMeans\non tf-idf vectors")
 #
 # A `n_init=1` can still be used as long as the dimension of the vectorized
 # space is reduced first to make k-means more stable. For such purpose we use
-# :class:`~sklearn.decomposition.TruncatedSVD`, which works on term count/tf-idf
+# :class:`~xlearn.decomposition.TruncatedSVD`, which works on term count/tf-idf
 # matrices. Since SVD results are not normalized, we redo the normalization to
-# improve the :class:`~sklearn.cluster.KMeans` result. Using SVD to reduce the
+# improve the :class:`~xlearn.cluster.KMeans` result. Using SVD to reduce the
 # dimensionality of TF-IDF document vectors is often known as `latent semantic
 # analysis <https://en.wikipedia.org/wiki/Latent_semantic_analysis>`_ (LSA) in
 # the information retrieval and text mining literature.
 
-from sklearn.decomposition import TruncatedSVD
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import Normalizer
-
+from xlearn.decomposition import TruncatedSVD
+from xlearn.pipeline import make_pipeline
+from xlearn.preprocessing import Normalizer
 
 lsa = make_pipeline(TruncatedSVD(n_components=100), Normalizer(copy=False))
 t0 = time()
@@ -288,8 +290,8 @@ print(f"Explained variance of the SVD step: {explained_variance * 100:.1f}%")
 
 # %%
 # Using a single initialization means the processing time will be reduced for
-# both :class:`~sklearn.cluster.KMeans` and
-# :class:`~sklearn.cluster.MiniBatchKMeans`.
+# both :class:`~xlearn.cluster.KMeans` and
+# :class:`~xlearn.cluster.MiniBatchKMeans`.
 
 kmeans = KMeans(
     n_clusters=true_k,
@@ -304,9 +306,9 @@ fit_and_evaluate(kmeans, X_lsa, name="KMeans\nwith LSA on tf-idf vectors")
 # significantly faster (both because of `n_init=1` and because the
 # dimensionality of the LSA feature space is much smaller). Furthermore, all the
 # clustering evaluation metrics have improved. We repeat the experiment with
-# :class:`~sklearn.cluster.MiniBatchKMeans`.
+# :class:`~xlearn.cluster.MiniBatchKMeans`.
 
-from sklearn.cluster import MiniBatchKMeans
+from xlearn.cluster import MiniBatchKMeans
 
 minibatch_kmeans = MiniBatchKMeans(
     n_clusters=true_k,
@@ -325,7 +327,7 @@ fit_and_evaluate(
 # Top terms per cluster
 # ---------------------
 #
-# Since :class:`~sklearn.feature_extraction.text.TfidfVectorizer` can be
+# Since :class:`~xlearn.feature_extraction.text.TfidfVectorizer` can be
 # inverted we can identify the cluster centers, which provide an intuition of
 # the most influential words **for each cluster**. See the example script
 # :ref:`sphx_glr_auto_examples_text_plot_document_classification_20newsgroups.py`
@@ -345,16 +347,15 @@ for i in range(true_k):
 # HashingVectorizer
 # -----------------
 # An alternative vectorization can be done using a
-# :class:`~sklearn.feature_extraction.text.HashingVectorizer` instance, which
+# :class:`~xlearn.feature_extraction.text.HashingVectorizer` instance, which
 # does not provide IDF weighting as this is a stateless model (the fit method
 # does nothing). When IDF weighting is needed it can be added by pipelining the
-# :class:`~sklearn.feature_extraction.text.HashingVectorizer` output to a
-# :class:`~sklearn.feature_extraction.text.TfidfTransformer` instance. In this
+# :class:`~xlearn.feature_extraction.text.HashingVectorizer` output to a
+# :class:`~xlearn.feature_extraction.text.TfidfTransformer` instance. In this
 # case we also add LSA to the pipeline to reduce the dimension and sparcity of
 # the hashed vector space.
 
-from sklearn.feature_extraction.text import HashingVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
+from xlearn.feature_extraction.text import HashingVectorizer, TfidfTransformer
 
 lsa_vectorizer = make_pipeline(
     HashingVectorizer(stop_words="english", n_features=50_000),
@@ -394,8 +395,8 @@ fit_and_evaluate(
 # Clustering evaluation summary
 # ==============================
 
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 
 fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(16, 6), sharey=True)
 
@@ -414,7 +415,7 @@ ax1.set_xlabel("Clustering time (s)")
 plt.tight_layout()
 
 # %%
-# :class:`~sklearn.cluster.KMeans` and :class:`~sklearn.cluster.MiniBatchKMeans`
+# :class:`~xlearn.cluster.KMeans` and :class:`~xlearn.cluster.MiniBatchKMeans`
 # suffer from the phenomenon called the `Curse of Dimensionality
 # <https://en.wikipedia.org/wiki/Curse_of_dimensionality>`_ for high dimensional
 # datasets such as text data. That is the reason why the overall scores improve
@@ -434,7 +435,7 @@ plt.tight_layout()
 # baseline with regards to random labeling: this means that depending on the
 # number of samples, clusters and ground truth classes, a completely random
 # labeling will not always yield the same values. In particular random labeling
-# won’t yield zero scores, especially when the number of clusters is large. This
+# won't yield zero scores, especially when the number of clusters is large. This
 # problem can safely be ignored when the number of samples is more than a
 # thousand and the number of clusters is less than 10, which is the case of the
 # present example. For smaller sample sizes or larger number of clusters it is
@@ -443,8 +444,8 @@ plt.tight_layout()
 # :ref:`sphx_glr_auto_examples_cluster_plot_adjusted_for_chance_measures.py` for
 # a demo on the effect of random labeling.
 #
-# The size of the error bars show that :class:`~sklearn.cluster.MiniBatchKMeans`
-# is less stable than :class:`~sklearn.cluster.KMeans` for this relatively small
+# The size of the error bars show that :class:`~xlearn.cluster.MiniBatchKMeans`
+# is less stable than :class:`~xlearn.cluster.KMeans` for this relatively small
 # dataset. It is more interesting to use when the number of samples is much
 # bigger, but it can come at the expense of a small degradation in clustering
 # quality compared to the traditional k-means algorithm.
