@@ -46,7 +46,7 @@ tracker = "https://github.com/chenxingqiang/jax-sklearn/issues"
 
 [project.optional-dependencies]
 build = ["numpy>=1.22.0", "scipy>=1.8.0", "cython>=3.0.10", "meson-python>=0.17.1"]
-install = ["numpy>=1.22.0", "scipy>=1.8.0", "joblib>=1.2.0", "threadpoolctl>=3.1.0"]
+install = ["numpy>=1.22.0", "scipy>=1.8.0", "joblib>=1.2.0", "threadpoolctl>=3.1.0", "jax>=0.4.20", "jaxlib>=0.4.20"]
 jax = ["jax>=0.4.20", "jaxlib>=0.4.20"]
 jax-cpu = ["jax[cpu]>=0.4.20"]
 jax-gpu = ["jax[gpu]>=0.4.20"]
