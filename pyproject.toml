@@ -1,6 +1,6 @@
 [project]
 name = "jax-sklearn"
-version = "0.1.0"
+version = "0.1.1"
 description = "JAX-accelerated machine learning library with scikit-learn compatibility"
 readme = "README.md"
 maintainers = [
