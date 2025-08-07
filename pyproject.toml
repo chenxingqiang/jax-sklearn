@@ -1,5 +1,5 @@
 [project]
-name = "xlearn"
+name = "jax-sklearn"
 version = "0.1.0"
 description = "JAX-accelerated machine learning library with scikit-learn compatibility"
 readme = "README.md"
