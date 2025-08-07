@@ -227,7 +227,7 @@ Task: 50 regression problems (5K samples × 100 features each)
 ## 🔬 Technical Details
 
 ### Architecture
-XLearn uses a **5-layer architecture**:
+JAX-sklearn uses a **5-layer architecture**:
 
 1. **User Code Layer**: 100% scikit-learn API compatibility
 2. **Compatibility Layer**: Transparent proxy system
@@ -235,11 +235,144 @@ XLearn uses a **5-layer architecture**:
 4. **Data Management Layer**: Automatic NumPy ↔ JAX conversion
 5. **Hardware Abstraction**: CPU/GPU/TPU support
 
+### 🚀 Runtime Injection Mechanism
+
+JAX-sklearn achieves seamless acceleration through a sophisticated **runtime injection system** that transparently replaces scikit-learn algorithms with JAX-accelerated versions:
+
+#### 1. **Initialization Phase** - Automatic JAX Detection
+```python
+# At system startup in xlearn/__init__.py
+try:
+    from . import _jax  # Import JAX module
+    _JAX_ENABLED = True
+    
+    # Import core components
+    from ._jax._proxy import create_intelligent_proxy
+    from ._jax._accelerator import AcceleratorRegistry
+    
+    # Create global registry
+    _jax_registry = AcceleratorRegistry()
+    
+except ImportError:
+    _JAX_ENABLED = False  # Disable when JAX unavailable
+```
+
+#### 2. **Dynamic Injection** - Lazy Module Loading
+```python
+def __getattr__(name):
+    if name in _submodules:  # e.g., 'linear_model', 'cluster'
+        # 1. Normal module import
+        module = _importlib.import_module(f"xlearn.{name}")
+        
+        # 2. Auto-apply JAX acceleration if enabled
+        if _JAX_ENABLED:
+            _auto_jax_accelerate_module(name)  # 🔥 Key injection step
+            
+        return module
+```
+
+#### 3. **Class Replacement** - Transparent Proxy Substitution
+```python
+def _auto_jax_accelerate_module(module_name):
+    """Automatically add JAX acceleration to all estimators in a module."""
+    module = _importlib.import_module(f'.{module_name}', package=__name__)
+    
+    # Iterate through all module attributes
+    for attr_name in dir(module):
+        if not attr_name.startswith('_'):
+            attr = getattr(module, attr_name)
+            
+            # Check if it's an estimator class
+            if (isinstance(attr, type) and 
+                hasattr(attr, 'fit') and 
+                attr.__module__.startswith('xlearn.')):
+                
+                # 🔥 Create intelligent proxy
+                proxy_class = create_intelligent_proxy(attr)
+                
+                # 🔥 Replace original class in module
+                setattr(module, attr_name, proxy_class)
+```
+
+#### 4. **Runtime Decision Making** - Intelligent JAX/NumPy Switching
+```python
+class EstimatorProxy:
+    def __init__(self, original_class, *args, **kwargs):
+        self._original_class = original_class
+        self._impl = None
+        self._using_jax = False
+        
+        # Create actual implementation (JAX or original)
+        self._create_implementation()
+    
+    def _create_implementation(self):
+        config = get_config()
+        
+        if config["enable_jax"]:
+            try:
+                # Attempt JAX-accelerated version
+                self._impl = create_accelerated_estimator(
+                    self._original_class, *args, **kwargs
+                )
+                self._using_jax = True
+                
+            except Exception:
+                # Fallback to original on failure
+                self._impl = self._original_class(*args, **kwargs)
+                self._using_jax = False
+        else:
+            # Use original when JAX disabled
+            self._impl = self._original_class(*args, **kwargs)
+```
+
+#### 5. **Complete Injection Flow**
+```
+User Code: import xlearn.linear_model
+                    ↓
+1. xlearn.__getattr__('linear_model') triggered
+                    ↓
+2. Normal import of xlearn.linear_model module
+                    ↓
+3. Check _JAX_ENABLED, call _auto_jax_accelerate_module if enabled
+                    ↓
+4. Iterate through all classes (LinearRegression, Ridge, Lasso...)
+                    ↓
+5. Call create_intelligent_proxy for each estimator class
+                    ↓
+6. create_intelligent_proxy creates JAX version and registers it
+                    ↓
+7. Create proxy class, replace original class in module
+                    ↓
+8. User gets proxy class instead of original LinearRegression
+                    ↓
+User Code: model = LinearRegression()
+                    ↓
+9. Proxy class __init__ called
+                    ↓
+10. _create_implementation decides JAX vs original
+                    ↓
+11. Intelligent selection based on data size and config
+```
+
+#### 6. **Performance Heuristics** - Smart Acceleration Decisions
+```python
+# Algorithm-specific thresholds for JAX acceleration
+thresholds = {
+    'LinearRegression': {'min_complexity': 1e8, 'min_samples': 10000},
+    'KMeans': {'min_complexity': 1e6, 'min_samples': 5000},
+    'PCA': {'min_complexity': 1e7, 'min_samples': 5000},
+    'Ridge': {'min_complexity': 1e8, 'min_samples': 10000},
+    # Automatically decides based on: samples × features × algorithm_factor
+}
+```
+
 ### Key Technologies
 - **JAX**: Just-in-time compilation and automatic differentiation
-- **Proxy Pattern**: Transparent algorithm switching
-- **Performance Heuristics**: Intelligent acceleration decisions
-- **Automatic Fallback**: Robust error handling
+- **Intelligent Proxy Pattern**: Runtime algorithm switching with zero user intervention
+- **Universal JAX Mixins**: Generic JAX implementations for algorithm families
+- **Performance Heuristics**: Data-driven acceleration decisions
+- **Automatic Fallback**: Robust error handling and graceful degradation
+- **Dynamic Module Injection**: Lazy loading with transparent class replacement
 
 ---
 
