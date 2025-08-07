@@ -1,6 +1,6 @@
-"""All minimum dependencies for jax-sklearn."""
+"""All minimum dependencies for XLearn."""
 
-# Authors: The jax-sklearn developers
+# Authors: The XLearn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import argparse
@@ -13,6 +13,8 @@ JOBLIB_MIN_VERSION = "1.2.0"
 THREADPOOLCTL_MIN_VERSION = "3.1.0"
 PYTEST_MIN_VERSION = "7.1.2"
 CYTHON_MIN_VERSION = "3.0.10"
+JAX_MIN_VERSION = "0.4.20"
+JAXLIB_MIN_VERSION = "0.4.20"
 
 
 # 'build' and 'install' is included to have structured metadata for CI.
@@ -23,6 +25,8 @@ dependent_packages = {
     "scipy": (SCIPY_MIN_VERSION, "build, install"),
     "joblib": (JOBLIB_MIN_VERSION, "install"),
     "threadpoolctl": (THREADPOOLCTL_MIN_VERSION, "install"),
+    "jax": (JAX_MIN_VERSION, "install"),
+    "jaxlib": (JAXLIB_MIN_VERSION, "install"),
     "cython": (CYTHON_MIN_VERSION, "build"),
     "meson-python": ("0.17.1", "build"),
     "matplotlib": ("3.5.0", "benchmark, docs, examples, tests"),

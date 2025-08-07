@@ -2,9 +2,23 @@
 
 **XLearn** is a drop-in replacement for scikit-learn that provides **automatic JAX acceleration** for machine learning algorithms while maintaining **100% API compatibility**.
 
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.20+-orange.svg)](https://github.com/google/jax)
-[![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](COPYING)
+[![Version](https://img.shields.io/badge/version-0.1.0-brightgreen.svg)](https://github.com/chenxingqiang/jax-sklearn)
+[![CI](https://img.shields.io/badge/CI-Azure%20Pipelines-blue.svg)](https://dev.azure.com/chenxingqiang/jax-sklearn)
+
+---
+
+## 🎉 Release 0.1.0
+
+**First public release of XLearn!** This initial version provides:
+
+- ✅ **Core JAX acceleration** for Linear Models, Clustering, and Decomposition
+- ✅ **Automatic performance optimization** with intelligent fallback
+- ✅ **100% scikit-learn API compatibility** - truly drop-in replacement
+- ✅ **Comprehensive test suite** with Azure Pipelines CI/CD
+- ✅ **Production-ready** proxy system with robust error handling
 
 ---
 
@@ -42,9 +56,9 @@ pip install jax[gpu]    # GPU version (CUDA)
 
 ### Install XLearn
 ```bash
-# From source (current)
-git clone https://github.com/your-org/xlearn.git
-cd xlearn
+# From source (recommended for now)
+git clone https://github.com/chenxingqiang/jax-sklearn.git
+cd jax-sklearn
 pip install -e .
 
 # From PyPI (coming soon)
@@ -204,7 +218,7 @@ XLearn uses a **5-layer architecture**:
 
 ## 🚨 Requirements
 
-- **Python**: 3.9+
+- **Python**: 3.10+
 - **JAX**: 0.4.20+ (automatically installs jaxlib)
 - **NumPy**: 1.22.0+
 - **SciPy**: 1.8.0+
@@ -245,8 +259,8 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ### Development Setup
 ```bash
-git clone https://github.com/your-org/xlearn.git
-cd xlearn
+git clone https://github.com/chenxingqiang/jax-sklearn.git
+cd jax-sklearn
 python -m venv xlearn-env
 source xlearn-env/bin/activate  # Linux/Mac
 pip install -e ".[dev]"
@@ -276,8 +290,8 @@ XLearn is released under the [BSD 3-Clause License](LICENSE).
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/xlearn/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/xlearn/discussions)
+- **Issues**: [GitHub Issues](https://github.com/chenxingqiang/jax-sklearn/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/chenxingqiang/jax-sklearn/discussions)
 - **Documentation**: [Full Documentation](https://xlearn.readthedocs.io)
 
 ---
