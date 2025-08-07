@@ -1,73 +1,73 @@
 # JAX Acceleration Module
 
-这个模块为 JAX-sklearn 提供透明的 JAX 加速功能。
+This module provides transparent JAX acceleration for JAX-sklearn.
 
-## 📁 文件结构
+## 📁 File Structure
 
 ```
 xlearn/_jax/
-├── __init__.py              # 模块入口，JAX可用性检查
-├── _config.py              # 配置管理系统
-├── _data_conversion.py     # NumPy ↔ JAX 数据转换工具
-├── _accelerator.py         # 加速器注册和管理系统
-├── _proxy.py              # 智能代理系统
-├── _universal_jax.py      # 通用JAX加速实现
-└── README.md              # 本文档
+├── __init__.py              # Module entry point, JAX availability check
+├── _config.py              # Configuration management system
+├── _data_conversion.py     # NumPy ↔ JAX data conversion utilities
+├── _accelerator.py         # Accelerator registration and management system
+├── _proxy.py              # Intelligent proxy system
+├── _universal_jax.py      # Universal JAX acceleration implementation
+└── README.md              # This documentation
 ```
 
-## 🚀 核心架构
+## 🚀 Core Architecture
 
-### 1. 智能代理模式 (`_proxy.py`)
-- **EstimatorProxy**: 透明切换JAX和原版实现
-- **create_intelligent_proxy**: 自动为任何算法创建JAX加速代理
-- **自动回退**: JAX失败时自动使用原版实现
+### 1. Intelligent Proxy Pattern (`_proxy.py`)
+- **EstimatorProxy**: Transparently switches between JAX and original implementations
+- **create_intelligent_proxy**: Automatically creates JAX acceleration proxy for any algorithm
+- **Automatic Fallback**: Automatically uses original implementation when JAX fails
 
-### 2. 通用JAX实现 (`_universal_jax.py`)
-- **UniversalJAXMixin**: 基础JAX加速混入类
-- **JAXLinearModelMixin**: 线性模型JAX加速
-- **JAXClusterMixin**: 聚类算法JAX加速  
-- **JAXDecompositionMixin**: 降维算法JAX加速
-- **性能启发式**: 智能决定何时使用JAX
+### 2. Universal JAX Implementation (`_universal_jax.py`)
+- **UniversalJAXMixin**: Base JAX acceleration mixin class
+- **JAXLinearModelMixin**: JAX acceleration for linear models
+- **JAXClusterMixin**: JAX acceleration for clustering algorithms  
+- **JAXDecompositionMixin**: JAX acceleration for dimensionality reduction algorithms
+- **Performance Heuristics**: Intelligently decides when to use JAX
 
-### 3. 配置系统 (`_config.py`)
+### 3. Configuration System (`_config.py`)
 ```python
 import xlearn._jax as jax_config
 
-# 检查JAX状态
+# Check JAX status
 jax_config.get_config()
 
-# 配置JAX设置
+# Configure JAX settings
 jax_config.set_config(enable_jax=True, jax_platform="gpu")
 
-# 临时配置
+# Temporary configuration
 with jax_config.config_context(enable_jax=False):
-    # 强制使用NumPy实现
+    # Force NumPy implementation
     pass
 ```
 
-### 4. 数据转换 (`_data_conversion.py`)
-- **to_jax()**: NumPy → JAX 数组转换
-- **to_numpy()**: JAX → NumPy 数组转换
-- **auto_convert_arrays**: 装饰器，自动处理数据转换
+### 4. Data Conversion (`_data_conversion.py`)
+- **to_jax()**: NumPy → JAX array conversion
+- **to_numpy()**: JAX → NumPy array conversion
+- **auto_convert_arrays**: Decorator for automatic data conversion
 
-### 5. 注册系统 (`_accelerator.py`)
-- **AcceleratorRegistry**: 管理JAX实现注册
-- **@accelerated_estimator**: 装饰器注册JAX实现
-- **create_accelerated_estimator**: 创建加速实例
+### 5. Registration System (`_accelerator.py`)
+- **AcceleratorRegistry**: Manages JAX implementation registration
+- **@accelerated_estimator**: Decorator for registering JAX implementations
+- **create_accelerated_estimator**: Creates accelerated instances
 
-## ⚡ 工作原理
+## ⚡ How It Works
 
-1. **自动检测**: 系统启动时检查JAX可用性
-2. **动态代理**: 为每个算法类创建智能代理
-3. **性能决策**: 基于数据规模智能选择实现
-4. **透明切换**: 用户无感知的JAX/NumPy切换
-5. **错误回退**: JAX失败时自动使用原版
+1. **Automatic Detection**: Checks JAX availability at system startup
+2. **Dynamic Proxy**: Creates intelligent proxy for each algorithm class
+3. **Performance Decision**: Intelligently selects implementation based on data scale
+4. **Transparent Switching**: Seamless JAX/NumPy switching without user awareness
+5. **Error Fallback**: Automatically uses original implementation when JAX fails
 
-## 🎯 性能优化
+## 🎯 Performance Optimization
 
-### 启发式规则
+### Heuristic Rules
 ```python
-# 算法特定的阈值
+# Algorithm-specific thresholds
 thresholds = {
     'LinearRegression': {'min_complexity': 1e8, 'min_samples': 10000},
     'KMeans': {'min_complexity': 1e6, 'min_samples': 5000},
@@ -76,49 +76,49 @@ thresholds = {
 }
 ```
 
-### JIT编译优化
-- 静态函数编译: `@jax.jit` 装饰核心计算
-- 函数缓存: 避免重复编译开销
-- 数值稳定性: 添加正则化防止数值问题
+### JIT Compilation Optimization
+- Static function compilation: `@jax.jit` decorates core computations
+- Function caching: Avoids repeated compilation overhead
+- Numerical stability: Adds regularization to prevent numerical issues
 
-## 🔧 扩展新算法
+## 🔧 Extending New Algorithms
 
-添加新算法的JAX支持：
+Adding JAX support for new algorithms:
 
 ```python
-# 1. 在_universal_jax.py中添加专用mixin
+# 1. Add specialized mixin in _universal_jax.py
 class JAXNewAlgorithmMixin(UniversalJAXMixin):
     def jax_fit(self, X, y=None):
-        # JAX实现
+        # JAX implementation
         pass
 
-# 2. 在_proxy.py中添加算法检测
+# 2. Add algorithm detection in _proxy.py
 def create_universal_jax_class(original_class):
     if 'new_algorithm' in module_name:
         mixin_class = JAXNewAlgorithmMixin
     # ...
 ```
 
-## 📊 使用示例
+## 📊 Usage Examples
 
 ```python
-import xlearn as sklearn  # JAX自动启用
+import xlearn as sklearn  # JAX automatically enabled
 
-# 正常使用，JAX在后台自动加速
+# Normal usage, JAX automatically accelerates in the background
 model = sklearn.linear_model.LinearRegression()
-model.fit(X, y)  # 大数据时自动使用JAX
+model.fit(X, y)  # Automatically uses JAX for large data
 predictions = model.predict(X_test)
 
-# 检查是否使用了JAX
+# Check if JAX was used
 print(f"Using JAX: {getattr(model, 'is_using_jax', False)}")
 ```
 
-## 🎉 特性
+## 🎉 Features
 
-- ✅ **100% API兼容**: 完全兼容scikit-learn接口
-- ✅ **透明加速**: 用户无需修改代码
-- ✅ **智能回退**: 错误时自动使用原版
-- ✅ **性能优化**: 基于数据规模智能决策
-- ✅ **易于扩展**: 模块化设计便于添加新算法
+- ✅ **100% API Compatible**: Fully compatible with scikit-learn interface
+- ✅ **Transparent Acceleration**: Users need no code modifications
+- ✅ **Intelligent Fallback**: Automatically uses original implementation on errors
+- ✅ **Performance Optimization**: Intelligent decisions based on data scale
+- ✅ **Easy to Extend**: Modular design facilitates adding new algorithms
 
-这个架构确保了JAX-sklearn既能提供性能提升，又保持了完全的兼容性和稳定性。
+This architecture ensures that JAX-sklearn provides both performance improvements and complete compatibility and stability.
