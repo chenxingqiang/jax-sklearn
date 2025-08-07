@@ -1,7 +1,11 @@
 BSD 3-Clause License
 
-Copyright (c) 2007-2024 The jax-sklearn developers.
+Copyright (c) 2007-2024 The scikit-learn developers.
+Copyright (c) 2024-2025 The XLearn developers.
 All rights reserved.
+
+XLearn is based on scikit-learn and includes substantial portions of
+scikit-learn code. The original scikit-learn license is preserved above.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
