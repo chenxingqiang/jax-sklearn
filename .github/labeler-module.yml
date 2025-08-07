@@ -1,0 +1,80 @@
+module:cluster:
+- xlearn/cluster/**/*
+
+module:common:
+- xlearn/common/**/*
+
+module:compose:
+- xlearn/compose/**/*
+
+module:covariance:
+- xlearn/covariance/**/*
+
+module:cross_decomposition:
+- xlearn/cross_decomposition/**/*
+
+module:datasets:
+- xlearn/datasets/**/*
+
+module:decomposition:
+- xlearn/decomposition/**/*
+
+module:ensemble:
+- xlearn/ensemble/**/*
+
+module:feature_extraction:
+- xlearn/feature_extraction/**/*
+
+module:feature_selection:
+- xlearn/feature_selection/**/*
+
+module:gaussian_process:
+- xlearn/gaussian_process/**/*
+
+module:impute:
+- xlearn/impute/**/*
+
+module:inspection:
+- xlearn/inspection/**/*
+
+module:linear_model:
+- xlearn/linear_model/**/*
+
+module:manifold:
+- xlearn/manifold/**/*
+
+module:metrics:
+- xlearn/metrics/**/*
+
+module:mixture:
+- xlearn/mixture/**/*
+
+module:model_selection:
+- xlearn/model_selection/**/*
+
+module:naive_bayes:
+- xlearn/naive_bayes.py
+
+module:neighbors:
+- xlearn/neighbors/**/*
+
+module:neural_network:
+- xlearn/neural_network/**/*
+
+module:pipeline:
+- xlearn/pipeline.py
+
+module:preprocessing:
+- xlearn/preprocessing/**/*
+
+module:semi_supervised:
+- xlearn/semi_supervised/**/*
+
+module:svm:
+- xlearn/svm/**/*
+
+module:tree:
+- xlearn/tree/**/*
+
+module:utils:
+- xlearn/utils/**/*

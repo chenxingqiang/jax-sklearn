@@ -1,0 +1,8 @@
+cython:
+- xlearn/**/*.pyx
+- xlearn/**/*.pxd
+- xlearn/**/*.pxi
+# Tempita templates
+- xlearn/**/*.pyx.tp
+- xlearn/**/*.pxd.tp
+- xlearn/**/*.pxi.tp

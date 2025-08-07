@@ -1,0 +1,11 @@
+[run]
+# Use statement coverage rather than branch coverage because
+# COVERAGE_CORE=sysmon can make branch coverage slower rather than faster. See
+# https://github.com/nedbat/coveragepy/issues/1812 for more details.
+branch = False
+source = xlearn
+parallel = True
+omit =
+    */xlearn/externals/*
+    */xlearn/_build_utils/*
+    */benchmarks/*

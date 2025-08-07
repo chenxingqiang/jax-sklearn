@@ -1,0 +1,10 @@
+--find-links https://pypi.anaconda.org/scientific-python-nightly-wheels/simple/jax-sklearn
+--pre
+matplotlib
+scikit-image
+pandas
+seaborn
+Pillow
+sphinx-gallery
+jax-sklearn
+polars
