@@ -19,8 +19,14 @@ from datetime import datetime
 from pathlib import Path
 from urllib.request import urlopen
 
-from xlearn.externals._packaging.version import parse
-from xlearn.utils._testing import turn_warnings_into_errors
+try:
+    from xlearn.externals._packaging.version import parse
+    from xlearn.utils._testing import turn_warnings_into_errors
+except ImportError:
+    # Fallback for development environment
+    from packaging.version import parse
+    def turn_warnings_into_errors():
+        pass
 
 # If extensions (or modules to document with autodoc) are in another
 # directory, add these directories to sys.path here. If the directory
@@ -260,10 +266,10 @@ html_theme_options = {
     "pygments_light_style": "tango",
     "pygments_dark_style": "monokai",
     "logo": {
-        "alt_text": "jax-sklearn homepage",
-        "image_relative": "logos/jax-sklearn-logo-small.png",
-        "image_light": "logos/jax-sklearn-logo-small.png",
-        "image_dark": "logos/jax-sklearn-logo-small.png",
+        "alt_text": "JAX-sklearn homepage",
+        "image_relative": "logos/scikit-learn-logo-small.png",
+        "image_light": "logos/scikit-learn-logo-small.png", 
+        "image_dark": "logos/scikit-learn-logo-small.png",
     },
     "surface_warnings": True,
     # -- Template placement in theme layouts ----------------------------------
@@ -308,7 +314,7 @@ html_theme_options = {
 # html_title = None
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-html_short_title = "jax-sklearn"
+html_short_title = "JAX-sklearn"
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32

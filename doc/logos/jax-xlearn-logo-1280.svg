@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- High resolution version for conversion to PNG -->
+<svg width="1280" height="384" viewBox="0 0 1280 384" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- JAX acceleration gradient -->
+    <linearGradient id="jaxGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7931E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD23F;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- sklearn blue gradient -->
+    <linearGradient id="sklearnGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E3A8A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60A5FA;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Acceleration effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1280" height="384" fill="#FFFFFF" rx="24"/>
+  
+  <!-- Lightning bolt icon (scaled 3.2x) -->
+  <g transform="translate(64, 80)">
+    <!-- Lightning bolt path -->
+    <path d="M80 16 L48 112 L80 96 L64 160 L112 64 L80 80 Z" 
+          fill="url(#jaxGradient)" 
+          filter="url(#glow)" 
+          stroke="#FF6B35" 
+          stroke-width="3"/>
+    
+    <!-- Speed lines -->
+    <g opacity="0.7">
+      <line x1="144" y1="48" x2="176" y2="48" stroke="#FF6B35" stroke-width="6" stroke-linecap="round"/>
+      <line x1="144" y1="80" x2="185" y2="80" stroke="#F7931E" stroke-width="6" stroke-linecap="round"/>
+      <line x1="144" y1="112" x2="166" y2="112" stroke="#FFD23F" stroke-width="6" stroke-linecap="round"/>
+    </g>
+  </g>
+  
+  <!-- JAX text (scaled) -->
+  <text x="272" y="144" 
+        font-family="'Arial Black', 'Helvetica Bold', sans-serif" 
+        font-size="90" 
+        font-weight="900"
+        fill="url(#jaxGradient)"
+        filter="url(#glow)">JAX</text>
+  
+  <!-- Dash/hyphen -->
+  <text x="480" y="144" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="90" 
+        font-weight="normal"
+        fill="#666666">-</text>
+  
+  <!-- sklearn text -->
+  <text x="528" y="144" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="90" 
+        font-weight="600"
+        fill="url(#sklearnGradient)">sklearn</text>
+  
+  <!-- Tagline -->
+  <text x="272" y="224" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="38" 
+        font-weight="400"
+        fill="#666666"
+        opacity="0.8">JAX-Accelerated Machine Learning</text>
+  
+  <!-- Performance indicators (scaled) -->
+  <g transform="translate(272, 272)">
+    <!-- Speed badge -->
+    <rect x="0" y="0" width="144" height="51" rx="26" fill="#10B981" opacity="0.1" stroke="#10B981" stroke-width="2"/>
+    <text x="72" y="35" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="29" 
+          font-weight="600"
+          fill="#10B981"
+          text-anchor="middle">5x+ Faster</text>
+    
+    <!-- Multi-hardware badge -->
+    <rect x="176" y="0" width="192" height="51" rx="26" fill="#3B82F6" opacity="0.1" stroke="#3B82F6" stroke-width="2"/>
+    <text x="272" y="35" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="29" 
+          font-weight="600"
+          fill="#3B82F6"
+          text-anchor="middle">Multi-Hardware</text>
+    
+    <!-- Drop-in badge -->
+    <rect x="400" y="0" width="160" height="51" rx="26" fill="#F59E0B" opacity="0.1" stroke="#F59E0B" stroke-width="2"/>
+    <text x="480" y="35" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="29" 
+          font-weight="600"
+          fill="#F59E0B"
+          text-anchor="middle">Drop-in</text>
+  </g>
+  
+  <!-- Enhanced circuit pattern -->
+  <g opacity="0.05" stroke="#3B82F6" stroke-width="2" fill="none">
+    <circle cx="1120" cy="96" r="26"/>
+    <circle cx="1184" cy="160" r="19"/>
+    <circle cx="1152" cy="224" r="13"/>
+    <line x1="1120" y1="122" x2="1165" y2="147"/>
+    <line x1="1165" y1="173" x2="1139" y2="211"/>
+    
+    <!-- Additional tech elements -->
+    <rect x="1100" y="60" width="32" height="8" rx="4"/>
+    <rect x="1160" y="200" width="24" height="6" rx="3"/>
+    <circle cx="1080" cy="180" r="8" fill="#3B82F6" opacity="0.1"/>
+    <circle cx="1200" cy="120" r="6" fill="#F7931E" opacity="0.1"/>
+  </g>
+</svg>

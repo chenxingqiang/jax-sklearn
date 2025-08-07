@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- JAX acceleration gradient -->
+    <linearGradient id="jaxGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7931E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD23F;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- sklearn blue gradient -->
+    <linearGradient id="sklearnGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E3A8A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60A5FA;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Clear space guidelines -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+      refX="0" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+      </marker>
+    </defs>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="500" height="300" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  
+  <!-- Clear space boundaries (dashed lines) -->
+  <rect x="100" y="75" width="300" height="150" 
+        fill="none" stroke="#DC2626" stroke-width="1" stroke-dasharray="4,4" opacity="0.7"/>
+  
+  <!-- Logo centered in clear space -->
+  <g transform="translate(150, 125)">
+    <!-- Lightning bolt -->
+    <g transform="translate(0, 0)">
+      <path d="M15 3 L9 21 L15 18 L12 30 L21 12 L15 15 Z" 
+            fill="url(#jaxGradient)" 
+            stroke="#FF6B35" 
+            stroke-width="0.5"/>
+      
+      <!-- Speed lines -->
+      <g opacity="0.7">
+        <line x1="27" y1="9" x2="33" y2="9" stroke="#FF6B35" stroke-width="1"/>
+        <line x1="27" y1="15" x2="35" y2="15" stroke="#F7931E" stroke-width="1"/>
+        <line x1="27" y1="21" x2="31" y2="21" stroke="#FFD23F" stroke-width="1"/>
+      </g>
+    </g>
+    
+    <!-- JAX text -->
+    <text x="45" y="20" 
+          font-family="'Arial Black', 'Helvetica Bold', sans-serif" 
+          font-size="16" 
+          font-weight="900"
+          fill="url(#jaxGradient)">JAX</text>
+    
+    <!-- Dash -->
+    <text x="85" y="20" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="16" 
+          font-weight="normal"
+          fill="#666666">-</text>
+    
+    <!-- sklearn text -->
+    <text x="95" y="20" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="16" 
+          font-weight="600"
+          fill="url(#sklearnGradient)">sklearn</text>
+  </g>
+  
+  <!-- Clear space measurement indicators -->
+  
+  <!-- Top margin -->
+  <line x1="250" y1="50" x2="250" y2="75" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <line x1="250" y1="75" x2="250" y2="50" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <text x="255" y="65" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="10" 
+        fill="#666">X</text>
+  
+  <!-- Left margin -->
+  <line x1="75" y1="150" x2="100" y2="150" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <line x1="100" y1="150" x2="75" y2="150" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <text x="82" y="145" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="10" 
+        fill="#666">X</text>
+  
+  <!-- Right margin -->
+  <line x1="400" y1="150" x2="425" y2="150" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <line x1="425" y1="150" x2="400" y2="150" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <text x="407" y="145" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="10" 
+        fill="#666">X</text>
+  
+  <!-- Bottom margin -->
+  <line x1="250" y1="225" x2="250" y2="250" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <line x1="250" y1="250" x2="250" y2="225" 
+        stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <text x="255" y="240" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="10" 
+        fill="#666">X</text>
+  
+  <!-- Title and description -->
+  <text x="250" y="25" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="14" 
+        font-weight="700"
+        fill="#1F2937"
+        text-anchor="middle">JAX-sklearn Logo Clear Space</text>
+  
+  <text x="250" y="285" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="10" 
+        fill="#666"
+        text-anchor="middle">Minimum clear space = X (height of lightning bolt)</text>
+</svg>

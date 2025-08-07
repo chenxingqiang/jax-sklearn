@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- JAX acceleration gradient -->
+    <linearGradient id="jaxGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7931E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD23F;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- sklearn blue gradient -->
+    <linearGradient id="sklearnGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E3A8A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60A5FA;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Acceleration effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="40" cy="40" r="38" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+  
+  <!-- Lightning bolt icon (representing JAX acceleration) -->
+  <g transform="translate(20, 15)">
+    <!-- Main lightning bolt -->
+    <path d="M20 5 L12 25 L20 22 L16 35 L28 18 L20 20 Z" 
+          fill="url(#jaxGradient)" 
+          filter="url(#glow)" 
+          stroke="#FF6B35" 
+          stroke-width="0.5"/>
+  </g>
+  
+  <!-- Speed lines around the bolt -->
+  <g opacity="0.6">
+    <!-- Top speed lines -->
+    <line x1="50" y1="20" x2="58" y2="18" stroke="#FF6B35" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="52" y1="28" x2="62" y2="26" stroke="#F7931E" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="50" y1="36" x2="58" y2="35" stroke="#FFD23F" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Bottom speed lines -->
+    <line x1="50" y1="44" x2="60" y2="43" stroke="#FF6B35" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="52" y1="52" x2="58" y2="52" stroke="#F7931E" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Circuit pattern elements -->
+  <g opacity="0.3" stroke="url(#sklearnGradient)" stroke-width="1" fill="none">
+    <circle cx="15" cy="60" r="3"/>
+    <circle cx="65" cy="60" r="3"/>
+    <line x1="18" y1="60" x2="25" y2="55"/>
+    <line x1="55" y1="55" x2="62" y2="60"/>
+  </g>
+  
+  <!-- Small performance indicator dots -->
+  <g>
+    <circle cx="25" cy="65" r="1.5" fill="#10B981"/>
+    <circle cx="40" cy="68" r="1.5" fill="#3B82F6"/>
+    <circle cx="55" cy="65" r="1.5" fill="#F59E0B"/>
+  </g>
+</svg>

@@ -126,7 +126,7 @@ citations to the following paper:
 
 Bibtex entry::
 
-  @article{jax-sklearn,
+  @article{scikit-sklearn,
     title={Scikit-learn: Machine Learning in {P}ython},
     author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
             and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.

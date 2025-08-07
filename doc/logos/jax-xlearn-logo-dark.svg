@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- JAX acceleration gradient (brighter for dark theme) -->
+    <linearGradient id="jaxGradientDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF8A65;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFB74D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFE082;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- sklearn blue gradient (brighter for dark theme) -->
+    <linearGradient id="sklearnGradientDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#42A5F5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#64B5F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#90CAF9;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Enhanced glow for dark theme -->
+    <filter id="glowDark">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Dark background -->
+  <rect width="400" height="120" fill="#1F2937" rx="8"/>
+  
+  <!-- Lightning bolt icon -->
+  <g transform="translate(20, 25)">
+    <path d="M25 5 L15 35 L25 30 L20 50 L35 20 L25 25 Z" 
+          fill="url(#jaxGradientDark)" 
+          filter="url(#glowDark)" 
+          stroke="#FFB74D" 
+          stroke-width="1"/>
+    
+    <!-- Speed lines (brighter) -->
+    <g opacity="0.9">
+      <line x1="45" y1="15" x2="55" y2="15" stroke="#FFB74D" stroke-width="2" stroke-linecap="round"/>
+      <line x1="45" y1="25" x2="58" y2="25" stroke="#FFE082" stroke-width="2" stroke-linecap="round"/>
+      <line x1="45" y1="35" x2="52" y2="35" stroke="#FFF176" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </g>
+  
+  <!-- JAX text (brighter) -->
+  <text x="85" y="45" 
+        font-family="'Arial Black', 'Helvetica Bold', sans-serif" 
+        font-size="28" 
+        font-weight="900"
+        fill="url(#jaxGradientDark)"
+        filter="url(#glowDark)">JAX</text>
+  
+  <!-- Dash (light gray for dark theme) -->
+  <text x="150" y="45" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="28" 
+        font-weight="normal"
+        fill="#9CA3AF">-</text>
+  
+  <!-- sklearn text (brighter blue) -->
+  <text x="165" y="45" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="28" 
+        font-weight="600"
+        fill="url(#sklearnGradientDark)">sklearn</text>
+  
+  <!-- Tagline (light gray) -->
+  <text x="85" y="70" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="12" 
+        font-weight="400"
+        fill="#D1D5DB"
+        opacity="0.9">JAX-Accelerated Machine Learning</text>
+  
+  <!-- Performance indicators (adjusted for dark theme) -->
+  <g transform="translate(85, 85)">
+    <!-- Speed badge -->
+    <rect x="0" y="0" width="45" height="16" rx="8" fill="#10B981" opacity="0.2" stroke="#10B981" stroke-width="0.5"/>
+    <text x="22.5" y="11" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="9" 
+          font-weight="600"
+          fill="#34D399"
+          text-anchor="middle">5x+ Faster</text>
+    
+    <!-- Multi-hardware badge -->
+    <rect x="55" y="0" width="60" height="16" rx="8" fill="#3B82F6" opacity="0.2" stroke="#3B82F6" stroke-width="0.5"/>
+    <text x="85" y="11" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="9" 
+          font-weight="600"
+          fill="#60A5FA"
+          text-anchor="middle">Multi-Hardware</text>
+    
+    <!-- Drop-in badge -->
+    <rect x="125" y="0" width="50" height="16" rx="8" fill="#F59E0B" opacity="0.2" stroke="#F59E0B" stroke-width="0.5"/>
+    <text x="150" y="11" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="9" 
+          font-weight="600"
+          fill="#FBBF24"
+          text-anchor="middle">Drop-in</text>
+  </g>
+  
+  <!-- Enhanced circuit pattern for dark theme -->
+  <g opacity="0.15" stroke="#64B5F6" stroke-width="0.8" fill="none">
+    <circle cx="350" cy="30" r="8"/>
+    <circle cx="370" cy="50" r="6"/>
+    <circle cx="360" cy="70" r="4"/>
+    <line x1="350" y1="38" x2="364" y2="46"/>
+    <line x1="364" y1="54" x2="356" y2="66"/>
+    
+    <!-- Additional glowing elements -->
+    <circle cx="345" cy="25" r="2" fill="#64B5F6" opacity="0.6"/>
+    <circle cx="375" cy="55" r="1.5" fill="#90CAF9" opacity="0.8"/>
+  </g>
+</svg>

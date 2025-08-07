@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="80" viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- JAX acceleration gradient -->
+    <linearGradient id="jaxGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7931E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD23F;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- sklearn blue gradient -->
+    <linearGradient id="sklearnGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E3A8A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60A5FA;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Acceleration effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Lightning bolt icon -->
+  <g transform="translate(20, 20)">
+    <path d="M20 5 L12 25 L20 22 L16 35 L28 18 L20 20 Z" 
+          fill="url(#jaxGradient)" 
+          filter="url(#glow)" 
+          stroke="#FF6B35" 
+          stroke-width="0.5"/>
+    
+    <!-- Speed lines -->
+    <g opacity="0.7">
+      <line x1="35" y1="12" x2="45" y2="10" stroke="#FF6B35" stroke-width="2" stroke-linecap="round"/>
+      <line x1="35" y1="20" x2="48" y2="18" stroke="#F7931E" stroke-width="2" stroke-linecap="round"/>
+      <line x1="35" y1="28" x2="42" y2="27" stroke="#FFD23F" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </g>
+  
+  <!-- JAX text -->
+  <text x="85" y="35" 
+        font-family="'Arial Black', 'Helvetica Bold', sans-serif" 
+        font-size="24" 
+        font-weight="900"
+        fill="url(#jaxGradient)"
+        filter="url(#glow)">JAX</text>
+  
+  <!-- Dash -->
+  <text x="140" y="35" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="24" 
+        font-weight="normal"
+        fill="#666666">-</text>
+  
+  <!-- sklearn text -->
+  <text x="155" y="35" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="24" 
+        font-weight="600"
+        fill="url(#sklearnGradient)">sklearn</text>
+  
+  <!-- Tagline -->
+  <text x="85" y="55" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="11" 
+        font-weight="400"
+        fill="#666666"
+        opacity="0.8">JAX-Accelerated Machine Learning for Python</text>
+  
+  <!-- Performance badges (horizontal layout) -->
+  <g transform="translate(300, 15)">
+    <!-- Speed badge -->
+    <rect x="0" y="0" width="60" height="20" rx="10" fill="#10B981" opacity="0.1" stroke="#10B981" stroke-width="0.5"/>
+    <text x="30" y="13" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="10" 
+          font-weight="700"
+          fill="#10B981"
+          text-anchor="middle">⚡ 5x+ Faster</text>
+    
+    <!-- Multi-hardware badge -->
+    <rect x="70" y="0" width="80" height="20" rx="10" fill="#3B82F6" opacity="0.1" stroke="#3B82F6" stroke-width="0.5"/>
+    <text x="110" y="13" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="10" 
+          font-weight="700"
+          fill="#3B82F6"
+          text-anchor="middle">🖥️ Multi-Hardware</text>
+    
+    <!-- Drop-in badge -->
+    <rect x="160" y="0" width="70" height="20" rx="10" fill="#F59E0B" opacity="0.1" stroke="#F59E0B" stroke-width="0.5"/>
+    <text x="195" y="13" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="10" 
+          font-weight="700"
+          fill="#F59E0B"
+          text-anchor="middle">🔄 Drop-in</text>
+    
+    <!-- Production badge -->
+    <rect x="0" y="30" width="90" height="20" rx="10" fill="#8B5CF6" opacity="0.1" stroke="#8B5CF6" stroke-width="0.5"/>
+    <text x="45" y="43" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="10" 
+          font-weight="700"
+          fill="#8B5CF6"
+          text-anchor="middle">🔬 Production Ready</text>
+    
+    <!-- API Compatible badge -->
+    <rect x="100" y="30" width="90" height="20" rx="10" fill="#EC4899" opacity="0.1" stroke="#EC4899" stroke-width="0.5"/>
+    <text x="145" y="43" 
+          font-family="'Arial', 'Helvetica', sans-serif" 
+          font-size="10" 
+          font-weight="700"
+          fill="#EC4899"
+          text-anchor="middle">🎯 100% API</text>
+  </g>
+  
+  <!-- Subtle tech pattern -->
+  <g opacity="0.08" stroke="#3B82F6" stroke-width="0.5" fill="none">
+    <circle cx="550" cy="25" r="6"/>
+    <circle cx="570" cy="40" r="4"/>
+    <circle cx="560" cy="55" r="3"/>
+    <line x1="550" y1="31" x2="566" y2="36"/>
+    <line x1="566" y1="44" x2="557" y2="52"/>
+    
+    <!-- Additional circuit elements -->
+    <rect x="545" y="15" width="8" height="2" rx="1"/>
+    <rect x="565" y="50" width="6" height="2" rx="1"/>
+  </g>
+</svg>

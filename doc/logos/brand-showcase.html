@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAX-sklearn Brand Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: #1F2937;
+            background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #FF6B35, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #1F2937;
+            border-bottom: 3px solid #FF6B35;
+            padding-bottom: 0.5rem;
+        }
+        
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-item {
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+        
+        .logo-item:hover {
+            border-color: #FF6B35;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .logo-item img, .logo-item svg {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        
+        .logo-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1F2937;
+        }
+        
+        .logo-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .color-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .dark-showcase {
+            background: #1F2937;
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        
+        .dark-showcase h3 {
+            color: #F9FAFB;
+            margin-bottom: 1rem;
+        }
+        
+        .usage-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .usage-item {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .usage-item h4 {
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .usage-item .size-info {
+            color: #10B981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .performance-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .badge.speed { background: rgba(16, 185, 129, 0.1); color: #10B981; border: 1px solid #10B981; }
+        .badge.hardware { background: rgba(59, 130, 246, 0.1); color: #3B82F6; border: 1px solid #3B82F6; }
+        .badge.dropin { background: rgba(245, 158, 11, 0.1); color: #F59E0B; border: 1px solid #F59E0B; }
+        .badge.production { background: rgba(139, 92, 246, 0.1); color: #8B5CF6; border: 1px solid #8B5CF6; }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #1F2937;
+            color: white;
+            border-radius: 12px;
+        }
+        
+        .footer a {
+            color: #FF6B35;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>JAX-sklearn Brand Showcase</h1>
+            <p>Professional brand identity for JAX-accelerated machine learning</p>
+            <div class="performance-badges">
+                <span class="badge speed">⚡ 5x+ Faster</span>
+                <span class="badge hardware">🖥️ Multi-Hardware</span>
+                <span class="badge dropin">🔄 Drop-in</span>
+                <span class="badge production">🔬 Production Ready</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎨 Logo Variations</h2>
+            <div class="logo-grid">
+                <div class="logo-item">
+                    <object data="jax-sklearn-logo.svg" type="image/svg+xml" width="100%" height="120"></object>
+                    <h3>Main Logo</h3>
+                    <p>Primary brand representation<br>400×120px • SVG Format</p>
+                </div>
+                
+                <div class="logo-item">
+                    <object data="jax-sklearn-logo-horizontal.svg" type="image/svg+xml" width="100%" height="80"></object>
+                    <h3>Horizontal Logo</h3>
+                    <p>Wide layouts, headers<br>600×80px • SVG Format</p>
+                </div>
+                
+                <div class="logo-item">
+                    <object data="jax-sklearn-logo-notext.svg" type="image/svg+xml" width="80" height="80"></object>
+                    <h3>Icon Only</h3>
+                    <p>Social media, app icons<br>80×80px • SVG Format</p>
+                </div>
+                
+                <div class="logo-item">
+                    <object data="jax-sklearn-logo-1280.svg" type="image/svg+xml" width="100%" height="120"></object>
+                    <h3>High Resolution</h3>
+                    <p>Print, large displays<br>1280×384px • SVG Format</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dark-showcase">
+            <h3>🌙 Dark Theme Variation</h3>
+            <div style="text-align: center; padding: 2rem;">
+                <object data="jax-sklearn-logo-dark.svg" type="image/svg+xml" width="400" height="120"></object>
+                <p style="margin-top: 1rem; opacity: 0.8;">Optimized for dark backgrounds and night mode interfaces</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎨 Brand Color Palette</h2>
+            <div class="color-palette">
+                <div class="color-item">
+                    <object data="brand_colors/colorswatch_FF6B35_jax_orange.svg" type="image/svg+xml" width="100%" height="100"></object>
+                </div>
+                
+                <div class="color-item">
+                    <object data="brand_colors/colorswatch_3B82F6_sklearn_blue.svg" type="image/svg+xml" width="100%" height="100"></object>
+                </div>
+                
+                <div class="color-item">
+                    <object data="brand_colors/colorswatch_10B981_success_green.svg" type="image/svg+xml" width="100%" height="100"></object>
+                </div>
+                
+                <div class="color-item">
+                    <object data="brand_colors/colorswatch_F59E0B_performance_yellow.svg" type="image/svg+xml" width="100%" height="100"></object>
+                </div>
+                
+                <div class="color-item">
+                    <object data="brand_colors/colorswatch_1F2937_dark_gray.svg" type="image/svg+xml" width="100%" height="100"></object>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📐 Usage Guidelines</h2>
+            <div style="text-align: center; margin: 2rem 0;">
+                <object data="brand_guidelines/jax-sklearn-logo-clearspace.svg" type="image/svg+xml" width="100%" height="300"></object>
+                <p style="margin-top: 1rem; color: #666;">Clear space requirements ensure optimal logo visibility and impact</p>
+            </div>
+            
+            <div class="usage-examples">
+                <div class="usage-item">
+                    <h4>Website Headers</h4>
+                    <div class="size-info">200-300px wide</div>
+                    <p>Primary navigation, hero sections</p>
+                </div>
+                
+                <div class="usage-item">
+                    <h4>Social Media</h4>
+                    <div class="size-info">400×400px</div>
+                    <p>Profile pictures, posts</p>
+                </div>
+                
+                <div class="usage-item">
+                    <h4>Print Materials</h4>
+                    <div class="size-info">2-3 inches wide</div>
+                    <p>Business cards, brochures</p>
+                </div>
+                
+                <div class="usage-item">
+                    <h4>Mobile Apps</h4>
+                    <div class="size-info">48×48px</div>
+                    <p>App icons, UI elements</p>
+                </div>
+                
+                <div class="usage-item">
+                    <h4>Presentations</h4>
+                    <div class="size-info">300-400px wide</div>
+                    <p>Slides, conference materials</p>
+                </div>
+                
+                <div class="usage-item">
+                    <h4>Favicon</h4>
+                    <div class="size-info">32×32px</div>
+                    <p>Browser tabs, bookmarks</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Brand Features</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center; padding: 1.5rem; background: rgba(255, 107, 53, 0.05); border-radius: 8px; border: 1px solid rgba(255, 107, 53, 0.2);">
+                    <h4 style="color: #FF6B35; margin-bottom: 0.5rem;">⚡ JAX Acceleration</h4>
+                    <p>Lightning bolt icon represents speed and performance optimization</p>
+                </div>
+                
+                <div style="text-align: center; padding: 1.5rem; background: rgba(59, 130, 246, 0.05); border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.2);">
+                    <h4 style="color: #3B82F6; margin-bottom: 0.5rem;">🔄 API Compatibility</h4>
+                    <p>Blue sklearn branding maintains connection to original library</p>
+                </div>
+                
+                <div style="text-align: center; padding: 1.5rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                    <h4 style="color: #10B981; margin-bottom: 0.5rem;">🎯 Performance Focus</h4>
+                    <p>Speed lines and gradients emphasize acceleration benefits</p>
+                </div>
+                
+                <div style="text-align: center; padding: 1.5rem; background: rgba(245, 158, 11, 0.05); border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.2);">
+                    <h4 style="color: #F59E0B; margin-bottom: 0.5rem;">🔬 Professional Quality</h4>
+                    <p>Circuit patterns suggest advanced technology and reliability</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>JAX-sklearn Brand Assets</h3>
+            <p>All brand assets are available under open source license.</p>
+            <p>Download complete brand package: <a href="https://github.com/chenxingqiang/jax-sklearn/tree/main/doc/logos">GitHub Repository</a></p>
+            <p style="margin-top: 1rem; opacity: 0.8;">Questions? Open an issue on <a href="https://github.com/chenxingqiang/jax-sklearn/issues">GitHub</a></p>
+        </div>
+    </div>
+</body>
+</html>
