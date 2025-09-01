@@ -67,7 +67,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: pypa/cibuildwheel@5f22145df44122af0f5a201f93cf0207171beca7
+      - uses: pypa/cibuildwheel@352e01339f0a173aa2a3eb57f01492e341e83865
         env:
           CIBW_PLATFORM: pyodide
           XLEARN_SKIP_OPENMP_TEST: "true"
@@ -96,7 +96,7 @@ jobs:
     if: github.repository == 'jax-sklearn/jax-sklearn' && github.event_name != 'pull_request'
     steps:
       - name: Download wheel artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: wheelhouse/
           merge-multiple: true
