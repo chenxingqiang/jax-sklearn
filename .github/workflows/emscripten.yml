@@ -35,7 +35,7 @@ jobs:
       build: ${{ steps.check_build_trigger.outputs.build }}
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
@@ -63,11 +63,11 @@ jobs:
     if: needs.check_build_trigger.outputs.build
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
-      - uses: pypa/cibuildwheel@352e01339f0a173aa2a3eb57f01492e341e83865
+      - uses: pypa/cibuildwheel@c923d83ad9c1bc00211c5041d0c3f73294ff88f6
         env:
           CIBW_PLATFORM: pyodide
           XLEARN_SKIP_OPENMP_TEST: "true"

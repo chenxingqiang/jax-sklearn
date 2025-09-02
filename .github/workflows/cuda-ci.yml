@@ -15,10 +15,10 @@ jobs:
     runs-on: "ubuntu-latest"
     name: Build wheel for Pull Request
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@352e01339f0a173aa2a3eb57f01492e341e83865
+        uses: pypa/cibuildwheel@c923d83ad9c1bc00211c5041d0c3f73294ff88f6
         env:
           CIBW_BUILD: cp313-manylinux_x86_64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
@@ -51,7 +51,7 @@ jobs:
           # https://github.com/actions/setup-python/issues/886
           python-version: '3.12.3'
       - name: Checkout main repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Cache conda environment
         id: cache-conda
         uses: actions/cache@v4
