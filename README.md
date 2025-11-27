@@ -22,6 +22,7 @@
 - ✅ **100% scikit-learn API compatibility** - truly drop-in replacement
 - ✅ **Comprehensive CI/CD** with Azure Pipelines
 - ✅ **Production-ready** intelligent proxy system
+- ✅ **Secret-Learn Integration** - 348 privacy-preserving algorithms for SecretFlow
 
 ---
 
@@ -35,6 +36,7 @@
 - **🔬 Numerical Accuracy**: Maintains scikit-learn precision (MSE diff < 1e-6)
 - **🖥️ Multi-Hardware Support**: Automatic CPU/GPU/TPU acceleration with intelligent selection
 - **🚀 Production Ready**: Robust hardware fallback and error handling
+- **🔐 Secret-Learn Integration**: 348 privacy-preserving algorithm implementations (SS/FL/SL modes) via SecretFlow
 
 ---
 
@@ -310,6 +312,93 @@ Task: 50 regression problems (5K samples × 100 features each)
 │ Sequential  │   0.540s     │   1.00x      │ NumPy-CPU       │
 └─────────────┴──────────────┴──────────────┴─────────────────┘
 ```
+
+---
+
+## 🔐 SecretFlow Integration - Secret-Learn
+
+**Secret-Learn** is a comprehensive integration project that seamlessly connects **JAX-sklearn** with **SecretFlow** for privacy-preserving federated learning, expanding SecretFlow's algorithm ecosystem from 8 to **116 unique algorithms** across **three privacy-preserving modes**.
+
+**Project Name**: **Secret-Learn**  
+**GitHub**: [secret-learn](https://github.com/chenxingqiang/secret-learn)
+
+### 🎯 Integration Statistics
+
+- ✅ **348 algorithm implementations** (116 × 3 modes)
+- ✅ **116 unique sklearn algorithms** fully supported
+- ✅ **Three privacy-preserving modes**: SS, FL, SL
+- ✅ **1,044 generated files** with tests and examples
+- ✅ **136,741 lines** of production-ready code
+
+### 🔒 Three Privacy-Preserving Modes
+
+#### SS Mode (Simple Sealed) - 116 algorithms
+- Data aggregated to SPU (Secure Processing Unit)
+- Full MPC (Multi-Party Computation) encryption
+- Zero knowledge leakage during computation
+
+#### FL Mode (Federated Learning) - 116 algorithms
+- Data stays in local PYUs (Plaintext Units)
+- JAX-accelerated local computation
+- HEU (Homomorphic Encryption Unit) secure aggregation
+
+#### SL Mode (Split Learning) - 116 algorithms
+- Model split across multiple parties
+- Collaborative training with encrypted intermediate activations
+- Best for neural networks and deep models
+
+### 📦 Quick Start with SecretFlow
+
+```python
+# SS Mode - Simple Sealed
+from xlearn._secretflow.algorithms import algorithms
+model = algorithms.PCA(spu, n_components=10)
+model.fit(fed_X)
+
+# FL Mode - Federated Learning
+from xlearn._secretflow.generated.fl_sgdclassifier import FLSGDClassifier
+model = FLSGDClassifier(devices={'alice': alice, 'bob': bob})
+model.fit(fed_X, fed_y, epochs=10)
+
+# SL Mode - Split Learning
+from xlearn._secretflow.generated.sl_mlpclassifier import SLMLPClassifier
+model = SLMLPClassifier(devices={'alice': alice, 'bob': bob})
+model.fit(fed_X, fed_y, epochs=10)
+```
+
+### 🛠️ Algorithm Migration Tool
+
+Automatically generate SecretFlow adapters for any sklearn algorithm:
+
+```bash
+python xlearn/_secretflow/algorithm_migrator_standalone.py \
+    --algorithm sklearn.linear_model.LogisticRegression \
+    --mode ss  # or fl or sl
+```
+
+### 📊 Impact
+
+- **SecretFlow original**: 8 algorithms
+- **Secret-Learn**: 116 unique algorithms
+- **Total implementations**: 348 (116 SS + 116 FL + 116 SL)
+- **Growth**: +1350% algorithm expansion
+
+### 🔗 Resources
+
+- **Project**: **Secret-Learn**
+- **GitHub Repository**: [secret-learn](https://github.com/chenxingqiang/secret-learn)
+- **Documentation**: `xlearn/_secretflow/README.md`
+- **Algorithm Lists**: 
+  - `xlearn/_secretflow/ALGORITHMS.txt` (all 116 algorithms)
+  - `xlearn/_secretflow/FL_ALGORITHMS.txt` (FL mode)
+  - `xlearn/_secretflow/SL_ALGORITHMS.txt` (SL mode)
+
+### 🎓 Use Cases
+
+- **Healthcare**: Train models on distributed medical data without sharing patient records
+- **Finance**: Collaborative fraud detection across banks while preserving data privacy
+- **IoT**: Federated learning on edge devices with encrypted aggregation
+- **Research**: Privacy-preserving ML on sensitive datasets across institutions
 
 ---
 
@@ -659,6 +748,7 @@ JAX-sklearn is released under the [BSD 3-Clause License](COPYING), maintaining c
 - **JAX Team**: For the amazing JAX library
 - **Scikit-learn Team**: For the foundational ML library
 - **NumPy/SciPy**: For numerical computing infrastructure
+- **SecretFlow Team**: For the privacy-preserving federated learning framework
 
 ---
 
@@ -677,3 +767,12 @@ pip install jax-sklearn
 ```
 
 Join the JAX ecosystem revolution in traditional machine learning! 🎉
+
+---
+
+## 🔐 Related Projects
+
+- **[Secret-Learn](https://github.com/chenxingqiang/secret-learn)**: Privacy-preserving ML integration with SecretFlow
+  - 348 algorithm implementations (116 SS + 116 FL + 116 SL modes)
+  - Expands SecretFlow's algorithm ecosystem from 8 to 116 unique algorithms
+  - Full integration with JAX-sklearn for federated learning

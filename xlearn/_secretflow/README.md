@@ -1,12 +1,12 @@
 # Secret-Learn: Privacy-Preserving ML for SecretFlow
 
-**232 sklearn-compatible algorithms for SecretFlow's privacy-preserving computation**
+**348 sklearn-compatible algorithms for SecretFlow's privacy-preserving computation**
 
 ## Features
 
-- ✅ 232 algorithm implementations (116 SS + 116 FL)
-- ✅ 116 unique algorithms, each in both modes
-- ✅ Support both SS (Simple Sealed) and FL (Federated Learning) modes
+- ✅ 348 algorithm implementations (116 SS + 116 FL + 116 SL)
+- ✅ 116 unique algorithms, each in THREE modes
+- ✅ Support SS, FL, and SL modes
 - ✅ Every major sklearn algorithm covered
 - ✅ 100% sklearn API compatibility
 - ✅ Full MPC privacy protection via SecretFlow SPU
@@ -35,7 +35,7 @@ ridge.fit(X_train, y_train)
 
 ## Algorithms
 
-**232 implementations: 116 unique algorithms × 2 modes (SS + FL)**
+**348 implementations: 116 unique algorithms × 3 modes (SS + FL + SL)**
 
 ### SS Mode (Simple Sealed) - 116 algorithms
 Data aggregated to SPU, full MPC protection
@@ -43,7 +43,10 @@ Data aggregated to SPU, full MPC protection
 ### FL Mode (Federated Learning) - 116 algorithms  
 Data stays in local PYUs, JAX-accelerated computation
 
-Every algorithm available in both modes!
+### SL Mode (Split Learning) - 116 algorithms
+Model split across parties, collaborative training
+
+Every algorithm available in ALL THREE modes!
 
 - Decomposition (6): PCA, TruncatedSVD, NMF, FactorAnalysis, FastICA, KernelPCA
 - Regression (14): Ridge, Lasso, ElasticNet, + CV variants, Huber, RANSAC, Isotonic
