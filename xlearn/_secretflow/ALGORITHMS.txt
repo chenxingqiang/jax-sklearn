@@ -1,0 +1,124 @@
+# Secret-Learn: 100 Privacy-Preserving Algorithms
+
+Author: Chen Xingqiang
+GitHub: https://github.com/chenxingqiang/secret-learn
+
+## Statistics
+
+- Total: 100 algorithms
+- Files: 300 (adapter + test + example for each)
+- Code: 48,922 lines
+- Categories: 14
+
+## Algorithm List
+
+1. AdaBoostClassifier
+2. AdaBoostRegressor
+3. AffinityPropagation
+4. AgglomerativeClustering
+5. BaggingClassifier
+6. BaggingRegressor
+7. BernoulliNB
+8. Binarizer
+9. Birch
+10. CCA
+11. CalibratedClassifierCV
+12. CategoricalNB
+13. ComplementNB
+14. DBSCAN
+15. DecisionTreeClassifier
+16. DecisionTreeRegressor
+17. DummyClassifier
+18. DummyRegressor
+19. ElasticNet
+20. ElasticNetCV
+21. EllipticEnvelope
+22. EmpiricalCovariance
+23. ExtraTreesClassifier
+24. ExtraTreesRegressor
+25. FactorAnalysis
+26. FastICA
+27. GaussianProcessRegressor
+28. GradientBoostingClassifier
+29. GradientBoostingRegressor
+30. HistGradientBoostingClassifier
+31. HistGradientBoostingRegressor
+32. HuberRegressor
+33. IsolationForest
+34. Isomap
+35. IsotonicRegression
+36. KBinsDiscretizer
+37. KernelPCA
+38. KernelRidge
+39. LabelEncoder
+40. LabelPropagation
+41. LabelSpreading
+42. Lasso
+43. LassoCV
+44. LedoitWolf
+45. LinearDiscriminantAnalysis
+46. LinearSVC
+47. LinearSVR
+48. LocalOutlierFactor
+49. LocallyLinearEmbedding
+50. MDS
+51. MLPClassifier
+52. MLPRegressor
+53. MaxAbsScaler
+54. MeanShift
+55. MinCovDet
+56. MiniBatchKMeans
+57. MultiOutputClassifier
+58. MultiOutputRegressor
+59. MultinomialNB
+60. NMF
+61. NearestCentroid
+62. Normalizer
+63. NuSVC
+64. NuSVR
+65. OneVsOneClassifier
+66. OneVsRestClassifier
+67. OrdinalEncoder
+68. PCA
+69. PLSCanonical
+70. PLSRegression
+71. Perceptron
+72. PolynomialFeatures
+73. PowerTransformer
+74. QuadraticDiscriminantAnalysis
+75. QuantileTransformer
+76. RFE
+77. RadiusNeighborsClassifier
+78. RadiusNeighborsRegressor
+79. RANSACRegressor
+80. RandomForestClassifier
+81. RandomForestRegressor
+82. Ridge
+83. RidgeCV
+84. RidgeClassifier
+85. RobustScaler
+86. SVC
+87. SVR
+88. SelectFromModel
+89. SelectKBest
+90. SequentialFeatureSelector
+91. ShrunkCovariance
+92. SpectralClustering
+93. SpectralEmbedding
+94. SplineTransformer
+95. TSNE
+96. TruncatedSVD
+97. VarianceThreshold
+98. VotingClassifier
+99. VotingRegressor
+100. chi2
+
+## Usage
+
+```python
+from secret_learn.algorithms import algorithms
+
+model = algorithms.PCA(spu, n_components=10)
+model.fit(fed_data)
+```
+

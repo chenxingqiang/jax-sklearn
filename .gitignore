@@ -11,6 +11,7 @@ build
 xlearn/datasets/__config__.py
 xlearn/**/*.html
 jax-xlearn-env/
+secretflow/
 
 dist/
 MANIFEST
