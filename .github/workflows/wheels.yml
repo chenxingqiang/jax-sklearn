@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -161,10 +161,10 @@ jobs:
 
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11" # update once build dependencies are available
 
@@ -199,7 +199,7 @@ jobs:
         run: bash build_tools/wheels/build_wheels.sh
 
       - name: Store artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cibw-wheels-cp${{ matrix.python }}-${{ matrix.platform_id }}
           path: wheelhouse/*.whl
@@ -222,10 +222,10 @@ jobs:
 
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -238,7 +238,7 @@ jobs:
           XLEARN_SKIP_NETWORK_TESTS: 1
 
       - name: Store artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cibw-sdist
           path: dist/*.tar.gz
@@ -254,17 +254,17 @@ jobs:
 
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: cibw-*
           path: dist
           merge-multiple: true
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
 
       - name: Upload artifacts
         env:
