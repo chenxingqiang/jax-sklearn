@@ -304,14 +304,14 @@ def _logistic_regression_path(
     # If class_weights is a dict (provided by the user), the weights
     # are assigned to the original labels. If it is "balanced", then
     # the class_weights are assigned after masking the labels with a OvR.
-    le = LabelEncoder()
+    le = LabelEncoder().fit(classes)
     if isinstance(class_weight, dict) or (
         multi_class == "multinomial" and class_weight is not None
     ):
         class_weight_ = compute_class_weight(
             class_weight, classes=classes, y=y, sample_weight=sample_weight
         )
-        sample_weight *= class_weight_[le.fit_transform(y)]
+        sample_weight *= class_weight_[le.transform(y)]
 
     # For doing a ovr, we need to mask the labels first. For the
     # multinomial case this is not necessary.
@@ -344,8 +344,7 @@ def _logistic_regression_path(
             # LabelEncoder, not LabelBinarizer, i.e. y as a 1d-array of integers.
             # LabelEncoder also saves memory compared to LabelBinarizer, especially
             # when n_classes is large.
-            le = LabelEncoder()
-            Y_multi = le.fit_transform(y).astype(X.dtype, copy=False)
+            Y_multi = le.transform(y).astype(X.dtype, copy=False)
         else:
             # For liblinear solver, apply LabelBinarizer, i.e. y is one-hot encoded.
             lbin = LabelBinarizer()
