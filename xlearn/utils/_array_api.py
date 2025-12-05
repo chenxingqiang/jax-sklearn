@@ -733,6 +733,41 @@ def _nanmean(X, axis=None, xp=None):
         return total / count
 
 
+def _nansum(X, axis=None, xp=None, keepdims=False, dtype=None):
+    """Compute sum of array elements, ignoring NaNs.
+    
+    Array API compatible nansum implementation.
+    
+    Parameters
+    ----------
+    X : array-like
+        Input array.
+    axis : int or None, default=None
+        Axis along which to compute the sum.
+    xp : module or None, default=None
+        Array API namespace.
+    keepdims : bool, default=False
+        If True, the reduced axes are left in the result as dimensions with size one.
+    dtype : dtype or None, default=None
+        The dtype of the returned array.
+    
+    Returns
+    -------
+    array
+        Sum of array elements, ignoring NaNs.
+    """
+    # TODO: refactor once nan-aware reductions are standardized:
+    # https://github.com/data-apis/array-api/issues/621
+    xp, _, X_device = get_namespace_and_device(X, xp=xp)
+
+    if _is_numpy_namespace(xp):
+        return xp.asarray(numpy.nansum(X, axis=axis, keepdims=keepdims, dtype=dtype))
+
+    mask = xp.isnan(X)
+    masked_arr = xp.where(mask, xp.asarray(0, device=X_device, dtype=X.dtype), X)
+    return xp.sum(masked_arr, axis=axis, keepdims=keepdims, dtype=dtype)
+
+
 def _asarray_with_order(
     array, dtype=None, order=None, copy=None, *, xp=None, device=None
 ):
