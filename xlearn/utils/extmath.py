@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings
+from contextlib import nullcontext
 from functools import partial
 from numbers import Integral
 
@@ -11,7 +12,16 @@ import numpy as np
 from scipy import linalg, sparse
 
 from ..utils._param_validation import Interval, StrOptions, validate_params
-from ._array_api import _average, _is_numpy_namespace, _nanmean, device, get_namespace
+from ._array_api import (
+    _average,
+    _is_numpy_namespace,
+    _max_precision_float_dtype,
+    _nanmean,
+    _nansum,
+    device,
+    get_namespace,
+    get_namespace_and_device,
+)
 from .sparsefuncs_fast import csr_row_norms
 from .validation import check_array, check_random_state
 
@@ -1119,25 +1129,38 @@ def _incremental_mean_and_var(
     # old = stats until now
     # new = the current increment
     # updated = the aggregated stats
+    xp, _, X_device = get_namespace_and_device(X)
+    max_float_dtype = _max_precision_float_dtype(xp, device=X_device)
+    # Promoting int -> float is not guaranteed by the array-api, so we cast manually.
+    # (Also, last_sample_count may be a python scalar)
+    last_sample_count = xp.asarray(
+        last_sample_count, dtype=max_float_dtype, device=X_device
+    )
     last_sum = last_mean * last_sample_count
-    X_nan_mask = np.isnan(X)
-    if np.any(X_nan_mask):
-        sum_op = np.nansum
+    X_nan_mask = xp.isnan(X)
+    if xp.any(X_nan_mask):
+        sum_op = _nansum
     else:
-        sum_op = np.sum
+        sum_op = xp.sum
     if sample_weight is not None:
         # equivalent to np.nansum(X * sample_weight, axis=0)
         # safer because np.float64(X*W) != np.float64(X)*np.float64(W)
         new_sum = _safe_accumulator_op(
-            np.matmul, sample_weight, np.where(X_nan_mask, 0, X)
+            xp.matmul,
+            sample_weight,
+            xp.where(X_nan_mask, 0, X),
         )
         new_sample_count = _safe_accumulator_op(
-            np.sum, sample_weight[:, None] * (~X_nan_mask), axis=0
+            xp.sum,
+            sample_weight[:, None] * xp.astype(~X_nan_mask, sample_weight.dtype),
+            axis=0,
         )
     else:
         new_sum = _safe_accumulator_op(sum_op, X, axis=0)
         n_samples = X.shape[0]
-        new_sample_count = n_samples - np.sum(X_nan_mask, axis=0)
+        new_sample_count = n_samples - _safe_accumulator_op(
+            sum_op, xp.astype(X_nan_mask, X.dtype), axis=0
+        )
 
     updated_sample_count = last_sample_count + new_sample_count
 
@@ -1152,11 +1175,15 @@ def _incremental_mean_and_var(
             # equivalent to np.nansum((X-T)**2 * sample_weight, axis=0)
             # safer because np.float64(X*W) != np.float64(X)*np.float64(W)
             correction = _safe_accumulator_op(
-                np.matmul, sample_weight, np.where(X_nan_mask, 0, temp)
+                xp.matmul,
+                sample_weight,
+                xp.where(X_nan_mask, 0, temp),
             )
             temp **= 2
             new_unnormalized_variance = _safe_accumulator_op(
-                np.matmul, sample_weight, np.where(X_nan_mask, 0, temp)
+                xp.matmul,
+                sample_weight,
+                xp.where(X_nan_mask, 0, temp),
             )
         else:
             correction = _safe_accumulator_op(sum_op, temp, axis=0)
@@ -1170,7 +1197,13 @@ def _incremental_mean_and_var(
 
         last_unnormalized_variance = last_variance * last_sample_count
 
-        with np.errstate(divide="ignore", invalid="ignore"):
+        # There is no errstate equivalent for warning/error management in array API
+        context_manager = (
+            np.errstate(divide="ignore", invalid="ignore")
+            if _is_numpy_namespace(xp)
+            else nullcontext()
+        )
+        with context_manager:
             last_over_new_count = last_sample_count / new_sample_count
             updated_unnormalized_variance = (
                 last_unnormalized_variance
