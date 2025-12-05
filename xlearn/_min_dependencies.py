@@ -7,8 +7,8 @@ import argparse
 from collections import defaultdict
 
 # scipy and cython should by in sync with pyproject.toml
-NUMPY_MIN_VERSION = "1.22.0"
-SCIPY_MIN_VERSION = "1.8.0"
+NUMPY_MIN_VERSION = "1.24.0"
+SCIPY_MIN_VERSION = "1.10.0"
 JOBLIB_MIN_VERSION = "1.2.0"
 THREADPOOLCTL_MIN_VERSION = "3.1.0"
 PYTEST_MIN_VERSION = "7.1.2"
