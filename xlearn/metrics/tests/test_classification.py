@@ -2572,6 +2572,12 @@ def test__check_targets_multiclass_with_both_y_true_and_y_pred_binary():
     assert _check_targets(y_true, y_pred)[0] == "multiclass"
 
 
+def test__check_targets_raises_on_empty_inputs():
+    msg = "Found empty input array (e.g., `y_true` or `y_pred`) while a minimum of 1"
+    with pytest.raises(ValueError, match=re.escape(msg)):
+        _check_targets(np.array([]), np.array([]))
+
+
 def test_hinge_loss_binary():
     y_true = np.array([-1, 1, 1, -1])
     pred_decision = np.array([-8.5, 0.5, 1.5, -0.3])

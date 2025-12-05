@@ -97,6 +97,12 @@ def _check_targets(y_true, y_pred):
     check_consistent_length(y_true, y_pred)
     type_true = type_of_target(y_true, input_name="y_true")
     type_pred = type_of_target(y_pred, input_name="y_pred")
+    for array in [y_true, y_pred]:
+        if _num_samples(array) < 1:
+            raise ValueError(
+                "Found empty input array (e.g., `y_true` or `y_pred`) while a minimum "
+                "of 1 sample is required."
+            )
 
     y_type = {type_true, type_pred}
     if y_type == {"binary", "multiclass"}:
