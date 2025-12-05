@@ -627,6 +627,22 @@ def _fill_or_add_to_diagonal(array, value, xp, add_value=True, wrap=False):
         array_flat[:end:step] = value
 
 
+def _fill_diagonal(array, value, xp):
+    """Fill the diagonal of a 2-d array with a scalar or 1D array value.
+
+    Note `array` is altered in place.
+    """
+    _fill_or_add_to_diagonal(array, value, xp, add_value=False, wrap=False)
+
+
+def _add_to_diagonal(array, value, xp):
+    """Add `value` to diagonal of `array`.
+
+    Note `array` is altered in place.
+    """
+    _fill_or_add_to_diagonal(array, value, xp, add_value=True, wrap=False)
+
+
 def _is_xp_namespace(xp, name):
     return xp.__name__ in (
         name,
