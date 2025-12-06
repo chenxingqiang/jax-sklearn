@@ -12,7 +12,7 @@ from scipy.sparse import issparse
 
 from xlearn.utils.fixes import PYARROW_VERSION_BELOW_17
 
-from ._array_api import _is_numpy_namespace, get_namespace
+from ._array_api import _is_numpy_namespace, get_namespace, get_namespace_and_device, move_to
 from ._param_validation import Interval, validate_params
 from .extmath import _approximate_mode
 from .validation import (
@@ -30,9 +30,26 @@ from .validation import (
 
 def _array_indexing(array, key, key_dtype, axis):
     """Index an array or scipy.sparse consistently across NumPy version."""
-    xp, is_array_api = get_namespace(array)
+    xp, is_array_api, device_ = get_namespace_and_device(array)
     if is_array_api:
-        return xp.take(array, key, axis=axis)
+        if hasattr(key, "shape"):
+            key = move_to(key, xp=xp, device=device_)
+        elif isinstance(key, (int, slice)):
+            # Passthrough for valid __getitem__ inputs as noted in the array
+            # API spec.
+            pass
+        else:
+            key = xp.asarray(key, device=device_)
+
+        if hasattr(key, "dtype"):
+            if xp.isdtype(key.dtype, "integral"):
+                return xp.take(array, key, axis=axis)
+            elif xp.isdtype(key.dtype, "bool"):
+                # Array API does not support boolean indexing for n-dim arrays
+                # yet hence the need to turn to equivalent integer indexing.
+                indices = xp.arange(array.shape[axis], device=device_)
+                return xp.take(array, indices[key], axis=axis)
+
     if issparse(array) and key_dtype == "bool":
         key = np.asarray(key)
     if isinstance(key, tuple):
