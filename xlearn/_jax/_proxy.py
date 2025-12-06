@@ -97,10 +97,13 @@ class EstimatorProxy:
 
         # If it's a method, wrap it to handle data conversion
         if callable(attr):
-            @functools.wraps(attr)
+            # Capture attr in a closure variable to avoid UnboundLocalError
+            captured_attr = attr
+            
+            @functools.wraps(captured_attr)
             def wrapper(*args, **kwargs):
                 try:
-                    result = attr(*args, **kwargs)
+                    result = captured_attr(*args, **kwargs)
 
                     # Convert JAX outputs to NumPy for compatibility
                     if self._using_jax:
@@ -124,9 +127,9 @@ class EstimatorProxy:
                         self._impl = self._original_class(*self._init_args, **self._init_kwargs)
                         self._using_jax = False
 
-                        # Retry the method call
-                        attr = getattr(self._impl, name)
-                        result = attr(*args, **kwargs)
+                        # Retry the method call with new implementation
+                        retry_attr = getattr(self._impl, name)
+                        result = retry_attr(*args, **kwargs)
                         return self if result is self._impl else result
                     else:
                         raise
