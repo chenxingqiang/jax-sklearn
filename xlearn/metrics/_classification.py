@@ -41,6 +41,8 @@ from ..utils._array_api import (
     _union1d,
     get_namespace,
     get_namespace_and_device,
+    move_to,
+    supported_float_dtypes,
     xpx,
 )
 from ..utils._param_validation import (
@@ -177,7 +179,7 @@ def _validate_multiclass_probabilistic_prediction(
     y_true : array-like or label indicator matrix
         Ground truth (correct) labels for n_samples samples.
 
-    y_prob : array-like of float, shape=(n_samples, n_classes) or (n_samples,)
+    y_prob : array of floats, shape=(n_samples, n_classes) or (n_samples,)
         Predicted probabilities, as returned by a classifier's
         predict_proba method. If `y_prob.shape = (n_samples,)`
         the probabilities provided are assumed to be that of the
@@ -199,14 +201,12 @@ def _validate_multiclass_probabilistic_prediction(
 
     y_prob : array of shape (n_samples, n_classes)
     """
-    y_prob = check_array(
-        y_prob, ensure_2d=False, dtype=[np.float64, np.float32, np.float16]
-    )
+    xp, _, device_ = get_namespace_and_device(y_prob)
 
-    if y_prob.max() > 1:
-        raise ValueError(f"y_prob contains values greater than 1: {y_prob.max()}")
-    if y_prob.min() < 0:
-        raise ValueError(f"y_prob contains values lower than 0: {y_prob.min()}")
+    if xp.max(y_prob) > 1:
+        raise ValueError(f"y_prob contains values greater than 1: {xp.max(y_prob)}")
+    if xp.min(y_prob) < 0:
+        raise ValueError(f"y_prob contains values lower than 0: {xp.min(y_prob)}")
 
     check_consistent_length(y_prob, y_true, sample_weight)
     lb = LabelBinarizer()
@@ -256,22 +256,27 @@ def _validate_multiclass_probabilistic_prediction(
     # If y_prob is of single dimension, assume y_true to be binary
     # and then check.
     if y_prob.ndim == 1:
-        y_prob = y_prob[:, np.newaxis]
+        y_prob = xp.reshape(y_prob, (-1, 1))
     if y_prob.shape[1] == 1:
-        y_prob = np.append(1 - y_prob, y_prob, axis=1)
+        y_prob = xp.concat([1 - y_prob, y_prob], axis=1)
 
-    eps = np.finfo(y_prob.dtype).eps
+    eps = float(xp.finfo(y_prob.dtype).eps)
 
     # Make sure y_prob is normalized
-    y_prob_sum = y_prob.sum(axis=1)
-    if not np.allclose(y_prob_sum, 1, rtol=np.sqrt(eps)):
+    y_prob_sum = xp.sum(y_prob, axis=1)
+    if not xp.all(
+        xpx.isclose(
+            y_prob_sum,
+            xp.asarray(1, dtype=y_prob_sum.dtype, device=device_),
+            rtol=eps**0.5,
+        )
+    ):
         warnings.warn(
             "The y_prob values do not sum to one. Make sure to pass probabilities.",
             UserWarning,
         )
 
     # Check if dimensions are consistent.
-    transformed_labels = check_array(transformed_labels)
     if len(lb.classes_) != y_prob.shape[1]:
         if labels is None:
             raise ValueError(
@@ -289,6 +294,9 @@ def _validate_multiclass_probabilistic_prediction(
                 "from that in y_prob. Classes found in "
                 "labels: {0}".format(lb.classes_)
             )
+
+    # Convert transformed_labels to the same namespace as y_prob
+    transformed_labels = xp.asarray(transformed_labels, device=device_)
 
     return transformed_labels, y_prob
 
@@ -3264,13 +3272,20 @@ def log_loss(y_true, y_pred, *, normalize=True, sample_weight=None, labels=None)
     ...          [[.1, .9], [.9, .1], [.8, .2], [.35, .65]])
     0.21616
     """
+    xp, _, device_ = get_namespace_and_device(y_pred)
+    y_pred = check_array(
+        y_pred, ensure_2d=False, dtype=supported_float_dtypes(xp, device=device_)
+    )
+    if sample_weight is not None:
+        sample_weight = move_to(sample_weight, xp=xp, device=device_)
+
     transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
         y_true, y_pred, sample_weight, labels
     )
 
     # Clipping
-    eps = np.finfo(y_pred.dtype).eps
-    y_pred = np.clip(y_pred, eps, 1 - eps)
+    eps = float(xp.finfo(y_pred.dtype).eps)
+    y_pred = xp.clip(y_pred, eps, 1 - eps)
 
     loss = -xlogy(transformed_labels, y_pred).sum(axis=1)
 
@@ -3710,12 +3725,18 @@ def d2_log_loss_score(y_true, y_pred, *, sample_weight=None, labels=None):
     This metric is not well-defined for a single sample and will return a NaN
     value if n_samples is less than two.
     """
-    y_pred = check_array(y_pred, ensure_2d=False, dtype="numeric")
+    xp, _, device_ = get_namespace_and_device(y_pred)
+    y_pred = check_array(
+        y_pred, ensure_2d=False, dtype=supported_float_dtypes(xp, device=device_)
+    )
     check_consistent_length(y_pred, y_true, sample_weight)
     if _num_samples(y_pred) < 2:
         msg = "D^2 score is not well-defined with less than two samples."
         warnings.warn(msg, UndefinedMetricWarning)
         return float("nan")
+
+    if sample_weight is not None:
+        sample_weight = move_to(sample_weight, xp=xp, device=device_)
 
     # log loss of the fitted model
     numerator = log_loss(
