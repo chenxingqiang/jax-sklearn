@@ -17,6 +17,7 @@ _global_config = {
     "precision": "float32",  # float32, float64
     "debug_mode": False,
     "cache_compiled_functions": True,
+    "jax_auto_threshold": False,  # If True, only use JAX for large datasets
 }
 
 _threadlocal = threading.local()
@@ -57,6 +58,7 @@ def set_config(
     precision: Optional[str] = None,
     debug_mode: Optional[bool] = None,
     cache_compiled_functions: Optional[bool] = None,
+    jax_auto_threshold: Optional[bool] = None,
 ) -> None:
     """Set global JAX acceleration configuration.
 
@@ -85,6 +87,10 @@ def set_config(
         
     cache_compiled_functions : bool, default=None
         Cache compiled JAX functions for reuse.
+        
+    jax_auto_threshold : bool, default=None
+        If True, only use JAX for large datasets (complexity >= 1e8).
+        If False (default), always use JAX when enabled.
 
     Examples
     --------
@@ -121,6 +127,8 @@ def set_config(
         local_config["debug_mode"] = debug_mode
     if cache_compiled_functions is not None:
         local_config["cache_compiled_functions"] = cache_compiled_functions
+    if jax_auto_threshold is not None:
+        local_config["jax_auto_threshold"] = jax_auto_threshold
 
 @contextmanager
 def config_context(**kwargs):

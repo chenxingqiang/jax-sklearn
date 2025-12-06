@@ -21,11 +21,20 @@ class UniversalJAXMixin:
         self._performance_cache = {}
     
     def _should_use_jax(self, X: np.ndarray, algorithm_name: str = None) -> bool:
-        """Determine if JAX should be used based on data characteristics."""
+        """Determine if JAX should be used based on configuration.
+        
+        By default, JAX is always used when enabled. The threshold-based
+        heuristic can be enabled via config if needed for specific use cases.
+        """
         config = get_config()
         if not config.get("enable_jax", True):
             return False
         
+        # If auto_threshold is disabled (default), always use JAX
+        if not config.get("jax_auto_threshold", False):
+            return True
+        
+        # Otherwise, use heuristic based on data size
         n_samples, n_features = X.shape
         
         # Cache key for performance decision
