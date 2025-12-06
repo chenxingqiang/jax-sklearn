@@ -203,6 +203,9 @@ def _validate_multiclass_probabilistic_prediction(
     """
     xp, _, device_ = get_namespace_and_device(y_prob)
 
+    # Ensure y_prob is an array (not a list) so we can access .ndim and .dtype
+    y_prob = xp.asarray(y_prob)
+
     if xp.max(y_prob) > 1:
         raise ValueError(f"y_prob contains values greater than 1: {xp.max(y_prob)}")
     if xp.min(y_prob) < 0:
