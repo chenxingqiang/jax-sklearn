@@ -34,6 +34,7 @@ from ...metrics._scorer import _SCORERS
 from ...model_selection import train_test_split
 from ...preprocessing import FunctionTransformer, LabelEncoder, OrdinalEncoder
 from ...utils import check_random_state, compute_sample_weight, resample
+from ...utils._dataframe import is_pandas_df
 from ...utils._missing import is_scalar_nan
 from ...utils._openmp_helpers import _openmp_effective_n_threads
 from ...utils._param_validation import Interval, RealNotInt, StrOptions
@@ -42,7 +43,6 @@ from ...utils.validation import (
     _check_monotonic_cst,
     _check_sample_weight,
     _check_y,
-    _is_pandas_df,
     check_array,
     check_consistent_length,
     check_is_fitted,
@@ -369,7 +369,7 @@ class BaseHistGradientBoosting(BaseEstimator, ABC):
         # fixed in main and maybe included in 2.2.1, see
         # https://github.com/pandas-dev/pandas/pull/57173.
         # Also pandas versions < 1.5.1 do not support the dataframe interchange
-        if _is_pandas_df(X):
+        if is_pandas_df(X):
             X_is_dataframe = True
             categorical_columns_mask = np.asarray(X.dtypes == "category")
         elif hasattr(X, "__dataframe__"):

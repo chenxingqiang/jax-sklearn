@@ -7,6 +7,7 @@ from functools import partial
 import numpy as np
 
 from ..base import BaseEstimator, TransformerMixin, _fit_context
+from ..utils._dataframe import is_pandas_df, is_polars_df
 from ..utils._param_validation import StrOptions
 from ..utils._repr_html.estimator import _VisualBlock
 from ..utils._set_output import (
@@ -20,8 +21,6 @@ from ..utils.validation import (
     _check_feature_names_in,
     _check_n_features,
     _get_feature_names,
-    _is_pandas_df,
-    _is_polars_df,
     check_array,
     validate_data,
 )
@@ -307,9 +306,9 @@ class FunctionTransformer(TransformerMixin, BaseEstimator):
                 "a {0} DataFrame to follow the `set_output` API  or `feature_names_out`"
                 " should be defined."
             )
-            if output_config == "pandas" and not _is_pandas_df(out):
+            if output_config == "pandas" and not is_pandas_df(out):
                 warnings.warn(warn_msg.format("pandas"))
-            elif output_config == "polars" and not _is_polars_df(out):
+            elif output_config == "polars" and not is_polars_df(out):
                 warnings.warn(warn_msg.format("polars"))
 
         return out
