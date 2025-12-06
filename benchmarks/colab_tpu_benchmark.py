@@ -15,6 +15,13 @@ print("=" * 70)
 print("Step 1: Installing dependencies...")
 print("=" * 70)
 
+import subprocess
+import sys
+
+# Install JAX with TPU support
+subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "jax[tpu]", "-f", "https://storage.googleapis.com/jax-releases/libtpu_releases.html"])
+# Install latest jax-sklearn from GitHub (includes all bug fixes)
+subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "git+https://github.com/chenxingqiang/jax-sklearn.git"])
 
 print("✅ Dependencies installed!")
 

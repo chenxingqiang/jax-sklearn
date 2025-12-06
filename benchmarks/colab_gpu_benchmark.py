@@ -23,7 +23,8 @@ import sys
 
 # Install JAX with GPU support
 subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "jax[cuda12]"])
-subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "jax-sklearn"])
+# Install latest jax-sklearn from GitHub (includes all bug fixes)
+subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "git+https://github.com/chenxingqiang/jax-sklearn.git"])
 
 print("✅ Dependencies installed!")
 
