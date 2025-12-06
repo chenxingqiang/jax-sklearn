@@ -47,16 +47,20 @@ class UniversalJAXMixin:
         thresholds = {
             # Linear models - benefit from JAX on large problems
             'LinearRegression': {'min_complexity': 1e8, 'min_samples': 10000},
+            'linear': {'min_complexity': 1e8, 'min_samples': 10000},  # alias for jax_fit
             'Ridge': {'min_complexity': 1e8, 'min_samples': 10000},
+            'ridge': {'min_complexity': 1e8, 'min_samples': 10000},  # alias for jax_fit
             'Lasso': {'min_complexity': 5e7, 'min_samples': 5000},  # Iterative, benefits earlier
             'LogisticRegression': {'min_complexity': 5e7, 'min_samples': 5000},
             
             # Clustering - benefit from vectorization
             'KMeans': {'min_complexity': 1e6, 'min_samples': 5000},
+            'kmeans': {'min_complexity': 1e6, 'min_samples': 5000},  # alias
             'DBSCAN': {'min_complexity': 1e6, 'min_samples': 1000},
             
             # Decomposition - matrix operations benefit greatly
             'PCA': {'min_complexity': 1e7, 'min_samples': 5000},
+            'pca': {'min_complexity': 1e7, 'min_samples': 5000},  # alias
             'TruncatedSVD': {'min_complexity': 1e7, 'min_samples': 5000},
             'NMF': {'min_complexity': 5e6, 'min_samples': 2000},
             
