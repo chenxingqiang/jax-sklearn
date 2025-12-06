@@ -10,7 +10,6 @@ import warnings
 from numbers import Integral, Real
 
 import numpy as np
-from joblib import effective_n_jobs
 from scipy import optimize
 
 from xlearn.metrics import get_scorer_names
@@ -1009,11 +1008,10 @@ class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
            *warm_start* to support *lbfgs*, *newton-cg*, *sag*, *saga* solvers.
 
     n_jobs : int, default=None
-        Number of CPU cores used when parallelizing over classes if
-        multi_class='ovr'". This parameter is ignored when the ``solver`` is
-        set to 'liblinear' regardless of whether 'multi_class' is specified or
-        not. ``None`` means 1 unless in a :obj:`joblib.parallel_backend`
-        context. ``-1`` means using all processors.
+        Does not have any effect.
+
+        .. deprecated:: 1.8
+           `n_jobs` is deprecated in version 1.8 and will be removed in 1.10.
         See :term:`Glossary <n_jobs>` for more details.
 
     l1_ratio : float, default=None
@@ -1223,6 +1221,13 @@ class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
                 "(penalty={})".format(self.penalty)
             )
 
+        msg = (
+            "'n_jobs' has no effect since 1.8 and will be removed in 1.10. "
+            f"You provided 'n_jobs={self.n_jobs}', please leave it unspecified."
+        )
+        if self.n_jobs is not None:
+            warnings.warn(msg, category=FutureWarning)
+
         if self.penalty == "elasticnet" and self.l1_ratio is None:
             raise ValueError("l1_ratio must be specified when penalty is elasticnet.")
 
@@ -1300,12 +1305,6 @@ class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
                     "scheme.",
                     FutureWarning,
                 )
-            if effective_n_jobs(self.n_jobs) != 1:
-                warnings.warn(
-                    "'n_jobs' > 1 does not have any effect when"
-                    " 'solver' is set to 'liblinear'. Got 'n_jobs'"
-                    " = {}.".format(effective_n_jobs(self.n_jobs))
-                )
             self.coef_, self.intercept_, self.n_iter_ = _fit_liblinear(
                 X,
                 y,
@@ -1369,16 +1368,9 @@ class LogisticRegression(LinearClassifierMixin, SparseCoefMixin, BaseEstimator):
         # TODO: Refactor this to avoid joblib parallelism entirely when doing binary
         # and multinomial multiclass classification and use joblib only for the
         # one-vs-rest multiclass case.
-        if (
-            solver in ["lbfgs", "newton-cg", "newton-cholesky"]
-            and len(classes_) == 1
-            and effective_n_jobs(self.n_jobs) == 1
-        ):
-            # In the future, we would like n_threads = _openmp_effective_n_threads()
-            # For the time being, we just do
-            n_threads = 1
-        else:
-            n_threads = 1
+        # TODO: enable multi-threading if benchmarks show a positive effect,
+        # see https://github.com/scikit-learn/scikit-learn/issues/32162
+        n_threads = 1
 
         fold_coefs_ = Parallel(n_jobs=self.n_jobs, verbose=self.verbose, prefer=prefer)(
             path_func(
