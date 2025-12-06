@@ -15,9 +15,6 @@ print("=" * 70)
 print("Step 1: Installing dependencies...")
 print("=" * 70)
 
-# Install JAX with TPU support
-!pip install -q jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
-!pip install -q jax-sklearn
 
 print("✅ Dependencies installed!")
 
