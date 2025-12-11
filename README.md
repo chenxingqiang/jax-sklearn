@@ -9,6 +9,7 @@
 [![PyPI](https://img.shields.io/badge/PyPI-published-success.svg)](https://pypi.org/project/jax-sklearn/)
 [![CI](https://img.shields.io/badge/CI-Azure%20Pipelines-blue.svg)](https://dev.azure.com/chenxingqiang/jax-sklearn)
 [![Tests](https://img.shields.io/badge/tests-13058%20passed-success.svg)](#-test-results)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/chenxingqiang/jax-sklearn)
 
 ---
 
