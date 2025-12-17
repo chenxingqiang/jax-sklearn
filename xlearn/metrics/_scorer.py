@@ -13,7 +13,7 @@ is the model to be evaluated, ``X`` is the test data and ``y`` is the
 ground truth labeling (or ``None`` in the case of unsupervised models).
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import copy

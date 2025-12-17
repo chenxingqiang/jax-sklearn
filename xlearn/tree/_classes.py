@@ -3,7 +3,7 @@ This module gathers tree-based methods, including decision, regression and
 randomized trees. Single and multi-output problems are both handled.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import copy

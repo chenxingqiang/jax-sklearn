@@ -1,4 +1,4 @@
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 # This list of English stop words is taken from the "Glasgow Information

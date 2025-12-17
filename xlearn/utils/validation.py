@@ -1,6 +1,6 @@
 """Functions to validate input and parameters within jax-sklearn estimators."""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import numbers

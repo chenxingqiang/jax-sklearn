@@ -3,7 +3,7 @@ from __future__ import annotations
 import warnings
 from dataclasses import dataclass, field
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 

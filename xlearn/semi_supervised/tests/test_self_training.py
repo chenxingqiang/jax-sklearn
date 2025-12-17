@@ -15,7 +15,7 @@ from xlearn.svm import SVC
 from xlearn.tests.test_pipeline import SimpleEstimator
 from xlearn.tree import DecisionTreeClassifier
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 # load the iris dataset and randomly permute it

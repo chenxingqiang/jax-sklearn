@@ -9,7 +9,7 @@ near-duplicates to form the final set of centroids.
 Seeding is performed using a binning technique for scalability.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings

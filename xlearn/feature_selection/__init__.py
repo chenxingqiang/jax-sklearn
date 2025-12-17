@@ -4,7 +4,7 @@ These include univariate filter selection methods and the recursive feature elim
 algorithm.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 from ._base import SelectorMixin

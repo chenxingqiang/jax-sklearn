@@ -1,4 +1,4 @@
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 # This is the exact and Barnes-Hut t-SNE implementation. There are other

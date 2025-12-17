@@ -3,7 +3,7 @@ HDBSCAN: Hierarchical Density-Based Spatial Clustering
          of Applications with Noise
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 # Redistribution and use in source and binary forms, with or without

@@ -4,7 +4,7 @@ These routines execute the OPTICS algorithm, and implement various
 cluster extraction methods of the ordered list.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings

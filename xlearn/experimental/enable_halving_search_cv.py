@@ -19,7 +19,7 @@ The ``# noqa`` comment comment can be removed: it just tells linters like
 flake8 to ignore the import, which appears as unused.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 from .. import model_selection

@@ -1,6 +1,6 @@
 """Implementation of ARFF parsers: via LIAC-ARFF and pandas."""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import itertools

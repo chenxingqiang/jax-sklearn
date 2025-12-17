@@ -5,7 +5,7 @@ TreeGrower builds a regression tree fitting a Newton-Raphson step, based on
 the gradients and hessians of the training data.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import numbers

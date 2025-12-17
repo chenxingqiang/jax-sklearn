@@ -5,7 +5,7 @@ The dataset page is available at
     http://jmlr.csail.mit.edu/papers/volume5/lewis04a/
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import logging

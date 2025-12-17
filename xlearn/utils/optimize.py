@@ -9,7 +9,7 @@ regression with large design matrix), this approach gives very
 significant speedups.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 # This is a modified file from scipy.optimize

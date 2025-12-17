@@ -1,4 +1,4 @@
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 """Classification, regression and One-Class SVM using Stochastic Gradient

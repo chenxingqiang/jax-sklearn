@@ -1,6 +1,6 @@
 """Approximate kernel feature maps based on Fourier transforms and count sketches."""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings

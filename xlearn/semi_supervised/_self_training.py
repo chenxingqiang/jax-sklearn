@@ -25,7 +25,7 @@ from ..utils.validation import _estimator_has, check_is_fitted, validate_data
 
 __all__ = ["SelfTrainingClassifier"]
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 

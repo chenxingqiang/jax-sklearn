@@ -4,7 +4,7 @@ Functions named as *_score return a scalar value to maximize: the higher the
 better.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings

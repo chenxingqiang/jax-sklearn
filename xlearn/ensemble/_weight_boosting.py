@@ -16,7 +16,7 @@ The module structure is the following:
   (AdaBoost.R2) for regression problems.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings

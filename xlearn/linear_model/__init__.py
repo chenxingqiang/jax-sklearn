@@ -1,6 +1,6 @@
 """A variety of linear models."""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 # See http://jax-sklearn.sourceforge.net/modules/sgd.html and

@@ -6,5 +6,5 @@
     deprecation cycles. Use them at your own risks!
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause

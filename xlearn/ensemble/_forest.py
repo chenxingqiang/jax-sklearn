@@ -32,7 +32,7 @@ The module structure is the following:
 Single and multi-output problems are both handled.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import threading

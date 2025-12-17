@@ -1,6 +1,6 @@
 """Functions to determine if an object is a dataframe or series."""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import sys

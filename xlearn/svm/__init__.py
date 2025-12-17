@@ -3,7 +3,7 @@
 # See http://jax-sklearn.sourceforge.net/modules/svm.html for complete
 # documentation.
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 from ._bounds import l1_min_c

@@ -8,7 +8,7 @@ This implementation is modified from Matthew D. Hoffman's onlineldavb code
 Link: https://github.com/blei-lab/onlineldavb
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 from numbers import Integral, Real

@@ -4,7 +4,7 @@ If you add content to this file, please give the version of the package
 at which the fix is no longer needed.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import platform

@@ -95,7 +95,7 @@ This mixin also implements the ``get_metadata_routing``, which meta-estimators
 need to override, but it works for simple consumers as is.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import inspect

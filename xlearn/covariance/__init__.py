@@ -5,7 +5,7 @@ precision matrix defined as the inverse of the covariance. Covariance estimation
 closely related to the theory of Gaussian graphical models.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 from ._elliptic_envelope import EllipticEnvelope

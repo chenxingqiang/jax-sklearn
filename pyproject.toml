@@ -191,6 +191,7 @@ notice-rgx = "\\#\\ Authors:\\ The\\ scikit\\-learn\\ developers\\\r?\\\n\\#\\ S
 "doc/*"=["CPY001"]
 "build_tools/*"=["CPY001"]
 "xlearn/_build_utils/*"=["CPY001"]
+"xlearn/_jax/*"=["CPY001"]
 "maint_tools/*"=["CPY001"]
 ".spin/*"=["CPY001"]
 ".github/*"=["CPY001"]

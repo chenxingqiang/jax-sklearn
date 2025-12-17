@@ -7,7 +7,7 @@ It used to enable the use of
 normally from `xlearn.ensemble`.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 # Don't remove this file, we don't want to break users code just because the

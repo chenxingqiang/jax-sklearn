@@ -2,7 +2,7 @@
 This file contains preprocessing tools based on polynomials.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import collections

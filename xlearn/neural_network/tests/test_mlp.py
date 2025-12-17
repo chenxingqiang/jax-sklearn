@@ -2,7 +2,7 @@
 Testing for Multi-layer Perceptron module (xlearn.neural_network)
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import re

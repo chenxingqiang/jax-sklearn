@@ -9,5 +9,5 @@ The jax-sklearn standard source distribution will not put code in this file,
 so you can safely replace this file with your own version.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause

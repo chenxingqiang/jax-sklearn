@@ -13,7 +13,7 @@ http://www.cs.ucl.ac.uk/staff/d.barber/brml,
 Algorithm 21.1
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings

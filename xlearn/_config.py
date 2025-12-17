@@ -1,6 +1,6 @@
 """Global configuration state and functions for management"""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import os

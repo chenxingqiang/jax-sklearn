@@ -3,7 +3,7 @@ The :mod:`xlearn.model_selection._validation` module includes classes and
 functions to validate the model.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import numbers

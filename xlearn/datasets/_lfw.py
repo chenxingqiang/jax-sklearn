@@ -6,7 +6,7 @@ over the internet, all details are available on the official website:
     http://vis-www.cs.umass.edu/lfw/
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import logging

@@ -1,6 +1,6 @@
 """All minimum dependencies for XLearn."""
 
-# Authors: The XLearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import argparse

@@ -1,6 +1,6 @@
 """Score functions, performance metrics, pairwise metrics and distance computations."""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 from . import cluster

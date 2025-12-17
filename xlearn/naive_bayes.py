@@ -4,7 +4,7 @@ These are supervised learning methods based on applying Bayes' theorem with stro
 (naive) feature independence assumptions.
 """
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import warnings

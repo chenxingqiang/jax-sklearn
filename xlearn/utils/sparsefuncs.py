@@ -1,6 +1,6 @@
 """A collection of utilities to work with sparse matrices and arrays."""
 
-# Authors: The jax-sklearn developers
+# Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
 import itertools
