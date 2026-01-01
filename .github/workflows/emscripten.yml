@@ -35,7 +35,7 @@ jobs:
       build: ${{ steps.check_build_trigger.outputs.build }}
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
@@ -63,11 +63,11 @@ jobs:
     if: needs.check_build_trigger.outputs.build
     steps:
       - name: Checkout jax-sklearn
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
 
-      - uses: pypa/cibuildwheel@c923d83ad9c1bc00211c5041d0c3f73294ff88f6
+      - uses: pypa/cibuildwheel@63fd63b352a9a8bdcc24791c9dbee952ee9a8abc
         env:
           CIBW_PLATFORM: pyodide
           XLEARN_SKIP_OPENMP_TEST: "true"
@@ -79,7 +79,7 @@ jobs:
           CIBW_TEST_COMMAND: "python -m pytest -svra --pyargs xlearn --durations 20 --showlocals"
 
       - name: Upload wheel artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: pyodide_wheel
           path: ./wheelhouse/*.whl
@@ -96,13 +96,13 @@ jobs:
     if: github.repository == 'jax-sklearn/jax-sklearn' && github.event_name != 'pull_request'
     steps:
       - name: Download wheel artifact
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v7
         with:
           path: wheelhouse/
           merge-multiple: true
 
       - name: Push to Anaconda PyPI index
-        uses: scientific-python/upload-nightly-action@b36e8c0c10dbcfd2e05bf95f17ef8c14fd708dbf # 0.6.2
+        uses: scientific-python/upload-nightly-action@5748273c71e2d8d3a61f3a11a16421c8954f9ecf # 0.6.3
         with:
           artifacts_path: wheelhouse/
           anaconda_nightly_upload_token: ${{ secrets.SCIKIT_LEARN_NIGHTLY_UPLOAD_TOKEN }}
