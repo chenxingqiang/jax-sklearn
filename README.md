@@ -13,16 +13,17 @@
 
 ---
 
-## 🎉 Release 0.1.4 - Always-On JAX Acceleration!
+## 🎉 Release 0.1.6 - Build System Improvements!
 
-**JAX-sklearn v0.1.4 is now live on PyPI!** This release includes:
+**JAX-sklearn v0.1.6 is now live on PyPI!** This release includes:
 
+- 🔧 **Fixed build issues** in isolated environments (uv, pip)
+- 🔧 **Updated meson-python** version constraints for better compatibility
+- 📚 **Added build prerequisites** documentation
+- 📚 **Added troubleshooting guide** for common installation issues
 - ✅ **JAX always enabled by default** - maximum acceleration on GPU/TPU
 - ✅ **Up to 20x speedup on CPU**, 100x+ on GPU/TPU for large datasets
-- ✅ **Optional threshold mode** for CPU users with mixed workloads
-- ✅ **Array API compatibility** for PyTorch, JAX, and other backends
 - ✅ **100% scikit-learn API compatibility** - truly drop-in replacement
-- ✅ **Production-ready** intelligent proxy system with fallback
 - ✅ **Secret-Learn Compatible** - Integrates with [Secret-Learn](https://github.com/chenxingqiang/secret-learn) for privacy-preserving ML
 
 ---
