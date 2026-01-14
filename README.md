@@ -5,7 +5,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.20+-orange.svg)](https://github.com/google/jax)
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](COPYING)
-[![Version](https://img.shields.io/badge/version-0.1.7-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
+[![Version](https://img.shields.io/badge/version-0.1.8-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
 [![PyPI](https://img.shields.io/badge/PyPI-published-success.svg)](https://pypi.org/project/jax-sklearn/)
 [![CI](https://img.shields.io/badge/CI-Azure%20Pipelines-blue.svg)](https://dev.azure.com/chenxingqiang/jax-sklearn)
 [![Tests](https://img.shields.io/badge/tests-13058%20passed-success.svg)](#-test-results)
@@ -159,11 +159,23 @@ pip install jax jaxlib
 ```
 
 ### Install JAX-sklearn
-```bash
-# From PyPI (recommended)
-pip install jax-sklearn
 
-# From source (for development)
+#### Using pip (recommended)
+```bash
+pip install jax-sklearn
+```
+
+#### Using uv (fast Python package installer)
+```bash
+# Install with uv
+uv pip install jax-sklearn
+
+# If you encounter build issues, try:
+uv pip install --no-build-isolation jax-sklearn
+```
+
+#### From source (for development)
+```bash
 git clone https://github.com/chenxingqiang/jax-sklearn.git
 cd jax-sklearn
 pip install -e .
@@ -839,6 +851,8 @@ JAX-sklearn is released under the [BSD 3-Clause License](COPYING), maintaining c
 
 ```bash
 pip install jax-sklearn
+# or with uv
+uv pip install jax-sklearn
 ```
 
 Join the JAX ecosystem revolution in traditional machine learning! 🎉
