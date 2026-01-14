@@ -5,7 +5,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.20+-orange.svg)](https://github.com/google/jax)
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](COPYING)
-[![Version](https://img.shields.io/badge/version-0.1.5-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
+[![Version](https://img.shields.io/badge/version-0.1.6-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
 [![PyPI](https://img.shields.io/badge/PyPI-published-success.svg)](https://pypi.org/project/jax-sklearn/)
 [![CI](https://img.shields.io/badge/CI-Azure%20Pipelines-blue.svg)](https://dev.azure.com/chenxingqiang/jax-sklearn)
 [![Tests](https://img.shields.io/badge/tests-13058%20passed-success.svg)](#-test-results)
@@ -103,6 +103,31 @@ jax_config.set_config(enable_jax=False)
 ---
 
 ## 🛠 Installation
+
+### Build Prerequisites (for source installation)
+
+When installing from source or when `pip`/`uv` builds the package, you need C/C++ development tools and Python headers:
+
+#### Linux (Ubuntu/Debian)
+```bash
+sudo apt-get update
+sudo apt-get install build-essential python3-dev
+```
+
+#### Linux (RHEL/CentOS/Fedora)
+```bash
+sudo dnf install gcc gcc-c++ python3-devel
+```
+
+#### macOS
+```bash
+xcode-select --install  # Install Xcode Command Line Tools
+```
+
+#### Windows
+Install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) with "Desktop development with C++".
+
+> **Note**: Pre-built wheels are available on PyPI for common platforms, so you may not need these build tools if a wheel exists for your system.
 
 ### Prerequisites - Choose Your Hardware
 
@@ -603,6 +628,35 @@ thresholds = {
 ---
 
 ## 🐛 Troubleshooting
+
+### Build/Installation Issues
+
+#### "Python dependency not found" Error
+If you see an error like `Run-time dependency python found: NO`, install Python development headers:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install python3-dev
+
+# RHEL/CentOS/Fedora
+sudo dnf install python3-devel
+
+# macOS (usually not needed, but if issues occur)
+xcode-select --install
+```
+
+#### Build Isolation Issues with uv/pip
+If the build fails in isolated environments, try:
+
+```bash
+# Method 1: Install build dependencies system-wide first
+pip install meson-python meson cython numpy scipy
+
+# Method 2: Disable build isolation (use with caution)
+pip install --no-build-isolation jax-sklearn
+# or with uv
+uv pip install --no-build-isolation jax-sklearn
+```
 
 ### Hardware Detection Issues
 
