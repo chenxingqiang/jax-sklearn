@@ -5,7 +5,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.20+-orange.svg)](https://github.com/google/jax)
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](COPYING)
-[![Version](https://img.shields.io/badge/version-0.1.6-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
+[![Version](https://img.shields.io/badge/version-0.1.7-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
 [![PyPI](https://img.shields.io/badge/PyPI-published-success.svg)](https://pypi.org/project/jax-sklearn/)
 [![CI](https://img.shields.io/badge/CI-Azure%20Pipelines-blue.svg)](https://dev.azure.com/chenxingqiang/jax-sklearn)
 [![Tests](https://img.shields.io/badge/tests-13058%20passed-success.svg)](#-test-results)
