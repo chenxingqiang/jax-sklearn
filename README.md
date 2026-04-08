@@ -151,27 +151,27 @@ pip install jax[gpu]    # Includes CUDA-enabled jaxlib
 #### TPU Acceleration (Google Cloud)
 ```bash
 # For Google Cloud TPU
-pip install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
+pip3 install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
 ```
 
 #### Apple Silicon (M1/M2) - Experimental
 ```bash
 # For Apple Silicon Macs
-pip install jax-metal  # Experimental Metal support
-pip install jax jaxlib
+pip3 install jax-metal --break-system-packages  # Experimental Metal support
+pip3 install jax jaxlib --break-system-packages
 ```
 
 ### Install JAX-sklearn
 
 #### Using pip (recommended)
 ```bash
-pip install jax-sklearn
+pip3 install jax-sklearn
 ```
 
 #### Using uv (fast Python package installer)
 ```bash
 # Install with uv
-uv pip install jax-sklearn
+uv pip install jax-sklearn --break-system-packages
 
 # If you encounter build issues, try:
 uv pip install --no-build-isolation jax-sklearn
