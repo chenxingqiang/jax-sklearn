@@ -134,7 +134,10 @@ Install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cp
 
 #### CPU Only (Default)
 ```bash
-pip install jax jaxlib  # CPU version
+pip3 install jax jaxlib  # CPU version
+# Mac
+
+pip3 install jax jaxlib  --break-system-packages
 ```
 
 #### CUDA GPU Acceleration
