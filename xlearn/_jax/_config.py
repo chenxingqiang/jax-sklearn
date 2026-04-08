@@ -102,12 +102,19 @@ def set_config(
     if enable_jax is not None:
         local_config["enable_jax"] = enable_jax
     if jax_platform is not None:
-        if jax_platform not in ("auto", "cpu", "gpu", "tpu"):
+        valid_platforms = ("auto", "cpu", "gpu", "cuda", "tpu", "metal", "mps")
+        if jax_platform.lower() not in valid_platforms:
             raise ValueError(
                 f"Invalid jax_platform: {jax_platform}. "
-                "Must be one of: 'auto', 'cpu', 'gpu', 'tpu'"
+                f"Must be one of: {valid_platforms}"
             )
-        local_config["jax_platform"] = jax_platform
+        # Normalize platform names
+        platform = jax_platform.lower()
+        if platform == "cuda":
+            platform = "gpu"
+        elif platform == "mps":
+            platform = "metal"
+        local_config["jax_platform"] = platform
     if fallback_on_error is not None:
         local_config["fallback_on_error"] = fallback_on_error
     if memory_limit_gpu is not None:
@@ -170,8 +177,9 @@ def _validate_config() -> None:
     
     # Validate platform
     platform = config["jax_platform"]
-    if platform not in ("auto", "cpu", "gpu", "tpu"):
-        raise ValueError(f"Invalid jax_platform: {platform}")
+    valid_platforms = ("auto", "cpu", "gpu", "tpu", "metal")
+    if platform not in valid_platforms:
+        raise ValueError(f"Invalid jax_platform: {platform}. Must be one of: {valid_platforms}")
     
     # Validate precision
     precision = config["precision"]

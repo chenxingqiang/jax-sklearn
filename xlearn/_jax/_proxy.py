@@ -14,6 +14,8 @@ from ._universal_jax import (
     JAXLinearModelMixin,
     JAXClusterMixin,
     JAXDecompositionMixin,
+    JAXPreprocessingMixin,
+    JAXMetricsMixin,
     create_jax_accelerated_class
 )
 
@@ -219,18 +221,21 @@ def create_universal_jax_class(original_class: Type) -> Type:
     class_name = original_class.__name__
     module_name = original_class.__module__
 
-    # Select appropriate mixin
+    # Select appropriate mixin based on algorithm type
     if 'linear_model' in module_name or any(keyword in class_name.lower() for keyword in
-                                           ['linear', 'regression', 'ridge', 'lasso', 'elastic', 'logistic']):
+                                           ['linear', 'regression', 'ridge', 'lasso', 'elastic', 'logistic', 'sgd']):
         mixin_class = JAXLinearModelMixin
+    elif 'preprocessing' in module_name or any(keyword in class_name.lower() for keyword in
+                                              ['scaler', 'normalizer', 'binarizer', 'encoder']):
+        mixin_class = JAXPreprocessingMixin
     elif 'cluster' in module_name or any(keyword in class_name.lower() for keyword in
-                                        ['kmeans', 'cluster', 'dbscan', 'agglomerative']):
+                                        ['kmeans', 'cluster', 'dbscan', 'agglomerative', 'spectral']):
         mixin_class = JAXClusterMixin
     elif 'decomposition' in module_name or any(keyword in class_name.lower() for keyword in
-                                              ['pca', 'svd', 'nmf', 'ica', 'decomposition']):
+                                              ['pca', 'svd', 'nmf', 'ica', 'decomposition', 'factor']):
         mixin_class = JAXDecompositionMixin
     else:
-        # For other algorithms, use the base mixin with minimal acceleration
+        # For other algorithms, use the base linear mixin with minimal acceleration
         mixin_class = JAXLinearModelMixin  # Fallback to basic mixin
 
     return create_jax_accelerated_class(original_class, mixin_class)

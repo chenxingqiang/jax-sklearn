@@ -5,26 +5,37 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.20+-orange.svg)](https://github.com/google/jax)
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](COPYING)
-[![Version](https://img.shields.io/badge/version-0.1.8-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
+[![Version](https://img.shields.io/badge/version-0.1.9-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
 [![PyPI](https://img.shields.io/badge/PyPI-published-success.svg)](https://pypi.org/project/jax-sklearn/)
 [![CI](https://img.shields.io/badge/CI-Azure%20Pipelines-blue.svg)](https://dev.azure.com/chenxingqiang/jax-sklearn)
-[![Tests](https://img.shields.io/badge/tests-13058%20passed-success.svg)](#-test-results)
+[![Tests](https://img.shields.io/badge/tests-16837%20passed-success.svg)](#-test-results)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/chenxingqiang/jax-sklearn)
 
 ---
 
-## 🎉 Release 0.1.6 - Build System Improvements!
+## 🎉 Release 0.1.9 - Apple Metal GPU Support!
 
-**JAX-sklearn v0.1.6 is now live on PyPI!** This release includes:
+**JAX-sklearn v0.1.9 is now live on PyPI!** This release includes:
 
-- 🔧 **Fixed build issues** in isolated environments (uv, pip)
-- 🔧 **Updated meson-python** version constraints for better compatibility
-- 📚 **Added build prerequisites** documentation
-- 📚 **Added troubleshooting guide** for common installation issues
-- ✅ **JAX always enabled by default** - maximum acceleration on GPU/TPU
-- ✅ **Up to 20x speedup on CPU**, 100x+ on GPU/TPU for large datasets
+- 🍎 **Apple Metal GPU Support** - 2-3x speedup on M1/M2/M3/M4 chips
+- 🚀 **uv Package Manager Support** - 10-100x faster installation
+- 🔧 **Auto Hardware Detection** - Automatic platform-specific optimization
+- 🔧 **Metal-Compatible Algorithms** - CG/Power iteration for unsupported operations
+- ✅ **16837 tests passed** - comprehensive test coverage
+- ✅ **Multi-platform Support** - CPU, CUDA, ROCm, TPU, Metal
 - ✅ **100% scikit-learn API compatibility** - truly drop-in replacement
-- ✅ **Secret-Learn Compatible** - Integrates with [Secret-Learn](https://github.com/chenxingqiang/secret-learn) for privacy-preserving ML
+
+### Quick Install
+
+```bash
+# Using uv (recommended - 10-100x faster)
+uv pip install jax-sklearn[jax-metal]  # Apple Silicon
+uv pip install jax-sklearn[jax-gpu]    # NVIDIA GPU
+uv pip install jax-sklearn[jax-cpu]    # CPU only
+
+# Using pip
+pip install jax-sklearn
+```
 
 ---
 
@@ -74,8 +85,19 @@ jax_config.set_config(jax_auto_threshold=True)  # Only use JAX for large data
 | Hardware | Small Data | Medium Data | Large Data | Recommendation |
 |----------|------------|-------------|------------|----------------|
 | **CPU** | ~1x | 0.2-0.5x ⚠️ | **4-20x** 🚀 | Use threshold for mixed workloads |
-| **GPU** | ~1-2x | **5-10x** 🚀 | **50-100x** 🚀 | Always use JAX |
+| **Metal (M1/M2/M3)** | ~1x | **1.5-2x** 🚀 | **2-3x** 🚀 | Matrix ops accelerated |
+| **CUDA GPU** | ~1-2x | **5-10x** 🚀 | **50-100x** 🚀 | Always use JAX |
 | **TPU** | ~2-5x | **10-20x** 🚀 | **100x+** 🚀 | Always use JAX |
+
+### 🍎 Apple Silicon (Metal) Benchmark
+
+| Operation | Size | Metal GPU | NumPy CPU | Speedup |
+|-----------|------|-----------|-----------|---------|
+| Matrix Multiply | 2000×2000 | 3.5ms | 7.4ms | **2.1x** 🚀 |
+| Matrix Multiply | 5000×5000 | 31ms | 102ms | **3.3x** 🚀 |
+| Linear Regression | 10K×500 | 186ms | 95ms | 0.5x* |
+
+> *Linear regression uses iterative CG method on Metal (SVD/solve not supported)
 
 ### 🎯 When to Use Which Mode
 
@@ -132,49 +154,62 @@ Install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cp
 
 ### Prerequisites - Choose Your Hardware
 
-#### CPU Only (Default)
-```bash
-pip3 install jax jaxlib  # CPU version
-# Mac
+#### Using uv (Recommended - 10-100x faster than pip)
 
-pip3 install jax jaxlib  --break-system-packages
+```bash
+# Install uv first
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Then install jax-sklearn with hardware-specific extras:
+uv pip install jax-sklearn[jax-cpu]      # CPU only
+uv pip install jax-sklearn[jax-gpu]      # NVIDIA GPU (CUDA 12)
+uv pip install jax-sklearn[jax-cuda11]   # NVIDIA GPU (CUDA 11)
+uv pip install jax-sklearn[jax-tpu]      # Google TPU
+uv pip install jax-sklearn[jax-metal]    # Apple Silicon (M1/M2/M3/M4)
 ```
 
-#### CUDA GPU Acceleration
+#### Using pip
+
 ```bash
-# For NVIDIA GPUs with CUDA support
-pip install jax[gpu]    # Includes CUDA-enabled jaxlib
-# Verify GPU support:
-# python -c "import jax; print(jax.devices())"
+# CPU Only (Default)
+pip install jax-sklearn[jax-cpu]
+
+# NVIDIA GPU (CUDA 12)
+pip install jax-sklearn[jax-gpu]
+
+# Google Cloud TPU
+pip install jax-sklearn[jax-tpu]
+
+# Apple Silicon (M1/M2/M3/M4)
+pip install jax-sklearn[jax-metal]
 ```
 
-#### TPU Acceleration (Google Cloud)
-```bash
-# For Google Cloud TPU
-pip3 install jax[tpu] -f https://storage.googleapis.com/jax-releases/libtpu_releases.html
-```
+#### Auto-detect Hardware
 
-#### Apple Silicon (M1/M2) - Experimental
-```bash
-# For Apple Silicon Macs
-pip3 install jax-metal --break-system-packages  # Experimental Metal support
-pip3 install jax jaxlib --break-system-packages
+```python
+from xlearn._jax import get_installation_command, detect_hardware
+
+# Get recommended install command for your hardware
+print(get_installation_command())
+# Output: uv pip install jax-sklearn[jax-metal]  # On Apple Silicon
+
+# Get detailed hardware info
+info = detect_hardware()
+print(f"Platform: {info['jax_status']['backend']}")
 ```
 
 ### Install JAX-sklearn
 
-#### Using pip (recommended)
+#### Quick install (auto-detect)
 ```bash
 pip3 install jax-sklearn
 ```
 
-#### Using uv (fast Python package installer)
+#### Development install
 ```bash
-# Install with uv
-uv pip install jax-sklearn --break-system-packages
-
-# If you encounter build issues, try:
-uv pip install --no-build-isolation jax-sklearn
+git clone https://github.com/chenxingqiang/jax-sklearn.git
+cd jax-sklearn
+uv pip install -e ".[tests,benchmark]"
 ```
 
 #### From source (for development)

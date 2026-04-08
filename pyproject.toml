@@ -49,7 +49,11 @@ build = ["numpy>=1.24.0", "scipy>=1.10.0", "cython>=3.0.10", "meson-python>=0.17
 install = ["numpy>=1.24.0", "scipy>=1.10.0", "joblib>=1.2.0", "threadpoolctl>=3.1.0", "jax>=0.4.20", "jaxlib>=0.4.20"]
 jax = ["jax>=0.4.20", "jaxlib>=0.4.20"]
 jax-cpu = ["jax[cpu]>=0.4.20"]
-jax-gpu = ["jax[gpu]>=0.4.20"]
+jax-gpu = ["jax[cuda12]>=0.4.20"]  # NVIDIA GPU with CUDA 12
+jax-cuda11 = ["jax[cuda11_pip]>=0.4.20"]  # NVIDIA GPU with CUDA 11
+jax-cuda12 = ["jax[cuda12]>=0.4.20"]  # NVIDIA GPU with CUDA 12 (alias)
+jax-tpu = ["jax[tpu]>=0.4.20"]  # Google TPU
+jax-metal = ["jax==0.4.35", "jaxlib==0.4.35", "jax-metal>=0.1.0"]  # Apple Silicon (M1/M2/M3/M4)
 benchmark = ["matplotlib>=3.5.0", "pandas>=1.4.0", "memory_profiler>=0.57.0"]
 docs = [
     "matplotlib>=3.5.0",

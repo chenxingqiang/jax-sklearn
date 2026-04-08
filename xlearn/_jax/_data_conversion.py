@@ -32,7 +32,7 @@ def is_numpy_array(data: Any) -> bool:
     """Check if data is a NumPy array."""
     return isinstance(data, np.ndarray)
 
-def to_jax(data: ArrayLike, dtype: Optional[str] = None) -> Any:
+def to_jax(data: ArrayLike, dtype: Optional[str] = None, device: str = None) -> Any:
     """Convert data to JAX array.
 
     Parameters
@@ -41,11 +41,19 @@ def to_jax(data: ArrayLike, dtype: Optional[str] = None) -> Any:
         Input data to convert.
     dtype : str, optional
         Target dtype. If None, uses current configuration.
+    device : str, optional
+        Target device ('cpu', 'gpu', 'metal'). If None, uses default.
+        For experimental backends like Metal, falls back to CPU on error.
 
     Returns
     -------
     jax_array
         JAX array representation of the data.
+        
+    Notes
+    -----
+    For Apple Metal (jax-metal), some operations may not be supported.
+    In such cases, the function will automatically fall back to CPU.
     """
     jax, jnp = _get_jax_modules()
     if jax is None:
@@ -62,19 +70,34 @@ def to_jax(data: ArrayLike, dtype: Optional[str] = None) -> Any:
             return data.astype(dtype)
         return data
     elif is_numpy_array(data):
-        # NumPy array
-        return jnp.asarray(data, dtype=dtype)
+        np_array = data
     elif hasattr(data, '__array__'):
         # Array-like (pandas, etc.)
         np_array = np.asarray(data)
-        return jnp.asarray(np_array, dtype=dtype)
     else:
         # Try to convert to numpy first
-        try:
-            np_array = np.asarray(data)
-            return jnp.asarray(np_array, dtype=dtype)
-        except Exception as e:
-            raise ValueError(f"Cannot convert data to JAX array: {e}")
+        np_array = np.asarray(data)
+    
+    # Convert to JAX array
+    try:
+        return jnp.asarray(np_array, dtype=dtype)
+    except Exception as e:
+        # For experimental backends (Metal), try CPU fallback
+        error_msg = str(e).lower()
+        if 'unimplemented' in error_msg or 'not supported' in error_msg:
+            try:
+                # Force CPU device
+                import warnings
+                warnings.warn(
+                    f"Default device doesn't support this operation. "
+                    f"Falling back to CPU: {e}",
+                    UserWarning
+                )
+                cpu_device = jax.devices('cpu')[0]
+                return jax.device_put(jnp.asarray(np_array, dtype=dtype), cpu_device)
+            except Exception:
+                pass
+        raise ValueError(f"Cannot convert data to JAX array: {e}")
 
 def to_numpy(data: ArrayLike) -> np.ndarray:
     """Convert data to NumPy array.
