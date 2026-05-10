@@ -696,6 +696,9 @@ class LinearRegression(MultiOutputMixin, RegressorMixin, LinearModel):
                 )
                 self.coef_ = np.vstack([out[0] for out in outs])
         else:
+            # Use self.tol as the condition number (cond) threshold for lstsq.
+            # This exposes the tol parameter to the dense solver, consistent
+            # with the sparse path that already uses self.tol via lsqr.
             self.coef_, _, self.rank_, self.singular_ = linalg.lstsq(
                 X, y, cond=self.tol
             )

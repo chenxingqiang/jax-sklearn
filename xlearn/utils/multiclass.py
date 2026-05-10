@@ -121,7 +121,7 @@ def unique_labels(*ys, ys_types=None):
     # Check that we don't mix string type with number type
     if len(set(isinstance(label, str) for label in ys_labels)) > 1:
         msg_details = (
-            f"Got {' and '.join([f'{xp.unique_values(y)}' for y in ys])}."
+            f"Got {' and '.join(f'{xp.unique_values(y)}' for y in ys)}."
         )
         raise ValueError(f"Mix of label input types (string and number); {msg_details}")
 
