@@ -8,7 +8,6 @@ extends single output estimators to multioutput estimators.
 # Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
-import warnings
 from abc import ABCMeta, abstractmethod
 from numbers import Integral
 
@@ -28,7 +27,6 @@ from .model_selection import cross_val_predict
 from .utils import Bunch, check_random_state, get_tags
 from .utils._param_validation import (
     HasMethods,
-    Hidden,
     StrOptions,
 )
 from .utils._response import _get_response_values
@@ -626,13 +624,13 @@ class MultiOutputClassifier(ClassifierMixin, _MultiOutputEstimator):
 
 
 def _available_if_base_estimator_has(attr):
-    """Return a function to check if `base_estimator` or `estimators_` has `attr`.
+    """Return a function to check if `estimator` or `estimators_` has `attr`.
 
     Helper for Chain implementations.
     """
 
     def _check(self):
-        return hasattr(self._get_estimator(), attr) or all(
+        return hasattr(self.estimator, attr) or all(
             hasattr(est, attr) for est in self.estimators_
         )
 
@@ -641,59 +639,27 @@ def _available_if_base_estimator_has(attr):
 
 class _BaseChain(BaseEstimator, metaclass=ABCMeta):
     _parameter_constraints: dict = {
-        "base_estimator": [
-            HasMethods(["fit", "predict"]),
-            StrOptions({"deprecated"}),
-        ],
-        "estimator": [
-            HasMethods(["fit", "predict"]),
-            Hidden(None),
-        ],
+        "estimator": [HasMethods(["fit", "predict"])],
         "order": ["array-like", StrOptions({"random"}), None],
         "cv": ["cv_object", StrOptions({"prefit"})],
         "random_state": ["random_state"],
         "verbose": ["boolean"],
     }
 
-    # TODO(1.9): Remove base_estimator
     def __init__(
         self,
-        estimator=None,
+        estimator,
         *,
         order=None,
         cv=None,
         random_state=None,
         verbose=False,
-        base_estimator="deprecated",
     ):
         self.estimator = estimator
-        self.base_estimator = base_estimator
         self.order = order
         self.cv = cv
         self.random_state = random_state
         self.verbose = verbose
-
-    # TODO(1.8): This is a temporary getter method to validate input wrt deprecation.
-    # It was only included to avoid relying on the presence of self.estimator_
-    def _get_estimator(self):
-        """Get and validate estimator."""
-
-        if self.estimator is not None and (self.base_estimator != "deprecated"):
-            raise ValueError(
-                "Both `estimator` and `base_estimator` are provided. You should only"
-                " pass `estimator`. `base_estimator` as a parameter is deprecated in"
-                " version 1.7, and will be removed in version 1.9."
-            )
-
-        if self.base_estimator != "deprecated":
-            warning_msg = (
-                "`base_estimator` as an argument was deprecated in 1.7 and will be"
-                " removed in 1.9. Use `estimator` instead."
-            )
-            warnings.warn(warning_msg, FutureWarning)
-            return self.base_estimator
-        else:
-            return self.estimator
 
     def _log_message(self, *, estimator_idx, n_estimators, processing_msg):
         if not self.verbose:
@@ -777,7 +743,7 @@ class _BaseChain(BaseEstimator, metaclass=ABCMeta):
         elif sorted(self.order_) != list(range(Y.shape[1])):
             raise ValueError("invalid order")
 
-        self.estimators_ = [clone(self._get_estimator()) for _ in range(Y.shape[1])]
+        self.estimators_ = [clone(self.estimator) for _ in range(Y.shape[1])]
 
         if self.cv is None:
             Y_pred_chain = Y[:, self.order_]
@@ -816,7 +782,7 @@ class _BaseChain(BaseEstimator, metaclass=ABCMeta):
 
         if hasattr(self, "chain_method"):
             chain_method = _check_response_method(
-                self._get_estimator(),
+                self.estimator,
                 self.chain_method,
             ).__name__
             self.chain_method_ = chain_method
@@ -841,7 +807,7 @@ class _BaseChain(BaseEstimator, metaclass=ABCMeta):
             if self.cv is not None and chain_idx < len(self.estimators_) - 1:
                 col_idx = X.shape[1] + chain_idx
                 cv_result = cross_val_predict(
-                    self._get_estimator(),
+                    self.estimator,
                     X_aug[:, :col_idx],
                     y=y,
                     cv=self.cv,
@@ -874,7 +840,7 @@ class _BaseChain(BaseEstimator, metaclass=ABCMeta):
 
     def __xlearn_tags__(self):
         tags = super().__xlearn_tags__()
-        tags.input_tags.sparse = get_tags(self._get_estimator()).input_tags.sparse
+        tags.input_tags.sparse = get_tags(self.estimator).input_tags.sparse
         return tags
 
 
@@ -935,15 +901,15 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
         - if `str`, name of the method;
         - if a list of `str`, provides the method names in order of
           preference. The method used corresponds to the first method in
-          the list that is implemented by `base_estimator`.
+          the list that is implemented by `estimator`.
 
         .. versionadded:: 1.5
 
     random_state : int, RandomState instance or None, optional (default=None)
         If ``order='random'``, determines random number generation for the
         chain order.
-        In addition, it controls the random seed given at each `base_estimator`
-        at each chaining iteration. Thus, it is only used when `base_estimator`
+        In addition, it controls the random seed given at each `estimator`
+        at each chaining iteration. Thus, it is only used when `estimator`
         exposes a `random_state`.
         Pass an int for reproducible output across multiple function calls.
         See :term:`Glossary <random_state>`.
@@ -953,13 +919,6 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
 
         .. versionadded:: 1.2
 
-    base_estimator : estimator, default="deprecated"
-        Use `estimator` instead.
-
-        .. deprecated:: 1.7
-            `base_estimator` is deprecated and will be removed in 1.9.
-            Use `estimator` instead.
-
     Attributes
     ----------
     classes_ : list
@@ -967,7 +926,7 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
         class labels for each estimator in the chain.
 
     estimators_ : list
-        A list of clones of base_estimator.
+        A list of clones of estimator.
 
     order_ : list
         The order of labels in the classifier chain.
@@ -978,7 +937,7 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
 
     n_features_in_ : int
         Number of features seen during :term:`fit`. Only defined if the
-        underlying `base_estimator` exposes such an attribute when fit.
+        underlying `estimator` exposes such an attribute when fit.
 
         .. versionadded:: 0.24
 
@@ -1034,17 +993,15 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
         ],
     }
 
-    # TODO(1.9): Remove base_estimator from __init__
     def __init__(
         self,
-        estimator=None,
+        estimator,
         *,
         order=None,
         cv=None,
         chain_method="predict",
         random_state=None,
         verbose=False,
-        base_estimator="deprecated",
     ):
         super().__init__(
             estimator,
@@ -1052,12 +1009,11 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
             cv=cv,
             random_state=random_state,
             verbose=verbose,
-            base_estimator=base_estimator,
         )
         self.chain_method = chain_method
 
     @_fit_context(
-        # ClassifierChain.base_estimator is not validated yet
+        # ClassifierChain.estimator is not validated yet
         prefer_skip_nested_validation=False
     )
     def fit(self, X, Y, **fit_params):
@@ -1154,7 +1110,7 @@ class ClassifierChain(MetaEstimatorMixin, ClassifierMixin, _BaseChain):
         """
 
         router = MetadataRouter(owner=self.__class__.__name__).add(
-            estimator=self._get_estimator(),
+            estimator=self.estimator,
             method_mapping=MethodMapping().add(caller="fit", callee="fit"),
         )
         return router
@@ -1214,8 +1170,8 @@ class RegressorChain(MetaEstimatorMixin, RegressorMixin, _BaseChain):
     random_state : int, RandomState instance or None, optional (default=None)
         If ``order='random'``, determines random number generation for the
         chain order.
-        In addition, it controls the random seed given at each `base_estimator`
-        at each chaining iteration. Thus, it is only used when `base_estimator`
+        In addition, it controls the random seed given at each `estimator`
+        at each chaining iteration. Thus, it is only used when `estimator`
         exposes a `random_state`.
         Pass an int for reproducible output across multiple function calls.
         See :term:`Glossary <random_state>`.
@@ -1225,24 +1181,17 @@ class RegressorChain(MetaEstimatorMixin, RegressorMixin, _BaseChain):
 
         .. versionadded:: 1.2
 
-    base_estimator : estimator, default="deprecated"
-        Use `estimator` instead.
-
-        .. deprecated:: 1.7
-            `base_estimator` is deprecated and will be removed in 1.9.
-            Use `estimator` instead.
-
     Attributes
     ----------
     estimators_ : list
-        A list of clones of base_estimator.
+        A list of clones of estimator.
 
     order_ : list
         The order of labels in the classifier chain.
 
     n_features_in_ : int
         Number of features seen during :term:`fit`. Only defined if the
-        underlying `base_estimator` exposes such an attribute when fit.
+        underlying `estimator` exposes such an attribute when fit.
 
         .. versionadded:: 0.24
 
@@ -1272,7 +1221,7 @@ class RegressorChain(MetaEstimatorMixin, RegressorMixin, _BaseChain):
     """
 
     @_fit_context(
-        # RegressorChain.base_estimator is not validated yet
+        # RegressorChain.estimator is not validated yet
         prefer_skip_nested_validation=False
     )
     def fit(self, X, Y, **fit_params):
@@ -1316,7 +1265,7 @@ class RegressorChain(MetaEstimatorMixin, RegressorMixin, _BaseChain):
         """
 
         router = MetadataRouter(owner=self.__class__.__name__).add(
-            estimator=self._get_estimator(),
+            estimator=self.estimator,
             method_mapping=MethodMapping().add(caller="fit", callee="fit"),
         )
         return router
