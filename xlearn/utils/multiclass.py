@@ -88,7 +88,7 @@ def unique_labels(*ys, ys_types=None):
     if len(ys_types) > 1:
         raise ValueError("Mix type of y not allowed, got types %s" % ys_types)
 
-    # We can't have more than one value in y_type => The set is no more needed
+    # We can't have more than one value in ys_types => The set is no more needed
     label_type = ys_types.pop()
 
     # Check consistency for the indicator format

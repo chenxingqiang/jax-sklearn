@@ -1078,13 +1078,12 @@ def _safe_accumulator_op(op, x, *args, **kwargs):
         and xp.finfo(x.dtype).bits < xp.finfo(max_float_dtype).bits
     ):
         # We need to upcast. Some ops support this natively; others don't.
-        target_dtype = _max_precision_float_dtype(xp, device=x_device)
 
         def convert_dtype(arr):
-            return xp.astype(arr, target_dtype, copy=False)
+            return xp.astype(arr, max_float_dtype, copy=False)
 
         if "dtype" in inspect.signature(op).parameters:
-            return op(x, *args, **kwargs, dtype=target_dtype)
+            return op(x, *args, **kwargs, dtype=max_float_dtype)
         else:
             # This op doesn't support a dtype kwarg, it seems. Rely on manual
             # type promotion, at the cost of memory allocations.
