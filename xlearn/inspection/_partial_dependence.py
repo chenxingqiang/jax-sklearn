@@ -3,7 +3,6 @@
 # Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
-import warnings
 from collections.abc import Iterable
 
 import numpy as np
@@ -713,18 +712,13 @@ def partial_dependence(
             continue
 
         if _safe_indexing(X, feature_idx, axis=1).dtype.kind in "iu":
-            # TODO(1.9): raise a ValueError instead.
-            warnings.warn(
+            raise ValueError(
                 f"The column {feature!r} contains integer data. Partial "
                 "dependence plots are not supported for integer data: this "
                 "can lead to implicit rounding with NumPy arrays or even errors "
                 "with newer pandas versions. Please convert numerical features"
-                "to floating point dtypes ahead of time to avoid problems. "
-                "This will raise ValueError in jax-sklearn 1.9.",
-                FutureWarning,
+                "to floating point dtypes ahead of time to avoid problems."
             )
-            # Do not warn again for other features to avoid spamming the caller.
-            break
 
     X_subset = _safe_indexing(X, features_indices, axis=1)
 
