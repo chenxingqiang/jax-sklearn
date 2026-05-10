@@ -316,13 +316,16 @@ def _is_arraylike_not_scalar(array):
 
 
 def _use_interchange_protocol(X):
-    """Use interchange protocol for non-pandas dataframes that follow the protocol.
+    """Use interchange protocol for non-pandas/polars dataframes that follow the
+    protocol.
 
-    Note: at this point we chose not to use the interchange API on pandas dataframe
+    Note: At this point we chose not to use the interchange API on pandas dataframe
     to ensure strict behavioral backward compatibility with older versions of
     jax-sklearn.
+    We also exclude the interchange protocol for polars because it was deprecated
+    in polars 1.40.
     """
-    return not _is_pandas_df(X) and hasattr(X, "__dataframe__")
+    return hasattr(X, "__dataframe__") and not _is_pandas_df(X) and not _is_polars_df(X)
 
 
 def _num_features(X):
@@ -385,15 +388,6 @@ def _num_samples(x):
         # Don't get num_samples from an ensembles length!
         raise TypeError(message)
 
-    if _use_interchange_protocol(x):
-        return x.__dataframe__().num_rows()
-
-    if not hasattr(x, "__len__") and not hasattr(x, "shape"):
-        if hasattr(x, "__array__"):
-            x = np.asarray(x)
-        else:
-            raise TypeError(message)
-
     if hasattr(x, "shape") and x.shape is not None:
         if len(x.shape) == 0:
             raise TypeError(
@@ -404,6 +398,15 @@ def _num_samples(x):
         # Dask dataframes may not return numeric shape[0] value
         if isinstance(x.shape[0], numbers.Integral):
             return x.shape[0]
+
+    if _use_interchange_protocol(x):
+        return x.__dataframe__().num_rows()
+
+    if not hasattr(x, "__len__") and not hasattr(x, "shape"):
+        if hasattr(x, "__array__"):
+            x = np.asarray(x)
+        else:
+            raise TypeError(message)
 
     try:
         return len(x)
@@ -2417,13 +2420,13 @@ def _get_feature_names(X):
     feature_names = None
 
     # extract feature names for support array containers
-    if _is_pandas_df(X):
-        # Make sure we can inspect columns names from pandas, even with
+    if _is_pandas_df(X) or _is_polars_df(X):
+        # Make sure we can inspect columns names from pandas/polars, even with
         # versions too old to expose a working implementation of
         # __dataframe__.column_names() and avoid introducing any
         # additional copy.
-        # TODO: remove the pandas-specific branch once the minimum supported
-        # version of pandas has a working implementation of
+        # TODO: remove the pandas-specific branch (but keep polars) once the minimum
+        # supported version of pandas has a working implementation of
         # __dataframe__.column_names() that is guaranteed to not introduce any
         # additional copy of the data without having to impose allow_copy=False
         # that could fail with other libraries. Note: in the longer term, we
