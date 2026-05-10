@@ -399,6 +399,7 @@ class BayesianRidge(RegressorMixin, LinearModel):
         if not return_std:
             return y_mean
         else:
+            X = X - self.X_offset_
             sigmas_squared_data = (np.dot(X, self.sigma_) * X).sum(axis=1)
             y_std = np.sqrt(sigmas_squared_data + (1.0 / self.alpha_))
             return y_mean, y_std
@@ -820,6 +821,7 @@ class ARDRegression(RegressorMixin, LinearModel):
             return y_mean
         else:
             col_index = self.lambda_ < self.threshold_lambda
+            X = X - self.X_offset_
             X = _safe_indexing(X, indices=col_index, axis=1)
             sigmas_squared_data = (np.dot(X, self.sigma_) * X).sum(axis=1)
             y_std = np.sqrt(sigmas_squared_data + (1.0 / self.alpha_))
