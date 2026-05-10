@@ -33,10 +33,10 @@ from ._arff_parser import load_arff_from_gzip_file
 
 __all__ = ["fetch_openml"]
 
-_SEARCH_NAME = "https://api.openml.org/api/v1/json/data/list/data_name/{}/limit/2"
-_DATA_INFO = "https://api.openml.org/api/v1/json/data/{}"
-_DATA_FEATURES = "https://api.openml.org/api/v1/json/data/features/{}"
-_DATA_QUALITIES = "https://api.openml.org/api/v1/json/data/qualities/{}"
+_SEARCH_NAME = "https://www.openml.org/api/v1/json/data/list/data_name/{}/limit/2"
+_DATA_INFO = "https://www.openml.org/api/v1/json/data/{}"
+_DATA_FEATURES = "https://www.openml.org/api/v1/json/data/features/{}"
+_DATA_QUALITIES = "https://www.openml.org/api/v1/json/data/qualities/{}"
 
 OpenmlQualitiesType = List[Dict[str, str]]
 OpenmlFeaturesType = List[Dict[str, str]]
@@ -109,6 +109,10 @@ def _retry_on_network_error(
                     warn(
                         f"A network error occurred while downloading {url}. Retrying..."
                     )
+                    # Avoid a ResourceWarning on Python 3.14 and later.
+                    if isinstance(e, HTTPError):
+                        e.close()
+
                     retry_counter -= 1
                     time.sleep(delay)
 

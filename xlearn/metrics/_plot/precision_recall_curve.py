@@ -1,8 +1,9 @@
 # Authors: The scikit-learn developers
 # SPDX-License-Identifier: BSD-3-Clause
 
-from collections import Counter
+import numpy as np
 
+from ...utils import check_array
 from ...utils._plotting import (
     _BinaryClassifierCurveDisplayMixin,
     _despine,
@@ -518,6 +519,7 @@ class PrecisionRecallDisplay(_BinaryClassifierCurveDisplayMixin):
         <...>
         >>> plt.show()
         """
+        y_true = check_array(y_true, ensure_2d=False, dtype=None)
         pos_label, name = cls._validate_from_predictions_params(
             y_true, y_pred, sample_weight=sample_weight, pos_label=pos_label, name=name
         )
@@ -533,8 +535,7 @@ class PrecisionRecallDisplay(_BinaryClassifierCurveDisplayMixin):
             y_true, y_pred, pos_label=pos_label, sample_weight=sample_weight
         )
 
-        class_count = Counter(y_true)
-        prevalence_pos_label = class_count[pos_label] / sum(class_count.values())
+        prevalence_pos_label = (y_true == pos_label).sum() / y_true.shape[0]
 
         viz = cls(
             precision=precision,

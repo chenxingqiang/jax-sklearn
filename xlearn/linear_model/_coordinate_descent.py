@@ -188,8 +188,17 @@ def _alpha_grid(
         "X": ["array-like", "sparse matrix"],
         "y": ["array-like", "sparse matrix"],
         "eps": [Interval(Real, 0, None, closed="neither")],
-        "n_alphas": [Interval(Integral, 1, None, closed="left")],
-        "alphas": ["array-like", None],
+        "n_alphas": [
+            Interval(Integral, 1, None, closed="left"),
+            Hidden(StrOptions({"deprecated"})),
+        ],
+        # TODO(1.11): remove "warn" and None options.
+        "alphas": [
+            Interval(Integral, 1, None, closed="left"),
+            "array-like",
+            None,
+            Hidden(StrOptions({"warn"})),
+        ],
         "precompute": [StrOptions({"auto"}), "boolean", "array-like"],
         "Xy": ["array-like", None],
         "copy_X": ["boolean"],
@@ -205,8 +214,8 @@ def lasso_path(
     y,
     *,
     eps=1e-3,
-    n_alphas=100,
-    alphas=None,
+    n_alphas="deprecated",
+    alphas="warn",
     precompute="auto",
     Xy=None,
     copy_X=True,
@@ -254,9 +263,22 @@ def lasso_path(
     n_alphas : int, default=100
         Number of alphas along the regularization path.
 
-    alphas : array-like, default=None
+        .. deprecated:: 1.9
+           `n_alphas` was deprecated in 1.9 and will be removed in 1.11.
+           `alphas` now accepts an integer value which removes the need to pass
+           `n_alphas`. The default value of `alphas` will change from None to
+           100 in 1.11. Pass an explicit value to `alphas` and leave `n_alphas`
+           to its default value to silence this warning.
+
+    alphas : int, array-like or None, default=None
         List of alphas where to compute the models.
-        If ``None`` alphas are set automatically.
+        If ``None`` alphas are set automatically. If an integer is passed,
+        it is used as the number of alphas along the regularization path.
+
+        .. deprecated:: 1.9
+           Passing ``alphas=None`` is deprecated and will be removed in 1.11.
+           At that point the default value will be set to 100. Set
+           ``alphas=100`` to silence this warning.
 
     precompute : 'auto', bool or array-like of shape \
             (n_features, n_features), default='auto'
@@ -356,13 +378,38 @@ def lasso_path(
     [[0.         0.         0.46915237]
      [0.2159048  0.4425765  0.23668876]]
     """
+    # TODO(1.11): remove n_alphas and alphas={"warn", None}; set alphas=100 by default.
+    if n_alphas == "deprecated":
+        _alphas = 100  # the old, current, and future default
+    else:
+        warnings.warn(
+            "'n_alphas' was deprecated in 1.9 and will be removed in 1.11. "
+            "'alphas' now accepts an integer value which removes the need to pass "
+            "'n_alphas'. The default value of 'alphas' will change from None to "
+            "100 in 1.11. Pass an explicit value to 'alphas' and leave 'n_alphas' "
+            "to its default value to silence this warning.",
+            FutureWarning,
+        )
+        _alphas = n_alphas
+
+    if isinstance(alphas, str) and alphas == "warn":
+        pass  # n_alphas handles this case
+    elif alphas is None:
+        warnings.warn(
+            "'alphas=None' is deprecated and will be removed in 1.11, at which "
+            "point the default value will be set to 100. Set 'alphas=100' "
+            "to silence this warning.",
+            FutureWarning,
+        )
+    else:
+        _alphas = alphas
+
     return enet_path(
         X,
         y,
         l1_ratio=1.0,
         eps=eps,
-        n_alphas=n_alphas,
-        alphas=alphas,
+        alphas=_alphas,
         precompute=precompute,
         Xy=Xy,
         copy_X=copy_X,
@@ -380,8 +427,17 @@ def lasso_path(
         "y": ["array-like", "sparse matrix"],
         "l1_ratio": [Interval(Real, 0.0, 1.0, closed="both")],
         "eps": [Interval(Real, 0.0, None, closed="neither")],
-        "n_alphas": [Interval(Integral, 1, None, closed="left")],
-        "alphas": ["array-like", None],
+        "n_alphas": [
+            Interval(Integral, 1, None, closed="left"),
+            Hidden(StrOptions({"deprecated"})),
+        ],
+        # TODO(1.11): remove "warn" and None options.
+        "alphas": [
+            Interval(Integral, 1, None, closed="left"),
+            "array-like",
+            None,
+            Hidden(StrOptions({"warn"})),
+        ],
         "precompute": [StrOptions({"auto"}), "boolean", "array-like"],
         "Xy": ["array-like", None],
         "copy_X": ["boolean"],
@@ -399,8 +455,8 @@ def enet_path(
     *,
     l1_ratio=0.5,
     eps=1e-3,
-    n_alphas=100,
-    alphas=None,
+    n_alphas="deprecated",
+    alphas="warn",
     precompute="auto",
     Xy=None,
     copy_X=True,
@@ -457,9 +513,22 @@ def enet_path(
     n_alphas : int, default=100
         Number of alphas along the regularization path.
 
-    alphas : array-like, default=None
+        .. deprecated:: 1.9
+           `n_alphas` was deprecated in 1.9 and will be removed in 1.11.
+           `alphas` now accepts an integer value which removes the need to pass
+           `n_alphas`. The default value of `alphas` will change from None to
+           100 in 1.11. Pass an explicit value to `alphas` and leave `n_alphas`
+           to its default value to silence this warning.
+
+    alphas : int, array-like or None, default=None
         List of alphas where to compute the models.
-        If None alphas are set automatically.
+        If None alphas are set automatically. If an integer is passed,
+        it is used as the number of alphas along the regularization path.
+
+        .. deprecated:: 1.9
+           Passing ``alphas=None`` is deprecated and will be removed in 1.11.
+           At that point the default value will be set to 100. Set
+           ``alphas=100`` to silence this warning.
 
     precompute : 'auto', bool or array-like of shape \
             (n_features, n_features), default='auto'
@@ -536,7 +605,7 @@ def enet_path(
     ... )
     >>> true_coef
     array([ 0.        ,  0.        ,  0.        , 97.9, 45.7])
-    >>> alphas, estimated_coef, _ = enet_path(X, y, n_alphas=3)
+    >>> alphas, estimated_coef, _ = enet_path(X, y, alphas=3)
     >>> alphas.shape
     (3,)
     >>> estimated_coef
@@ -546,6 +615,32 @@ def enet_path(
             [ 0., 23.046, 88.939],
             [ 0., 10.637, 41.566]])
     """
+    # TODO(1.11): remove n_alphas and alphas={"warn", None}; set alphas=100 by default.
+    if n_alphas == "deprecated":
+        _alphas = 100  # the old, current, and future default
+    else:
+        warnings.warn(
+            "'n_alphas' was deprecated in 1.9 and will be removed in 1.11. "
+            "'alphas' now accepts an integer value which removes the need to pass "
+            "'n_alphas'. The default value of 'alphas' will change from None to "
+            "100 in 1.11. Pass an explicit value to 'alphas' and leave 'n_alphas' "
+            "to its default value to silence this warning.",
+            FutureWarning,
+        )
+        _alphas = n_alphas
+
+    if isinstance(alphas, str) and alphas == "warn":
+        pass  # n_alphas handles this case
+    elif alphas is None:
+        warnings.warn(
+            "'alphas=None' is deprecated and will be removed in 1.11, at which "
+            "point the default value will be set to 100. Set 'alphas=100' "
+            "to silence this warning.",
+            FutureWarning,
+        )
+    else:
+        _alphas = alphas
+
     X_offset_param = params.pop("X_offset", None)
     X_scale_param = params.pop("X_scale", None)
     sample_weight = params.pop("sample_weight", None)
@@ -613,7 +708,7 @@ def enet_path(
             copy=False,
             check_input=check_input,
         )
-    if alphas is None:
+    if isinstance(_alphas, Integral):
         # No need to normalize of fit_intercept: it has been done
         # above
         alphas = _alpha_grid(
@@ -623,11 +718,13 @@ def enet_path(
             l1_ratio=l1_ratio,
             fit_intercept=False,
             eps=eps,
-            n_alphas=n_alphas,
+            n_alphas=_alphas,
             copy_X=False,
         )
-    elif len(alphas) > 1:
-        alphas = np.sort(alphas)[::-1]  # make sure alphas are properly ordered
+    elif len(_alphas) > 1:
+        alphas = np.sort(_alphas)[::-1]  # make sure alphas are properly ordered
+    else:
+        alphas = _alphas
 
     n_alphas = len(alphas)
     dual_gaps = np.empty(n_alphas)
@@ -1502,11 +1599,7 @@ class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
 
     _parameter_constraints: dict = {
         "eps": [Interval(Real, 0, None, closed="neither")],
-        "n_alphas": [
-            Interval(Integral, 1, None, closed="left"),
-            Hidden(StrOptions({"deprecated"})),
-        ],
-        # TODO(1.9): remove "warn" and None options.
+        # TODO(1.11): remove "warn" and None options.
         "alphas": [
             Interval(Integral, 1, None, closed="left"),
             "array-like",
@@ -1530,7 +1623,6 @@ class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
     def __init__(
         self,
         eps=1e-3,
-        n_alphas="deprecated",
         alphas="warn",
         fit_intercept=True,
         precompute="auto",
@@ -1545,7 +1637,6 @@ class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
         selection="cyclic",
     ):
         self.eps = eps
-        self.n_alphas = n_alphas
         self.alphas = alphas
         self.fit_intercept = fit_intercept
         self.precompute = precompute
@@ -1613,37 +1704,19 @@ class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
         """
         _raise_for_params(params, self, "fit")
 
-        # TODO(1.9): remove n_alphas and alphas={"warn", None}; set alphas=100 by
-        # default. Remove these deprecations messages and use self.alphas directly
+        # TODO(1.11): remove alphas={"warn", None}; set alphas=100 by default.
+        # Remove these deprecation messages and use self.alphas directly
         # instead of self._alphas.
-        if self.n_alphas == "deprecated":
-            self._alphas = 100
-        else:
-            warnings.warn(
-                "'n_alphas' was deprecated in 1.7 and will be removed in 1.9. "
-                "'alphas' now accepts an integer value which removes the need to pass "
-                "'n_alphas'. The default value of 'alphas' will change from None to "
-                "100 in 1.9. Pass an explicit value to 'alphas' and leave 'n_alphas' "
-                "to its default value to silence this warning.",
-                FutureWarning,
-            )
-            self._alphas = self.n_alphas
-
         if isinstance(self.alphas, str) and self.alphas == "warn":
-            # - If self.n_alphas == "deprecated", both are left to their default values
-            #   so we don't warn since the future default behavior will be the same as
-            #   the current default behavior.
-            # - If self.n_alphas != "deprecated", then we already warned about it
-            #   and the warning message mentions the future self.alphas default, so
-            #   no need to warn a second time.
-            pass
+            self._alphas = 100
         elif self.alphas is None:
             warnings.warn(
-                "'alphas=None' is deprecated and will be removed in 1.9, at which "
+                "'alphas=None' is deprecated and will be removed in 1.11, at which "
                 "point the default value will be set to 100. Set 'alphas=100' "
                 "to silence this warning.",
                 FutureWarning,
             )
+            self._alphas = 100
         else:
             self._alphas = self.alphas
 
@@ -1945,25 +2018,15 @@ class LassoCV(RegressorMixin, LinearModelCV):
         Length of the path. ``eps=1e-3`` means that
         ``alpha_min / alpha_max = 1e-3``.
 
-    n_alphas : int, default=100
-        Number of alphas along the regularization path.
-
-        .. deprecated:: 1.7
-            `n_alphas` was deprecated in 1.7 and will be removed in 1.9. Use `alphas`
-            instead.
-
-    alphas : array-like or int, default=None
+    alphas : array-like or int, default=100
         Values of alphas to test along the regularization path.
         If int, `alphas` values are generated automatically.
         If array-like, list of alpha values to use.
 
-        .. versionchanged:: 1.7
-            `alphas` accepts an integer value which removes the need to pass
-            `n_alphas`.
-
-        .. deprecated:: 1.7
-            `alphas=None` was deprecated in 1.7 and will be removed in 1.9, at which
-            point the default value will be set to 100.
+        .. deprecated:: 1.9
+            Passing ``alphas=None`` is deprecated and will be removed in 1.11, at which
+            point the default value will be set to 100. Set ``alphas=100`` to silence
+            this warning.
 
     fit_intercept : bool, default=True
         Whether to calculate the intercept for this model. If set
@@ -2113,7 +2176,6 @@ class LassoCV(RegressorMixin, LinearModelCV):
         self,
         *,
         eps=1e-3,
-        n_alphas="deprecated",
         alphas="warn",
         fit_intercept=True,
         precompute="auto",
@@ -2129,7 +2191,6 @@ class LassoCV(RegressorMixin, LinearModelCV):
     ):
         super().__init__(
             eps=eps,
-            n_alphas=n_alphas,
             alphas=alphas,
             fit_intercept=fit_intercept,
             precompute=precompute,
@@ -2216,25 +2277,15 @@ class ElasticNetCV(RegressorMixin, LinearModelCV):
         Length of the path. ``eps=1e-3`` means that
         ``alpha_min / alpha_max = 1e-3``.
 
-    n_alphas : int, default=100
-        Number of alphas along the regularization path, used for each l1_ratio.
-
-        .. deprecated:: 1.7
-            `n_alphas` was deprecated in 1.7 and will be removed in 1.9. Use `alphas`
-            instead.
-
-    alphas : array-like or int, default=None
+    alphas : array-like or int, default=100
         Values of alphas to test along the regularization path, used for each l1_ratio.
         If int, `alphas` values are generated automatically.
         If array-like, list of alpha values to use.
 
-        .. versionchanged:: 1.7
-            `alphas` accepts an integer value which removes the need to pass
-            `n_alphas`.
-
-        .. deprecated:: 1.7
-            `alphas=None` was deprecated in 1.7 and will be removed in 1.9, at which
-            point the default value will be set to 100.
+        .. deprecated:: 1.9
+            Passing ``alphas=None`` is deprecated and will be removed in 1.11, at which
+            point the default value will be set to 100. Set ``alphas=100`` to silence
+            this warning.
 
     fit_intercept : bool, default=True
         Whether to calculate the intercept for this model. If set
@@ -2403,7 +2454,6 @@ class ElasticNetCV(RegressorMixin, LinearModelCV):
         *,
         l1_ratio=0.5,
         eps=1e-3,
-        n_alphas="deprecated",
         alphas="warn",
         fit_intercept=True,
         precompute="auto",
@@ -2419,7 +2469,6 @@ class ElasticNetCV(RegressorMixin, LinearModelCV):
     ):
         self.l1_ratio = l1_ratio
         self.eps = eps
-        self.n_alphas = n_alphas
         self.alphas = alphas
         self.fit_intercept = fit_intercept
         self.precompute = precompute
@@ -2919,25 +2968,15 @@ class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
         Length of the path. ``eps=1e-3`` means that
         ``alpha_min / alpha_max = 1e-3``.
 
-    n_alphas : int, default=100
-        Number of alphas along the regularization path.
-
-        .. deprecated:: 1.7
-            `n_alphas` was deprecated in 1.7 and will be removed in 1.9. Use `alphas`
-            instead.
-
-    alphas : array-like or int, default=None
+    alphas : array-like or int, default=100
         Values of alphas to test along the regularization path, used for each l1_ratio.
         If int, `alphas` values are generated automatically.
         If array-like, list of alpha values to use.
 
-        .. versionchanged:: 1.7
-            `alphas` accepts an integer value which removes the need to pass
-            `n_alphas`.
-
-        .. deprecated:: 1.7
-            `alphas=None` was deprecated in 1.7 and will be removed in 1.9, at which
-            point the default value will be set to 100.
+        .. deprecated:: 1.9
+            Passing ``alphas=None`` is deprecated and will be removed in 1.11, at which
+            point the default value will be set to 100. Set ``alphas=100`` to silence
+            this warning.
 
     fit_intercept : bool, default=True
         Whether to calculate the intercept for this model. If set
@@ -3081,7 +3120,6 @@ class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
         *,
         l1_ratio=0.5,
         eps=1e-3,
-        n_alphas="deprecated",
         alphas="warn",
         fit_intercept=True,
         max_iter=1000,
@@ -3095,7 +3133,6 @@ class MultiTaskElasticNetCV(RegressorMixin, LinearModelCV):
     ):
         self.l1_ratio = l1_ratio
         self.eps = eps
-        self.n_alphas = n_alphas
         self.alphas = alphas
         self.fit_intercept = fit_intercept
         self.max_iter = max_iter
@@ -3175,25 +3212,15 @@ class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
         Length of the path. ``eps=1e-3`` means that
         ``alpha_min / alpha_max = 1e-3``.
 
-    n_alphas : int, default=100
-        Number of alphas along the regularization path.
-
-        .. deprecated:: 1.7
-            `n_alphas` was deprecated in 1.7 and will be removed in 1.9. Use `alphas`
-            instead.
-
-    alphas : array-like or int, default=None
+    alphas : array-like or int, default=100
         Values of alphas to test along the regularization path.
         If int, `alphas` values are generated automatically.
         If array-like, list of alpha values to use.
 
-        .. versionchanged:: 1.7
-            `alphas` accepts an integer value which removes the need to pass
-            `n_alphas`.
-
-        .. deprecated:: 1.7
-            `alphas=None` was deprecated in 1.7 and will be removed in 1.9, at which
-            point the default value will be set to 100.
+        .. deprecated:: 1.9
+            Passing ``alphas=None`` is deprecated and will be removed in 1.11, at which
+            point the default value will be set to 100. Set ``alphas=100`` to silence
+            this warning.
 
     fit_intercept : bool, default=True
         Whether to calculate the intercept for this model. If set
@@ -3333,7 +3360,6 @@ class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
         self,
         *,
         eps=1e-3,
-        n_alphas="deprecated",
         alphas="warn",
         fit_intercept=True,
         max_iter=1000,
@@ -3347,7 +3373,6 @@ class MultiTaskLassoCV(RegressorMixin, LinearModelCV):
     ):
         super().__init__(
             eps=eps,
-            n_alphas=n_alphas,
             alphas=alphas,
             fit_intercept=fit_intercept,
             max_iter=max_iter,

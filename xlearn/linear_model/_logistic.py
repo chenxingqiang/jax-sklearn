@@ -2178,7 +2178,9 @@ class LogisticRegressionCV(LogisticRegression, LinearClassifierMixin, BaseEstima
                     best_indices_l1 = best_indices // len(self.Cs_)
                     self.l1_ratio_.append(np.mean(l1_ratios_[best_indices_l1]))
                 else:
-                    self.l1_ratio_.append(None)
+                    # Non-elasticnet penalties have no l1_ratio; use 0.0 (pure L2)
+                    # to avoid float() raising TypeError with None values.
+                    self.l1_ratio_.append(0.0)
 
             if multi_class == "multinomial":
                 self.C_ = np.tile(self.C_, n_classes)

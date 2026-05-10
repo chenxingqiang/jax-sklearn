@@ -185,7 +185,7 @@ def test_column_transformer_dataframe(constructor_name):
 
     X_array = np.array([[0, 1, 2], [2, 4, 6]]).T
     X_df = _convert_container(
-        X_array, constructor_name, columns_name=["first", "second"]
+        X_array, constructor_name, column_names=["first", "second"]
     )
 
     X_res_first = np.array([0, 1, 2]).reshape(-1, 1)

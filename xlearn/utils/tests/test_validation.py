@@ -1917,7 +1917,7 @@ def test_get_feature_names_dataframe_protocol(constructor_name, minversion):
     data = [[1, 4, 2], [3, 3, 6]]
     columns = ["col_0", "col_1", "col_2"]
     df = _convert_container(
-        data, constructor_name, columns_name=columns, minversion=minversion
+        data, constructor_name, column_names=columns, minversion=minversion
     )
     feature_names = _get_feature_names(df)
 
