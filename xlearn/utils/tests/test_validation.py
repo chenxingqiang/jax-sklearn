@@ -64,6 +64,7 @@ from xlearn.utils.fixes import (
 from xlearn.utils.validation import (
     FLOAT_DTYPES,
     _allclose_dense_sparse,
+    _check_categorical_features,
     _check_feature_names_in,
     _check_method_params,
     _check_psd_eigenvalues,
@@ -2025,36 +2026,34 @@ class PassthroughTransformer(BaseEstimator):
         return _check_feature_names_in(self, input_features)
 
 
-def test_check_feature_names_in():
+@pytest.mark.parametrize(
+    ["constructor_name", "feature_names", "msg"],
+    [
+        ("array", ["x0", "x1", "x2"], "input_features should have length equal to"),
+        ("pandas", ["a", "b", "c"], "input_features is not equal to"),
+        ("polars", ["a", "b", "c"], "input_features is not equal to"),
+    ],
+)
+def test_check_feature_names_in(constructor_name, feature_names, msg):
     """Check behavior of check_feature_names_in for arrays."""
     X = np.array([[0.0, 1.0, 2.0]])
+    X = _convert_container(X, constructor_name, column_names=["a", "b", "c"])
     est = PassthroughTransformer().fit(X)
 
     names = est.get_feature_names_out()
-    assert_array_equal(names, ["x0", "x1", "x2"])
+    assert_array_equal(names, feature_names)
 
-    incorrect_len_names = ["x10", "x1"]
-    with pytest.raises(ValueError, match="input_features should have length equal to"):
+    incorrect_len_names = feature_names[:2]
+    with pytest.raises(ValueError, match=msg):
         est.get_feature_names_out(incorrect_len_names)
 
     # remove n_feature_in_
     del est.n_features_in_
-    with pytest.raises(ValueError, match="Unable to generate feature names"):
-        est.get_feature_names_out()
-
-
-def test_check_feature_names_in_pandas():
-    """Check behavior of check_feature_names_in for pandas dataframes."""
-    pd = pytest.importorskip("pandas")
-    names = ["a", "b", "c"]
-    df = pd.DataFrame([[0.0, 1.0, 2.0]], columns=names)
-    est = PassthroughTransformer().fit(df)
-
-    names = est.get_feature_names_out()
-    assert_array_equal(names, ["a", "b", "c"])
-
-    with pytest.raises(ValueError, match="input_features is not equal to"):
-        est.get_feature_names_out(["x1", "x2", "x3"])
+    if constructor_name == "array":
+        with pytest.raises(ValueError, match="Unable to generate feature names"):
+            est.get_feature_names_out()
+    else:
+        assert_array_equal(est.get_feature_names_out(), feature_names)
 
 
 def test_check_response_method_unknown_method():
@@ -2372,3 +2371,73 @@ def test_force_all_finite_rename_warning():
 def test_check_array_allow_nd_errors(X, estimator, expected_error_message):
     with pytest.raises(ValueError, match=expected_error_message):
         check_array(X, estimator=estimator)
+
+
+@pytest.mark.parametrize(
+    ["categorical_features", "expected_msg"],
+    [
+        (
+            [b"hello", b"world"],
+            re.escape(
+                "categorical_features must be an array-like of bool, int or str, "
+                "got: bytes40."
+            ),
+        ),
+        (
+            np.array([b"hello", 1.3], dtype=object),
+            re.escape(
+                "categorical_features must be an array-like of bool, int or str, "
+                "got: bytes, float."
+            ),
+        ),
+        (
+            [0, -1],
+            re.escape(
+                "categorical_features set as integer indices must be in "
+                "[0, n_features - 1]"
+            ),
+        ),
+        (
+            [True, True, False, False, True],
+            re.escape(
+                "categorical_features set as a boolean mask must have shape "
+                "(n_features,)"
+            ),
+        ),
+    ],
+)
+def test_check_categorical_features_raises(categorical_features, expected_msg):
+    """Test that check_categorical_features raises expected errors."""
+    rng = np.random.RandomState(0)
+    n_samples, n_features = 10, 10
+    X = rng.randint(0, 3, size=(n_samples, n_features))
+
+    with pytest.raises(ValueError, match=expected_msg):
+        _check_categorical_features(X, categorical_features)
+
+
+@pytest.mark.parametrize(
+    ["categorical_features", "on_array"],
+    [
+        ([False, True, True, False], True),
+        ([1, 2], True),
+        (["b", "c"], False),
+    ],
+)
+@pytest.mark.parametrize("constructor_name", ["array", "pandas"])
+def test_check_categorical_features(categorical_features, on_array, constructor_name):
+    """Test that check_categorical_features returns as expected on simple data."""
+    rng = np.random.RandomState(0)
+    n_samples, n_features = 30, 4
+    X = rng.randint(0, 3, size=(n_samples, n_features))
+    if constructor_name == "array" and not on_array:
+        return
+    X = _convert_container(
+        X,
+        constructor_name,
+        column_names=["a", "b", "c", "d"],
+        categorical_feature_names=["b", "c"],
+    )
+
+    result = _check_categorical_features(X, categorical_features)
+    assert_allclose(result, [False, True, True, False])
