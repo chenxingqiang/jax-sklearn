@@ -3,10 +3,6 @@ import pytest
 from numpy.testing import assert_allclose
 
 from xlearn.datasets import make_regression
-from xlearn.ensemble._hist_gradient_boosting._bitset import (
-    set_bitset_memoryview,
-    set_raw_bitset_from_binned_bitset,
-)
 from xlearn.ensemble._hist_gradient_boosting.binning import _BinMapper
 from xlearn.ensemble._hist_gradient_boosting.common import (
     ALMOST_INF,
@@ -20,6 +16,10 @@ from xlearn.ensemble._hist_gradient_boosting.grower import TreeGrower
 from xlearn.ensemble._hist_gradient_boosting.predictor import TreePredictor
 from xlearn.metrics import r2_score
 from xlearn.model_selection import train_test_split
+from xlearn.utils._bitset import (
+    set_bitset_memoryview,
+    set_raw_bitset_from_binned_bitset,
+)
 from xlearn.utils._openmp_helpers import _openmp_effective_n_threads
 
 n_threads = _openmp_effective_n_threads()
