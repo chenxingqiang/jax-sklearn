@@ -14,9 +14,9 @@ from timeit import default_timer as time
 
 import numpy as np
 
+from xlearn.utils._bitset import set_raw_bitset_from_binned_bitset
 from xlearn.utils._openmp_helpers import _openmp_effective_n_threads
 
-from ._bitset import set_raw_bitset_from_binned_bitset
 from .common import (
     PREDICTOR_RECORD_DTYPE,
     X_BITSET_INNER_DTYPE,
