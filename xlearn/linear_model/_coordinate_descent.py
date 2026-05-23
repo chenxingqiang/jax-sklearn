@@ -1849,8 +1849,6 @@ class LinearModelCV(MultiOutputMixin, LinearModel, ABC):
 
         # We want n_alphas to be the number of alphas used for each l1_ratio.
         n_alphas = len(alphas[0])
-        path_params.update({"n_alphas": n_alphas})
-
         path_params["copy_X"] = copy_X
         # We are not computing in parallel, we can modify X
         # inplace in the folds

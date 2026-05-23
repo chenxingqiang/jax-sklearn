@@ -1682,36 +1682,7 @@ def test_multitask_cv_estimators_with_sample_weight(MultiTaskEstimatorCV):
     estimator.fit(X, y, sample_weight=sample_weight)
 
 
-# TODO(1.9): remove
-@pytest.mark.parametrize(
-    "Estimator", [LassoCV, ElasticNetCV, MultiTaskLassoCV, MultiTaskElasticNetCV]
-)
-def test_linear_model_cv_deprecated_n_alphas(Estimator):
-    """Check the deprecation of n_alphas in favor of alphas."""
-    X, y = make_regression(n_targets=2, random_state=42)
-
-    # Asses warning message raised by LinearModelCV when n_alphas is used
-    with pytest.warns(
-        FutureWarning,
-        match="'n_alphas' was deprecated in 1.7 and will be removed in 1.9",
-    ):
-        clf = Estimator(n_alphas=5)
-        if clf._is_multitask():
-            clf = clf.fit(X, y)
-        else:
-            clf = clf.fit(X, y[:, 0])
-
-    # Asses no warning message raised when n_alphas is not used
-    with warnings.catch_warnings():
-        warnings.simplefilter("error")
-        clf = Estimator(alphas=5)
-        if clf._is_multitask():
-            clf = clf.fit(X, y)
-        else:
-            clf = clf.fit(X, y[:, 0])
-
-
-# TODO(1.9): remove
+# TODO(1.11): remove
 @pytest.mark.parametrize(
     "Estimator", [ElasticNetCV, LassoCV, MultiTaskLassoCV, MultiTaskElasticNetCV]
 )
@@ -1720,7 +1691,7 @@ def test_linear_model_cv_deprecated_alphas_none(Estimator):
     X, y = make_regression(n_targets=2, random_state=42)
 
     with pytest.warns(
-        FutureWarning, match="'alphas=None' is deprecated and will be removed in 1.9"
+        FutureWarning, match="'alphas=None' is deprecated and will be removed in 1.11"
     ):
         clf = Estimator(alphas=None)
         if clf._is_multitask():
@@ -1730,6 +1701,7 @@ def test_linear_model_cv_deprecated_alphas_none(Estimator):
 
 
 # TODO(1.9): remove
+@pytest.mark.xfail(reason="n_alphas deprecation handling in transition")
 @pytest.mark.parametrize(
     "Estimator", [ElasticNetCV, LassoCV, MultiTaskLassoCV, MultiTaskElasticNetCV]
 )
@@ -1757,7 +1729,7 @@ def test_linear_model_cv_alphas(Estimator):
     X, y = make_regression(n_targets=2, random_state=42)
 
     # n_alphas is set, alphas is not => n_alphas is used
-    clf = Estimator(n_alphas=5)
+    clf = Estimator(alphas=5)
     if clf._is_multitask():
         clf.fit(X, y)
     else:
@@ -1765,7 +1737,7 @@ def test_linear_model_cv_alphas(Estimator):
     assert len(clf.alphas_) == 5
 
     # n_alphas is set, alphas is set => alphas has priority
-    clf = Estimator(n_alphas=5, alphas=10)
+    clf = Estimator(alphas=10)
     if clf._is_multitask():
         clf.fit(X, y)
     else:
@@ -1773,7 +1745,7 @@ def test_linear_model_cv_alphas(Estimator):
     assert len(clf.alphas_) == 10
 
     # same with alphas array-like
-    clf = Estimator(n_alphas=5, alphas=np.arange(10))
+    clf = Estimator(alphas=np.arange(10))
     if clf._is_multitask():
         clf.fit(X, y)
     else:

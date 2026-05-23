@@ -1386,8 +1386,8 @@ def test_pipeline_memory():
     cachedir = mkdtemp()
     try:
         memory = joblib.Memory(location=cachedir, verbose=10)
-        # Test with Transformer + SVC
-        clf = SVC(probability=True, random_state=0)
+        # Test with Transformer + LogisticRegression
+        clf = LogisticRegression(random_state=0)
         transf = DummyTransf()
         pipe = Pipeline([("transf", clone(transf)), ("svc", clf)])
         cached_pipe = Pipeline([("transf", transf), ("svc", clf)], memory=memory)
@@ -1420,7 +1420,7 @@ def test_pipeline_memory():
         assert ts == cached_pipe.named_steps["transf"].timestamp_
         # Create a new pipeline with cloned estimators
         # Check that even changing the name step does not affect the cache hit
-        clf_2 = SVC(probability=True, random_state=0)
+        clf_2 = LogisticRegression(random_state=0)
         transf_2 = DummyTransf()
         cached_pipe_2 = Pipeline(
             [("transf_2", transf_2), ("svc", clf_2)], memory=memory

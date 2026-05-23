@@ -325,7 +325,7 @@ def test_sample_weight(global_random_seed):
     """Tests sample_weight parameter of VotingClassifier"""
     clf1 = LogisticRegression(random_state=global_random_seed)
     clf2 = RandomForestClassifier(n_estimators=10, random_state=global_random_seed)
-    clf3 = SVC(probability=True, random_state=global_random_seed)
+    clf3 = LogisticRegression(random_state=global_random_seed)
     eclf1 = VotingClassifier(
         estimators=[("lr", clf1), ("rf", clf2), ("svc", clf3)], voting="soft"
     ).fit(X_scaled, y, sample_weight=np.ones((len(y),)))

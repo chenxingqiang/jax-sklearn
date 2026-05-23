@@ -218,7 +218,7 @@ def test_2d_y():
         StratifiedKFold(),
         RepeatedKFold(),
         RepeatedStratifiedKFold(),
-        StratifiedGroupKFold(),
+        StratifiedGroupKFold(n_splits=3),
         ShuffleSplit(),
         StratifiedShuffleSplit(test_size=0.5),
         GroupShuffleSplit(),
@@ -1922,7 +1922,7 @@ def test_nested_cv():
         LeaveOneOut(),
         GroupKFold(n_splits=3),
         StratifiedKFold(),
-        StratifiedGroupKFold(),
+        StratifiedGroupKFold(n_splits=3),
         StratifiedShuffleSplit(n_splits=3, random_state=0),
     ]
 

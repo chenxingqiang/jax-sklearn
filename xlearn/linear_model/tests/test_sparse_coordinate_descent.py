@@ -254,7 +254,7 @@ def test_path_parameters(csc_container):
     max_iter = 50
     n_alphas = 10
     clf = ElasticNetCV(
-        n_alphas=n_alphas,
+        alphas=n_alphas,
         eps=1e-3,
         max_iter=max_iter,
         l1_ratio=0.5,
@@ -262,7 +262,6 @@ def test_path_parameters(csc_container):
     )
     ignore_warnings(clf.fit)(X, y)  # new params
     assert_almost_equal(0.5, clf.l1_ratio)
-    assert n_alphas == clf.n_alphas
     assert n_alphas == len(clf.alphas_)
     sparse_mse_path = clf.mse_path_
     ignore_warnings(clf.fit)(X.toarray(), y)  # compare with dense data

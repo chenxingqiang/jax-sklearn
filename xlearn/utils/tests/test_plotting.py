@@ -303,12 +303,18 @@ def test_validate_curve_kwargs_single_legend(
 ):
     """Check `_validate_curve_kwargs` returns correct kwargs for single legend entry."""
     n_curves = 3
+    default_multi_curve_kwargs = (
+        {"alpha": 0.5, "linestyle": "--", "color": "blue"}
+        if curve_kwargs is None
+        else None
+    )
     curve_kwargs_out = _BinaryClassifierCurveDisplayMixin._validate_curve_kwargs(
         n_curves=n_curves,
         name=name,
         legend_metric=legend_metric,
         legend_metric_name=legend_metric_name,
         curve_kwargs=curve_kwargs,
+        default_multi_curve_kwargs=default_multi_curve_kwargs,
     )
 
     assert isinstance(curve_kwargs_out, list)

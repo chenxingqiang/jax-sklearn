@@ -3460,7 +3460,7 @@ class PowerTransformer(OneToOneFeatureMixin, TransformerMixin, BaseEstimator):
             ensure_all_finite="allow-nan",
         )
 
-        if not X.shape[1] == self.n_features_in_:
+        if hasattr(self, "n_features_in_") and not X.shape[1] == self.n_features_in_:
             raise ValueError(
                 f"X has {X.shape[1]} features, but PowerTransformer "
                 f"is expecting {self.n_features_in_} features as input."

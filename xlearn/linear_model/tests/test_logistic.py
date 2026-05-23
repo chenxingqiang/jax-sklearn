@@ -133,11 +133,9 @@ def test_lr_liblinear_warning():
 
     lr = LogisticRegression(solver="liblinear", n_jobs=2)
     warning_message = (
-        "'n_jobs' > 1 does not have any effect when"
-        " 'solver' is set to 'liblinear'. Got 'n_jobs'"
-        " = 2."
+        "'n_jobs' has no effect since 1.8 and will be removed in 1.10."
     )
-    with pytest.warns(UserWarning, match=warning_message):
+    with pytest.warns(FutureWarning, match=warning_message):
         lr.fit(X, y)
 
 

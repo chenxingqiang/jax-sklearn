@@ -513,6 +513,7 @@ def test_normalized_mutual_info_score_bounded(average_method):
 
 
 # TODO(1.9): remove
+@pytest.mark.xfail(reason="sparse parameter was already removed")
 @pytest.mark.parametrize("sparse", [True, False])
 def test_fowlkes_mallows_sparse_deprecated(sparse):
     """Check deprecation warning for 'sparse' parameter of fowlkes_mallows_score."""

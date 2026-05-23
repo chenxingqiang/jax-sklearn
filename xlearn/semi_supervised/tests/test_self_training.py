@@ -10,6 +10,7 @@ from xlearn.exceptions import NotFittedError
 from xlearn.metrics import accuracy_score
 from xlearn.model_selection import train_test_split
 from xlearn.neighbors import KNeighborsClassifier
+from xlearn.linear_model import LogisticRegression
 from xlearn.semi_supervised import SelfTrainingClassifier
 from xlearn.svm import SVC
 from xlearn.tests.test_pipeline import SimpleEstimator
@@ -45,7 +46,7 @@ def test_warns_k_best():
 
 @pytest.mark.parametrize(
     "estimator",
-    [KNeighborsClassifier(), SVC(gamma="scale", probability=True, random_state=0)],
+    [KNeighborsClassifier(), LogisticRegression(random_state=0)],
 )
 @pytest.mark.parametrize("selection_crit", ["threshold", "k_best"])
 def test_classification(estimator, selection_crit):
@@ -139,7 +140,7 @@ def test_none_iter():
 
 @pytest.mark.parametrize(
     "estimator",
-    [KNeighborsClassifier(), SVC(gamma="scale", probability=True, random_state=0)],
+    [KNeighborsClassifier(), LogisticRegression(random_state=0)],
 )
 @pytest.mark.parametrize("y", [y_train_missing_labels, y_train_missing_strings])
 def test_zero_iterations(estimator, y):
@@ -263,21 +264,21 @@ def test_verbose_k_best(capsys):
 
 def test_k_best_selects_best():
     # Tests that the labels added by st really are the 10 best labels.
-    svc = SVC(gamma="scale", probability=True, random_state=0)
-    st = SelfTrainingClassifier(svc, criterion="k_best", max_iter=1, k_best=10)
+    lr = LogisticRegression(random_state=0)
+    st = SelfTrainingClassifier(lr, criterion="k_best", max_iter=1, k_best=10)
     has_label = y_train_missing_labels != -1
     st.fit(X_train, y_train_missing_labels)
 
     got_label = ~has_label & (st.transduction_ != -1)
 
-    svc.fit(X_train[has_label], y_train_missing_labels[has_label])
-    pred = svc.predict_proba(X_train[~has_label])
+    lr.fit(X_train[has_label], y_train_missing_labels[has_label])
+    pred = lr.predict_proba(X_train[~has_label])
     max_proba = np.max(pred, axis=1)
 
-    most_confident_svc = X_train[~has_label][np.argsort(max_proba)[-10:]]
+    most_confident_lr = X_train[~has_label][np.argsort(max_proba)[-10:]]
     added_by_st = X_train[np.where(got_label)].tolist()
 
-    for row in most_confident_svc.tolist():
+    for row in most_confident_lr.tolist():
         assert row in added_by_st
 
 
