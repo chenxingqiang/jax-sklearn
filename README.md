@@ -338,7 +338,7 @@ model.fit(X, y)  # Automatically uses available GPUs
 
 ## ✅ Test Results
 
-JAX-sklearn v0.1.2 has been thoroughly tested and validated:
+JAX-sklearn v0.1.9 has been thoroughly tested and validated:
 
 ### Comprehensive Test Suite
 - **✅ 13,058 tests passed** (99.99% success rate)
