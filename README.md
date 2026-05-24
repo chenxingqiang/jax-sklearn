@@ -5,7 +5,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-0.4.20+-orange.svg)](https://github.com/google/jax)
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](COPYING)
-[![Version](https://img.shields.io/badge/version-0.1.10-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
+[![Version](https://img.shields.io/badge/version-0.1.11-brightgreen.svg)](https://pypi.org/project/jax-sklearn/)
 [![CI](https://img.shields.io/badge/CI-Azure%20Pipelines-blue.svg)](https://dev.azure.com/chenxingqiang/jax-sklearn)
 [![Tests](https://img.shields.io/badge/tests-34752%20passed-success.svg)](#-test-results)
 
@@ -94,6 +94,15 @@ jax_config.set_config(enable_jax=False)
 | CUDA GPU | 1-2x | 5-10x | 50-100x |
 | TPU | 2-5x | 10-20x | 100x+ |
 
+### Raw JAX Kernel Benchmarks (Apple Silicon M2 CPU)
+
+| Operation | Size | JAX | NumPy/SciPy | Speedup |
+|-----------|------|-----|-------------|---------|
+| Matrix Multiply | 5000×5000 | 0.012s | 0.122s | **9.9x** 🚀 |
+| RBF Kernel (pairwise distance) | 5K×100 | 0.0001s | 0.239s | **3571x** 🚀 |
+
+> JAX acceleration is most impactful on GPU/CUDA — the benchmarks above are on CPU only.
+
 ---
 
 ## Supported Algorithms
@@ -103,8 +112,12 @@ jax_config.set_config(enable_jax=False)
 - **Clustering**: KMeans
 - **Decomposition**: PCA, TruncatedSVD
 - **Preprocessing**: StandardScaler, MinMaxScaler
+- **Gaussian Process**: GaussianProcessRegressor (JIT kernel + Cholesky)
+- **SVM**: SVC, SVR, LinearSVC — predict/decision_function (JIT kernel eval)
+- **Neural Network**: MLPClassifier, MLPRegressor — predict (JIT forward pass)
+- **Decision Trees / Random Forest**: predict/predict_proba (JIT tree walk)
 
-All other scikit-learn algorithms (RandomForest, SVM, Neural Networks, etc.) are fully available via automatic fallback to the original implementation.
+All other scikit-learn algorithms are fully available via automatic fallback to the original implementation.
 
 ---
 
