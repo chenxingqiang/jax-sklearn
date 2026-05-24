@@ -98,17 +98,13 @@ jax_config.set_config(enable_jax=False)
 
 ## Supported Algorithms
 
-### Fully Accelerated
+### JAX-Accelerated
 - **Linear Models**: LinearRegression, Ridge, Lasso, ElasticNet
 - **Clustering**: KMeans
 - **Decomposition**: PCA, TruncatedSVD
 - **Preprocessing**: StandardScaler, MinMaxScaler
 
-### In Development
-- **Ensemble**: RandomForest, GradientBoosting
-- **SVM**, **Neural Networks**, **Gaussian Process**
-
-All other scikit-learn algorithms fall back to original NumPy implementation automatically.
+All other scikit-learn algorithms (RandomForest, SVM, Neural Networks, etc.) are fully available via automatic fallback to the original implementation.
 
 ---
 
