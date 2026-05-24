@@ -205,6 +205,22 @@ def create_proxy_class(original_class: Type) -> Type:
     ProxyClass.__module__ = original_class.__module__
     ProxyClass.__doc__ = original_class.__doc__
 
+    # Copy class-level attributes needed by sklearn's metaclass system
+    # (_parameter_constraints, __xlearn_tags__, etc.)
+    for attr_name in dir(original_class):
+        attr = getattr(original_class, attr_name)
+        # Skip dunder methods, callables that are methods, and already-set attrs
+        if attr_name.startswith('__') and attr_name.endswith('__'):
+            continue
+        if callable(attr) and not isinstance(attr, (staticmethod, classmethod)):
+            continue
+        if hasattr(ProxyClass, attr_name) and attr_name not in ('__name__', '__qualname__', '__module__', '__doc__'):
+            continue
+        try:
+            setattr(ProxyClass, attr_name, attr)
+        except Exception:
+            pass
+
     return ProxyClass
 
 
