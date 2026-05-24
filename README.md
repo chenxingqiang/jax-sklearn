@@ -25,11 +25,11 @@
 
 ```bash
 # Apple Silicon (recommended)
-uv pip install jax-sklearn[jax-metal]
+uv pip install 'jax-sklearn[jax-metal]' --system
 # NVIDIA GPU
-uv pip install jax-sklearn[jax-gpu]
+uv pip install 'jax-sklearn[jax-gpu]' --system
 # CPU only
-uv pip install jax-sklearn[jax-cpu]
+uv pip install 'jax-sklearn[jax-cpu]' --system
 ```
 
 Or with pip:
