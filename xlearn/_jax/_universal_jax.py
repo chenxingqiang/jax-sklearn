@@ -1384,9 +1384,31 @@ class UniversalJAXMixin:
             'TruncatedSVD': {'min_complexity': 1e7, 'min_samples': 5000},
             'NMF': {'min_complexity': 5e6, 'min_samples': 2000},
 
+            # Gaussian Process - matrix ops benefit greatly
+            'GaussianProcessRegressor': {'min_complexity': 1e6, 'min_samples': 100},
+            'GaussianProcessClassifier': {'min_complexity': 1e6, 'min_samples': 100},
+
+            # SVM - predict/decision function is kernel evaluation
+            'SVC': {'min_complexity': 1e5, 'min_samples': 100},
+            'SVR': {'min_complexity': 1e5, 'min_samples': 100},
+            'LinearSVC': {'min_complexity': 1e5, 'min_samples': 100},
+            'LinearSVR': {'min_complexity': 1e5, 'min_samples': 100},
+            'NuSVC': {'min_complexity': 1e5, 'min_samples': 100},
+            'NuSVR': {'min_complexity': 1e5, 'min_samples': 100},
+
+            # Neural Network - forward pass is matrix ops
+            'MLPClassifier': {'min_complexity': 1e6, 'min_samples': 1000},
+            'MLPRegressor': {'min_complexity': 1e6, 'min_samples': 1000},
+
             # Tree-based - limited JAX benefit but some operations can be accelerated
             'RandomForestClassifier': {'min_complexity': 1e5, 'min_samples': 1000},
             'RandomForestRegressor': {'min_complexity': 1e5, 'min_samples': 1000},
+            'DecisionTreeClassifier': {'min_complexity': 1e5, 'min_samples': 100},
+            'DecisionTreeRegressor': {'min_complexity': 1e5, 'min_samples': 100},
+            'ExtraTreeClassifier': {'min_complexity': 1e5, 'min_samples': 100},
+            'ExtraTreeRegressor': {'min_complexity': 1e5, 'min_samples': 100},
+            'ExtraTreesClassifier': {'min_complexity': 1e5, 'min_samples': 1000},
+            'ExtraTreesRegressor': {'min_complexity': 1e5, 'min_samples': 1000},
 
             # Default for unknown algorithms
             'default': {'min_complexity': 1e7, 'min_samples': 10000}

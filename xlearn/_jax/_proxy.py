@@ -18,6 +18,10 @@ from ._universal_jax import (
     JAXMetricsMixin,
     create_jax_accelerated_class
 )
+from ._gp import JAXGaussianProcessMixin
+from ._svm import JAXSVMMixin
+from ._mlp import JAXNeuralNetworkMixin
+from ._tree import JAXTreePredictorMixin
 
 
 class EstimatorProxy:
@@ -234,6 +238,19 @@ def create_universal_jax_class(original_class: Type) -> Type:
     elif 'decomposition' in module_name or any(keyword in class_name.lower() for keyword in
                                               ['pca', 'svd', 'nmf', 'ica', 'decomposition', 'factor']):
         mixin_class = JAXDecompositionMixin
+    elif 'gaussian_process' in module_name:
+        mixin_class = JAXGaussianProcessMixin
+    elif 'svm' in module_name or any(keyword in class_name.lower() for keyword in
+                                     ['svc', 'svr', 'linesvc', 'linesvr']):
+        mixin_class = JAXSVMMixin
+    elif 'neural_network' in module_name or any(keyword in class_name.lower() for keyword in
+                                               ['mlpclassifier', 'mlpregressor']):
+        mixin_class = JAXNeuralNetworkMixin
+    elif 'tree' in module_name and not 'gradient' in module_name:
+        mixin_class = JAXTreePredictorMixin
+    elif 'ensemble' in module_name and any(keyword in class_name.lower() for keyword in
+                                          ['randomforest', 'extratrees', 'forest']):
+        mixin_class = JAXTreePredictorMixin
     else:
         # For other algorithms, use the base linear mixin with minimal acceleration
         mixin_class = JAXLinearModelMixin  # Fallback to basic mixin
